@@ -18,9 +18,9 @@ export default function Nav() {
 				<Link href='/' passHref>
 					<span className='text-lg pt-1 font-bold'>Shopify + Next.js</span>
 				</Link>
-				<a className='text-md font-bold cursor-pointer' onClick={() => setCartOpen(!cartOpen)}>
+				<span className='text-md font-bold cursor-pointer' onClick={() => setCartOpen(!cartOpen)}>
 					Cart ({cartQuantity})
-				</a>
+				</span>
 				<MiniCart cart={cart} />
 			</div>
 		</header>

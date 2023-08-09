@@ -17,9 +17,6 @@ export default function Hero() {
 				>
 					Enroll Now
 				</Link>
-				<Link href='https://buildnextshop.com' className='inline-flex items-center font-semibold text-gray-900 hover:text-gray-800'>
-					Learn more
-				</Link>
 			</div>
 		</div>
 	);
