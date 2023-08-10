@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
 	return (
 		<div key={id} className='group relative'>
 			<div className='h-56 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-72 xl:h-80'>
-				<Image src={url} alt={altText} width={500} height={500} className='h-full w-full object-cover object-center' />
+				<Image src={url} alt={altText} width={500} height={500} loading='lazy' className='h-full w-full object-cover object-center' />
 			</div>
 			<h3 className='mt-4 text-sm text-gray-700'>
 				<Link href={`/products/${handle}`}>
