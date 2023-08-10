@@ -6,8 +6,8 @@ import MiniCart from './MiniCart';
 
 export default function Nav() {
 	const { cart, cartOpen, setCartOpen } = useContext(CartContext);
-
 	let cartQuantity = 0;
+
 	cart.map((item) => {
 		return (cartQuantity += item?.variantQuantity);
 	});
