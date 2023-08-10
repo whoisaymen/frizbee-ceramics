@@ -80,7 +80,14 @@ export default function MiniCart({ cart }) {
 																	}`}
 																></div>
 																<div className='relative flex-shrink-0 w-24 h-24 overflow-hidden border border-gray-200 rounded-md'>
-																	<Image src={product.image} alt={product.title} layout='fill' objectFit='cover' />
+																	<Image
+																		src={product.image}
+																		alt={product.title}
+																		width={500}
+																		height={500}
+																		priority
+																		className='h-full w-full object-cover object-center'
+																	/>
 																</div>
 
 																<div className='flex flex-col flex-1 ml-4'>
