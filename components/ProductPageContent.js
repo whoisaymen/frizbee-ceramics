@@ -14,10 +14,10 @@ export default function ProductPageContent({ product }) {
 				<Image
 					src={image.node.url}
 					alt={image.node.altText}
-					height={1000}
-					width={1000}
-					className='h-full w-full object-cover object-center'
+					width={500}
+					height={500}
 					priority
+					className='h-full w-full object-cover object-center'
 				/>
 			</SwiperSlide>
 		);
