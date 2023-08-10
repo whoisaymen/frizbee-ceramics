@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import Layout from '@/components/Layout';
 import ShopProvider from '@/context/shopContext';
 import Nav from '@/components/Nav';
+import Footer from '@/components/Footer';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -35,10 +36,9 @@ export default function RootLayout({ children }) {
 		<html lang='en'>
 			<body className={inter.className}>
 				<ShopProvider>
-					<Layout>
-						<Nav />
-						{children}
-					</Layout>
+					<Nav />
+					{children}
+					<Footer />
 				</ShopProvider>
 			</body>
 		</html>
