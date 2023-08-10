@@ -1,6 +1,6 @@
 'use client';
 import { createContext, useState, useEffect } from 'react';
-import { createCheckout, updateCheckout } from '../lib/shopify';
+import { createCheckout, updateCheckout } from '@/lib/shopify';
 
 const CartContext = createContext();
 
@@ -28,7 +28,6 @@ export default function ShopProvider({ children }) {
 
 	async function addToCart(addedItem) {
 		const newItem = { ...addedItem };
-
 		setCartOpen(true);
 
 		if (cart.length === 0) {

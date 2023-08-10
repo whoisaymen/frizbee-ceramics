@@ -1,7 +1,7 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
-import ShopProvider from '@/context/shopContext';
 import Layout from '@/components/Layout';
+import ShopProvider from '@/context/shopContext';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
