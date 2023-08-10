@@ -35,8 +35,10 @@ export default function RootLayout({ children }) {
 		<html lang='en'>
 			<body className={inter.className}>
 				<ShopProvider>
-					<Nav />
-					<Layout>{children}</Layout>
+					<Layout>
+						<Nav />
+						{children}
+					</Layout>
 				</ShopProvider>
 			</body>
 		</html>
