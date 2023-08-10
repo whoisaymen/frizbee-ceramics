@@ -2,6 +2,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import Layout from '@/components/Layout';
 import ShopProvider from '@/context/shopContext';
+import Nav from '@/components/Nav';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
 		<html lang='en'>
 			<body className={inter.className}>
 				<ShopProvider>
+					<Nav />
 					<Layout>{children}</Layout>
 				</ShopProvider>
 			</body>
