@@ -9,17 +9,19 @@ const ProductCard = ({ product }) => {
 
 	return (
 		<div key={id} className='group relative'>
-			<div className='h-56 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-72 xl:h-80'>
-				<Image src={url} alt={altText} width={500} height={500} loading='lazy' className='h-full w-full object-cover object-center' />
+			<div className='w-full overflow-hidden h-80  bg-gray-100'>
+				<Link href={`/products/${handle}`}>
+					<Image src={url} alt={'Test'} width={500} height={500} loading='lazy' className='h-full w-full object-cover object-center 	' />
+				</Link>
 			</div>
-			<h3 className='mt-4 text-sm text-gray-700'>
+			{/* <h3 className='mt-4 text-sm text-gray-700'>
 				<Link href={`/products/${handle}`}>
 					<span className='absolute inset-0' />
 					{title}
 				</Link>
-			</h3>
+			</h3> */}
 			{/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
-			<p className='mt-1 text-sm font-medium text-gray-900'>{formatter.format(price)}</p>
+			{/* <p className='mt-1 text-sm font-medium text-gray-900'>{formatter.format(price)}</p> */}
 		</div>
 	);
 };

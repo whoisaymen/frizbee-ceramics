@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 import ProductList from '@/components/ProductList';
 import { getProductsInCollection } from '@/lib/shopify';
 import Hero from '@/components/Hero';
@@ -8,7 +8,7 @@ export default async function Home() {
 
 	return (
 		<div className='text-xl'>
-			<Hero />
+			{/* <Hero /> */}
 			<ProductList products={products} />
 		</div>
 	);
