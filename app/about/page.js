@@ -27,7 +27,7 @@ export default function AboutPage() {
 					{/* Assuming that you want the image to take full width on mobile */}
 					<div className='order-1 lg:order-2 w-full md:w-1/2 '>
 						<Image
-							src='/images/about.JPG'
+							src='/images/about.jpg'
 							alt='Product screenshot'
 							className='border-b border-black md:border-none object-cover h-[30vh] lg:h-auto'
 							width={1000}
