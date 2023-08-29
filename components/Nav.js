@@ -1,13 +1,21 @@
 'use client';
 import Link from 'next/link';
-import { useContext, useState } from 'react';
+import { useContext, useState, Fragment } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+
 import { CartContext } from '../context/shopContext';
 import MiniCart from './MiniCart';
 import Image from 'next/image';
 
+function classNames(...classes) {
+	return classes.filter(Boolean).join(' ');
+}
+
 export default function Nav() {
-	const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
-	const { cart, cartOpen, setCartOpen } = useContext(CartContext);
+	const pathname = usePathname();
+
+	const { cart, cartOpen, setCartOpen, sortOption, setSortOption } = useContext(CartContext);
+	const [isProjectsVisible, setIsProjectsVisible] = useState(false);
 
 	let cartQuantity = 0;
 
@@ -16,64 +24,177 @@ export default function Nav() {
 	});
 
 	return (
-		<header className='sticky top-0 z-20 bg-white uppercase pt-10 font-light tracking-tight '>
-			<div className='flex items-center max-w-6xl mx-auto lg:max-w-screen-xl border-b border-black outline-offset-1	pb-0 border-t '>
-				{/* Left side - Links */}
-				<div className='hidden space-x-6 flex-1 md:flex justify-start'>
-					<Link href='/'>
-						<span>Color</span>
-					</Link>
-					<Link href='/'>
-						<span>Shape</span>
-					</Link>
-					<Link href='/'>
-						<span>Pattern</span>
-					</Link>
-					<Link href='/'>
-						<span>New</span>
-					</Link>
-					<Link href='/'>
-						<span>Sets</span>
-					</Link>
-				</div>
+		<div className='font-light tracking-tight uppercase sticky top-0 z-50 -ml-[1px] -mr-[1px]'>
+			<div className='letstry relative lg:pt-10 -mb-2'>
+				<header className=' relative'>
+					<nav aria-label='Top' className='mx-auto max-w-7xl'>
+						<div className='flex items-center justify-between'>
+							<div className='hidden lg:block'>
+								<span
+									className={`cursor-pointer border border-black py-[2px] bg-white ${sortOption === 'color' ? 'bg-[#ddd] text-black' : ''}`}
+								>
+									<Link href='/' onClick={() => setSortOption('color')} className='px-4'>
+										Color
+									</Link>
+								</span>
+								<span
+									className={`py-[2px] cursor-pointer border border-black -ml-[1px] bg-white ${
+										sortOption === 'shape' ? 'bg-[#F1EFF3] text-black' : ''
+									}`}
+								>
+									<Link href='/' onClick={() => setSortOption('shape')} className='px-4'>
+										Shape
+									</Link>
+								</span>
+								<span
+									className={`py-[2px] cursor-pointer border border-black -ml-[1px] bg-white ${
+										sortOption === 'pattern' ? 'bg-[#F1EFF3] text-black' : ''
+									}`}
+								>
+									<Link href='/' onClick={() => setSortOption('pattern')} className='px-4'>
+										Pattern
+									</Link>
+								</span>
+								<span
+									className={`py-[2px] cursor-pointer border border-black -ml-[1px] bg-white ${
+										sortOption === 'new' ? 'bg-[#F1EFF3] text-black' : ''
+									}`}
+								>
+									<Link href='/' onClick={() => setSortOption('new')} className='px-4'>
+										New
+									</Link>
+								</span>
+								<span
+									className={`py-[2px] cursor-pointer border border-black -ml-[1px] bg-white ${
+										sortOption === 'set' ? 'bg-[#F1EFF3] text-black' : ''
+									}`}
+								>
+									<Link href='/' onClick={() => setSortOption('set')} className='px-4'>
+										Set
+									</Link>
+								</span>
+							</div>
 
-				{/* Center - Logo */}
-				<div className='-rotate-6 max-w-[200px] -my-10'>
-					<Link href='/'>
-						<Image src='/images/logo.png' height={1000} width={1000} className='object-contain'></Image>
-					</Link>
-				</div>
+							{/* Mobile Menu */}
+							<div className='text-sm lg:hidden flex flex-wrap w-full m-0 p-0 text-center justify-center'>
+								<div className='flex justify-center'>
+									<Link href='/' onClick={() => setSortOption('')} className=''>
+										<span className='sr-only'>Frizbee Ceramics</span>
+										<Image
+											src='/images/logoBlack.png'
+											height={1000}
+											width={1000}
+											className='w-auto mx-auto z-50'
+											alt='Frizbee Ceramics logo'
+										></Image>
+									</Link>
+								</div>
 
-				{/* Right side - Cart */}
-				<div className='space-x-6 flex-1 flex justify-end'>
-					<Link href='/about'>
-						<span>About</span>
-					</Link>
-					{/* Container for both "Projects" link and the submenu */}
-					<div className='relative' onMouseEnter={() => setIsSubmenuVisible(true)} onMouseLeave={() => setIsSubmenuVisible(false)}>
-						<Link href='/'>
-							<span>Projects</span>
-						</Link>
+								<div className='w-full flex justify-center'>
+									{['color', 'shape', 'pattern', 'new', 'set'].map((option) => (
+										<span
+											key={option}
+											className={`cursor-pointer flex-grow border border-black py-[4px] bg-white -ml-[1px] ${
+												sortOption === option ? 'bg-[#F1EFF3] text-black' : ''
+											}`}
+										>
+											<Link href='/' onClick={() => setSortOption(option)} className='px-3 flex justify-center items-center'>
+												{sortOption === option ? (
+													// <svg className='h-1.5 w-1.5 fill-gray-800 mr-1' viewBox='0 0 6 6' aria-hidden='true'>
+													// 	<circle cx={3} cy={3} r={3} />
+													// </svg>
+													<svg className='h-2.5 w-2.5 fill-gray-900 mr-1' viewBox='0 0 10 15'>
+														<path d='M10 6L5 0L0 6H10ZM10 9L5 15L0 9H10Z' />
+													</svg>
+												) : (
+													<span className='h-1.5 w-1.5 opacity-0'> </span> // The mirror element
+												)}
+												{option.charAt(0).toUpperCase() + option.slice(1)}
+											</Link>
+										</span>
+									))}
+								</div>
 
-						{/* Submenu */}
-						{isSubmenuVisible && (
-							<div className='absolute left-0 mt-2 w-full'>
-								<div className='flex justify-between max-w-lg mx-auto'>
-									<Image src='/images/img1.jpg' width={100} height={100} />
-									<Image src='/images/img1.jpg' width={100} height={100} />
-									<Image src='/images/img1.jpg' width={100} height={100} />
+								<div className='w-full flex justify-center -mt-[1px]'>
+									<span
+										onClick={() => setIsProjectsVisible(!isProjectsVisible)}
+										className='cursor-pointer border border-black px-4 py-[4px] font-light tracking-tight uppercase flex-grow bg-white -ml-[1px]'
+									>
+										Projects
+									</span>
+									<Link
+										href='/about'
+										className={`border border-black px-4 py-[4px] flex-grow ${
+											pathname === '/about' ? 'bg-[#F3FFE0]' : 'bg-white'
+										} -ml-[1px]`}
+										onClick={() => {
+											console.log('Current sortOption value:', sortOption);
+											setSortOption('');
+										}}
+									>
+										<span>About</span>
+									</Link>
+									<span
+										className='cursor-pointer border border-black px-4 py-[4px] flex-grow bg-white -ml-[1px]'
+										onClick={() => setCartOpen(!cartOpen)}
+									>
+										Cart ({cartQuantity})
+									</span>
 								</div>
 							</div>
-						)}
+
+							<Link href='/' onClick={() => setSortOption('')} className='hidden lg:flex -rotate-6 '>
+								<span className='sr-only'>Frizbee Ceramics</span>
+								<Image
+									src='/images/logo.png'
+									height={1000}
+									width={1000}
+									className='h-24 w-auto z-50 px-4'
+									alt='Frizbee Ceramics logo'
+								></Image>
+							</Link>
+							<div className='flex items-center justify-end z-10'>
+								<div className='hidden lg:block'>
+									<span
+										onClick={() => setIsProjectsVisible(!isProjectsVisible)}
+										className='cursor-pointer border border-black px-4 py-[2px] font-light tracking-tight uppercase'
+									>
+										{isProjectsVisible ? 'Projects X' : 'Projects'}
+									</span>
+									<Link
+										href='/about'
+										className={`border border-black px-4 py-[2px] -ml-[1px] ${pathname === '/about' ? 'bg-[#F3FFE0]' : 'bg-white'} `}
+									>
+										<span>About</span>
+									</Link>
+									<span className='cursor-pointer border border-black px-4 -ml-[1px] py-[2px]' onClick={() => setCartOpen(!cartOpen)}>
+										Cart ({cartQuantity})
+									</span>
+									<span className='sr-only'>items in cart, view bag</span>
+								</div>
+								<MiniCart cart={cart} />
+							</div>
+						</div>
+					</nav>
+				</header>
+
+				{isProjectsVisible && (
+					<div className='w-full bg-white z-20'>
+						<div className='mx-auto max-w-7xl  border-b border-black p-4 text-sm'>
+							<ul role='list' className='space-y-0'>
+								<li>A Box Is A Box</li>
+								<li>Carne</li>
+								<li>Chez Manger</li>
+								<li>Lina Lapelyte</li>
+								<li>MAD</li>
+								<li>Now Belgium Now</li>
+								<li>Phyps</li>
+								<li>Pon Ding</li>
+							</ul>
+						</div>
 					</div>
-
-					<span className='cursor-pointer' onClick={() => setCartOpen(!cartOpen)}>
-						Cart ({cartQuantity})
-					</span>
-
-					<MiniCart cart={cart} />
-				</div>
+				)}
 			</div>
-		</header>
+		</div>
 	);
 }

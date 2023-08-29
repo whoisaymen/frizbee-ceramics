@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const navigation = {
 	footer: [
 		{ name: 'Professionals', href: '#' },
@@ -6,18 +8,14 @@ const navigation = {
 		{ name: 'Press', href: '#' },
 		{ name: 'Careers', href: '#' },
 	],
-	support: [
-		{ name: 'Pricing', href: '#' },
-		{ name: 'Documentation', href: '#' },
-		{ name: 'Guides', href: '#' },
-		{ name: 'API Status', href: '#' },
+	socials: [
+		{ name: 'Facebook', href: '#' },
+		{ name: 'Instagram', href: '#' },
 	],
-	company: [
+	header: [
+		{ name: 'Shop', href: '#' },
+		{ name: 'Projects', href: '#' },
 		{ name: 'About', href: '#' },
-		{ name: 'Blog', href: '#' },
-		{ name: 'Jobs', href: '#' },
-		{ name: 'Press', href: '#' },
-		{ name: 'Partners', href: '#' },
 	],
 	legal: [
 		{ name: 'Claim', href: '#' },
@@ -56,14 +54,58 @@ const navigation = {
 
 export default function Footer() {
 	return (
-		<footer className='bg-white font-light tracking-tight' aria-labelledby='footer-heading'>
-			<h2 id='footer-heading' className='sr-only'>
-				Footer
-			</h2>
-			<div className='mx-auto max-w-7xl pt-6 border-t border-black'>
-				<div className='grid grid-cols-3 gap-8 uppercase'>
-					<div className='grid grid-cols-2 gap-8 xl:col-span-2'>
-						<div className='md:grid md:grid-cols-2 md:gap-8'>
+		<footer
+			className='bg-gradient-to-b from-gray-100 lg:from-white font-light tracking-tight max-w-7xl mx-auto -mt-[1px] md:border-t border-black'
+			aria-labelledby='footer-heading'
+		>
+			<div className='md:hidden border-t border-black border-b'>
+				<span className='sr-only'>Frizbee Ceramics</span>
+				<Image src='/images/comics.png' height={1000} width={1000} className='w-auto mx-auto z-50' alt='Frizbee Ceramics logo'></Image>
+			</div>
+			<div className='px-4 lg:px-0'>
+				<h2 id='footer-heading' className='sr-only'>
+					Footer
+				</h2>
+
+				<div className='mx-auto max-w-7xl pt-6'>
+					<div className='lg:flex uppercase justify-between'>
+						<div className='lg:w-1/2'>
+							<h3 className='text-sm leading-6 text-gray-900'>Subscribe to our newsletter</h3>
+							<form className='mt-6 sm:flex sm:max-w-md'>
+								<label htmlFor='email-address' className='sr-only'>
+									Email address
+								</label>
+								<input
+									type='email'
+									name='email-address'
+									id='email-address'
+									autoComplete='email'
+									required
+									className='min-w-0 text-sm font-light appearance-none border border-black bg-white px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  w-full uppercase'
+									placeholder='Enter your email'
+								/>
+								<div className='mt-4 sm:mt-0 sm:flex-shrink-0'>
+									<button
+										type='submit'
+										className='flex w-full items-center justify-center bg-black px-3 py-2 text-sm text-white shadow-sm hover:bg-white hover:text-black uppercase'
+									>
+										Subscribe
+									</button>
+								</div>
+							</form>
+						</div>
+						<div className='flex justify-between mt-6 lg:w-1/2'>
+							<div>
+								<ul role='list' className='space-y-0'>
+									{navigation.socials.map((item) => (
+										<li key={item.name}>
+											<a href={item.href} className='text-sm text-black hover:text-gray-900'>
+												{item.name}
+											</a>
+										</li>
+									))}
+								</ul>
+							</div>
 							<div>
 								<ul role='list' className='space-y-0'>
 									{navigation.footer.map((item) => (
@@ -75,47 +117,34 @@ export default function Footer() {
 									))}
 								</ul>
 							</div>
+							<div>
+								<ul role='list' className='space-y-0'>
+									{navigation.header.map((item) => (
+										<li key={item.name}>
+											<a href={item.href} className='text-sm text-black hover:text-gray-900'>
+												{item.name}
+											</a>
+										</li>
+									))}
+								</ul>
+							</div>
 						</div>
 					</div>
-					<div className=''>
-						<h3 className='text-sm leading-6 text-gray-900'>Subscribe to our newsletter</h3>
-
-						<form className='mt-6 sm:flex sm:max-w-md'>
-							<label htmlFor='email-address' className='sr-only'>
-								Email address
-							</label>
-							<input
-								type='email'
-								name='email-address'
-								id='email-address'
-								autoComplete='email'
-								required
-								className='min-w-0 text-sm appearance-none border-0 bg-white px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  w-full'
-								placeholder='Enter your email'
-							/>
-							<div className='mt-4 sm:mt-0 sm:flex-shrink-0'>
-								<button
-									type='submit'
-									className='flex w-full items-center justify-center bg-black px-3 py-2 text-sm text-white shadow-sm hover:bg-white hover:text-black uppercase'
-								>
-									Subscribe
-								</button>
-							</div>
-						</form>
+					<div className='mt-6 sm:mt-20 md:flex md:items-center md:justify-between'>
+						<p className='mt-8 text-xs leading-5 text-gray-500 md:order-1 md:mt-0 pb-2'>
+							&copy; 2023 Frizbee Ceramics. All rights reserved.
+						</p>
 					</div>
-				</div>
-				<div className='mt-6 sm:mt-20 md:flex md:items-center md:justify-between'>
-					<div className='flex space-x-6 md:order-2'>
-						{navigation.social.map((item) => (
-							<a key={item.name} href={item.href} className='text-gray-400 hover:text-gray-500'>
-								<span className='sr-only'>{item.name}</span>
-								<item.icon className='h-6 w-6' aria-hidden='true' />
-							</a>
-						))}
-					</div>
-					<p className='mt-8 text-xs leading-5 text-gray-500 md:order-1 md:mt-0'>&copy; 2023 Frizbee Ceramics. All rights reserved.</p>
 				</div>
 			</div>
 		</footer>
+
+		// <div className='relative max-w-7xl mx-auto border border-black my-6'>
+		// 	<div className='bg-black bg-cover bg-no-repeat bg-center relative h-80 overflow-hidden md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2'></div>
+		// 	<div className='relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40'>
+		// 		<div className='pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2 lg:pl-24 lg:pr-0 xl:pl-32'>Test 2</div>
+		// 		{/* bg-[url('/images/gradientSvg.svg')] */}
+		// 	</div>
+		// </div>
 	);
 }

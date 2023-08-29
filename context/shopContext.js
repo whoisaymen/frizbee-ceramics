@@ -4,12 +4,46 @@ import { createCheckout, updateCheckout } from '@/lib/shopify';
 
 const CartContext = createContext();
 
+function sortProducts(products, option) {
+	if (option === 'color') {
+		return [...products].sort((a, b) => {
+			const colorA = a.node.tags.find((tag) => tag.startsWith('color:'))?.split(':')[1] || '';
+			const colorB = b.node.tags.find((tag) => tag.startsWith('color:'))?.split(':')[1] || '';
+			return colorA.localeCompare(colorB);
+		});
+	}
+	if (option === 'shape') {
+		return [...products].sort((a, b) => {
+			const shapeA = a.node.tags.find((tag) => tag.startsWith('shape:'))?.split(':')[1] || '';
+			const shapeB = b.node.tags.find((tag) => tag.startsWith('shape:'))?.split(':')[1] || '';
+			return shapeA.localeCompare(shapeB);
+		});
+	}
+	if (option === 'pattern') {
+		return [...products].sort((a, b) => {
+			const patternA = a.node.tags.find((tag) => tag.startsWith('pattern:'))?.split(':')[1] || '';
+			const patternB = b.node.tags.find((tag) => tag.startsWith('pattern:'))?.split(':')[1] || '';
+			return patternA.localeCompare(patternB);
+		});
+	}
+
+	if (option === 'set') {
+		const filteredProducts = [...products].filter((product) => {
+			return product.node.tags.includes('set');
+		});
+		console.log('Filtered products for sets:', filteredProducts);
+		return filteredProducts;
+	}
+	return products; // return products as-is if there's no sorting
+}
+
 export default function ShopProvider({ children }) {
 	const [cart, setCart] = useState([]);
 	const [cartOpen, setCartOpen] = useState(false);
 	const [checkoutId, setCheckoutId] = useState('');
 	const [checkoutUrl, setCheckoutUrl] = useState('');
 	const [cartLoading, setCartLoading] = useState(false);
+	const [sortOption, setSortOption] = useState(null); // New state for sort option
 
 	useEffect(() => {
 		if (localStorage.checkout_id) {
@@ -29,6 +63,7 @@ export default function ShopProvider({ children }) {
 	async function addToCart(addedItem) {
 		const newItem = { ...addedItem };
 		setCartOpen(true);
+		console.log(newItem);
 
 		if (cart.length === 0) {
 			setCart([newItem]);
@@ -140,6 +175,9 @@ export default function ShopProvider({ children }) {
 				cartLoading,
 				incrementCartItem,
 				decrementCartItem,
+				sortOption, // New state export
+				setSortOption, // New function export
+				sortProducts, // New function export
 			}}
 		>
 			{children}

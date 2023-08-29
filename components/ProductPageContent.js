@@ -24,15 +24,15 @@ export default function ProductPageContent({ product }) {
 	});
 
 	return (
-		<div>
-			<div className='flex flex-col items-center justify-center w-11/12 max-w-6xl mx-auto space-y-8 md:flex-row md:items-start md:space-y-0 md:space-x-4 lg:space-x-8'>
-				<div className='w-full max-w-md overflow-hidden bg-white border shadow-lg rounded-2xl md:w-1/2'>
-					<div className='relative w-full h-96'>
+		<div className='max-w-7xl mx-auto border border-black'>
+			<div className='flex flex-col items-center justify-center mx-auto md:flex-row md:items-stretch'>
+				<div className='w-full overflow-hidden bg-white md:w-1/2 md:border-black md:border-r '>
+					<div className='relative w-full h-[50vh]'>
 						<Swiper
 							style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
 							navigation
 							pagination={{ clickable: true }}
-							className='h-96 rounded-2xl'
+							className='h-full'
 							loop='true'
 							modules={[Navigation, Pagination]}
 						>
@@ -40,12 +40,14 @@ export default function ProductPageContent({ product }) {
 						</Swiper>
 					</div>
 				</div>
-				<ProductForm product={product} />
+				<div className='flex flex-1'>
+					<ProductForm product={product} />
+				</div>
 			</div>
 
-			<p className='w-11/12 max-w-3xl pt-16 mx-auto space-y-8 md:space-x-4 lg:space-x-8'>{product.description}</p>
-
-			<RecommendedList current={product.id} products={product.collections.edges[0].node.products.edges} />
+			{/* <p className='w-11/12 max-w-3xl pt-16 mx-auto space-y-8 md:space-x-4 lg:space-x-8'>{product.description}</p> */}
+			{/*
+			<RecommendedList current={product.id} products={product.collections.edges[0].node.products.edges} /> */}
 		</div>
 	);
 }

@@ -6,19 +6,29 @@ import ProductCard from './ProductCard';
 const RecommendedList = ({ products, current }) => {
 	return (
 		<div className='bg-white'>
-			<div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8'>
-				<div className='md:flex md:items-center md:justify-between'>
-					<h2 className='text-2xl font-bold tracking-tight text-gray-900'>Recommended products</h2>
+			<div className='mx-auto max-w-2xl lg:max-w-7xl'>
+				<div className='md:flex md:items-center md:justify-between border-b border-t border-black'>
+					<h2 className='font-light tracking-tight text-black uppercase'>Recommended products</h2>
 					<Link href='#' className='hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 md:block'>
 						Shop the collection
 						<span aria-hidden='true'> &rarr;</span>
 					</Link>
 				</div>
 
-				<div className='mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8'>
+				{/* <div className='grid grid-cols-2  md:grid-cols-4'>
 					{products
 						.slice(0, 4)
 						.map((product) => (product.node.id === current ? null : <ProductCard key={product.node.id} product={product} />))}
+				</div> */}
+
+				<div className='grid grid-cols-2 md:grid-cols-4'>
+					{products.slice(0, 4).map((product, index, self) =>
+						product.node.id === current ? null : (
+							<div key={product.node.id} className={index < self.length - 1 ? 'border-r border-black' : ''}>
+								<ProductCard product={product} />
+							</div>
+						)
+					)}
 				</div>
 
 				<div className='mt-8 text-sm md:hidden'>

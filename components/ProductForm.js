@@ -82,34 +82,26 @@ export default function ProductForm({ product }) {
 	}, [productInventory, selectedVariant]);
 
 	return (
-		<div className='flex flex-col w-full p-4 shadow-lg rounded-2xl md:w-1/3'>
-			<h2 className='text-2xl font-bold'>{product.title}</h2>
-			<span className='pb-3'>{formatter.format(product.variants.edges[0].node.priceV2.amount)}</span>
-			{product.options.map(({ name, values }) => (
-				<ProductOptions
-					key={`key-${name}`}
-					name={name}
-					values={values}
-					selectedOptions={selectedOptions}
-					setOptions={setOptions}
-					selectedVariant={selectedVariant}
-					productInventory={productInventory}
-					available={available}
-				/>
-			))}
-
-			{available ? (
-				<button
-					onClick={() => {
-						addToCart(selectedVariant);
-					}}
-					className='px-2 py-3 mt-3 text-white bg-black rounded-lg hover:bg-gray-800'
-				>
-					Add To Card
-				</button>
-			) : (
-				<button className='px-2 py-3 mt-3 text-white bg-gray-800 rounded-lg cursor-not-allowed'>Sold out!</button>
-			)}
+		<div>
+			<div className='bg-gradient-to-b from-[#B0AAEF]/30 mb-4 px-4 py-2 border-t border-black lg:border-none'>
+				<h2 className='text-lg lg:text-2xl font-bold lg:mt-10'>{product.title}</h2>
+				<span className='pb-3'>{formatter.format(product.variants.edges[0].node.priceV2.amount)}</span>
+			</div>
+			<div className='flex flex-col w-full p-4 md:w-1/2 self-end'>
+				<p className='text-sm font-extralight lg:text-md tracking-tight mb-4'>{product.description}</p>
+				{available ? (
+					<button
+						onClick={() => {
+							addToCart(selectedVariant);
+						}}
+						className='px-2 py-3 mt-3 text-black border-[1px] border-black uppercase font-light tracking-tight mb-4'
+					>
+						Add To Card
+					</button>
+				) : (
+					<button className='px-2 py-3 mt-3 text-white bg-gray-800 rounded-lg cursor-not-allowed mb-4'>Sold out!</button>
+				)}
+			</div>
 		</div>
 	);
 }

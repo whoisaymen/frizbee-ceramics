@@ -34,9 +34,10 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
 			<ShopProvider>
-				<body className={inter.className}>
+				<body className={`${inter.className} lg:mx-6`}>
 					<Nav />
 					{children}
+
 					<Footer />
 				</body>
 			</ShopProvider>
