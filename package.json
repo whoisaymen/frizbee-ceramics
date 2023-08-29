@@ -7,7 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"postinstall": "patch-package"
+		"postinstall": "rm -rf node_modules/package-name && npm i --ignore-scripts && npx patch-package"
 	},
 	"dependencies": {
 		"@headlessui/react": "^1.7.16",
