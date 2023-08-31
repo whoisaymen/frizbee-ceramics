@@ -2,11 +2,11 @@
 import Link from 'next/link';
 import { useContext, useState, Fragment } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { XMarkIcon } from '@heroicons/react/20/solid';
 
 import { CartContext } from '../context/shopContext';
 import MiniCart from './MiniCart';
 import Image from 'next/image';
-
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
@@ -117,14 +117,32 @@ export default function Nav() {
 									))}
 								</div>
 
-								<div className='w-full flex justify-center -mt-[1px]'>
+								<div className='w-full flex -mt-[1px]'>
 									<span
 										onClick={() => setIsProjectsVisible(!isProjectsVisible)}
-										className={`cursor-pointer border border-black px-4 py-[4px] font-light tracking-tight uppercase flex-grow bg-white -ml-[1px] ${
+										className={`cursor-pointer border border-black px-4 py-[4px] font-light tracking-tight uppercase flex-grow bg-white -ml-[1px] flex justify-center items-center ${
 											isProjectsVisible ? 'bg-[#FFE9B2]' : 'bg-white'
 										}`}
+										style={isProjectsVisible ? { backgroundColor: '#FFE9B2' } : {}}
 									>
 										Projects
+										{isProjectsVisible ? (
+											// <svg className='h-1.5 w-1.5 fill-gray-800 mr-1' viewBox='0 0 6 6' aria-hidden='true'>
+											// 	<circle cx={3} cy={3} r={3} />
+											// </svg>
+
+											<svg
+												className='h-[11px] w-[11px] fill-gray-50 ml-1 mt-[1px]'
+												viewBox='0 0 28 28'
+												fill='none'
+												xmlns='http://www.w3.org/2000/svg'
+											>
+												<path d='M26.022 0L27.436 1.414L1.414 27.434L0 26.021L26.022 0Z' fill='black' />
+												<path d='M1.414 0L27.436 26.02L26.022 27.435L0 1.415L1.414 0Z' fill='black' />
+											</svg>
+										) : (
+											''
+										)}
 									</span>
 									<Link
 										href='/about'
