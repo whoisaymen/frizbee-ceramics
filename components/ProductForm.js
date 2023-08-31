@@ -85,10 +85,11 @@ export default function ProductForm({ product }) {
 		// <div className='bg-[#F0FFFD] from-[#B0AAEF]/30'>
 		<div className='bg-white from-[#B0AAEF]/30 w-full flex flex-col justify-between bg-[#F1F2F6]'>
 			<div className=' border-t border-b border-black lg:border-none flex justify-between items-stretch'>
-				<div className='bg-gradient-to-b from-[#AAEFB1] text-black flex-grow flex justify-center items-center'>
+				<div className='bg-black text-white flex-grow flex justify-center items-center'>
+					{/* <div className='bg-gradient-to-b from-[#AAEFB1] text-black flex-grow flex justify-center items-center'> */}
 					<h2 className='p-2 px-4 leading-tight text-lg lg:text-2xl font-medium tracking-tight '>{product.title}</h2>
 				</div>
-				<div className='bg-white flex justify-center items-center border-l border-black'>
+				<div className='bg-white flex justify-center items-center border-l border-black lg:border-b'>
 					<span className='tracking-tight px-4 py-2'>{formatter.format(product.variants.edges[0].node.priceV2.amount)}</span>
 				</div>
 			</div>

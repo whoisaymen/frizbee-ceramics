@@ -20,9 +20,9 @@ export const metadata = {
 		siteName: 'Frizbee Ceramics',
 		images: [
 			{
-				url: 'https://frizbeeceramics.com/imaeges/inserthere.png',
+				url: '/imaeges/logoSpirale.png',
 				width: 800,
-				height: 600,
+				height: 800,
 			},
 		],
 		locale: 'en_US',
