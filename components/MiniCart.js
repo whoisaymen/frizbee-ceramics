@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { formatter } from '../utils/helpers';
 import { CartContext } from '@/context/shopContext';
 import useHeaderHeight from '@/hooks/useHeaderHeight';
-useHeaderHeight;
 
 export default function MiniCart({ cart }) {
 	const cancelButtonRef = useRef();
@@ -132,7 +131,7 @@ export default function MiniCart({ cart }) {
 													</ul>
 												) : (
 													<div>
-														<p className='text-sm tracking-tight'>There's nothing in your cart.</p>
+														<p className='text-sm tracking-tight'>There&apos;s nothing in your cart.</p>
 													</div>
 												)}
 											</div>
