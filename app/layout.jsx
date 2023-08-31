@@ -33,14 +33,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
-			<ShopProvider>
-				<body className={`${inter.className} lg:mx-6`}>
+			<body className={`${inter.className} lg:mx-6`}>
+				<ShopProvider>
 					<Nav />
 					{children}
-
-					<Footer />
-				</body>
-			</ShopProvider>
+				</ShopProvider>
+				<Footer />
+			</body>
 		</html>
 	);
 }

@@ -1,15 +1,16 @@
 'use client';
-import { Fragment, useContext, useRef } from 'react';
+import { Fragment, useContext, useRef, useState, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import Link from 'next/link';
 import { formatter } from '../utils/helpers';
 import { CartContext } from '@/context/shopContext';
+import useHeaderHeight from '@/hooks/useHeaderHeight';
+useHeaderHeight;
 
 export default function MiniCart({ cart }) {
 	const cancelButtonRef = useRef();
-
 	const { cartOpen, setCartOpen, checkoutUrl, removeCartItem, clearCart, cartLoading, incrementCartItem, decrementCartItem } =
 		useContext(CartContext);
 
@@ -17,6 +18,8 @@ export default function MiniCart({ cart }) {
 	cart.map((item) => {
 		cartTotal += item?.variantPrice * item?.variantQuantity;
 	});
+
+	const headerHeight = useHeaderHeight();
 
 	return (
 		<Transition.Root show={cartOpen} as={Fragment}>
@@ -41,7 +44,7 @@ export default function MiniCart({ cart }) {
 						<Dialog.Overlay className='absolute inset-0 transition-opacity lg:bg-gray-500/75' />
 					</Transition.Child>
 
-					<div className='fixed inset-y-0 right-0 top-[177px] md:top-0 flex w-full lg:max-w-full'>
+					<div className={`fixed inset-y-0 right-0 md:top-0 flex w-full lg:max-w-full`} style={{ top: `${headerHeight}px` }}>
 						<Transition.Child
 							as={Fragment}
 							enter='transform transition ease-in-out duration-500 sm:duration-700'
@@ -53,26 +56,25 @@ export default function MiniCart({ cart }) {
 						>
 							<div className='w-full'>
 								<div className='flex flex-col h-full overflow-y-scroll bg-white shadow-xl'>
-									<div className='flex-1 px-4 py-6 overflow-y-auto sm:px-6'>
-										<div className='flex items-start justify-between'>
-											<Dialog.Title className='text-lg font-medium text-gray-900'>Shopping cart</Dialog.Title>
-											<div className='flex items-center ml-3 h-7'>
-												<button
-													ref={cancelButtonRef}
-													type='button'
-													className='p-2 -m-2 text-gray-400 hover:text-gray-500'
-													onClick={() => setCartOpen(false)}
-												>
-													<span className='sr-only'>Close panel</span>
-													<XMarkIcon className='w-6 h-6' aria-hidden='true' />
-												</button>
-											</div>
+									<div className='flex items-start justify-between bg-[#AAEFB1] px-4 py-2 overflow-y-auto sm:px-6'>
+										<Dialog.Title className='font-medium text-gray-900 text-base tracking-tighter'>Shopping cart</Dialog.Title>
+										<div className='flex items-center ml-3 h-7'>
+											<button
+												ref={cancelButtonRef}
+												type='button'
+												className='p-1 -m-2 text-gray-800 hover:text-gray-500 outline-none'
+												onClick={() => setCartOpen(false)}
+											>
+												<span className='sr-only'>Close panel</span>
+												<XMarkIcon className='w-6 h-6' aria-hidden='true' />
+											</button>
 										</div>
-
-										<div className='mt-8'>
+									</div>
+									<div className='flex-1 px-4 py-2 overflow-y-auto sm:px-6'>
+										<div className='mt-2'>
 											<div className='flow-root'>
 												{cart.length > 0 ? (
-													<ul role='list' className='-my-6 divide-y divide-gray-200'>
+													<ul role='list' className='-my-6 divide-y divide-gray-900'>
 														{cart.map((product) => (
 															<li key={product.id + Math.random()} className='relative flex py-6'>
 																<div
@@ -80,7 +82,7 @@ export default function MiniCart({ cart }) {
 																		cartLoading ? 'bg-white opacity-60' : 'hidden'
 																	}`}
 																></div>
-																<div className='relative flex-shrink-0 w-24 h-24 overflow-hidden border border-gray-200 rounded-md'>
+																<div className='relative flex-shrink-0 w-24 h-24 overflow-hidden border border-gray-900'>
 																	<Image
 																		src={product.image}
 																		alt={product.title}
@@ -93,7 +95,7 @@ export default function MiniCart({ cart }) {
 
 																<div className='flex flex-col flex-1 ml-4'>
 																	<div>
-																		<div className='flex justify-between text-base font-medium text-gray-900'>
+																		<div className='flex justify-between text-sm font-medium text-gray-900 tracking-tighter leading-[18px] '>
 																			<h3>
 																				<Link href={`/products/${product.handle}`} passHref>
 																					<span onClick={() => setCartOpen(false)}>{product.title}</span>
@@ -101,7 +103,6 @@ export default function MiniCart({ cart }) {
 																			</h3>
 																			<p className='ml-4'>{formatter.format(product.variantPrice)}</p>
 																		</div>
-																		<p className='mt-1 text-sm text-gray-500'>{product.variantTitle}</p>
 																	</div>
 																	<div className='flex items-end justify-between flex-1 text-sm'>
 																		{/* <p className="text-gray-500">Qty {product.variantQuantity}</p> */}
@@ -118,7 +119,7 @@ export default function MiniCart({ cart }) {
 																			<button
 																				onClick={() => removeCartItem(product.id)}
 																				type='button'
-																				className='font-medium text-gray-500 hover:text-gray-800'
+																				className='font-medium text-gray-500 hover:text-gray-600'
 																				disabled={cartLoading}
 																			>
 																				Remove
@@ -131,30 +132,21 @@ export default function MiniCart({ cart }) {
 													</ul>
 												) : (
 													<div>
-														<p>Nothing in your cart!</p>
+														<p className='text-sm tracking-tight'>There's nothing in your cart.</p>
 													</div>
 												)}
 											</div>
 										</div>
 									</div>
 									{cart.length > 0 ? (
-										<div className='px-4 py-6 border-t border-gray-200 sm:px-6'>
-											<div className='flex justify-between text-base font-medium text-gray-900'>
+										<div className='px-4 py-4 border-t border-black sm:px-6'>
+											<div className='flex justify-between uppercase font-medium text-black text-sm tracking-tighter'>
 												<p>Subtotal</p>
 												<p>{formatter.format(cartTotal)}</p>
 											</div>
-											<p className='mt-0.5 text-sm text-gray-500'>Shipping and taxes calculated at checkout.</p>
-											<div className='mt-6'>
-												<a
-													href={checkoutUrl}
-													className={`flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-black border border-transparent rounded-md shadow-sm hover:bg-gray-800 ${
-														cartLoading ? 'cursor-not-allowed' : 'cursor-pointer'
-													}`}
-												>
-													Checkout
-												</a>
-											</div>
-											<div className='flex justify-center mt-6 text-sm text-center text-gray-500'>
+											<p className='mt-0.5 text-sm text-gray-500 tracking-tight'>Shipping and taxes calculated at checkout.</p>
+
+											{/* <div className='flex justify-center mt-4 text-sm text-center text-gray-500'>
 												<p>
 													<button onClick={() => clearCart()} className='font-medium hover:text-gray-800'>
 														Clear Cart
@@ -164,9 +156,19 @@ export default function MiniCart({ cart }) {
 														Continue Shopping<span aria-hidden='true'> &rarr;</span>
 													</button>
 												</p>
-											</div>
+											</div> */}
 										</div>
 									) : null}
+									<div className='mt-0'>
+										<a
+											href={checkoutUrl}
+											className={`uppercase tracking-tight flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-black border border-transparent shadow-sm hover:bg-gray-800 ${
+												cartLoading ? 'cursor-not-allowed' : 'cursor-pointer'
+											}`}
+										>
+											Checkout
+										</a>
+									</div>
 								</div>
 							</div>
 						</Transition.Child>

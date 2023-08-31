@@ -82,19 +82,25 @@ export default function ProductForm({ product }) {
 	}, [productInventory, selectedVariant]);
 
 	return (
-		<div>
-			<div className='bg-gradient-to-b from-[#B0AAEF]/30 mb-4 px-4 py-2 border-t border-black lg:border-none'>
-				<h2 className='text-lg lg:text-2xl font-bold lg:mt-10'>{product.title}</h2>
-				<span className='pb-3'>{formatter.format(product.variants.edges[0].node.priceV2.amount)}</span>
+		// <div className='bg-[#F0FFFD] from-[#B0AAEF]/30'>
+		<div className='bg-white from-[#B0AAEF]/30 w-full flex flex-col justify-between bg-[#F1F2F6]'>
+			<div className='bg-gradient-to-b from-[#000]/5 border-t border-b border-black lg:border-none flex justify-between items-stretch'>
+				<div className='bg-black text-white flex-grow flex justify-center items-center'>
+					<h2 className='p-2 px-4 leading-tight text-lg lg:text-2xl font-medium tracking-tight border-r border-black'>{product.title}</h2>
+				</div>
+				<div className='bg-white flex-none flex justify-center items-center'>
+					<span className='tracking-tight px-4 py-2'>{formatter.format(product.variants.edges[0].node.priceV2.amount)}</span>
+				</div>
 			</div>
-			<div className='flex flex-col w-full p-4 md:w-1/2 self-end'>
+
+			<div className='flex flex-col w-full py-8 px-4  '>
 				<p className='text-sm font-extralight lg:text-md tracking-tight mb-4'>{product.description}</p>
 				{available ? (
 					<button
 						onClick={() => {
 							addToCart(selectedVariant);
 						}}
-						className='px-2 py-3 mt-3 text-black border-[1px] border-black uppercase font-light tracking-tight mb-4'
+						className='px-2 py-3 mt-3 text-black border-[1px] border-black uppercase font-light tracking-tight bg-white'
 					>
 						Add To Card
 					</button>

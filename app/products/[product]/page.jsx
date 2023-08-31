@@ -1,4 +1,6 @@
 import ProductPageContent from '@/components/ProductPageContent';
+import ScrollToTop from '@/components/ScrollToTop';
+
 import { getProduct } from '@/lib/shopify';
 
 export async function generateMetadata({ params, searchParams }, parent) {
@@ -14,8 +16,9 @@ export default async function ProductPage({ params }) {
 	const product = await getProduct(params.product);
 
 	return (
-		<div className=''>
+		<>
+			<ScrollToTop />
 			<ProductPageContent product={product} />
-		</div>
+		</>
 	);
 }

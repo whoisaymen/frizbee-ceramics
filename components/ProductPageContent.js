@@ -13,7 +13,8 @@ export default function ProductPageContent({ product }) {
 			<SwiperSlide key={`slide-${i}`}>
 				<Image
 					src={image.node.url}
-					alt={image.node.altText}
+					// alt={image.node.altText}
+					alt='Product image'
 					width={500}
 					height={500}
 					priority
@@ -27,7 +28,7 @@ export default function ProductPageContent({ product }) {
 		<div className='max-w-7xl mx-auto border border-black'>
 			<div className='flex flex-col items-center justify-center mx-auto md:flex-row md:items-stretch'>
 				<div className='w-full overflow-hidden bg-white md:w-1/2 md:border-black md:border-r '>
-					<div className='relative w-full h-[50vh]'>
+					<div className='relative w-full h-[55vh] lg:h-[50vh]'>
 						<Swiper
 							style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
 							navigation
@@ -40,7 +41,7 @@ export default function ProductPageContent({ product }) {
 						</Swiper>
 					</div>
 				</div>
-				<div className='flex flex-1'>
+				<div className='flex flex-1 w-full'>
 					<ProductForm product={product} />
 				</div>
 			</div>

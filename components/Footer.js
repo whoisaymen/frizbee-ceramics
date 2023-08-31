@@ -121,7 +121,7 @@ export default function Footer() {
 								<ul role='list' className='space-y-0'>
 									{navigation.header.map((item) => (
 										<li key={item.name}>
-											<a href={item.href} className='text-sm text-black hover:text-gray-900'>
+											<a href={item.href} className='text-sm text-black hover:text-gray-900 pr-1'>
 												{item.name}
 											</a>
 										</li>

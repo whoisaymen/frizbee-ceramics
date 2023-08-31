@@ -24,7 +24,7 @@ export default function Nav() {
 	});
 
 	return (
-		<div className='font-light tracking-tight uppercase sticky top-0 z-50 -ml-[1px] -mr-[1px]'>
+		<div className='font-light tracking-tight uppercase sticky top-0 z-50 -ml-[1px] -mr-[1px]' id='header'>
 			<div className='letstry relative lg:pt-10 -mb-2'>
 				<header className=' relative'>
 					<nav aria-label='Top' className='mx-auto max-w-7xl'>
@@ -39,7 +39,7 @@ export default function Nav() {
 								</span>
 								<span
 									className={`py-[2px] cursor-pointer border border-black -ml-[1px] bg-white ${
-										sortOption === 'shape' ? 'bg-[#F1EFF3] text-black' : ''
+										sortOption === 'shape' ? 'bg-[#66D8B4] text-black' : ''
 									}`}
 								>
 									<Link href='/' onClick={() => setSortOption('shape')} className='px-4'>
@@ -48,7 +48,7 @@ export default function Nav() {
 								</span>
 								<span
 									className={`py-[2px] cursor-pointer border border-black -ml-[1px] bg-white ${
-										sortOption === 'pattern' ? 'bg-[#F1EFF3] text-black' : ''
+										sortOption === 'pattern' ? 'bg-[#B0AAEF] text-black' : ''
 									}`}
 								>
 									<Link href='/' onClick={() => setSortOption('pattern')} className='px-4'>
@@ -86,6 +86,7 @@ export default function Nav() {
 											width={1000}
 											className='w-auto mx-auto z-50'
 											alt='Frizbee Ceramics logo'
+											priority
 										></Image>
 									</Link>
 								</div>
@@ -95,15 +96,16 @@ export default function Nav() {
 										<span
 											key={option}
 											className={`cursor-pointer flex-grow border border-black py-[4px] bg-white -ml-[1px] ${
-												sortOption === option ? 'bg-[#F1EFF3] text-black' : ''
+												sortOption === option ? 'bg-[#000] text-white' : 'text-black'
 											}`}
+											style={sortOption === option ? { backgroundColor: 'black' } : {}}
 										>
 											<Link href='/' onClick={() => setSortOption(option)} className='px-3 flex justify-center items-center'>
 												{sortOption === option ? (
 													// <svg className='h-1.5 w-1.5 fill-gray-800 mr-1' viewBox='0 0 6 6' aria-hidden='true'>
 													// 	<circle cx={3} cy={3} r={3} />
 													// </svg>
-													<svg className='h-2.5 w-2.5 fill-gray-900 mr-1' viewBox='0 0 10 15'>
+													<svg className='h-2.5 w-2.5 fill-gray-50 mr-1' viewBox='0 0 10 15'>
 														<path d='M10 6L5 0L0 6H10ZM10 9L5 15L0 9H10Z' />
 													</svg>
 												) : (
@@ -118,7 +120,9 @@ export default function Nav() {
 								<div className='w-full flex justify-center -mt-[1px]'>
 									<span
 										onClick={() => setIsProjectsVisible(!isProjectsVisible)}
-										className='cursor-pointer border border-black px-4 py-[4px] font-light tracking-tight uppercase flex-grow bg-white -ml-[1px]'
+										className={`cursor-pointer border border-black px-4 py-[4px] font-light tracking-tight uppercase flex-grow bg-white -ml-[1px] ${
+											isProjectsVisible ? 'bg-[#FFE9B2]' : 'bg-white'
+										}`}
 									>
 										Projects
 									</span>
@@ -128,7 +132,7 @@ export default function Nav() {
 											pathname === '/about' ? 'bg-[#F3FFE0]' : 'bg-white'
 										} -ml-[1px]`}
 										onClick={() => {
-											console.log('Current sortOption value:', sortOption);
+											// console.log('Current sortOption value:', sortOption);
 											setSortOption('');
 										}}
 									>
@@ -151,6 +155,7 @@ export default function Nav() {
 									width={1000}
 									className='h-24 w-auto z-50 px-4'
 									alt='Frizbee Ceramics logo'
+									priority
 								></Image>
 							</Link>
 							<div className='flex items-center justify-end z-10'>

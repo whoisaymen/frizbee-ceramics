@@ -31,7 +31,7 @@ function sortProducts(products, option) {
 		const filteredProducts = [...products].filter((product) => {
 			return product.node.tags.includes('set');
 		});
-		console.log('Filtered products for sets:', filteredProducts);
+		// console.log('Filtered products for sets:', filteredProducts);
 		return filteredProducts;
 	}
 	return products; // return products as-is if there's no sorting
@@ -63,7 +63,6 @@ export default function ShopProvider({ children }) {
 	async function addToCart(addedItem) {
 		const newItem = { ...addedItem };
 		setCartOpen(true);
-		console.log(newItem);
 
 		if (cart.length === 0) {
 			setCart([newItem]);
