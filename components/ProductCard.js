@@ -1,51 +1,84 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { formatter } from '@/utils/helpers';
-import { motion } from 'framer-motion';
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { formatter } from "@/utils/helpers";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const ProductCard = ({ product }) => {
-	const { handle, title, id } = product.node;
-	const { altText, url } = product.node.images.edges[0].node;
-	const price = product.node.priceRange.minVariantPrice.amount;
-	const color = product.node.tags.find((tag) => tag.startsWith('color:'))?.split(':')[1] || '';
+  const { handle, title, id } = product.node;
+  const { altText, url } = product.node.images.edges[0].node;
+  const price = product.node.priceRange.minVariantPrice.amount;
+  const color =
+    product.node.tags.find((tag) => tag.startsWith("color:"))?.split(":")[1] ||
+    "";
 
-	return (
-		<motion.div
-			layout // This prop enables automatic animation on layout changes
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-			className='border border-black -m-[0.5px]'
-		>
-			<div key={id} className='group relative'>
-				<div className='w-full overflow-hidden h-64 bg-gray-100 relative'>
-					<Link href={`/products/${handle}`}>
-						<Image src={url} alt={'Test'} width={500} height={500} loading='lazy' className='h-full w-full object-cover object-center' />
-					</Link>
-					{/* <div className='absolute bottom-0 left-0 p-2 text-black text-xs uppercase font-bold'>
-						<p className='mt-1'>{title}</p>
-						<p className='font-medium'>{formatter.format(price)}</p>
-					</div> */}
-					{/* <div className='absolute top-0 left-0 p-1 uppercase'>
-						<span className='inline-flex items-center gap-x-1.5 rounded-md bg-white px-1.5 py-0.5 text-xs font-light text-blue-900'>
-							<svg className='h-1.5 w-1.5 fill-blue-900' viewBox='0 0 6 6' aria-hidden='true'>
-								<circle cx={3} cy={3} r={3} />
-							</svg>
-							{color}
-						</span>
-					</div> */}
-				</div>
-				{/* <h3 className='mt-4 text-sm text-gray-700'>
-				<Link href={`/products/${handle}`}>
-					<span className='absolute inset-0' />
-					{title}
-				</Link>
-			</h3> */}
-				{/* <p className='mt-1 text-sm text-gray-500'>{color}</p> */}
-				{/* <p className='mt-1 text-sm font-medium text-gray-900'>{formatter.format(price)}</p> */}
-			</div>
-		</motion.div>
-	);
+  const imageUrl1 = product.node.images.edges[0].node.url;
+  const imageUrl2 = product.node.images.edges[1]?.node.url; // second image, if available
+
+  const [displayImageUrl, setDisplayImageUrl] = useState(imageUrl1);
+
+  const prepareSwiperSlides = () => {
+    return product.node.images.edges.map((image, i) => (
+      <SwiperSlide key={`mobile-slide-${i}`}>
+        <Image
+          src={image.node.url}
+          alt="Product image"
+          width={500}
+          height={500}
+          loading="lazy"
+          className="w-full h-full object-cover object-center"
+        />
+      </SwiperSlide>
+    ));
+  };
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="border border-black -m-[0.5px]"
+    >
+      <Link href={`/products/${handle}`} className="custom-cursor relative">
+        <div
+          key={id}
+          className="group relative"
+          onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
+          onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
+        >
+          {/* Mobile Only Slider */}
+          <div className="md:hidden relative w-full h-80 overflow-hidden bg-gray-100">
+            <Swiper className="h-full">{prepareSwiperSlides()}</Swiper>
+            {/* <span className="absolute bottom-1 left-1 z-10 tracking-tighter font-bold text-xs">
+              {title}
+            </span> */}
+          </div>
+          <div className="hidden md:block w-full overflow-hidden h-80 md:h-64 bg-gray-100 relative">
+            <Image
+              src={displayImageUrl}
+              alt={"Test"}
+              width={500}
+              height={500}
+              loading="lazy"
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
+          <div className="bg-white flex justify-between items-center p-2 py-1 tracking-tighter font-extralight text-xs lg:text-base border-black border-t">
+            <div className="text-black text-left truncate pr-3">
+              <span>{title}</span>
+            </div>
+            <div className="text-black text-right font-extralight">
+              <span>{formatter.format(price)}</span>
+            </div>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
 };
 
 export default ProductCard;

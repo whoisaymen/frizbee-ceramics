@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-	/* --foreground-rgb: 0, 0, 0;
+  /* --foreground-rgb: 0, 0, 0;
 	--background-start-rgb: 214, 219, 220;
 	--background-end-rgb: 255, 255, 255; */
 }
@@ -17,39 +17,142 @@
 } */
 
 body {
-	/* color: rgb(var(--foreground-rgb));
+  /* color: rgb(var(--foreground-rgb));
 	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb)); */
+  /* cursor: none; */
 }
 
 .letstry::after {
-	content: '';
-	position: absolute;
-	inset: 0;
-	z-index: -1;
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
 
-	background: white;
-	mask: linear-gradient(to top, transparent, black 35%);
-	backdrop-filter: blur(2px);
+  background: white;
+  mask: linear-gradient(to top, transparent, black 35%);
+  backdrop-filter: blur(2px);
 }
 
 .swiper-button-next {
-	background-image: url(/images/arrowRight.svg);
-	background-repeat: no-repeat;
-	background-size: 100% auto;
-	background-position: center;
+  background-image: url(/images/arrowRight.svg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
 }
 
 .swiper-button-next::after {
-	display: none;
+  display: none;
 }
 
 .swiper-button-prev {
-	background-image: url(/images/arrowLeft.svg);
-	background-repeat: no-repeat;
-	background-size: 100% auto;
-	background-position: center;
+  background-image: url(/images/arrowLeft.svg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
 }
 
 .swiper-button-prev::after {
-	display: none;
+  display: none;
+}
+
+.custom-cursor {
+  cursor: url("/images/mouseCursor.png"), auto;
+  /* transition: transform 0.3s ease; */
+}
+
+.custom-cursor-blue {
+  cursor: url("/images/mouseCursorBlue.png"), auto;
+}
+
+/* Marquee styles */
+.marquee {
+  --gap: 8px;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: var(--gap);
+}
+
+.marquee__content {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  gap: var(--gap);
+  min-width: 100%;
+  animation: scroll 60s linear infinite;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+/* Pause animation when reduced-motion is set */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__content {
+    animation-play-state: paused !important;
+  }
+}
+
+/* Enable animation */
+.enable-animation .marquee__content {
+}
+
+/* Reverse animation */
+.marquee--reverse .marquee__content {
+  animation-direction: reverse;
+}
+
+/* Pause on hover */
+.marquee--hover-pause:hover .marquee__content {
+  animation-play-state: paused;
+}
+
+/* Attempt to size parent based on content. Keep in mind that the parent width is equal to both content containers that stretch to fill the parent. */
+.marquee--fit-content {
+  max-width: fit-content;
+}
+
+/* A fit-content sizing fix: Absolute position the duplicate container. This will set the size of the parent wrapper to a single child container. Shout out to Olavi's article that had this solution 👏 @link: https://olavihaapala.fi/2021/02/23/modern-marquee.html  */
+.marquee--pos-absolute .marquee__content:last-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Enable position absolute animation on the duplicate content (last-child) */
+.enable-animation .marquee--pos-absolute .marquee__content:last-child {
+  animation-name: scroll-abs;
+}
+
+@keyframes scroll-abs {
+  from {
+    transform: translateX(calc(100% + var(--gap)));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.bg-custom-gradient {
+  background: linear-gradient(180deg, #ee7752, #e73c7e);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
