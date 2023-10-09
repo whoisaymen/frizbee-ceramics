@@ -1,16 +1,129 @@
 "use client";
 import Link from "next/link";
-import { useContext, useState, Fragment } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
-import { XMarkIcon } from "@heroicons/react/20/solid";
+import { usePathname } from "next/navigation";
+import { useContext, useState } from "react";
 
-import { CartContext } from "../context/shopContext";
-import MiniCart from "./MiniCart";
 import Image from "next/image";
+import { CartContext } from "../context/shopContext";
 import MarketingBanner from "./MarketingBanner";
+import MiniCart from "./MiniCart";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+
+const submenus = {
+  color: (
+    <div className="absolute top-10 -left-4 ml-4 flex flex-row">
+      <span className="bg-[#4169CC] p-[0.1rem] px-6 py-2 blur-none"></span>
+      <span className="bg-[#67AB82] p-[0.1rem] px-6 py-2 blur-none"></span>
+      <span className="bg-[#EADF50] p-[0.1rem] px-6 py-2 blur-none"></span>
+      <span className="bg-[#EB792F] p-[0.1rem] px-6 py-2 blur-none"></span>
+      <span className="bg-[#AAAAEF] p-[0.1rem] px-6 py-2 blur-none"></span>
+    </div>
+  ),
+  shape: (
+    <div className="absolute top-10 -left-4 ml-4 flex flex-row ">
+      <Image
+        src="/images/iconShape1.png"
+        alt="icon"
+        height={32}
+        width={32}
+        className="object-contain bg-white border border-black hover:-rotate-3 "
+      />
+      <Image
+        src="/images/iconShape2.png"
+        alt="icon"
+        height={32}
+        width={32}
+        className="object-contain bg-white border border-black ml-1 hover:-rotate-3 "
+      />
+      <Image
+        src="/images/iconShape3.png"
+        alt="icon"
+        height={32}
+        width={32}
+        className="object-contain bg-white border border-black ml-1"
+      />
+      <Image
+        src="/images/iconShape4.png"
+        alt="icon"
+        height={32}
+        width={32}
+        className="object-contain bg-white border border-black ml-1"
+      />
+      <Image
+        src="/images/iconShape5.png"
+        alt="icon"
+        height={32}
+        width={32}
+        className="object-contain bg-white border border-black ml-1"
+      />
+      <Image
+        src="/images/iconShape6.png"
+        alt="icon"
+        height={32}
+        width={32}
+        className="object-contain bg-white border border-black ml-1"
+      />
+    </div>
+  ),
+  pattern: (
+    <div className="absolute top-10 -left-4 ml-4 flex flex-row">
+      <Image
+        src="/images/pattern1.png"
+        alt="icon"
+        height={32}
+        width={32}
+        className="object-cover bg-white border border-black hover:-rotate-3"
+      />
+      <Image
+        src="/images/pattern2.png"
+        alt="icon"
+        height={32}
+        width={32}
+        className="object-cover bg-white border border-black ml-1 hover:-rotate-3"
+      />
+      <Image
+        src="/images/pattern3.png"
+        alt="icon"
+        height={32}
+        width={32}
+        className="object-cover bg-white border border-black ml-1 hover:-rotate-3"
+      />
+      <Image
+        src="/images/pattern4.png"
+        alt="icon"
+        height={32}
+        width={32}
+        className="object-cover bg-white border border-black ml-1 hover:-rotate-3"
+      />
+      <Image
+        src="/images/pattern5.png"
+        alt="icon"
+        height={32}
+        width={32}
+        className="object-cover bg-white border border-black ml-1 hover:-rotate-3"
+      />
+      <Image
+        src="/images/pattern6.png"
+        alt="icon"
+        height={32}
+        width={32}
+        className="object-cover bg-white border border-black ml-1 hover:-rotate-3"
+      />
+    </div>
+  ),
+  set: (
+    <div className="absolute top-10 -left-4 ml-4 flex flex-row">
+      {/* Add submenu content specific to "set" category */}
+    </div>
+  ),
+  new: (
+    <div className="absolute top-10 -left-4 ml-4 flex flex-row">
+      {/* Add submenu content specific to "new" category */}
+    </div>
+  ),
+};
 
 export default function Nav() {
   const pathname = usePathname();
@@ -18,6 +131,9 @@ export default function Nav() {
   const { cart, cartOpen, setCartOpen, sortOption, setSortOption } =
     useContext(CartContext);
   const [isProjectsVisible, setIsProjectsVisible] = useState(false);
+  const [isHeaderEnlarged, setIsHeaderEnlarged] = useState(false);
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   let cartQuantity = 0;
 
@@ -25,82 +141,56 @@ export default function Nav() {
     return (cartQuantity += item?.variantQuantity);
   });
 
+  const handleCategoryClick = (category) => {
+    if (selectedCategory === category) {
+      setSelectedCategory(null);
+      setIsHeaderEnlarged(false);
+    } else {
+      setSelectedCategory(category);
+      setIsHeaderEnlarged(true);
+    }
+
+    setSortOption(category);
+  };
+
   return (
     <div
-      className="font-light tracking-tight uppercase sticky top-0 z-50 -ml-[1px] -mr-[1px]"
+      className="font-light tracking-tight uppercase fixed top-0 left-0 right-0 mx-auto z-50 mt-4"
       id="header"
     >
-      <MarketingBanner />
-      <div className="letstry relative lg:pt-10 -mb-2">
-        <header className=" relative">
-          <nav aria-label="Top" className="mx-auto max-w-7xl">
-            <div className="flex items-center justify-between">
-              <div className="hidden lg:block">
-                <span
-                  className={` border border-black py-[2px] bg-white ${
-                    sortOption === "color" ? "bg-[#ddd] text-black" : ""
-                  }`}
-                >
-                  <Link
-                    href="/"
-                    onClick={() => setSortOption("color")}
-                    className="px-4 custom-cursor"
+      <div className="fixed bottom-0 left-0 right-0 z-50">
+        <MarketingBanner />
+      </div>
+
+      <div
+        className={` relative  mb-4 ${
+          isHeaderEnlarged ? "header-enlarged" : ""
+        }`}
+      >
+        <header className="relative">
+          <nav aria-label="Top" className="mx-auto">
+            <div className="w-full flex items-start justify-between">
+              <div className="hidden lg:flex">
+                {Object.keys(submenus).map((category) => (
+                  <span
+                    key={category}
+                    className={`py-[2px]  ml-4 relative 
+                    
+                    `}
                   >
-                    Color
-                  </Link>
-                </span>
-                <span
-                  className={`py-[2px]  border border-black -ml-[1px] bg-white ${
-                    sortOption === "shape" ? "bg-[#66D8B4] text-black" : ""
-                  }`}
-                >
-                  <Link
-                    href="/"
-                    onClick={() => setSortOption("shape")}
-                    className="px-4 custom-cursor"
-                  >
-                    Shape
-                  </Link>
-                </span>
-                <span
-                  className={`py-[2px]  border border-black -ml-[1px] bg-white ${
-                    sortOption === "pattern" ? "bg-[#B0AAEF] text-black" : ""
-                  }`}
-                >
-                  <Link
-                    href="/"
-                    onClick={() => setSortOption("pattern")}
-                    className="px-4 custom-cursor"
-                  >
-                    Pattern
-                  </Link>
-                </span>
-                <span
-                  className={`py-[2px]  border border-black -ml-[1px] bg-white ${
-                    sortOption === "new" ? "bg-[#F1EFF3] text-black" : ""
-                  }`}
-                >
-                  <Link
-                    href="/"
-                    onClick={() => setSortOption("new")}
-                    className="px-4 custom-cursor"
-                  >
-                    New
-                  </Link>
-                </span>
-                <span
-                  className={`py-[2px]  border border-black -ml-[1px] bg-white ${
-                    sortOption === "set" ? "bg-[#F1EFF3] text-black" : ""
-                  }`}
-                >
-                  <Link
-                    href="/"
-                    onClick={() => setSortOption("set")}
-                    className="px-4 custom-cursor"
-                  >
-                    Set
-                  </Link>
-                </span>
+                    <div
+                      className={`cursor-pointer px-4 custom-cursor  bg-white/90 border-black border hover:-rotate-3 ${
+                        selectedCategory === category
+                          ? "border border-black bg-white"
+                          : ""
+                      }`}
+                      onClick={() => handleCategoryClick(category)}
+                    >
+                      {category.charAt(0).toUpperCase() + category.slice(1)}
+                    </div>
+                    {selectedCategory === category && submenus[category]}
+                  </span>
+                ))}
               </div>
 
               {/* Mobile Menu */}
@@ -222,48 +312,63 @@ export default function Nav() {
               <Link
                 href="/"
                 onClick={() => setSortOption("")}
-                className="hidden lg:flex -rotate-6 custom-cursor"
+                className="hidden lg:block lg:absolute lg:top-4 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 -rotate-6 custom-cursor lg:z-50"
               >
                 <span className="sr-only">Frizbee Ceramics</span>
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logoAnimated.gif"
                   height={1000}
                   width={1000}
-                  className="h-24 w-auto z-50 px-4"
+                  className="h-24 w-auto z-50 -mb-6 mt-6"
                   alt="Frizbee Ceramics logo"
                   priority
                 ></Image>
               </Link>
               <div className="flex items-center justify-end z-10">
                 <div className="hidden lg:block">
-                  <span
-                    onClick={() => setIsProjectsVisible(!isProjectsVisible)}
-                    className=" border border-black px-4 py-[2px] font-light tracking-tight uppercase"
-                  >
-                    {isProjectsVisible ? "Projects X" : "Projects"}
-                  </span>
-                  <Link
-                    href="/about"
-                    className={`border border-black px-4 py-[2px] -ml-[1px] ${
-                      pathname === "/about" ? "bg-[#F3FFE0]" : "bg-white"
-                    } `}
-                  >
-                    <span>About</span>
-                  </Link>
-                  <span
-                    className=" border border-black px-4 -ml-[1px] py-[2px]"
-                    onClick={() => setCartOpen(!cartOpen)}
-                  >
-                    Cart ({cartQuantity})
-                  </span>
-                  <span className="sr-only">items in cart, view bag</span>
+                  <div className="flex items-start justify-end">
+                    <div className="hover:-rotate-3">
+                      <span
+                        onClick={() => setIsProjectsVisible(!isProjectsVisible)}
+                        className="px-4 py-[2px] font-light tracking-tight uppercase bg-white/90 border border-black "
+                      >
+                        {isProjectsVisible ? "Projects X" : "Projects"}
+                      </span>
+                    </div>
+                    <div className="hover:-rotate-3">
+                      <Link
+                        href="/about"
+                        className={`px-4 py-[2px] ml-4 border border-black ${
+                          pathname === "/about" ? "bg-[#F3FFE0]" : "bg-white"
+                        } `}
+                      >
+                        <span>About</span>
+                      </Link>
+                    </div>
+                    {/* <span
+                      className="px-4 -ml-[1px] py-[2px]"
+                      onClick={() => setCartOpen(!cartOpen)}
+                    >
+                      Cart ({cartQuantity})
+                    </span> */}
+                    <div
+                      className="flex flex-col border items-center border-black ml-4 bg-white/95 hover:rotate-3"
+                      onClick={() => setCartOpen(!cartOpen)}
+                    >
+                      <span className="px-1 pt-1">C</span>
+                      <span className="px-1 -mt-[6px]">A</span>
+                      <span className="px-1 -mt-[6px]">R</span>
+                      <span className="px-1 -mt-[6px]">T</span>
+                      <span className="px-1 pb-1">({cartQuantity})</span>
+                    </div>
+                    <span className="sr-only">items in cart, view bag</span>
+                  </div>
                 </div>
                 <MiniCart cart={cart} />
               </div>
             </div>
           </nav>
         </header>
-
         {isProjectsVisible && (
           <div className="w-full bg-white z-20">
             <div className="mx-auto max-w-7xl  border-b border-black p-4 text-sm">

@@ -41,10 +41,10 @@ export default function ProductPageContent({ product }) {
   });
 
   return (
-    <div className="max-w-7xl mx-auto border border-black">
+    <div className="mx-auto border border-black">
       <div className="flex flex-col items-center justify-center mx-auto md:flex-row md:items-stretch">
-        <div className="w-full overflow-hidden bg-white md:w-1/2 md:border-black md:border-r ">
-          <div className="hidden md:block relative w-full h-[55vh] lg:h-[50vh]">
+        <div className="w-full overflow-hidden bg-white md:w-1/3 md:border-black md:border-r ">
+          <div className="hidden md:block relative w-full h-[55vh] lg:h-[85vh]">
             <Swiper
               style={{
                 "--swiper-navigation-color": "#000",

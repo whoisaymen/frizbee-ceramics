@@ -104,7 +104,7 @@ export default function ProductForm({ product }) {
         </div>
       </div>
 
-      <div className="flex flex-col w-full py-8 px-4  ">
+      <div className="py-8 px-4  ">
         <p className="text-sm font-extralight lg:text-md tracking-tight mb-4">
           {product.description}
         </p>

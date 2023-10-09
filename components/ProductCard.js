@@ -1,11 +1,11 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { formatter } from "@/utils/helpers";
-import { motion } from "framer-motion";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { formatter } from "../utils/helpers";
 
 const ProductCard = ({ product }) => {
   const { handle, title, id } = product.node;
@@ -57,7 +57,7 @@ const ProductCard = ({ product }) => {
               {title}
             </span> */}
           </div>
-          <div className="hidden md:block w-full overflow-hidden h-80 md:h-64 bg-gray-100 relative">
+          <div className="hidden md:block w-full overflow-hidden h-80 md:h-[36rem] bg-gray-100 relative">
             <Image
               src={displayImageUrl}
               alt={"Test"}
@@ -66,15 +66,21 @@ const ProductCard = ({ product }) => {
               loading="lazy"
               className="w-full h-full object-cover object-center"
             />
+            <div className="absolute left-5  font-semibold bottom-4 flex flex-col">
+              <span>{title.split(" ")[0]}</span>
+              <span className="font-light -mt-1">
+                {formatter.format(price)}
+              </span>
+            </div>
           </div>
-          <div className="bg-white flex justify-between items-center p-2 py-1 tracking-tighter font-extralight text-xs lg:text-base border-black border-t">
+          {/* <div className="bg-white flex justify-between items-center p-2 py-1 tracking-tighter font-extralight text-xs lg:text-base border-black border-t">
             <div className="text-black text-left truncate pr-3">
               <span>{title}</span>
             </div>
             <div className="text-black text-right font-extralight">
               <span>{formatter.format(price)}</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </Link>
     </motion.div>

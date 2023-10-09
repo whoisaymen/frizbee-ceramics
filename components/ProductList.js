@@ -9,8 +9,11 @@ const ProductList = ({ products }) => {
   const sortedProducts = sortProducts(products, sortOption);
 
   return (
-    <motion.div className="bg-white pt-1">
-      <div className="mx-auto max-w-7xl">
+    <motion.div
+      className="bg-white pt-1 -mt-10"
+      style={{ backgroundImage: "url(/images/bgHomeGradient.svg)" }}
+    >
+      <div className="mx-auto">
         <AnimatePresence>
           <motion.div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {sortedProducts.map((product, index) => (

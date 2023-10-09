@@ -28,7 +28,7 @@ body {
   inset: 0;
   z-index: -1;
 
-  background: white;
+  background: transparent;
   mask: linear-gradient(to top, transparent, black 35%);
   backdrop-filter: blur(2px);
 }
@@ -56,7 +56,8 @@ body {
 }
 
 .custom-cursor {
-  cursor: url("/images/mouseCursor.png"), auto;
+  cursor: url("/images/mouseCursorSmall.png") 12 12, auto;
+
   /* transition: transform 0.3s ease; */
 }
 
@@ -155,4 +156,9 @@ body {
   100% {
     background-position: 0% 50%;
   }
+}
+
+.header-enlarged {
+  padding-bottom: 2rem; /* Increase the bottom padding */
+  /* Add any other styles you want for the enlarged header */
 }
