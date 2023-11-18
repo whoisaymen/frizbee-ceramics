@@ -41,7 +41,7 @@ const ProductCard = ({ product }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="border border-black -m-[0.5px]"
+      className="border border-black/30 -m-[0.5px]"
     >
       <Link href={`/products/${handle}`} className="custom-cursor relative">
         <div
@@ -57,7 +57,7 @@ const ProductCard = ({ product }) => {
               {title}
             </span> */}
           </div>
-          <div className="hidden md:block w-full overflow-hidden h-80 md:h-[36rem] bg-gray-100 relative">
+          <div className="hidden md:block w-full overflow-hidden h-80 md:h-[24rem] bg-gray-100 relative text-sm">
             <Image
               src={displayImageUrl}
               alt={"Test"}
@@ -66,7 +66,7 @@ const ProductCard = ({ product }) => {
               loading="lazy"
               className="w-full h-full object-cover object-center"
             />
-            <div className="absolute left-5  font-semibold bottom-4 flex flex-col">
+            <div className="absolute left-3  font-semibold bottom-2 flex flex-col">
               <span>{title.split(" ")[0]}</span>
               <span className="font-light -mt-1">
                 {formatter.format(price)}

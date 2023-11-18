@@ -55,7 +55,7 @@ const navigation = {
 export default function Footer() {
   return (
     <footer
-      className="bg-gradient-to-b from-gray-100 lg:from-white font-light tracking-tight -mt-[0.5px]"
+      className="bg-gradient-to-b from-gray-100 bg-white lg:from-white font-light tracking-tight fixed left-0 right-0 z-50 bottom-[29px] h-[35px]"
       aria-labelledby="footer-heading"
     >
       <div className="md:hidden border-t border-black border-b">
@@ -74,7 +74,7 @@ export default function Footer() {
           Footer
         </h2>
 
-        <div className="mx-auto border-t border-b border-black pb-6">
+        <div className="mx-auto border-t border-b border-black">
           <div className="lg:flex uppercase justify-between">
             <div className="flex justify-between items-center lg:w-1/2 pl-4">
               <div>
@@ -95,7 +95,7 @@ export default function Footer() {
                 </ul>
               </div>
             </div>
-            <div className="lg:w-1/2 border-l border-black pl-4 flex items-center justify-between -mt-[1px]">
+            <div className="lg:w-1/2 border-l border-black pl-4 flex items-center justify-between -mt-[1px] -mb-[1px]">
               <h3 className="text-sm leading-6 text-gray-900">
                 Subscribe to our newsletter
               </h3>

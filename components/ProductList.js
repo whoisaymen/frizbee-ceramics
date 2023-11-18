@@ -10,7 +10,7 @@ const ProductList = ({ products }) => {
 
   return (
     <motion.div
-      className="bg-white pt-1 -mt-10"
+      className="bg-white pt-1 -mt-10 mb-[63px]"
       style={{ backgroundImage: "url(/images/bgHomeGradient.svg)" }}
     >
       <div className="mx-auto">

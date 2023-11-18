@@ -89,9 +89,9 @@ export default function ProductForm({ product }) {
 
   return (
     // <div className='bg-[#F0FFFD] from-[#B0AAEF]/30'>
-    <div className="from-[#B0AAEF]/30 w-full flex flex-col justify-between bg-[#fff]">
+    <div className="from-[#B0AAEF]/30 w-1/2 fixed top-[65%] left-[45%] border border-black">
       <div className=" border-t border-b border-black lg:border-none flex justify-between items-stretch">
-        <div className="bg-gray-100 text-black flex-grow flex justify-center items-center">
+        <div className="bg-gray-100 text-black flex-grow flex justify-start items-center">
           {/* <div className='bg-gradient-to-b from-[#AAEFB1] text-black flex-grow flex justify-center items-center'> */}
           <h2 className="p-2 px-4 leading-tight text-lg lg:text-2xl tracking-tighter font-bold">
             {product.title}
@@ -104,7 +104,7 @@ export default function ProductForm({ product }) {
         </div>
       </div>
 
-      <div className="py-8 px-4  ">
+      <div className="py-8 px-4 bg-white">
         <p className="text-sm font-extralight lg:text-md tracking-tight mb-4">
           {product.description}
         </p>

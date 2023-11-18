@@ -22,13 +22,13 @@ const submenus = {
     </div>
   ),
   shape: (
-    <div className="absolute top-10 -left-4 ml-4 flex flex-row ">
+    <div className="absolute top-10 -left-4 ml-4 flex flex-row">
       <Image
         src="/images/iconShape1.png"
         alt="icon"
         height={32}
         width={32}
-        className="object-contain bg-white border border-black hover:-rotate-3 "
+        className="object-contain bg-white border border-black hover:-rotate-3"
       />
       <Image
         src="/images/iconShape2.png"
@@ -178,8 +178,9 @@ export default function Nav() {
                     
                     `}
                   >
+                    {/* shadow-sm hover:shadow-lg  transition rotate duration-200 ease-out */}
                     <div
-                      className={`cursor-pointer px-4 custom-cursor  bg-white/90 border-black border hover:-rotate-3 ${
+                      className={`cursor-pointer px-4 custom-cursor  bg-white/90 border-black border hover:-rotate-3  ${
                         selectedCategory === category
                           ? "border border-black bg-white"
                           : ""
@@ -312,14 +313,14 @@ export default function Nav() {
               <Link
                 href="/"
                 onClick={() => setSortOption("")}
-                className="hidden lg:block lg:absolute lg:top-4 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 -rotate-6 custom-cursor lg:z-50"
+                className="hidden lg:block lg:absolute lg:top-4 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 -rotate-6 custom-cursor lg:z-[2000] "
               >
                 <span className="sr-only">Frizbee Ceramics</span>
                 <Image
-                  src="/images/logoAnimated.gif"
+                  src="/images/logo.png"
                   height={1000}
                   width={1000}
-                  className="h-24 w-auto z-50 -mb-6 mt-6"
+                  className="h-20 w-auto -mb-6 mt-6"
                   alt="Frizbee Ceramics logo"
                   priority
                 ></Image>
@@ -371,16 +372,30 @@ export default function Nav() {
         </header>
         {isProjectsVisible && (
           <div className="w-full bg-white z-20">
-            <div className="mx-auto max-w-7xl  border-b border-black p-4 text-sm">
-              <ul role="list" className="space-y-0">
-                <li>A Box Is A Box</li>
-                <li>Carne</li>
-                <li>Chez Manger</li>
-                <li>Lina Lapelyte</li>
-                <li>MAD</li>
-                <li>Now Belgium Now</li>
-                <li>Phyps</li>
-                <li>Pon Ding</li>
+            <div className="absolute top-10 right-11 ml-4 flex flex-col w-1/4 border border-black">
+              <ul className="list-none p-0 m-0">
+                <li className="bg-[#fff] p-[0.1rem] px-1 py-1 blur-none">
+                  A Box Is A Box
+                </li>
+                <li className="bg-gray-100 p-[0.1rem] px-1 py-1 blur-none">
+                  Carne
+                </li>
+                <li className="bg-white p-[0.1rem] px-1 py-1 blur-none">
+                  Chez Manger
+                </li>
+                <li className="bg-gray-100 p-[0.1rem] px-1 py-1 blur-none">
+                  Lina Lapelyte
+                </li>
+                <li className="bg-white p-[0.1rem] px-1 py-1 blur-none">MAD</li>
+                <li className="bg-gray-100 p-[0.1rem] px-1 py-1 blur-none">
+                  Now Belgium Now
+                </li>
+                <li className="bg-white p-[0.1rem] px-1 py-1 blur-none">
+                  Phyps
+                </li>
+                <li className="bg-gray-100 p-[0.1rem] px-1 py-1 blur-none">
+                  Pon Ding
+                </li>
               </ul>
             </div>
           </div>

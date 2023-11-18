@@ -52,7 +52,7 @@ export default function MiniCart({ cart }) {
           </Transition.Child>
 
           <div
-            className={`fixed inset-y-0 right-0 md:top-0 flex w-full lg:max-w-[50%] mt-[15px]`}
+            className={`fixed inset-y-0 right-0 md:top-0 flex w-full lg:max-w-[25%] z-0`}
             // style={{ top: `${headerHeight}px` }}
           >
             <Transition.Child
@@ -64,13 +64,13 @@ export default function MiniCart({ cart }) {
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <div className="w-full">
+              <div className="w-full border-black border-l-[0.5px]">
                 <div className="flex flex-col h-full overflow-y-scroll bg-white shadow-xl">
-                  <div className="flex items-start justify-end px-4 py-2 overflow-y-auto sm:px-6">
-                    {/* <Dialog.Title className="font-medium text-gray-900 text-base tracking-tighter">
-                      Shopping cart
-                    </Dialog.Title> */}
-                    <div className="flex items-center ml-3 h-7">
+                  <div className="flex items-center justify-between px-2 py-2 overflow-y-auto sm:px-4 border-b border-black">
+                    <Dialog.Title className="font-light uppercase text-gray-900 text-base tracking-tighter">
+                      Your cart
+                    </Dialog.Title>
+                    <div className="flex items-center">
                       <button
                         ref={cancelButtonRef}
                         type="button"
@@ -82,6 +82,7 @@ export default function MiniCart({ cart }) {
                       </button>
                     </div>
                   </div>
+
                   <div className="flex-1 px-4 py-2 overflow-y-auto sm:px-0">
                     <div className="mt-2">
                       <div className="flow-root">
@@ -231,7 +232,7 @@ export default function MiniCart({ cart }) {
                   <div className="mt-0">
                     <a
                       href={checkoutUrl}
-                      className={`uppercase tracking-tight flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-black border border-transparent shadow-sm hover:bg-gray-800 ${
+                      className={`h-[64px] uppercase tracking-tight flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-black border border-transparent shadow-sm hover:bg-gray-800 ${
                         cartLoading ? "cursor-not-allowed" : ""
                       }`}
                     >
