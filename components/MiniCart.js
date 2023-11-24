@@ -2,7 +2,7 @@
 import { Fragment, useContext, useRef, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { formatter } from "../utils/helpers";
 import { CartContext } from "@/context/shopContext";

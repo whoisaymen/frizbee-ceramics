@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext, useState } from "react";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { CartContext } from "../context/shopContext";
 import MarketingBanner from "./MarketingBanner";
 import MiniCart from "./MiniCart";
