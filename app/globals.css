@@ -158,6 +158,19 @@ body {
   }
 }
 
+@keyframes colorChange {
+  0%,
+  100% {
+    background-color: #6535d2; /* Purple */
+  }
+  33% {
+    background-color: #dbff00; /* Neon Green */
+  }
+  66% {
+    background-color: #ffa572; /* Coral */
+  }
+}
+
 .header-enlarged {
   padding-bottom: 2rem; /* Increase the bottom padding */
   /* Add any other styles you want for the enlarged header */

@@ -7,15 +7,17 @@ export default function AboutPage() {
       <ScrollToTop />
 
       <div className="mx-auto">
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col md:flex-row justify-center items-center">
           <div className="order-2 lg:order-1 border-b border-black md:border-r md:border-black md:border-b-0 w-full md:w-1/2">
-            <div className="p-6 md:py-28 text-sm lg:text-base">
+            <div className="p-12 md:py-28 text-sm lg:text-base">
               {/* <h2 className='uppercase mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>About</h2> */}
               {/* <Image src='/images/sun.png' height={1000} width={1000} className='w-auto mx-auto z-50' alt='Frizbee Ceramics logo'></Image> */}
-              <p className="text-gray-900">
-                <strong>
-                  Launched in 2017, Brussels-based FRIZBEE CERAMICS offers an
-                  edgy handcrafted tableware collection.
+              <p className="text-gray-900 pr-52 tracking-tighter mb-28">
+                <strong className="text-4xl tracking-tighter">
+                  Launched in 2017, Brussels-based{" "}
+                  <span className="font-black">FRIZBEE CERAMICS</span> offers an
+                  <span className="italic">edgy</span> handcrafted tableware
+                  collection.
                 </strong>
               </p>
               <p className="mt-4 text-gray-700">

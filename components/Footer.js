@@ -95,11 +95,11 @@ export default function Footer() {
                 </ul>
               </div>
             </div>
-            <div className="lg:w-1/2 border-l border-black pl-4 flex items-center justify-between -mt-[1px] -mb-[1px]">
-              <h3 className="text-sm leading-6 text-gray-900">
+            <div className="lg:w-1/2 border-l border-black flex items-center justify-between -mt-[1px] -mb-[1px]">
+              <h3 className="text-sm leading-6 text-gray-900 w-1/2 pl-4">
                 Subscribe to our newsletter
               </h3>
-              <form className="sm:flex sm:max-w-md">
+              <form className="sm:flex sm:max-w-md sm:w-1/2">
                 <label htmlFor="email-address" className="sr-only">
                   Email address
                 </label>

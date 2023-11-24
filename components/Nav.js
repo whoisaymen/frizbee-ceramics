@@ -313,18 +313,40 @@ export default function Nav() {
               <Link
                 href="/"
                 onClick={() => setSortOption("")}
-                className="hidden lg:block lg:absolute lg:top-4 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 -rotate-6 custom-cursor lg:z-[2000] "
+                className="hidden lg:block lg:absolute lg:top-8 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 -rotate-6 custom-cursor lg:z-[2000] "
               >
                 <span className="sr-only">Frizbee Ceramics</span>
                 <Image
                   src="/images/logo.png"
                   height={1000}
                   width={1000}
-                  className="h-20 w-auto -mb-6 mt-6"
+                  className="h-20 w-auto -mb-6 mt-6 "
                   alt="Frizbee Ceramics logo"
                   priority
                 ></Image>
               </Link>
+
+              <Link
+                href="/"
+                onClick={() => setSortOption("")}
+                className="hidden lg:block lg:absolute lg:top-4 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 -rotate-6 custom-cursor lg:z-[1]"
+              >
+                <span className="sr-only">Frizbee Ceramics</span>
+                <div
+                  className="relative h-20 w-auto bg-[#6535D2] blur-3xl"
+                  style={{ animation: "colorChange 20s infinite alternate" }}
+                >
+                  <Image
+                    src="/images/logo.png"
+                    height={1000}
+                    width={1000}
+                    className="h-20 w-auto -mb-6 mt-6"
+                    alt="Frizbee Ceramics logo"
+                    priority
+                  />
+                </div>
+              </Link>
+
               <div className="flex items-center justify-end z-10">
                 <div className="hidden lg:block">
                   <div className="flex items-start justify-end">
@@ -372,7 +394,7 @@ export default function Nav() {
         </header>
         {isProjectsVisible && (
           <div className="w-full bg-white z-20">
-            <div className="absolute top-10 right-11 ml-4 flex flex-col w-1/4 border border-black">
+            <div className="absolute top-10 right-11 ml-4 flex flex-col w-[228px] border border-black">
               <ul className="list-none p-0 m-0">
                 <li className="bg-[#fff] p-[0.1rem] px-1 py-1 blur-none">
                   A Box Is A Box
