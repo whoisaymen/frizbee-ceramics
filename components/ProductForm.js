@@ -26,6 +26,23 @@ export default function ProductForm({ product }) {
   );
 
   const [available, setAvailable] = useState(true);
+  const [quantity, setQuantity] = useState(1); // Add a state to manage quantity
+
+  const handleIncrementQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const handleDecrementQuantity = () => {
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
+
+  const handleAddToCart = () => {
+    const itemToAdd = {
+      ...selectedVariant,
+      variantQuantity: quantity, // Use the local quantity state
+    };
+    addToCart(itemToAdd);
+  };
 
   const { addToCart } = useContext(CartContext);
 
@@ -88,40 +105,56 @@ export default function ProductForm({ product }) {
   }, [productInventory, selectedVariant]);
 
   return (
-    // <div className='bg-[#F0FFFD] from-[#B0AAEF]/30'>
-    <div className="from-[#B0AAEF]/30 w-1/2 fixed top-[65%] left-[45%] border border-black">
-      <div className=" border-t border-b border-black lg:border-none flex justify-between items-stretch">
-        <div className="bg-gray-100 text-black flex-grow flex justify-start items-center">
-          {/* <div className='bg-gradient-to-b from-[#AAEFB1] text-black flex-grow flex justify-center items-center'> */}
-          <h2 className="p-2 px-4 leading-tight text-lg lg:text-2xl tracking-tighter font-bold">
-            {product.title}
-          </h2>
+    <div className="from-[#B0AAEF]/30 bg-[#fff]/70 w-3/4 -bottom-[4vh] lg:w-1/4  fixed md:bottom-[29px] md:right-1/4 border border-black h-[25vh]">
+      <div className="relative">
+        <button className="swiper-button-prev"></button>
+        <button className="swiper-button-next"></button>
+        <div className="lg:border-none flex justify-between items-stretch">
+          <div className="text-black flex-grow flex justify-start items-center">
+            {/* <div className='bg-gradient-to-b from-[#AAEFB1] text-black flex-grow flex justify-center items-center'> */}
+            <h2 className="p-2 px-4 leading-tight text-lg lg:text-2xl tracking-tighter font-bold">
+              {product.title}
+            </h2>
+          </div>
+          <div className="bg-white flex justify-center items-center border-l border-black border-b">
+            <span className="tracking-tight px-4 py-2">
+              {formatter.format(product.variants.edges[0].node.priceV2.amount)}
+            </span>
+          </div>
         </div>
-        <div className="bg-white flex justify-center items-center border-l border-black lg:border-b">
-          <span className="tracking-tight px-4 py-2">
-            {formatter.format(product.variants.edges[0].node.priceV2.amount)}
-          </span>
+        <div className="py-8 px-4">
+          <p className="text-sm font-extralight lg:text-md tracking-tight mb-4">
+            {product.description}
+          </p>
+          <div className="flex items-center border border-black">
+            <button
+              className="px-4 py-2 bg-white"
+              onClick={handleDecrementQuantity}
+            >
+              -
+            </button>
+            <span className="px-4 py-2 border-black border-l border-r">
+              {quantity}
+            </span>
+            <button
+              className="px-4 py-2 bg-white"
+              onClick={handleIncrementQuantity}
+            >
+              +
+            </button>
+            <button
+              onClick={handleAddToCart}
+              className="flex-grow px-4 py-2 text-black uppercase font-light tracking-tight bg-white border-l border-black"
+            >
+              Add To Cart
+            </button>
+          </div>
+          {!available && (
+            <button className="px-2 py-3 mt-3 text-white bg-gray-800 rounded-lg cursor-not-allowed mb-4">
+              Sold out!
+            </button>
+          )}
         </div>
-      </div>
-
-      <div className="py-8 px-4 bg-white">
-        <p className="text-sm font-extralight lg:text-md tracking-tight mb-4">
-          {product.description}
-        </p>
-        {available ? (
-          <button
-            onClick={() => {
-              addToCart(selectedVariant);
-            }}
-            className="px-2 py-3 mt-3 text-black border-[1px] border-black uppercase font-light tracking-tight bg-white"
-          >
-            Add To Card
-          </button>
-        ) : (
-          <button className="px-2 py-3 mt-3 text-white bg-gray-800 rounded-lg cursor-not-allowed mb-4">
-            Sold out!
-          </button>
-        )}
       </div>
     </div>
   );

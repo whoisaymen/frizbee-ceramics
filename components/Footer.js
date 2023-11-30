@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 const navigation = {
   footer: [
@@ -54,11 +54,18 @@ const navigation = {
 
 export default function Footer() {
   return (
+    // <div className='relative max-w-7xl mx-auto border border-black my-6'>
+    // 	<div className='bg-black bg-cover bg-no-repeat bg-center relative h-80 overflow-hidden md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2'></div>
+    // 	<div className='relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40'>
+    // 		<div className='pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2 lg:pl-24 lg:pr-0 xl:pl-32'>Test 2</div>
+    // 		{/* bg-[url('/images/gradientSvg.svg')] */}
+    // 	</div>
+    // </div>
     <footer
-      className="bg-gradient-to-b from-gray-100 bg-white lg:from-white font-light tracking-tight fixed left-0 right-0 z-50 bottom-[29px] h-[35px]"
+      className="bg-gradient-to-b from-gray-100 bg-white lg:from-white font-light tracking-tight fixed left-0 right-0 z-50 bottom-[29px] h-[35px] hidden md:block"
       aria-labelledby="footer-heading"
     >
-      <div className="md:hidden border-t border-black border-b">
+      {/* <div className="md:hidden border-t border-black border-b">
         <span className="sr-only">Frizbee Ceramics</span>
         <Image
           src="/images/comics.png"
@@ -66,8 +73,11 @@ export default function Footer() {
           width={1000}
           className="w-auto mx-auto z-50"
           alt="Frizbee Ceramics logo"
-        ></Image>
-      </div>
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }}></Image>
+      </div> */}
 
       <div className="px-4 lg:px-0">
         <h2 id="footer-heading" className="sr-only">
@@ -131,13 +141,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-
-    // <div className='relative max-w-7xl mx-auto border border-black my-6'>
-    // 	<div className='bg-black bg-cover bg-no-repeat bg-center relative h-80 overflow-hidden md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2'></div>
-    // 	<div className='relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40'>
-    // 		<div className='pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2 lg:pl-24 lg:pr-0 xl:pl-32'>Test 2</div>
-    // 		{/* bg-[url('/images/gradientSvg.svg')] */}
-    // 	</div>
-    // </div>
   );
 }

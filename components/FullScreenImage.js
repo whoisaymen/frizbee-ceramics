@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 function FullScreenImage() {
   return (
@@ -10,7 +10,10 @@ function FullScreenImage() {
         width={1000}
         height={1000}
         priority
-      />
+        style={{
+          maxWidth: "100%",
+          height: "auto"
+        }} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import ScrollToTop from "@/components/ScrollToTop";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export default function AboutPage() {
   return (
@@ -49,7 +49,10 @@ export default function AboutPage() {
               width={1000}
               height={1000}
               priority
-            />
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </div>
         </div>
       </div>

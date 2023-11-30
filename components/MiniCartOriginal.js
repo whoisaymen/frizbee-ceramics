@@ -2,7 +2,7 @@
 import { Fragment, useContext, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { formatter } from "../utils/helpers";
 import { CartContext } from "@/context/shopContext";
@@ -106,7 +106,10 @@ export default function MiniCart({ cart }) {
                                     height={500}
                                     priority
                                     className="h-full w-full object-cover object-center"
-                                  />
+                                    style={{
+                                      maxWidth: "100%",
+                                      height: "auto"
+                                    }} />
                                 </div>
 
                                 <div className="flex flex-col flex-1 ml-4">

@@ -1,12 +1,13 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import ShopProvider from "@/context/shopContext";
-import Nav from "@/components/Nav";
+
 import Footer from "@/components/Footer";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Nav from "@/components/Nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,7 +39,7 @@ export default function RootLayout({ children }) {
           <Nav />
           {children}
         </ShopProvider>
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );

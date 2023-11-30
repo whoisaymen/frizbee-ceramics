@@ -1,9 +1,9 @@
-'use client';
-import Footer from './Footer';
-import Nav from './Nav';
+"use client";
+import Footer from "./Footer";
+import Nav from "./Nav";
 
 export default function Layout({ children }) {
-	return (
+  return (
     <div className="flex flex-col justify-between min-h-screen">
       <Nav />
 

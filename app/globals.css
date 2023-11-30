@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 :root {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
   /* --foreground-rgb: 0, 0, 0;
+  
 	--background-start-rgb: 214, 219, 220;
 	--background-end-rgb: 255, 255, 255; */
 }
@@ -36,8 +39,11 @@ body {
 .swiper-button-next {
   background-image: url(/images/arrowRight.svg);
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: 80% auto;
   background-position: center;
+  /* background-color: #fff; */
+  /* border: 1px solid black; */
+  margin-right: 1px;
 }
 
 .swiper-button-next::after {
@@ -47,8 +53,11 @@ body {
 .swiper-button-prev {
   background-image: url(/images/arrowLeft.svg);
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: 80% auto;
   background-position: center;
+  /* background-color: #fff; */
+  /* border: 1px solid black; */
+  margin-left: 1px;
 }
 
 .swiper-button-prev::after {
@@ -56,14 +65,12 @@ body {
 }
 
 .custom-cursor {
-  cursor: url("/images/mouseCursorSmall.png") 12 12, auto;
-
-  /* transition: transform 0.3s ease; */
+  cursor: url("/images/logo.svg") 12 12, auto;
 }
 
-.custom-cursor-blue {
-  cursor: url("/images/mouseCursorBlue.png"), auto;
-}
+/* a:hover {
+  cursor: url("/images/logoHover.svg") 12 12, auto;
+} */
 
 /* Marquee styles */
 .marquee {
@@ -174,4 +181,30 @@ body {
 .header-enlarged {
   padding-bottom: 2rem; /* Increase the bottom padding */
   /* Add any other styles you want for the enlarged header */
+}
+
+@media screen and (max-width: 768px) {
+  .no-top-border {
+    border-top: none;
+  }
+}
+
+.swiper-pagination > .swiper-pagination-bullet {
+  opacity: 1;
+  background-color: #c8c8c8;
+}
+
+.swiper-pagination > .swiper-pagination-bullet-active {
+  background-color: black;
+  /* border: black solid 0.5px; */
+}
+
+.swiper-button-prev {
+  left: -50px !important;
+  color: red !important;
+  top: 50% !important;
+}
+.swiper-button-next {
+  right: -50px !important;
+  top: 50% !important;
 }
