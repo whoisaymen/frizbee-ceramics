@@ -210,10 +210,11 @@ export default function MiniCart({ cart }) {
                               ))}
                             </ul>
                           ) : (
-                            <div>
-                              <p className="p-4 text-lg tracking-tighter font-light">
+                            <div className="h-full">
+                              <p className="p-4 text-sm md:text-lg tracking-tighter font-light">
                                 There&apos;s nothing in your cart.
                               </p>
+                              <div className="h-screen bg-[#4019A9]/10 blur-xl mt-32 -mb-10"></div>
                             </div>
                           )}
                         </div>
