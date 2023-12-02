@@ -43,9 +43,22 @@ function sortProducts(products, option) {
     const filteredProducts = [...products].filter((product) => {
       return product.node.tags.includes("set");
     });
-    // console.log('Filtered products for sets:', filteredProducts);
     return filteredProducts;
   }
+  if (option === "new") {
+    // Filter products with the 'new' tag
+    return products.filter((product) => product.node.tags.includes("new"));
+  }
+
+  if (option === "date") {
+    // Sort products by date added, from newest to oldest
+    return [...products].sort((a, b) => {
+      const dateA = new Date(a.node.createdAt);
+      const dateB = new Date(b.node.createdAt);
+      return dateB - dateA; // Sorting in descending order
+    });
+  }
+
   return products; // return products as-is if there's no sorting
 }
 
@@ -55,7 +68,19 @@ export default function ShopProvider({ children }) {
   const [checkoutId, setCheckoutId] = useState("");
   const [checkoutUrl, setCheckoutUrl] = useState("");
   const [cartLoading, setCartLoading] = useState(false);
-  const [sortOption, setSortOption] = useState(null); // New state for sort option
+  const [sortOption, setSortOption] = useState("date"); // New state for sort option
+  const [itemUpdated, setItemUpdated] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (itemUpdated) {
+      timer = setTimeout(() => {
+        setCartOpen(false);
+        setItemUpdated(false);
+      }, 1000);
+    }
+    return () => clearTimeout(timer);
+  }, [itemUpdated]);
 
   useEffect(() => {
     if (localStorage.checkout_id) {
@@ -75,7 +100,6 @@ export default function ShopProvider({ children }) {
   async function addToCart(addedItem) {
     const newItem = { ...addedItem };
     setCartOpen(true);
-    console.log(newItem, "New Item:");
 
     if (cart.length === 0) {
       setCart([newItem]);
@@ -84,7 +108,6 @@ export default function ShopProvider({ children }) {
         newItem.id,
         newItem.variantQuantity
       );
-      console.log(checkout, "checkout");
 
       setCheckoutId(checkout.id);
       setCheckoutUrl(checkout.webUrl);
@@ -111,13 +134,13 @@ export default function ShopProvider({ children }) {
 
       setCart(newCart);
       const newCheckout = await updateCheckout(checkoutId, newCart);
-      console.log("newCheckout response:", newCheckout);
 
       localStorage.setItem(
         "checkout_id",
         JSON.stringify([newCart, newCheckout])
       );
     }
+    setItemUpdated(true);
   }
 
   async function removeCartItem(itemToRemove) {
@@ -137,6 +160,7 @@ export default function ShopProvider({ children }) {
     if (cart.length === 1) {
       setCartOpen(false);
     }
+    // setItemUpdated(true);
   }
 
   async function incrementCartItem(item) {
@@ -155,6 +179,7 @@ export default function ShopProvider({ children }) {
 
     localStorage.setItem("checkout_id", JSON.stringify([newCart, newCheckout]));
     setCartLoading(false);
+    // setItemUpdated(true);
   }
 
   async function decrementCartItem(item) {
@@ -180,6 +205,7 @@ export default function ShopProvider({ children }) {
       );
     }
     setCartLoading(false);
+    // setItemUpdated(true);
   }
 
   async function clearCart() {

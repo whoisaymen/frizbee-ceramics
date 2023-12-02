@@ -5,14 +5,34 @@ import Image from "next/image";
 import { CartContext } from "../context/shopContext";
 import MarketingBanner from "./MarketingBanner";
 import MiniCart from "./MiniCart";
+import { useRouter, usePathname } from "next/navigation";
 
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import { Dialog, Transition } from "@headlessui/react";
 
 export default function Nav() {
+  const router = useRouter();
+
   const { cart, setCartOpen, sortOption, setSortOption } =
     useContext(CartContext);
+
+  const [isProjectsSubmenuOpen, setIsProjectsSubmenuOpen] = useState(false); // New state for mobile projects submenu
+
+  // Toggle Projects Submenu on Mobile
+  const toggleProjectsSubmenuMobile = () => {
+    setIsProjectsSubmenuOpen(!isProjectsSubmenuOpen);
+  };
+
+  // const router = useRouter();
+  const pathname = usePathname();
+  const isSpecialPage =
+    pathname === "/about" ||
+    pathname === "/projects" ||
+    pathname.includes("/products"); // Combine the checks for About and Projects pages
+
+  const isAboutPage = pathname === "/about"; // Check if current page is About page
+  const isProjectsPage = pathname === "/projects"; // Check if current page is Projects page
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -44,14 +64,14 @@ export default function Nav() {
       activeColor: "bg-[#EADF50]",
     },
     {
-      name: "new",
-      hoverColor: "bg-[#EB792F]",
-      activeColor: "bg-[#EB792F]",
-    },
-    {
       name: "set",
       hoverColor: "bg-[#AAAAEF]",
       activeColor: "bg-[#AAAAEF]",
+    },
+    {
+      name: "new",
+      hoverColor: "bg-[#EB792F]",
+      activeColor: "bg-[#EB792F]",
     },
   ];
 
@@ -67,6 +87,10 @@ export default function Nav() {
   ];
 
   const handleCategoryClick = (category) => {
+    router.push({
+      pathname: "/", // Path to the main page
+      query: { sort: category },
+    });
     setSortOption(category);
   };
 
@@ -76,7 +100,7 @@ export default function Nav() {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-50 font-light tracking-tight uppercase mx-auto lg:mt-4">
+      <div className="fixed top-0 left-0 right-0 z-10 font-light tracking-tight uppercase mx-auto lg:mt-4">
         <header className="relative mb-4">
           {/* Hamburger Icon for Mobile */}
           <div className="lg:hidden absolute top-2 right-4 z-10">
@@ -92,10 +116,10 @@ export default function Nav() {
           </div>
 
           {/* Filter Icon as a Button */}
-          <div className="lg:hidden absolute top-6 left-4 z-10">
+          <div className="lg:hidden absolute top-2 left-4 z-10">
             <button
               onClick={toggleDropdown}
-              className="flex flex-col justify-center items-center w-8 h-8 border border-blac bg-[#fff] border-black"
+              className="flex flex-col justify-center items-center w-8 h-8 border border-blac bg-white border-black"
               aria-label="Open filter menu"
             >
               {/* <Image
@@ -112,7 +136,7 @@ export default function Nav() {
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div className="absolute top-full mt-2 left-0 z-20 bg-white border border-black">
+              <div className="absolute top-full mt-2 left-0 z-10 bg-white border border-black">
                 <select
                   id="sortby"
                   className="block w-full text-xs p-1"
@@ -127,58 +151,93 @@ export default function Nav() {
           <div className="bg-transparent w-full h-[10vh] md:h-0 -mb-[9.5vh] md:-mb-0"></div>
 
           <nav aria-label="Top" className="mx-auto">
-            <div className="flex justify-between items-start w-full md:bg-transparent">
+            <div className="flex justify-center md:justify-between items-center w-full md:bg-transparent">
               {/* Logo */}
               <Link
                 href="/"
                 onClick={() => setSortOption("")}
-                className="lg:absolute lg:top-6 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 -rotate-6 custom-cursor"
+                className="absolute top-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-6 custom-cursor mt-2"
               >
                 <span className="sr-only">Frizbee Ceramics</span>
-                <div className="h-14 lg:h-[5.4rem] w-auto -mb-6 mt-2 lg:mt-6">
+                <div className="h-16 lg:h-[5.4rem] w-auto">
                   <Image
                     src="/images/logo.png"
                     height={1000}
                     width={1000}
                     alt="Frizbee Ceramics logo"
                     priority
-                    className="object-contain relative z-[1000]"
-                    style={{ maxWidth: "100%", height: "100%" }}
+                    className="object-contain relative z-[2000]"
+                    style={{ width: "100%", height: "100%" }}
                   />
+                  <div className="absolute top-0 left-1/4 h-16 w-1/2 blur-lg">
+                    test
+                  </div>
                 </div>
               </Link>
+              {/* <Link
+                href="/"
+                onClick={() => setSortOption("")}
+                className="custom-cursor"
+              >
+                <span className="sr-only">Frizbee Ceramics</span>
+                <div className="inline-block lg:absolute lg:top-6 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 -rotate-6 custom-cursor bg-red-500 mx-auto ">
+                  <Image
+                    src="/images/logo.png"
+                    height={1000}
+                    width={1000}
+                    alt="Frizbee Ceramics logo"
+                    priority
+                    className="object-contain"
+                    style={{ width: "auto", height: "4rem" }}
+                  />
+                </div>
+              </Link> */}
 
               {/* Categories */}
-              <div className="hidden lg:flex py-[2px] relative">
-                {categories.map(({ name, hoverColor, activeColor }) => (
-                  <button
-                    key={name}
-                    className={`cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 ${
-                      sortOption === name ? "bg-[#AAAAEF]" : "bg-white/90"
-                    } ${
-                      hoverColor !== activeColor ? `hover:${hoverColor}` : ""
-                    } transition duration-200 ease-out`}
-                    onClick={() => handleCategoryClick(name)}
-                  >
-                    {name.charAt(0).toUpperCase() + name.slice(1)}
-                  </button>
-                ))}
-              </div>
+              {!isSpecialPage && (
+                <div className="hidden lg:flex py-[2px] relative">
+                  {categories.map(({ name, hoverColor, activeColor }) => (
+                    <button
+                      key={name}
+                      className={`cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 ${
+                        sortOption === name ? "bg-[#AAAAEF]" : "bg-white/90"
+                      } ${
+                        hoverColor !== activeColor ? `hover:${hoverColor}` : ""
+                      } transition duration-200 ease-out`}
+                      onClick={() => handleCategoryClick(name)}
+                    >
+                      {name.charAt(0).toUpperCase() + name.slice(1)}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Desktop Menu Items */}
               <div className="hidden lg:flex py-[2px] relative mr-14">
-                {/* Existing categories mapping... */}
+                {isSpecialPage && (
+                  <Link
+                    href="/"
+                    className="cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 bg-white/90"
+                  >
+                    Shop
+                  </Link>
+                )}
 
                 {/* Additional menu items */}
-                <button
-                  onClick={() => setIsProjectsVisible(!isProjectsVisible)}
-                  className="cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 bg-white/90"
+                <Link
+                  href="/projects"
+                  // onClick={() => setIsProjectsVisible(!isProjectsVisible)}
+                  className={`cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 ${
+                    isProjectsPage ? "bg-[#DEF6E0]" : "bg-white/90" // Different background color if on Projects page
+                  }`}
                 >
                   Projects
-                </button>
+                </Link>
                 <Link
                   href="/about"
-                  className="cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 bg-white/90"
+                  className={`cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 ${
+                    isAboutPage ? "bg-[#AAAAEF]" : "bg-white/90" // Different background color if on About page
+                  }`}
                 >
                   About
                 </Link>
@@ -189,7 +248,7 @@ export default function Nav() {
       </div>
 
       {/* <CartIcon cartQuantity={cartQuantity} setCartOpen={setCartOpen} /> */}
-      <div className="fixed bottom-0 left-0 right-0 z-50">
+      <div className="fixed bottom-0 left-0 right-0 z-[20000]">
         <MarketingBanner />
       </div>
 
@@ -220,7 +279,7 @@ export default function Nav() {
 
       {/* Mobile Menu Modal */}
       <Transition.Root show={isMenuOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={toggleMenu}>
+        <Dialog as="div" className="relative z-[8]" onClose={toggleMenu}>
           <Transition.Child
             as={Fragment}
             enter="ease-in-out duration-300"
@@ -233,7 +292,7 @@ export default function Nav() {
             <Dialog.Overlay className="fixed inset-0 transition-opacity" />
           </Transition.Child>
 
-          <div className="fixed inset-y-0 right-0 w-full flex">
+          <div className="fixed inset-y-0 right-0 w-[calc(50%+2px)] flex">
             <Transition.Child
               as={Fragment}
               enter="transform transition ease-in-out duration-300"
@@ -244,39 +303,41 @@ export default function Nav() {
               leaveTo="translate-x-full"
             >
               <div className="relative w-screen max-w-md">
-                <div className="flex h-1/2 flex-col overflow-y-scroll bg-gray-300 shadow-xl border-black border-l-[1px] text-xs">
-                  <div className="flex-1 py-6 px-4 sm:px-6">
-                    <nav className="flex flex-col space-y-8 mt-20 tracking-tighter uppercase text-3xl">
+                <div className="flex h-full flex-col overflow-y-scroll border-b border-black bg-[#e8ecf4] shadow-xl border-l-[1px] text-xs font-light">
+                  <div className="h-screen bg-[#4019A9]/10 blur-xl mt-32 -mb-10"></div>
+
+                  <div className="flex pb-40 px-4 sm:px-6 h-full">
+                    <nav className="flex flex-col tracking-tighter uppercase text-sm justify-center space-y-2 mt-[60px]">
                       <Link href="/about" className="">
                         About
                       </Link>
+                      <button
+                        onClick={toggleProjectsSubmenuMobile}
+                        className="text-left uppercase"
+                      >
+                        Projects
+                      </button>
+                      {isProjectsSubmenuOpen && (
+                        <ul className="pl-4 list-none text-gray-400 my-0 py-0">
+                          {projects.map((project, index) => (
+                            <li key={project} className="py-1">
+                              {project}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                       <Link href="/newsletter" className="">
                         Newsletter
                       </Link>
                       <Link href="/shipping-returns" className="">
                         Shipping & Returns
                       </Link>
+                      <Link href="/about" className="">
+                        Contact
+                      </Link>
                       {/* Add more links as needed */}
                     </nav>
                   </div>
-
-                  {/* <div className="bg-[#74D0E4] border-t-[1px] border-black flex items-center justify-center">
-                    <span className="uppercase text-sm tracking-tighter py-[2px] font-extrabold">
-                      Join the newsletter ↝
-                    </span>
-                  </div> */}
-                  {/* 
-                  <div className="border-t-[1px] border-black">
-                    <Image
-                      src="/images/imgHero1.jpg"
-                      height={1000}
-                      width={1000}
-                      alt="Promotional Image 1"
-                      priority
-                      className="object-cover object-center w-full"
-                      style={{ height: "100%" }}
-                    />
-                  </div> */}
                 </div>
               </div>
             </Transition.Child>
@@ -308,7 +369,23 @@ function CartIcon({ cartQuantity, setCartOpen }) {
 
 function NewsletterIcon({ setCartOpen }) {
   return (
-    <div className="fixed bottom-28 right-0 z-10 lg:bottom-12 text-sm lg:text-base font-light">
+    <div className="hidden lg:fixed bottom-28 right-0 z-10 lg:bottom-12 text-sm lg:text-base font-light">
+      <button
+        className={`flex flex-col border items-center border-black bg-white hover:rotate-3 rounded-l-md px-1`}
+        onClick={() => setCartOpen(true)}
+      >
+        <span className="px-1 pt-1">N</span>
+        <span className="px-1 -mt-[8px]">E</span>
+        <span className="px-1 -mt-[8px]">W</span>
+        <span className="px-1 -mt-[8px] pb-1">S</span>
+      </button>
+    </div>
+  );
+}
+
+function NewsletterMobile({ setCartOpen }) {
+  return (
+    <div className="!hidden fixed bottom-28 right-0 z-10 lg:bottom-12 text-sm lg:text-base font-light">
       <button
         className={`flex flex-col border items-center border-black bg-white hover:rotate-3 rounded-l-md px-1`}
         onClick={() => setCartOpen(true)}

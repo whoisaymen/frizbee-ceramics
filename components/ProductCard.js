@@ -15,7 +15,15 @@ const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
 
   const colorTag = product.node.tags.find((tag) => tag.startsWith("color:"));
-  const colorValue = colorTag ? colorTag.split(":")[1] : "defaultColor";
+  const colorValue = colorTag ? colorTag.split(":")[1] : null;
+
+  // Color mappings
+  const colorMappings = {
+    acid: "#AECCD7",
+    blue: "#3549A6",
+    green: "#7BB97A",
+    roses: "#942B50",
+  };
 
   // Function to fetch detailed product information
   const fetchProductDetails = async () => {
@@ -68,7 +76,6 @@ const ProductCard = ({ product }) => {
 
   const imageUrl1 = product.node.images.edges[0].node.url;
   const imageUrl2 = product.node.images.edges[1]?.node.url;
-
   const [displayImageUrl, setDisplayImageUrl] = useState(imageUrl1);
 
   const prepareSwiperSlides = () => {
@@ -82,9 +89,9 @@ const ProductCard = ({ product }) => {
           loading="lazy"
           className="w-full h-full object-cover object-center"
           style={{
-            maxWidth: "100%",
+            width: "100%",
             height: "100%",
-            objectFit: "contain",
+            objectFit: "cover",
             // mixBlendMode: "multiply",
           }}
         />
@@ -98,7 +105,7 @@ const ProductCard = ({ product }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="group border border-black -m-[0.5px] relative overflow-hidden"
+      className="group border border-gray-800 -m-[0.5px] relative overflow-hidden"
     >
       <Link href={`/products/${handle}`} className="custom-cursor relative">
         <div
@@ -107,10 +114,10 @@ const ProductCard = ({ product }) => {
           onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
           onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
         >
-          {/* Mobile Only Slider */}
-          <div className="md:hidden h-[16rem] overflow-hidden bg-gray-100 text-[12px] text-center flex flex-col justify-end ml-2">
+          {/* Mobile Product Card */}
+          <div className="md:hidden overflow-hidden text-[12px] h-[18rem] text-center flex flex-col justify-end relative">
             <Swiper
-              className="w-full"
+              className="w-full h-full object-cover object-center"
               modules={[Pagination]}
               pagination={{ clickable: true, el: ".swiper-pagination" }}
               style={{
@@ -122,39 +129,33 @@ const ProductCard = ({ product }) => {
               }}
             >
               {prepareSwiperSlides()}
-              <div className="swiper-pagination"></div>
+              <div className="swiper-pagination -mt-4"></div>
             </Swiper>
 
-            <div className="flex justify-between">
-              {" "}
-              <span className="z-10 tracking-tighter text-left font-extrabold w-full">
-                {title.split("-")[1]}
+            <div className="flex justify-between mt-4 absolute left-3 bottom-[3px]">
+              <div
+                className="w-1/2 blur-2xl absolute left-0 bottom-0 h-6 z-[8]"
+                style={{
+                  backgroundColor: colorMappings[colorValue] || "#343dfb",
+                }}
+              ></div>
+              <span className="z-[7] tracking-tighter text-left font-bold w-full leading-none">
+                {title.split("-")[0]}
+                {/* {title.split(" ")[0]} */}
                 {/* <br />
               <span className="font-normal inline-block text-black/70 capitalize italic py-0">
                 {title.split(" ")[0]}
               </span> */}
                 <br />
-                <span className="font-normal mt-0 inline-block">
+                <span className="font-normal mt-[4px] mb-[8px] inline-block">
                   {formatter.format(price)}
                 </span>
               </span>
-              <button
-                style={buttonStyle}
-                className=" md:hidden text-sm tracking-tighter font-light  bg-gradient-to-b from-white h-8 w-8 border-black border-l border-t uppercase flex items-center justify-center"
-                onClick={handleAddToCart}
-              >
-                <Image
-                  src="/images/cartIcon.svg"
-                  alt="Filter"
-                  className="object-cover"
-                  width={14}
-                  height={14}
-                />
-              </button>
             </div>
           </div>
 
-          <div className="hidden md:block w-full overflow-hidden h-80 md:h-[24rem] bg-gray-100 relative text-sm">
+          {/* Desktop Product Card */}
+          <div className="hidden md:block w-full overflow-hidden md:h-[24rem] bg-gray-100 relative text-sm">
             <Image
               src={displayImageUrl}
               alt={"Test"}
@@ -162,11 +163,11 @@ const ProductCard = ({ product }) => {
               height={500}
               loading="lazy"
               className="w-full h-full object-cover object-center"
-              style={imageStyle} // Apply the adjusted styles here
+              style={imageStyle}
             />
 
             <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
-              <span>{title.split(" ")[0]}</span>
+              <span>{title.split("-")[0]}</span>
               <span className="font-light -mt-1">
                 {formatter.format(price)}
               </span>
@@ -174,31 +175,26 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
       </Link>
-      {/* Centered '+' button for mobile views */}
-      {/* <div className="flex justify-center md:hidden mt-0">
-        <span className="border-t  border-black  w-full text-center text-sm flex items-center justify-center tracking-tighter">
-          {formatter.format(price)}
-        </span>
-        <span
-          className="text-xl font-extralight border-t border-l border-black px-1"
+
+      {/* Mobile Quick Buy  */}
+      <div className="relative">
+        <span className="bg-[#fbf234]/30 blur-xl absolute right-0 bottom-0 h-8 w-8 z-[8] md:hidden"></span>
+        <button
+          style={buttonStyle}
+          className=" md:hidden absolute right-0 bottom-0 text-sm tracking-tighter font-light   h-10 w-10 border-black uppercase flex items-center justify-center z-[7] "
           onClick={handleAddToCart}
         >
-          +
-        </span>
-      </div> */}
+          <Image
+            src="/images/cartIcon.svg"
+            alt="Filter"
+            className="object-cover"
+            width={16}
+            height={16}
+          />
+        </button>
+      </div>
 
-      {/* <div className="hidden md:absolute md:right-3 font-semibold md:bottom-2 md:flex flex-col text-right">
-        <span className="text-4xl font-medium" onClick={handleAddToCart}>
-          +
-        </span>
-      </div> */}
-      {/* <button
-        style={buttonStyle}
-        className=" md:hidden absolute right-2 -bottom-1  text-sm tracking-tighter font-light  bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase"
-        onClick={handleAddToCart}
-      >
-        <Image src="/images/cartIcon.svg" alt="Filter" width={14} height={14} />
-      </button> */}
+      {/* Desktop Quick Buy */}
       <button
         style={buttonStyle}
         className="hidden md:block md:absolute right-8 -bottom-1   translate-y-full text-sm tracking-tighter font-light group-hover:translate-y-0 bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase"

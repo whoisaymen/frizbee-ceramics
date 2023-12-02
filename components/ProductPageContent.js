@@ -52,7 +52,7 @@ export default function ProductPageContent({ product }) {
   return (
     <div className="mx-auto">
       <div className="flex flex-col md:flex-row items-stretch w-full">
-        <div className="w-full h-screen">
+        <div className="w-full h-[calc(100vh-30px)]">
           <Swiper
             // ref={swiperRef}
             style={{
@@ -63,7 +63,7 @@ export default function ProductPageContent({ product }) {
               nextEl: ".swiper-button-prev",
               prevEl: ".swiper-button-next",
             }}
-            pagination={{ clickable: true }}
+            // pagination={{ clickable: true }}
             className="h-full w-full"
             loop="true"
             modules={[Navigation, Pagination]}
@@ -72,7 +72,7 @@ export default function ProductPageContent({ product }) {
           </Swiper>
         </div>
         {/* Product Form */}
-        <div className="z-10">
+        <div className="z-[7]">
           <ProductForm product={product} />
         </div>
       </div>

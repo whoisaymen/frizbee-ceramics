@@ -4,7 +4,8 @@
 
 :root {
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  /* background-color: rgb(243 244 246 / var(--tw-bg-opacity)); */
+  background-color: #e8ecf4;
   /* --foreground-rgb: 0, 0, 0;
   
 	--background-start-rgb: 214, 219, 220;
@@ -207,4 +208,8 @@ body {
 .swiper-button-next {
   right: -50px !important;
   top: 50% !important;
+}
+
+.animate-rotate {
+  animation: rotate 20s linear infinite; /* Adjust the duration as needed */
 }
