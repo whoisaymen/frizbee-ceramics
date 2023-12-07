@@ -37,26 +37,6 @@ export default function Nav() {
     boxSizing: "border-box",
   };
 
-  // CSS styles for the button
-  const filterButtonStyle = {
-    position: "fixed",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    top: "0.5rem",
-    left: isFilterOpen ? "8rem" : "0",
-    zIndex: 30,
-    height: "2rem",
-    width: "2rem",
-    backgroundColor: "white",
-    border: "1px solid black",
-    borderLeft: "none",
-
-    // padding: "10px",
-    cursor: "pointer",
-    transition: "left 0.3s ease",
-  };
-
   const toggleFilter = () => setIsFilterOpen(!isFilterOpen);
 
   // Toggle Projects Submenu on Mobile
@@ -73,11 +53,13 @@ export default function Nav() {
     pathname === "/about" ||
     pathname === "/projects" ||
     pathname === "/stockists" ||
-    pathname.includes("/products"); // Combine the checks for About and Projects pages
+    pathname === "/terms-and-conditions" ||
+    pathname.includes("/products");
 
-  const isAboutPage = pathname === "/about"; // Check if current page is About page
-  const isProjectsPage = pathname === "/projects"; // Check if current page is Projects page
-  const isStockistsPage = pathname === "/stockists"; // Check if current page is Projects page
+  const isAboutPage = pathname === "/about";
+  const isProjectsPage = pathname === "/projects";
+  const isStockistsPage = pathname === "/stockists";
+  const isTermsAndConditionsPage = pathname === "/terms-and-conditions";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -200,35 +182,45 @@ export default function Nav() {
             </button>
           </div>
 
-          <>
-            <div
-              className={`lg:hidden fixed flex items-center justify-center top-[0.5rem] ${
-                isFilterOpen ? "left-[8rem]" : "left-0"
-              } z-30 h-[2rem] w-[1.5rem] bg-[#6072D3] border-black border border-l-0 cursor-pointer  rounded-r-lg transition-[left] duration-300 ease-in-out`}
-              onClick={toggleFilter}
+          {isSpecialPage ? (
+            // Render 'Shop' button for special pages
+            <Link
+              href="/"
+              className="lg:hidden cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 bg-white/90  z-10 absolute top-2"
             >
-              <ChevronUpIcon
-                className={`h-5 w-5 text-black transform ${
-                  isFilterOpen ? "-rotate-90" : "rotate-90"
-                }`}
-              />
-            </div>
+              Shop
+            </Link>
+          ) : (
+            <>
+              <div
+                className={`lg:hidden fixed flex items-center justify-center top-[0.5rem] ${
+                  isFilterOpen ? "left-[8rem]" : "left-0"
+                } z-30 h-[2rem] w-[1.5rem] bg-[#6072D3] border-black border border-l-0 cursor-pointer  rounded-r-lg transition-[left] duration-300 ease-in-out`}
+                onClick={toggleFilter}
+              >
+                <ChevronUpIcon
+                  className={`h-5 w-5 text-black transform ${
+                    isFilterOpen ? "-rotate-90" : "rotate-90"
+                  }`}
+                />
+              </div>
 
-            <div
-              style={filterContainerStyle}
-              className="lg:hidden flex flex-col"
-            >
-              {categories.map(({ name, hoverColor, activeColor }) => (
-                <button
-                  key={name}
-                  className={`cursor-pointer uppercase tracking-[-1.2px] custom-cursor bg-[#B8D0F3] border-black border-t border-r`}
-                  onClick={() => handleCategoryClick(name)}
-                >
-                  {name.charAt(0).toUpperCase() + name.slice(1)}
-                </button>
-              ))}
-            </div>
-          </>
+              <div
+                style={filterContainerStyle}
+                className="lg:hidden flex flex-col"
+              >
+                {categories.map(({ name, hoverColor, activeColor }) => (
+                  <button
+                    key={name}
+                    className={`cursor-pointer uppercase tracking-[-1.2px] custom-cursor bg-[#B8D0F3] border-black border-t border-r`}
+                    onClick={() => handleCategoryClick(name)}
+                  >
+                    {name.charAt(0).toUpperCase() + name.slice(1)}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
           <div className="bg-transparent w-full h-[10vh] md:h-0 -mb-[9.5vh] md:-mb-0"></div>
 
           <nav aria-label="Top" className="mx-auto">

@@ -5,11 +5,11 @@ import { ChevronUpIcon } from "@heroicons/react/20/solid";
 
 export default function TermsAndConditionsPage() {
   return (
-    <div className="font-extralight tracking-tight bg-white">
+    <div className="font-extralight tracking-tight">
       <ScrollToTop />
 
       <div className="mx-auto p-4 md:py-28 text-sm lg:text-base max-w-7xl">
-        <h2 className="uppercase text-xl font-extralight tracking-tighter text-gray-900 sm:text-4xl mb-1 mt-28 border-black border text-left px-2 bg-white inline-block">
+        <h2 className="uppercase text-xl font-extralight tracking-tighter text-gray-900 sm:text-xl mt-28 border-black border text-left px-2 bg-white inline-block mb-4">
           Terms & Conditions
         </h2>
         <div className="">
