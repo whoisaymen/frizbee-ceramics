@@ -45,8 +45,7 @@ export default function TermsAndConditionsPage() {
                   </p>
 
                   <p className="text-gray-700 mb-2">
-                    <strong>{`Intellectual Property Right(s):`}</strong>{" "}
-                    {`Means all
+                    <strong>Intellectual Property Right(s):</strong> Means all
                     trademarks, software (source codes), copyright, copyrighted
                     programs, patents and all neighbouring and database rights
                     and moral rights, registered designs, registered and
@@ -60,23 +59,21 @@ export default function TermsAndConditionsPage() {
                     techniques, research and development information, drawings,
                     specifications, plans, proposals, technical data, and plans
                     and copies and tangible embodiments thereof (in whatever
-                    form or medium).`}
+                    form or medium).
                   </p>
 
                   <p className="text-gray-700 mb-2">
-                    <strong>Personal Data:</strong>{" "}
-                    {`Means any information
+                    <strong>Personal Data:</strong> Means any information
                     relating to an identified or identifiable natural person
-                    ('data subject') which is processed by or on behalf of one
-                    the Parties for the Agreement.`}
+                    (&apos;data subject&apos;) which is processed by or on
+                    behalf of one the Parties for the Agreement.
                   </p>
 
                   <p className="text-gray-700 mb-2">
-                    <strong>Seller:</strong>
-                    {`Leek SRL incorporated under the
+                    <strong>Seller:</strong> Leek SRL incorporated under the
                     laws of Belgium with registered office at Chaussée de La
                     Hulpe, 207, B-1170 Watermael-Boitsfort and VAT-number
-                    BE791.269.184 (commercial name: Frizbee Ceramics).`}
+                    BE791.269.184 (commercial name: Frizbee Ceramics).
                   </p>
 
                   <p className="text-gray-700 mb-2">
@@ -111,7 +108,7 @@ export default function TermsAndConditionsPage() {
                 </Disclosure.Button>
                 <Disclosure.Panel className="text-sm font-extralight lg:text-lg tracking-tighter leading-snug md:leading-normal py-1 text-justify">
                   <p className="text-gray-700 mb-2 mt-2">
-                    {`This document sets out the terms and conditions (hereinafter
+                    This document sets out the terms and conditions (hereinafter
                     referred to as the “Terms and Conditions B2C”) applicable to
                     the Webshop and to any other distance sale and/or to any
                     other online offers made by the Seller. The purpose of these
@@ -121,7 +118,7 @@ export default function TermsAndConditionsPage() {
                     Customer on the Webshop. When placing an order via the
                     Webshop or by any other distance communication means,
                     Customer must explicitly accept these Terms and Conditions
-                    B2C.`}
+                    B2C.
                   </p>
                   <p className="text-gray-700 mb-2">
                     These Terms and Conditions B2C will be made available to the
@@ -130,9 +127,9 @@ export default function TermsAndConditionsPage() {
                     and Conditions B2C on a durable electronic data carrier.
                   </p>
                   <p className="text-gray-700">
-                    {`For any order or purchase of Good(s) by a professional
+                    For any order or purchase of Good(s) by a professional
                     customer, please refer to the Terms and Conditions in the
-                    B2B context below.`}
+                    B2B context below.
                   </p>
                 </Disclosure.Panel>
               </>
@@ -157,13 +154,13 @@ export default function TermsAndConditionsPage() {
                 </Disclosure.Button>
                 <Disclosure.Panel className="text-sm font-extralight lg:text-lg tracking-tighter leading-snug md:leading-normal py-1 text-justify">
                   <p className="text-gray-700 mb-2 mt-2">
-                    {`Good(s) are offered for sale or advertised on the Webshop.
+                    Good(s) are offered for sale or advertised on the Webshop.
                     The Agreement is concluded as from the moment the Customer
                     has accepted the offer and the Terms and Conditions B2C. The
                     Agreement and the Terms and Conditions B2C will remain in
                     force until all obligations have been executed. Any sale on
                     the Webshop is conditional to the acceptance without
-                    reservation of such Terms and Conditions B2C.`}
+                    reservation of such Terms and Conditions B2C.
                   </p>
                 </Disclosure.Panel>
               </>
@@ -188,8 +185,8 @@ export default function TermsAndConditionsPage() {
                 </Disclosure.Button>
                 <Disclosure.Panel className="text-sm font-extralight lg:text-lg tracking-tighter leading-snug md:leading-normal py-1 text-justify">
                   <p className="text-gray-700 mb-2 mt-2">
-                    {`The prices of the Good(s) will be as quoted on the Webshop
-                    at the time the Customer submits an order.`}
+                    The prices of the Good(s) will be as quoted on the Webshop
+                    at the time the Customer submits an order.
                   </p>
                   <p className="text-gray-700 mb-2">
                     All prices listed on the Webshop are expressed in EUR and
@@ -211,7 +208,7 @@ export default function TermsAndConditionsPage() {
                     by volumetric weight.
                   </p>
                   <p className="text-gray-700">
-                    {`The Seller makes all reasonable efforts to ensure that all
+                    The Seller makes all reasonable efforts to ensure that all
                     prices shown on the Webshop are correct at the time of going
                     online. The Seller reserves the right to change prices and
                     to add, alter, or remove special offers from time to time
@@ -227,7 +224,7 @@ export default function TermsAndConditionsPage() {
                     the order process, or if the Seller does not receive any
                     response from the Customer within the timeframe set out
                     above, the Seller will treat the order as cancelled and will
-                    notify the Customer thereof in writing.`}
+                    notify the Customer thereof in writing.
                   </p>
                 </Disclosure.Panel>
               </>
@@ -407,15 +404,15 @@ export default function TermsAndConditionsPage() {
                     Pick-up at the Showroom:
                   </h4>
                   <p className="text-gray-700 mb-4">
-                    {`Unless agreed otherwise, the delivery of the Good(s) occurs
+                    Unless agreed otherwise, the delivery of the Good(s) occurs
                     at the showroom of the Seller located at Boulevard
                     Poincarré, 58B at B-1070 Anderlecht after notification from
-                    the Seller that the Good(s) are ready for pick up.`}
+                    the Seller that the Good(s) are ready for pick up.
                   </p>
 
                   <h4 className="font-bold text-lg mb-2">Delivery:</h4>
                   <p className="text-gray-700 mb-4">
-                    {`The Seller undertakes to deliver the Good(s) within a period
+                    The Seller undertakes to deliver the Good(s) within a period
                     of 30 days after receipt of the payment in full, unless
                     another delivery date is concluded between the Seller and
                     the Customer at the moment of formation of the Agreement.
@@ -426,15 +423,15 @@ export default function TermsAndConditionsPage() {
                     responsible for these delays. All items are sent with a
                     ‘Track and Trace’ code which will be sent to the Customer in
                     an e-mail. The periods mentioned under this article are
-                    therefore non-binding.`}
+                    therefore non-binding.
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    {`In case the Seller is not able to deliver the Good(s) within
+                    In case the Seller is not able to deliver the Good(s) within
                     the period set out above, the Seller undertakes to inform
                     the Customer thereof in writing. The Customer has the right
                     to cancel the order in case of absence of shipping within a
-                    90 Business Days period.`}
+                    90 Business Days period.
                   </p>
 
                   <p className="text-gray-700 mb-4">
@@ -452,26 +449,26 @@ export default function TermsAndConditionsPage() {
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    {`The Seller reserves the right to make partial deliveries of
+                    The Seller reserves the right to make partial deliveries of
                     the ordered Good(s), for example, in case part of the order
                     is delayed or unavailable. In case of partial delivery, the
-                    Seller will notify the Customer via email.`}
+                    Seller will notify the Customer via email.
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    {`The Customer must check the packaging upon
+                    The Customer must check the packaging upon
                     delivery/collection for possible damages. In case the
                     Good(s) are damaged, the Customer must not accept the
                     delivery and must notify the Seller immediately and maximum
                     within 48 hours. After notification, the Seller will provide
                     the Customer with the necessary instructions regarding the
-                    damaged Good(s).`}
+                    damaged Good(s).
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    {`Costs of shipment are always on expense of the Customer as
+                    Costs of shipment are always on expense of the Customer as
                     well as any import taxes and duties related to Customer’s
-                    selected delivery country.`}
+                    selected delivery country.
                   </p>
 
                   <h4 className="font-bold text-lg mb-2">Pick-up:</h4>
@@ -492,13 +489,13 @@ export default function TermsAndConditionsPage() {
                   </p>
 
                   <p className="text-gray-700">
-                    {`The risk due to loss or damage is transferred to the
+                    The risk due to loss or damage is transferred to the
                     Customer at the time the goods have been physically received
                     by the Customer (or a third party indicated by the Customer
                     that is not the carrier). However, the risk transfers to the
                     Customer upon delivery to the carrier when the carrier
                     received the commission to transport the goods and this
-                    option was not offered by the Seller.`}
+                    option was not offered by the Seller.
                   </p>
                 </Disclosure.Panel>
               </>
@@ -523,10 +520,10 @@ export default function TermsAndConditionsPage() {
                 </Disclosure.Button>
                 <Disclosure.Panel className="text-sm font-extralight lg:text-lg tracking-tighter leading-snug md:leading-normal py-1 text-justify">
                   <p className="text-gray-700 mb-4">
-                    {`The provisions of this article apply solely to Customers in
+                    The provisions of this article apply solely to Customers in
                     their capacity as consumers purchasing articles online from
                     the Seller and only when the Good(s) purchased were not
-                    manufactured according to the Customer’s specifications.`}
+                    manufactured according to the Customer’s specifications.
                   </p>
 
                   <p className="text-gray-700 mb-4">
@@ -540,35 +537,35 @@ export default function TermsAndConditionsPage() {
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    {`To exercise the right of withdrawal, the Consumer must
+                    To exercise the right of withdrawal, the Consumer must
                     inform the Seller by means of a clear statement (e.g., via a
-                    registered letter or e-mail) of the Customer's decision to
-                    withdraw from the Agreement. The Consumer can use the
+                    registered letter or e-mail) of the Customer&apos;s decision
+                    to withdraw from the Agreement. The Consumer can use the
                     attached sample withdrawal form for this purpose, but this
-                    is not mandatory.`}
+                    is not mandatory.
                   </p>
 
                   <p className="text-gray-700 italic mb-4">
                     Template of withdrawal form that can be used:
                   </p>
                   <p className="text-gray-700 italic mb-4">
-                    {`To the attention of: [Seller's Contact Details]`}
+                    To the attention of: [Seller&apos;s Contact Details]
                   </p>
                   <ul className="list-disc pl-5 text-gray-700 mb-4 italic">
                     <li>
-                      {`I/we (*) hereby notify you (*) of my/our (*) withdrawal
+                      I/we (*) hereby notify you (*) of my/our (*) withdrawal
                       from the contract concluded by me/us (*) for the purchase
-                      of the following goods (*)`}
+                      of the following goods (*)
                     </li>
-                    <li>{`Ordered on (*) / received on (*)`}</li>
-                    <li>{`Name of the consumer(s): (*)`}</li>
-                    <li>{`Address of the consumer(s): (*)`}</li>
-                    <li>{`Order number: (*)`}</li>
+                    <li>Ordered on (*) / received on (*)</li>
+                    <li>Name of the consumer(s): (*)</li>
+                    <li>Address of the consumer(s): (*)</li>
+                    <li>Order number: (*)</li>
                     <li>
-                      {`Signature of consumer(s): (*)(only if notified on paper)`}
+                      Signature of consumer(s): (*)(only if notified on paper)
                     </li>
-                    <li>{`Date: (*)`}</li>
-                    <li>{`(*) Delete as appropriate or complete.`}</li>
+                    <li>Date: (*)</li>
+                    <li>(*) Delete as appropriate or complete.</li>
                   </ul>
 
                   <p className="text-gray-700 mb-4">
@@ -578,12 +575,12 @@ export default function TermsAndConditionsPage() {
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    {`The Customer has no later than 14 calendar days from the day
+                    The Customer has no later than 14 calendar days from the day
                     that they notify the Seller of their decision to withdraw
                     from the agreement to send back or hand over the goods to
-                    the Seller [Seller's Address], Belgium. The Customer is on
-                    time if they have sent back the Good(s) before the period of
-                    14 calendar days has expired.`}
+                    the Seller [Seller&apos;s Address], Belgium. The Customer is
+                    on time if they have sent back the Good(s) before the period
+                    of 14 calendar days has expired.
                   </p>
 
                   <p className="text-gray-700 mb-4">
@@ -592,7 +589,7 @@ export default function TermsAndConditionsPage() {
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    {`In case of withdrawal, the Seller shall refund the amounts
+                    In case of withdrawal, the Seller shall refund the amounts
                     already paid by the Customer for the Good(s), after receipt
                     of the Good(s). However, the Seller can reduce the refund to
                     reflect any reduction in the value of the Good(s), if this
@@ -600,15 +597,15 @@ export default function TermsAndConditionsPage() {
                     would not be permitted in a shop. The Seller shall make any
                     refund within a reasonable time after receipt of the Goods.
                     The Seller shall refund the Customer on the credit card or
-                    debit card used by the Customer to pay.`}
+                    debit card used by the Customer to pay.
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    {`No refund will be granted to the Consumer after the legal
+                    No refund will be granted to the Consumer after the legal
                     period of withdrawal. No refund will be given if the good is
                     not returned entirely and in the condition in which it was
                     sold and in its original package. No Goods that are returned
-                    broken or damaged are accepted – please pack carefully.`}
+                    broken or damaged are accepted – please pack carefully.
                   </p>
 
                   <p className="text-gray-700">
@@ -616,9 +613,9 @@ export default function TermsAndConditionsPage() {
                   </p>
                   <ul className="list-disc pl-5 text-gray-700 mb-4">
                     <li>
-                      {`The delivery of goods manufactured according to the
+                      The delivery of goods manufactured according to the
                       Customer’s specifications or that are clearly destined for
-                      a specific person.`}
+                      a specific person.
                     </li>
                     <li>Items on sale.</li>
                     <li>
@@ -656,20 +653,20 @@ export default function TermsAndConditionsPage() {
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    The Customer must inform the Seller via email at
+                    The Customer must inform the Seller via email at{" "}
                     <a
                       href="mailto:hey@frizbeeceramics.com"
                       className="text-blue-600 underline"
                     >
                       hey@frizbeeceramics.com
-                    </a>
+                    </a>{" "}
                     of the defective Goods within a maximum period of one month
                     after the hidden defect becomes known or could have
                     reasonably become known to the Customer.
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    {`In case a defect occurs within the legal warranty period of
+                    In case a defect occurs within the legal warranty period of
                     2 years, the Customer must follow the procedure as set out
                     in clause 8. After the return of the defective Goods, the
                     Seller will, after establishing the defective character of
@@ -681,7 +678,7 @@ export default function TermsAndConditionsPage() {
                     not possible or cannot be executed within a reasonable time,
                     the Customer has the right to terminate the Agreement and
                     the Seller will refund the price in accordance with clause
-                    7.`}
+                    7.
                   </p>
 
                   <h4 className="font-bold text-lg mb-2">Exclusions:</h4>
@@ -689,9 +686,9 @@ export default function TermsAndConditionsPage() {
                     <li>Normal wear and tear of the Goods.</li>
                     <li>Accident, disaster or event of force majeure.</li>
                     <li>
-                      {`Misuse of the Goods, fault or negligence (i.e.,
+                      Misuse of the Goods, fault or negligence (i.e.,
                       non-compliance with the instructions for use or normal use
-                      for this type of Goods).`}
+                      for this type of Goods).
                     </li>
                     <li>Improper storage or handling of the Goods.</li>
                     <li>Any other valid and legal exclusion.</li>
@@ -771,13 +768,13 @@ export default function TermsAndConditionsPage() {
                   <ul className="list-disc pl-5 text-gray-700 mb-4">
                     <li>The Seller shall inform the Customer thereof, and;</li>
                     <li>
-                      {`The Seller’s obligations under the Agreement will be
+                      The Seller’s obligations under the Agreement will be
                       suspended and the time for the performance of the
                       obligations will be extended for the duration of the
                       situation of Force Majeure. Where the situation of Force
                       Majeure affects the delivery of the Good(s), the Seller
                       will arrange a new delivery date with the Customer after
-                      the situation of Force Majeure is over.`}
+                      the situation of Force Majeure is over.
                     </li>
                   </ul>
                 </Disclosure.Panel>
@@ -803,13 +800,13 @@ export default function TermsAndConditionsPage() {
                 </Disclosure.Button>
                 <Disclosure.Panel className="text-sm font-extralight lg:text-lg tracking-tighter leading-snug md:leading-normal py-1 text-justify">
                   <p className="text-gray-700 mb-4 mt-2">
-                    {`Models, drawings, logos, original works and shapes, logos
+                    Models, drawings, logos, original works and shapes, logos
                     and any type of content present on the Webshop: The models,
                     drawings, trademarks, logos, texts, software, scripts,
                     graphics, photos, creations, sounds, music, as well as any
                     content of all kinds of the Webshop (graphic illustrations,
                     texts...) are protected by intellectual property rights and
-                    mainly by copyright.`}
+                    mainly by copyright.
                   </p>
 
                   <p className="text-gray-700 mb-4">
@@ -822,12 +819,12 @@ export default function TermsAndConditionsPage() {
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    {`The sale/purchase of the Good(s) does not imply any transfer
-                    of these Intellectual Property Rights.`}
+                    The sale/purchase of the Good(s) does not imply any transfer
+                    of these Intellectual Property Rights.
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    {`In addition, Users are not allowed to systematically extract
+                    In addition, Users are not allowed to systematically extract
                     and/or reuse parts of the content of the Webshop without the
                     express written permission of the Seller. In particular,
                     Users may not use a data mining robot, or any other similar
@@ -837,7 +834,7 @@ export default function TermsAndConditionsPage() {
                     of the Seller. Users are also not allowed to create and/or
                     publish their own databases that contain substantial parts
                     (e.g., our prices and product lists) of the Webshop and/or
-                    the Goods without the express written consent of the Seller.`}
+                    the Goods without the express written consent of the Seller.
                   </p>
                 </Disclosure.Panel>
               </>
@@ -916,13 +913,13 @@ export default function TermsAndConditionsPage() {
                 </Disclosure.Button>
                 <Disclosure.Panel className="text-sm font-extralight lg:text-lg tracking-tighter leading-snug md:leading-normal py-1 text-justify">
                   <p className="text-gray-700 mb-4 mt-2">
-                    {`Without prejudice to any of the rights and remedies granted
+                    Without prejudice to any of the rights and remedies granted
                     to the Customer by the applicable law or these Terms and
                     Conditions B2C or in case of fraud or wilful misconduct, the
                     liability of the Seller for direct damages will always be
                     limited to the value of the ordered Goods. Any indirect
                     damage (damage to reputation, missing chance etc.) are
-                    always excluded.`}
+                    always excluded.
                   </p>
                 </Disclosure.Panel>
               </>
@@ -947,13 +944,13 @@ export default function TermsAndConditionsPage() {
                 </Disclosure.Button>
                 <Disclosure.Panel className="text-sm font-extralight lg:text-lg tracking-tighter leading-snug md:leading-normal py-1 text-justify">
                   <p className="text-gray-700 mb-4 mt-2">
-                    {`Should any provision of these Terms and Conditions B2C be or
+                    Should any provision of these Terms and Conditions B2C be or
                     become ineffective, or should one of the clause be
                     invalidated, then such shall be without prejudice to the
                     effectiveness of the remaining provisions. The Parties shall
                     be obligated to replace the ineffective provision with one
                     that most closely meets the ineffective provision’s economic
-                    purpose.`}
+                    purpose.
                   </p>
                 </Disclosure.Panel>
               </>
@@ -980,9 +977,9 @@ export default function TermsAndConditionsPage() {
                   <p className="text-gray-700 mb-4 mt-2">
                     The delivered items remain the exclusive property of the
                     Seller until full payment by the Customer. If necessary, the
-                    Customer undertakes to inform third parties of the Seller's
-                    retention of title, e.g., to anyone who would seize articles
-                    that have not yet been paid in full.
+                    Customer undertakes to inform third parties of the
+                    Seller&apos;s retention of title, e.g., to anyone who would
+                    seize articles that have not yet been paid in full.
                   </p>
                 </Disclosure.Panel>
               </>
@@ -1007,8 +1004,8 @@ export default function TermsAndConditionsPage() {
                 </Disclosure.Button>
                 <Disclosure.Panel className="text-sm font-extralight lg:text-lg tracking-tighter leading-snug md:leading-normal py-1 text-justify">
                   <p className="text-gray-700 mb-4 mt-2">
-                    {`The Seller only uses the Customer’s personal information in
-                    accordance with the Privacy Policy on the Webshop.`}
+                    The Seller only uses the Customer’s personal information in
+                    accordance with the Privacy Policy on the Webshop.
                   </p>
                 </Disclosure.Panel>
               </>
