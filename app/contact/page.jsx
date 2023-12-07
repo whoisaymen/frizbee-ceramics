@@ -8,7 +8,7 @@ export default function ContactPage() {
       <ScrollToTop />
 
       <div className="h-full flex flex-col items-between justify-between">
-        <div className="w-full h-full mt-20">
+        <div className="w-full h-full mt-8 lg:mt-20">
           {/* <div className="self-stretch h-auto">
             <Image
               src={"/images/contact/frizbeeceramics.jpg"}
@@ -91,7 +91,7 @@ export default function ContactPage() {
             alt={"Image"}
             height={3000}
             width={3000}
-            className={`border-t border-black object-contain`}
+            className={`object-contain`}
           />
         </div>
         {/* </div> */}
