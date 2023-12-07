@@ -94,14 +94,14 @@ export default function Nav() {
       activeColor: "bg-[#EADF50]",
     },
     {
-      name: "set",
-      hoverColor: "bg-[#AAAAEF]",
-      activeColor: "bg-[#AAAAEF]",
-    },
-    {
       name: "new",
       hoverColor: "bg-[#EB792F]",
       activeColor: "bg-[#EB792F]",
+    },
+    {
+      name: "set",
+      hoverColor: "bg-[#AAAAEF]",
+      activeColor: "bg-[#AAAAEF]",
     },
   ];
 
