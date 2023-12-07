@@ -54,10 +54,12 @@ export default function Nav() {
     pathname === "/projects" ||
     pathname === "/stockists" ||
     pathname === "/terms-and-conditions" ||
+    pathname === "/contact" ||
     pathname.includes("/products") ||
     pathname.includes("/projects");
 
   const isAboutPage = pathname === "/about";
+  const isContactPage = pathname === "/contact";
   const isProjectsPage = pathname === "/projects";
   const isStockistsPage = pathname === "/stockists";
   const isTermsAndConditionsPage = pathname === "/terms-and-conditions";
@@ -174,7 +176,7 @@ export default function Nav() {
           <div className="lg:hidden absolute top-2 right-4 z-10">
             <button
               onClick={toggleMenu}
-              className="flex flex-col justify-center items-center w-8 h-8 border border-black bg-[#F1C1AF]"
+              className="flex flex-col justify-center items-center w-8 h-8 border border-black bg-[#FD5381]/90"
               aria-label="Open menu"
             >
               <span className="block w-6 h-[1px] bg-black mb-1"></span>
@@ -302,7 +304,9 @@ export default function Nav() {
                   href="/stockists"
                   // onClick={() => setIsProjectsVisible(!isProjectsVisible)}
                   className={`cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 ${
-                    isStockistsPage ? "bg-[#EB792F]" : "bg-white/90" // Different background color if on Projects page
+                    isStockistsPage
+                      ? "bg-[#FD5381]/90"
+                      : "bg-white/90 hover:bg-[#FD5381]/90" // Different background color if on Projects page
                   }`}
                 >
                   Stockists
@@ -334,7 +338,17 @@ export default function Nav() {
                   onMouseEnter={() => setIsAboutHovered(true)}
                   onMouseLeave={() => setIsAboutHovered(false)}
                   className={` relative cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] z-2 hover:-rotate-3 bg-white/90 ${
-                    isAboutPage ? "bg-[#AAAAEF]" : "" // Different background color if on Projects page
+                    isAboutPage
+                      ? "bg-[#AAAAEF]/90"
+                      : "bg-white/90 hover:bg-[#AAAAEF]/90" // Different background color if on Projects page
+                  } ${
+                    isTermsAndConditionsPage
+                      ? "bg-[#AAAAEF]/90"
+                      : "bg-white/90 hover:bg-[#AAAAEF]/90" // Different background color if on Projects page
+                  } ${
+                    isContactPage
+                      ? "bg-[#AAAAEF]/90"
+                      : "bg-white/90 hover:bg-[#AAAAEF]/90" // Different background color if on Projects page
                   } ${
                     isAboutHovered
                       ? "hover:bg-[#AAAAEF] border-b-[#AAAAEF]"

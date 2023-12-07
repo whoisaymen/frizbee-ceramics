@@ -7,8 +7,8 @@ export default function ContactPage() {
     <div className="bg-white font-extralight tracking-tight h-screen w-full">
       <ScrollToTop />
 
-      <div className="h-[50vh] flex items-center justify-center">
-        <div className="w-full">
+      <div className="h-full flex flex-col items-between justify-between">
+        <div className="w-full h-full mt-20">
           {/* <div className="self-stretch h-auto">
             <Image
               src={"/images/contact/frizbeeceramics.jpg"}
@@ -18,10 +18,10 @@ export default function ContactPage() {
               className={`h-auto`}
             />
           </div> */}
-          <div className="mt-32 flex justify-evenly w-full">
+          <div className="mt-32 flex flex-col lg:flex-row justify-center lg:items-center w-full mx-10 lg:mx-48">
             {/* Contact Information */}
-            <div className="space-y-2">
-              <span className="px-2 border-[#E42220] border text-[#E42220] mb-6 inline-block">
+            <div className="space-y-4 w-1/2">
+              <span className="bg-[#E42220] text-[#fff] mb-6 inline-block font-normal tracking-tight px-3 py-1">
                 TO SAY HI
               </span>
               <p>
@@ -63,11 +63,11 @@ export default function ContactPage() {
             </div>
 
             {/* Social Links */}
-            <div className="flex flex-col space-y-2">
-              <span className="px-2 border-[#E42220] border text-[#E42220] self-start mb-6 inline-block">
+            <div className="flex flex-col space-y-2 self-start w-1/2">
+              <span className="bg-[#E42220] text-[#fff] self-start mb-6 inline-block font-normal tracking-tight px-3 py-1 lg:mt-0 mt-14">
                 TO FOLLOW US
               </span>
-              <div>
+              <div className="flex flex-col items-start space-y-4">
                 <Link
                   href="https://www.instagram.com"
                   className="uppercase border-b border-gray-700 tracking-tighter mr-6"
@@ -84,9 +84,20 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+        <div className="absolute bottom-[24px] lg:bottom-[30px] left-0">
+          <div className="relative w-full h-full">
+            <Image
+              src={"/images/contact/frizbee-redlogo.jpg"}
+              alt={"Image"}
+              height={3000}
+              width={3000}
+              className={`border-t border-black object-contain`}
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="flex flex-col justify-end h-full -mt-20">
+      {/* <div className="flex flex-col justify-end h-full -mt-20">
         <div className="w-full">
           <div className="relative w-full h-[50vh]">
             <Image
@@ -98,7 +109,7 @@ export default function ContactPage() {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
