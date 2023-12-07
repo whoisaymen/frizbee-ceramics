@@ -18,10 +18,10 @@ export default function ContactPage() {
               className={`h-auto`}
             />
           </div> */}
-          <div className="mt-32 flex flex-col lg:flex-row justify-center lg:items-center w-full mx-10 lg:mx-48">
+          <div className="mt-20 flex flex-col lg:flex-row justify-center lg:items-center w-full mx-10 lg:mx-48 text-xs">
             {/* Contact Information */}
             <div className="space-y-4 w-1/2">
-              <span className="bg-[#E42220] text-[#fff] mb-6 inline-block font-normal tracking-tight px-3 py-1">
+              <span className="bg-[#E42220] text-[#fff] mb-6 inline-block font-normal tracking-tight px-1 py-[2px] text-sm">
                 TO SAY HI
               </span>
               <p>
@@ -64,7 +64,7 @@ export default function ContactPage() {
 
             {/* Social Links */}
             <div className="flex flex-col space-y-2 self-start w-1/2">
-              <span className="bg-[#E42220] text-[#fff] self-start mb-6 inline-block font-normal tracking-tight px-3 py-1 lg:mt-0 mt-14">
+              <span className="bg-[#E42220] text-[#fff] self-start mb-6 inline-block font-normal tracking-tight px-1 py-[2px] lg:mt-0 mt-1 text-sm">
                 TO FOLLOW US
               </span>
               <div className="flex flex-col items-start space-y-4">
@@ -84,17 +84,17 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-[24px] lg:bottom-[30px] left-0">
-          <div className="relative w-full h-full">
-            <Image
-              src={"/images/contact/frizbee-redlogo.jpg"}
-              alt={"Image"}
-              height={3000}
-              width={3000}
-              className={`border-t border-black object-contain`}
-            />
-          </div>
+        {/* <div className="absolute bottom-[24px] lg:bottom-[30px] left-0"> */}
+        <div className="relative w-full bg-[#E42220] pb-[40px]">
+          <Image
+            src={"/images/contact/frizbee-redlogo.jpg"}
+            alt={"Image"}
+            height={3000}
+            width={3000}
+            className={`border-t border-black object-contain`}
+          />
         </div>
+        {/* </div> */}
       </div>
 
       {/* <div className="flex flex-col justify-end h-full -mt-20">
