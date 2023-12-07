@@ -200,40 +200,13 @@ export default function Nav() {
             </button>
           </div>
 
-          {/* Filter Icon as a Button */}
-          {/* <div className="lg:hidden absolute top-2 left-4 z-10">
-            <button
-              onClick={toggleDropdown}
-              className="flex flex-col justify-center items-center w-8 h-8 border border-blac bg-white border-black"
-              aria-label="Open filter menu"
-            >
-              <span className="block w-6 h-[1px] bg-black mb-1"></span>
-              <span className="block w-4 h-[1px] bg-black mb-1"></span>
-              <span className="block w-2 h-[1px] bg-black"></span>
-            </button>
-
-            {isDropdownOpen && (
-              <div className="absolute top-full mt-2 left-0 z-10 bg-white border border-black">
-                <select
-                  id="sortby"
-                  className="block w-full text-xs p-1"
-                  onChange={handleDropdownChange}
-                  value={sortOption}
-                >
-                  <option value="">Select</option>
-                  {categories.map((category) => (
-                    <option key={category.name} value={category.name}>
-                      {category.name.charAt(0).toUpperCase() +
-                        category.name.slice(1)}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-          </div> */}
-
           <>
-            <div style={filterButtonStyle} onClick={toggleFilter}>
+            <div
+              className={`lg:hidden fixed flex items-center justify-center top-[0.5rem] ${
+                isFilterOpen ? "left-[8rem]" : "left-0"
+              } z-30 h-[2rem] w-[2rem] bg-white border-black border border-l-0 cursor-pointer  transition-[left] duration-300 ease-in-out`}
+              onClick={toggleFilter}
+            >
               <ChevronUpIcon
                 className={`h-5 w-5 text-black transform ${
                   isFilterOpen ? "-rotate-90" : "rotate-90"
@@ -241,8 +214,10 @@ export default function Nav() {
               />
             </div>
 
-            <div style={filterContainerStyle} className="flex flex-col">
-              {/* Filter content */}
+            <div
+              style={filterContainerStyle}
+              className="lg:hidden flex flex-col"
+            >
               {categories.map(({ name, hoverColor, activeColor }) => (
                 <button
                   key={name}
@@ -252,20 +227,6 @@ export default function Nav() {
                   {name.charAt(0).toUpperCase() + name.slice(1)}
                 </button>
               ))}
-              {/* <select
-                id="sortby"
-                className="block w-full text-xs p-1"
-                onChange={handleDropdownChange}
-                value={sortOption}
-              >
-                <option value="">Select</option>
-                {categories.map((category) => (
-                  <option key={category.name} value={category.name}>
-                    {category.name.charAt(0).toUpperCase() +
-                      category.name.slice(1)}
-                  </option>
-                ))}
-              </select> */}
             </div>
           </>
           <div className="bg-transparent w-full h-[10vh] md:h-0 -mb-[9.5vh] md:-mb-0"></div>

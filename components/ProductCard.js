@@ -178,7 +178,7 @@ const ProductCard = ({ product }) => {
 
       {/* Mobile Quick Buy  */}
       <div className="relative">
-        <span className="bg-[#fbf234]/30 blur-xl absolute right-0 bottom-0 h-8 w-8 z-[8] md:hidden"></span>
+        <span className="bg-[#eee]/30 blur-xl absolute right-0 bottom-0 h-8 w-8 z-[8] md:hidden"></span>
         <button
           style={buttonStyle}
           className=" md:hidden absolute right-0 bottom-0 text-sm tracking-tighter font-light   h-10 w-10 border-black uppercase flex items-center justify-center z-[7] "
