@@ -5,7 +5,7 @@ import Image from "next/image";
 const images = [
   "/images/about/img1.jpg",
   "/images/about/img2.jpg",
-  "/images/about/img3.JPG",
+  "/images/about/img3.jpg",
   "/images/about/img4.jpg",
 ];
 export default function AboutPage() {
