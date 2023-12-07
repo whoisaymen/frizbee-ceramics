@@ -119,7 +119,7 @@ export default function Newsletter() {
 
             <div
               className={`fixed right-0 bottom-[24px] lg:bottom-[10%]
-               flex w-full lg:max-w-[calc(40%+1px)] h-[30vh] lg:h-[40vh]`}
+               flex w-full lg:max-w-[calc(40%+1px)] h-[75vh] lg:h-[40vh]`}
             >
               <Transition.Child
                 as={Fragment}
