@@ -33,7 +33,7 @@ const ProductCard = ({ product }) => {
 
   useEffect(() => {
     fetchProductDetails();
-  }, []);
+  });
 
   // Function to handle adding product to cart
   const handleAddToCart = () => {
