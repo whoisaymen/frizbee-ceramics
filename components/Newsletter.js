@@ -164,11 +164,9 @@ export default function Newsletter() {
                           </h3>
                           <ul className="text-sm font-extralight tracking-tighter list-disc p-2 pt-0 -mt-1">
                             <li>
-                              Diswasher safe handmade porcelain objects Now
-                              available @smets_store Bxl
+                              The studio is now located in Portugal, Barrosinha.
+                              Feel free to visit to see what we're up to.
                             </li>
-                            <li>Xmas drop - 07/12 11am CEST</li>
-                            <li>Xmas sale - 18/12 @bouche.coffee Bxl</li>
                           </ul>
                         </div>
 
