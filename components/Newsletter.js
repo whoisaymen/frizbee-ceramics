@@ -165,7 +165,7 @@ export default function Newsletter() {
                           <ul className="text-sm font-extralight tracking-tighter list-disc p-2 pt-0 -mt-1">
                             <li>
                               The studio is now located in Portugal, Barrosinha.
-                              Feel free to visit to see what we're up to.
+                              Feel free to visit to see what we&apos;re up to.
                             </li>
                           </ul>
                         </div>
