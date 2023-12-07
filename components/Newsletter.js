@@ -71,7 +71,7 @@ export default function Newsletter() {
     <>
       <button
         className={`flex lg:hidden text-sm font-light tracking-wide fixed left-[10px] bottom-[24px] z-[9] px-3 py-1 text-black transition-[bottom] duration-500 ease-in-out rounded-t-lg rounded-b-none border-black border bg-[#FFA500] ${
-          newsletterOpen ? "bottom-[calc(75vh)]" : "bottom-[24px]"
+          newsletterOpen ? "bottom-[75vh]" : "bottom-[24px]"
         }}`}
         onClick={() => setNewsletterOpen(!newsletterOpen)}
       >
@@ -119,7 +119,7 @@ export default function Newsletter() {
 
             <div
               className={`fixed right-0 bottom-[24px] lg:bottom-[10%]
-               flex w-full lg:max-w-[calc(40%+1px)] h-[75vh] lg:h-[40vh]`}
+               flex w-full lg:max-w-[calc(40%+1px)] min-h-[75vh] md:h-auto `}
             >
               <Transition.Child
                 as={Fragment}
@@ -131,10 +131,10 @@ export default function Newsletter() {
                 leaveTo={isMobile ? "translate-y-full" : "translate-x-full"}
               >
                 <div className="w-full border-black lg:border-l border-t border-b rounded-l-lg">
-                  <div className="flex flex-col overflow-y-scroll bg-white rounded-l-lg shadow-xl relative h-full">
+                  <div className="flex flex-col overflow-y-scroll bg-white rounded-l-lg shadow-xl relative h-auto">
                     <button
                       type="button"
-                      className="p-1 -m-2 text-black hover:bg-white hover:text-black outline-none absolute right-2 top-3 z-[10000]"
+                      className="p-1 -m-2 text-black hover:text-white outline-none absolute right-2 top-3 z-[10000]"
                       onClick={() => setNewsletterOpen(false)}
                     >
                       <span className="sr-only">Close panel</span>
@@ -147,16 +147,17 @@ export default function Newsletter() {
                       </div>
                     </div> */}
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 h-screen mt-0 -m-[1px]">
-                      <div className="relative border-r border-black">
+                    <div className="grid grid-cols-1 md:grid-cols-2 mt-0 -m-[1px]">
+                      <div className="relative lg:border-r border-black md:w-full">
                         <Image
                           src={"/images/newsletter2.jpeg"}
                           alt={""}
-                          layout="fill"
-                          objectFit="cover"
+                          className="object-cover h-full"
+                          width={1000}
+                          height={1000}
                         />
                       </div>
-                      <div className="flex flex-col justify-between">
+                      <div className="flex flex-col justify-between lg:mb-0">
                         <div className="h-1/2">
                           <h3 className="tracking-tighter font-extralight uppercase m-2 text-lg">
                             News

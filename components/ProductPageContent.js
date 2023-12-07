@@ -16,8 +16,8 @@ export default function ProductPageContent({ product }) {
           src={image.node.url}
           // alt={image.node.altText}
           alt="Product image"
-          width={500}
-          height={500}
+          width={2000}
+          height={2000}
           priority
           className="object-cover w-full h-full object-center"
           style={{
@@ -36,9 +36,9 @@ export default function ProductPageContent({ product }) {
         // alt={image.node.altText}
         key={`${i}`}
         alt="Product image"
-        width={500}
-        height={500}
-        priority
+        width={2000}
+        height={2000}
+        // priority
         className="object-center border-b border-black"
         style={{
           maxWidth: "100%",

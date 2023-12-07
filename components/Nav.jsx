@@ -54,7 +54,8 @@ export default function Nav() {
     pathname === "/projects" ||
     pathname === "/stockists" ||
     pathname === "/terms-and-conditions" ||
-    pathname.includes("/products");
+    pathname.includes("/products") ||
+    pathname.includes("/projects");
 
   const isAboutPage = pathname === "/about";
   const isProjectsPage = pathname === "/projects";
@@ -103,13 +104,13 @@ export default function Nav() {
   ];
 
   const projects = [
-    { title: "A Box Is A Box", url: "/projects/a-box-is-a-box" },
+    // { title: "A Box Is A Box", url: "/projects/a-box-is-a-box" },
     { title: "Carne Bollente", url: "/projects/carne-bollente" },
-    { title: "Chez Manger", url: "/projects/chez-manger" },
-    { title: "Lina Lapelyte", url: "/projects/lina-lapelyte" },
-    { title: "MAD", url: "/projects/mad" },
-    { title: "Now Belgium Now", url: "/projects/now-belgium-now" },
-    { title: "Phyps", url: "/projects/phyps" },
+    // { title: "Chez Manger", url: "/projects/chez-manger" },
+    // { title: "Lina Lapelyte", url: "/projects/lina-lapelyte" },
+    // { title: "MAD", url: "/projects/mad" },
+    // { title: "Now Belgium Now", url: "/projects/now-belgium-now" },
+    // { title: "Phyps", url: "/projects/phyps" },
     { title: "Pon Ding", url: "/projects/pon-ding" },
   ];
 
