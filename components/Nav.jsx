@@ -312,7 +312,7 @@ export default function Nav() {
                   Stockists
                 </Link>
                 {/* Projects menu item with hover effect */}
-                <div
+                {/* <div
                   onMouseEnter={() => setIsProjectsHovered(true)}
                   onMouseLeave={() => setIsProjectsHovered(false)}
                   className={` relative cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] z-2 hover:-rotate-3 bg-white/90 ${
@@ -325,30 +325,23 @@ export default function Nav() {
                 >
                   <span className="">Projects</span>
                   {isProjectsHovered && projectsSubmenu}
-                </div>
-                {/* <Link
-                  href="/about"
-                  className={`cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 ${
-                    isAboutPage ? "bg-[#AAAAEF]" : "bg-white/90" // Different background color if on About page
-                  }`}
-                >
-                  About
-                </Link> */}
+                </div> */}
+
                 <div
                   onMouseEnter={() => setIsAboutHovered(true)}
                   onMouseLeave={() => setIsAboutHovered(false)}
                   className={` relative cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] z-2 hover:-rotate-3 bg-white/90 ${
                     isAboutPage
                       ? "bg-[#AAAAEF]/90"
-                      : "bg-white/90 hover:bg-[#AAAAEF]/90" // Different background color if on Projects page
+                      : "bg-white/90 hover:bg-[#AAAAEF]/90"
                   } ${
                     isTermsAndConditionsPage
                       ? "bg-[#AAAAEF]/90"
-                      : "bg-white/90 hover:bg-[#AAAAEF]/90" // Different background color if on Projects page
+                      : "bg-white/90 hover:bg-[#AAAAEF]/90"
                   } ${
                     isContactPage
                       ? "bg-[#AAAAEF]/90"
-                      : "bg-white/90 hover:bg-[#AAAAEF]/90" // Different background color if on Projects page
+                      : "bg-white/90 hover:bg-[#AAAAEF]/90"
                   } ${
                     isAboutHovered
                       ? "hover:bg-[#AAAAEF] border-b-[#AAAAEF]"
@@ -364,20 +357,16 @@ export default function Nav() {
         </header>
       </div>
 
-      {/* <CartIcon cartQuantity={cartQuantity} setCartOpen={setCartOpen} /> */}
       <div className="fixed bottom-0 left-0 right-0 z-[20000]">
         <MarketingBanner />
       </div>
 
-      {/* <NewsletterIcon setCartOpen={setCartOpen} /> */}
-
-      {/* MiniCart */}
       <MiniCart cart={cart} />
 
       <Newsletter />
 
       {/* Projects submenu */}
-      {isProjectsVisible && (
+      {/* {isProjectsVisible && (
         <div className="w-full bg-white z-20">
           <div className="absolute top-10 right-11 ml-4 flex flex-col w-[228px] border border-black">
             <ul className="list-none p-0 m-0">
@@ -396,7 +385,7 @@ export default function Nav() {
             </ul>
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Mobile Menu Modal */}
       <Transition.Root show={isMenuOpen} as={Fragment}>
