@@ -43,7 +43,7 @@ export default function ProductPageContent({ product }) {
         style={{
           maxWidth: "100%",
           height: "100%",
-          objectFit: "cover",
+          objectFit: "contain",
         }}
       />
     );
@@ -51,7 +51,7 @@ export default function ProductPageContent({ product }) {
 
   return (
     <div className="mx-auto">
-      <div className="flex flex-col md:flex-row items-stretch w-full">
+      <div className="flex flex-row items-stretch w-full">
         <div className="w-full h-[calc(100vh-30px)]">
           <Swiper
             // ref={swiperRef}
@@ -64,7 +64,7 @@ export default function ProductPageContent({ product }) {
               prevEl: ".swiper-button-next",
             }}
             // pagination={{ clickable: true }}
-            className="h-full w-full"
+            className="h-full"
             loop="true"
             modules={[Navigation, Pagination]}
           >

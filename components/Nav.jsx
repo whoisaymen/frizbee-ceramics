@@ -1,15 +1,17 @@
 "use client";
-import Link from "next/link";
 import { Fragment, useContext, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
+import { ChevronUpIcon } from "@heroicons/react/20/solid";
+
 import { CartContext } from "../context/shopContext";
+import { useRouter, usePathname } from "next/navigation";
+import { Dialog, Transition } from "@headlessui/react";
+
 import MarketingBanner from "./MarketingBanner";
 import MiniCart from "./MiniCart";
-import { useRouter, usePathname } from "next/navigation";
-
-import { XMarkIcon } from "@heroicons/react/24/outline";
-
-import { Dialog, Transition } from "@headlessui/react";
+import Newsletter from "./Newsletter";
+import { useVideo } from "@/context/VideoContext";
 
 export default function Nav() {
   const router = useRouter();
@@ -17,22 +19,65 @@ export default function Nav() {
   const { cart, setCartOpen, sortOption, setSortOption } =
     useContext(CartContext);
 
-  const [isProjectsSubmenuOpen, setIsProjectsSubmenuOpen] = useState(false); // New state for mobile projects submenu
+  const [isProjectsSubmenuOpen, setIsProjectsSubmenuOpen] = useState(false);
+
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  // CSS styles for filter container
+  const filterContainerStyle = {
+    position: "fixed",
+    top: "0.5rem",
+    left: isFilterOpen ? "0" : "-100vw",
+    width: "8rem",
+    // height: "100%",
+    transition: "left 0.3s ease",
+    backgroundColor: "white",
+    zIndex: 20,
+    borderBottom: "1px solid black",
+    boxSizing: "border-box",
+  };
+
+  // CSS styles for the button
+  const filterButtonStyle = {
+    position: "fixed",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    top: "0.5rem",
+    left: isFilterOpen ? "8rem" : "0",
+    zIndex: 30,
+    height: "2rem",
+    width: "2rem",
+    backgroundColor: "white",
+    border: "1px solid black",
+    borderLeft: "none",
+
+    // padding: "10px",
+    cursor: "pointer",
+    transition: "left 0.3s ease",
+  };
+
+  const toggleFilter = () => setIsFilterOpen(!isFilterOpen);
 
   // Toggle Projects Submenu on Mobile
   const toggleProjectsSubmenuMobile = () => {
     setIsProjectsSubmenuOpen(!isProjectsSubmenuOpen);
   };
 
-  // const router = useRouter();
+  const handleDropdownChange = (e) => {
+    setSortOption(e.target.value);
+  };
+
   const pathname = usePathname();
   const isSpecialPage =
     pathname === "/about" ||
     pathname === "/projects" ||
+    pathname === "/stockists" ||
     pathname.includes("/products"); // Combine the checks for About and Projects pages
 
   const isAboutPage = pathname === "/about"; // Check if current page is About page
   const isProjectsPage = pathname === "/projects"; // Check if current page is Projects page
+  const isStockistsPage = pathname === "/stockists"; // Check if current page is Projects page
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -76,21 +121,61 @@ export default function Nav() {
   ];
 
   const projects = [
-    "A Box Is A Box",
-    "Carne",
-    "Chez Manger",
-    "Lina Lapelyte",
-    "MAD",
-    "Now Belgium Now",
-    "Phyps",
-    "Pon Ding",
+    { title: "A Box Is A Box", url: "/projects/a-box-is-a-box" },
+    { title: "Carne Bollente", url: "/projects/carne-bollente" },
+    { title: "Chez Manger", url: "/projects/chez-manger" },
+    { title: "Lina Lapelyte", url: "/projects/lina-lapelyte" },
+    { title: "MAD", url: "/projects/mad" },
+    { title: "Now Belgium Now", url: "/projects/now-belgium-now" },
+    { title: "Phyps", url: "/projects/phyps" },
+    { title: "Pon Ding", url: "/projects/pon-ding" },
   ];
 
+  const about = [
+    { title: "About us", url: "/about" },
+    { title: "Contact", url: "/contact" },
+    { title: "Terms & Conditions", url: "/terms-and-conditions" },
+  ];
+
+  // State for managing hover state of Projects dropdown
+  const [isProjectsHovered, setIsProjectsHovered] = useState(false);
+  const [isAboutHovered, setIsAboutHovered] = useState(false);
+
+  // Projects submenu content
+  const projectsSubmenu = (
+    <div className="projects-submenu absolute top-full right-0 z-0 bg-[#D6FD53] border border-t-0 border-black w-[150px] -mt-0 -mr-[1px]">
+      <ul className="list-none p-0 m-0 text-right">
+        {projects.map((project) => (
+          <li key={project.title} className="p-[0.1rem] px-1 py-0">
+            <Link href={project.url}>
+              <span className="block text-black no-underline">
+                {project.title}
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+
+  // About submenu content
+  const aboutSubmenu = (
+    <div className="about-submenu absolute top-full right-0 z-0 bg-[#AAAAEF] border border-t-0 border-black w-[180px] -mt-0 -mr-[1px]">
+      <ul className="list-none p-0 m-0 text-right">
+        {about.map((item) => (
+          <li key={item.title} className="p-[0.1rem] px-1 py-0">
+            <Link href={item.url}>
+              <span className="block text-black no-underline">
+                {item.title}
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+
   const handleCategoryClick = (category) => {
-    router.push({
-      pathname: "/", // Path to the main page
-      query: { sort: category },
-    });
     setSortOption(category);
   };
 
@@ -116,38 +201,73 @@ export default function Nav() {
           </div>
 
           {/* Filter Icon as a Button */}
-          <div className="lg:hidden absolute top-2 left-4 z-10">
+          {/* <div className="lg:hidden absolute top-2 left-4 z-10">
             <button
               onClick={toggleDropdown}
               className="flex flex-col justify-center items-center w-8 h-8 border border-blac bg-white border-black"
               aria-label="Open filter menu"
             >
-              {/* <Image
-                src="/images/iconFilter.svg"
-                alt="Filter"
-                width={24}
-                height={24}
-              /> */}
-
               <span className="block w-6 h-[1px] bg-black mb-1"></span>
               <span className="block w-4 h-[1px] bg-black mb-1"></span>
               <span className="block w-2 h-[1px] bg-black"></span>
             </button>
 
-            {/* Dropdown Menu */}
             {isDropdownOpen && (
               <div className="absolute top-full mt-2 left-0 z-10 bg-white border border-black">
                 <select
                   id="sortby"
                   className="block w-full text-xs p-1"
-                  onChange={(e) => handleCategoryClick(e.target.value)}
+                  onChange={handleDropdownChange}
+                  value={sortOption}
                 >
                   <option value="">Select</option>
-                  {/* ... options ... */}
+                  {categories.map((category) => (
+                    <option key={category.name} value={category.name}>
+                      {category.name.charAt(0).toUpperCase() +
+                        category.name.slice(1)}
+                    </option>
+                  ))}
                 </select>
               </div>
             )}
-          </div>
+          </div> */}
+
+          <>
+            <div style={filterButtonStyle} onClick={toggleFilter}>
+              <ChevronUpIcon
+                className={`h-5 w-5 text-black transform ${
+                  isFilterOpen ? "-rotate-90" : "rotate-90"
+                }`}
+              />
+            </div>
+
+            <div style={filterContainerStyle} className="flex flex-col">
+              {/* Filter content */}
+              {categories.map(({ name, hoverColor, activeColor }) => (
+                <button
+                  key={name}
+                  className={`cursor-pointer uppercase tracking-[-1.2px] custom-cursor border-black border-t border-r`}
+                  onClick={() => handleCategoryClick(name)}
+                >
+                  {name.charAt(0).toUpperCase() + name.slice(1)}
+                </button>
+              ))}
+              {/* <select
+                id="sortby"
+                className="block w-full text-xs p-1"
+                onChange={handleDropdownChange}
+                value={sortOption}
+              >
+                <option value="">Select</option>
+                {categories.map((category) => (
+                  <option key={category.name} value={category.name}>
+                    {category.name.charAt(0).toUpperCase() +
+                      category.name.slice(1)}
+                  </option>
+                ))}
+              </select> */}
+            </div>
+          </>
           <div className="bg-transparent w-full h-[10vh] md:h-0 -mb-[9.5vh] md:-mb-0"></div>
 
           <nav aria-label="Top" className="mx-auto">
@@ -200,7 +320,7 @@ export default function Nav() {
                     <button
                       key={name}
                       className={`cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 ${
-                        sortOption === name ? "bg-[#AAAAEF]" : "bg-white/90"
+                        sortOption === name ? "bg-gray-200" : "bg-white/90"
                       } ${
                         hoverColor !== activeColor ? `hover:${hoverColor}` : ""
                       } transition duration-200 ease-out`}
@@ -225,22 +345,51 @@ export default function Nav() {
 
                 {/* Additional menu items */}
                 <Link
-                  href="/projects"
+                  href="/stockists"
                   // onClick={() => setIsProjectsVisible(!isProjectsVisible)}
                   className={`cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 ${
-                    isProjectsPage ? "bg-[#DEF6E0]" : "bg-white/90" // Different background color if on Projects page
+                    isStockistsPage ? "bg-[#EB792F]" : "bg-white/90" // Different background color if on Projects page
                   }`}
                 >
-                  Projects
+                  Stockists
                 </Link>
-                <Link
+                {/* Projects menu item with hover effect */}
+                <div
+                  onMouseEnter={() => setIsProjectsHovered(true)}
+                  onMouseLeave={() => setIsProjectsHovered(false)}
+                  className={` relative cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] z-2 hover:-rotate-3 bg-white/90 ${
+                    isProjectsPage ? "bg-[#D6FD53]" : "" // Different background color if on Projects page
+                  } ${
+                    isProjectsHovered
+                      ? "hover:bg-[#D6FD53] border-b-[#D6FD53]"
+                      : "border-b"
+                  }`}
+                >
+                  <span className="">Projects</span>
+                  {isProjectsHovered && projectsSubmenu}
+                </div>
+                {/* <Link
                   href="/about"
                   className={`cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 ${
                     isAboutPage ? "bg-[#AAAAEF]" : "bg-white/90" // Different background color if on About page
                   }`}
                 >
                   About
-                </Link>
+                </Link> */}
+                <div
+                  onMouseEnter={() => setIsAboutHovered(true)}
+                  onMouseLeave={() => setIsAboutHovered(false)}
+                  className={` relative cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] z-2 hover:-rotate-3 bg-white/90 ${
+                    isAboutPage ? "bg-[#AAAAEF]" : "" // Different background color if on Projects page
+                  } ${
+                    isAboutHovered
+                      ? "hover:bg-[#AAAAEF] border-b-[#AAAAEF]"
+                      : "border-b"
+                  }`}
+                >
+                  <span className="">About</span>
+                  {isAboutHovered && aboutSubmenu}
+                </div>
               </div>
             </div>
           </nav>
@@ -252,24 +401,28 @@ export default function Nav() {
         <MarketingBanner />
       </div>
 
-      <NewsletterIcon setCartOpen={setCartOpen} />
+      {/* <NewsletterIcon setCartOpen={setCartOpen} /> */}
 
       {/* MiniCart */}
       <MiniCart cart={cart} />
+
+      <Newsletter />
 
       {/* Projects submenu */}
       {isProjectsVisible && (
         <div className="w-full bg-white z-20">
           <div className="absolute top-10 right-11 ml-4 flex flex-col w-[228px] border border-black">
             <ul className="list-none p-0 m-0">
-              {projects.map((project, index) => (
+              {projects.map((project) => (
                 <li
-                  key={project}
-                  className={`${
-                    index % 2 === 0 ? "bg-[#fff]" : "bg-gray-100"
-                  } p-[0.1rem] px-1 py-1 blur-none`}
+                  key={project.title}
+                  className="bg-white p-[0.1rem] px-1 py-1 blur-none"
                 >
-                  {project}
+                  <Link href={project.url}>
+                    <span className="block text-black no-underline">
+                      {project.title}
+                    </span>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -311,17 +464,28 @@ export default function Nav() {
                       <Link href="/about" className="">
                         About
                       </Link>
+                      <Link href="/stockists" className="">
+                        Stockists
+                      </Link>
                       <button
                         onClick={toggleProjectsSubmenuMobile}
                         className="text-left uppercase"
                       >
                         Projects
                       </button>
+                      {/* Mobile Menu Projects Submenu */}
                       {isProjectsSubmenuOpen && (
-                        <ul className="pl-4 list-none text-gray-400 my-0 py-0">
-                          {projects.map((project, index) => (
-                            <li key={project} className="py-1">
-                              {project}
+                        <ul className="pl-4 list-nonemy-0 py-0">
+                          {projects.map((project) => (
+                            <li
+                              key={project.title}
+                              className="py-1 text-gray-400 "
+                            >
+                              <Link href={project.url}>
+                                <span className="block no-underline">
+                                  {project.title}
+                                </span>
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -329,8 +493,8 @@ export default function Nav() {
                       <Link href="/newsletter" className="">
                         Newsletter
                       </Link>
-                      <Link href="/shipping-returns" className="">
-                        Shipping & Returns
+                      <Link href="/terms-and-conditions" className="">
+                        Terms & Conditions
                       </Link>
                       <Link href="/about" className="">
                         Contact

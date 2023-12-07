@@ -54,7 +54,7 @@ export default function MiniCart({ cart }) {
           className={`flex flex-col border items-center border-black border-r-0 rounded-l-md ${
             cartQuantity > 0 ? "bg-[#fbf234]" : "bg-white/95"
           } p-0`}
-          onClick={() => setCartOpen(true)}
+          onClick={() => setCartOpen(!cartOpen)}
         >
           <span className="px-1 pt-1">C</span>
           <span className="px-1 -mt-[8px]">A</span>
@@ -63,6 +63,8 @@ export default function MiniCart({ cart }) {
           <span className="px-1 pb-1">({cartQuantity})</span>
         </button>
       </div>
+
+      <div></div>
       <Transition.Root show={cartOpen} as={Fragment}>
         <Dialog
           initialFocus={cancelButtonRef}
@@ -202,7 +204,10 @@ export default function MiniCart({ cart }) {
                                       </div>
 
                                       <p className="ml-4 mr-4 self-center">
-                                        {formatter.format(product.variantPrice)}
+                                        {formatter.format(
+                                          product.variantPrice *
+                                            product.variantQuantity
+                                        )}
                                       </p>
                                     </div>
                                   </div>
@@ -234,7 +239,7 @@ export default function MiniCart({ cart }) {
                     <div className="mt-0 pb-6 lg:pb-0">
                       <a
                         href={checkoutUrl}
-                        className={`uppercase tracking-tight flex items-center justify-center px-6 py-2 text-sm font-medium text-white bg-[#000] border border-transparent shadow-sm hover:bg-gray-800 ${
+                        className={`uppercase tracking-tight flex items-center justify-center px-6 py-2 text-sm font-medium text-white bg-[#000] border border-transparent shadow-sm hover:bg-[#fbf234] hover:text-black hover:border-t hover:border-l-0 hover:border-r-0 hover:border-black ${
                           cartLoading ? "cursor-not-allowed" : ""
                         }`}
                       >

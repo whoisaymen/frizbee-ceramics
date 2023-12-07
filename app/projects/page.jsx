@@ -14,15 +14,14 @@ export default function ProjectsPage() {
     },
     {
       id: 2,
-      src: "/images/projects/carne/motif.jpg",
+      src: "/images/projects/carne/motif.jpeg",
       alt: "Carne X Frizbee Motif",
     },
     // Second section - text on the left, image on the right
     {
       id: 3,
-      content: "CARNE X FRIZBEE",
-      description:
-        "Cheer up your dining table with the creative aesthetic of CARNE BOLLENTE.  Established in 2014, Parisian fashion brand CARNE BOLLENTE collaborates with FRIZBEE Ceramics",
+      title: "CARNE BOLLENTE X FRIZBEE",
+      description: `Carne Bollente is a free and independent Paris-based brand established in 2015, focusing on the relation between sex and positivity to allow people to embrace their own sexuality and kinks through their clothes. By pairing straightforward streetwear staples with scenic sex illustrations that manage to cover a wide scope of sexual taboos without verging on the problematic, we inject irreverence and provocation into no-frills basics.`,
     },
     {
       id: 4,
@@ -66,7 +65,10 @@ export default function ProjectsPage() {
         {/* Projects Grid - First Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 h-screen -m-[1px]">
           {projects.slice(0, 2).map((project) => (
-            <div key={project.id} className="relative border-l border-white">
+            <div
+              key={project.id}
+              className="relative border-l border-black border-b"
+            >
               <Image
                 src={project.src}
                 alt={project.alt}
@@ -78,20 +80,13 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      <div className="snap-start h-screen">
-        {/* Projects Grid - Second Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 h-screen mt-0 ml-[1px]">
-          {/* Text block on the left */}
-          <div className="flex items-start justify-start p-4 mt-12">
-            <div>
-              <h2 className="text-4xl font-normal tracking-tight  mb-4">
-                {projects[2].content}
-              </h2>
-              {/* <p>{projects[2].description}</p> */}
-            </div>
+      <div className="snap-start h-screen border-b border-black relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 h-screen mt-0 -m-[1px]">
+          <div className="flex flex-col justify-start p-28 pl-10 pr-32">
+            <h2 className="text-4xl lg:text-5xl font-extralight tracking-tighter  mb-10 leading-snug">
+              {projects[2].title.split("X")[0]}
+            </h2>
           </div>
-
-          {/* Image on the right */}
           <div className="relative border-l border-black">
             <Image
               src={projects[3].src}
@@ -104,41 +99,48 @@ export default function ProjectsPage() {
       </div>
 
       <div className="snap-start h-screen">
-        {/* Third Section - Two Text Blocks */}
-        <div className="grid grid-cols-1 md:grid-cols-1 h-screen gap-4">
-          {/* Left Text Block */}
-          <div className="flex items-start justify-start p-4 pr-80 mt-64 w-3/4">
+        <div className="relative w-full h-screen flex justify-center items-center p-30">
+          <motion.div
+            style={{ width: "859px", height: "859px" }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          >
+            <Image
+              src="/images/projects/carne/rotating-plate.png"
+              alt="Rotating Plate"
+              layout="fixed"
+              width={1000}
+              height={1000}
+              objectFit="contain"
+            />
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="snap-start h-screen border-b border-black border-t">
+        <div className="grid grid-cols-1 md:grid-cols-2 h-screen relative -m-[1px]">
+          <div className="flex items-start justify-start p-4 pr-30 absolute left-10 top-1/3 max-w-6xl">
             <div>
-              <p className="uppercase text-4xl font-normal tracking-tight  mb-4">
-                {textBlocks[0].content}
+              <p className="text-3xl font-extralight tracking-tighter mb-4 uppercase">
+                {projects[2].description}
               </p>
-              <h2 className="border-b border-black uppercase inline-block mt-4">
-                {textBlocks[0].title}
-              </h2>
             </div>
           </div>
-
-          {/* Right Text Block */}
-          {/* <div className="flex items-center justify-center p-10">
-          <div>
-            <h2 className="text-2xl font-bold mb-4">{textBlocks[1].title}</h2>
-            <p>{textBlocks[1].content}</p>
-          </div>
-        </div> */}
         </div>
       </div>
 
       <div className="snap-start h-screen">
-        {/* Fourth Section - Product Images Row */}
         <div className="flex flex-col justify-end h-full">
-          {" "}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {productImages.slice(0, 4).map((image) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+            {productImages.slice(0, 4).map((image, index) => (
               <div key={image.id} className="relative w-full h-[50vh]">
                 <Image
                   src={image.src}
                   alt={image.alt}
                   layout="fill"
+                  className={`border-t border-black border-l ${
+                    index !== 1 ? "border-l" : ""
+                  }`}
                   objectFit="cover"
                 />
               </div>
@@ -148,38 +150,20 @@ export default function ProjectsPage() {
       </div>
 
       <div className="snap-start h-screen">
-        {/* Fourth Section - Product Images Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 h-screen">
-          {productImages.slice(4, 8).map((image) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0 h-screen border-t border-black">
+          {productImages.slice(4, 8).map((image, index) => (
             <div key={image.id} className="relative w-full h-[50vh]">
               <Image
                 src={image.src}
                 alt={image.alt}
                 layout="fill"
                 objectFit="cover"
+                className={`border-black border-l border-b ${
+                  index !== 4 ? "border-l" : ""
+                }`}
               />
             </div>
           ))}
-        </div>
-      </div>
-
-      <div className="snap-start h-screen">
-        {/* Fifth Section - Full Width Rotating Image */}
-        <div className="relative w-full h-screen flex justify-center items-center">
-          <motion.div
-            style={{ width: "900px", height: "900px" }} // Set the size of the rotating element
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          >
-            <Image
-              src="/images/projects/carne/rotatingplate.jpg"
-              alt="Rotating Plate"
-              layout="fixed" // Use 'fixed' layout for specific width and height
-              width={1000}
-              height={1000}
-              objectFit="contain" // Adjust this as needed
-            />
-          </motion.div>
         </div>
       </div>
     </div>

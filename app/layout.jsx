@@ -1,13 +1,14 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import ShopProvider from "@/context/shopContext";
-
+import { VideoProvider } from "@/context/VideoContext";
 import Footer from "@/components/Footer";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Nav from "@/components/Nav";
+// import Newsletter from "@/components/Newsletter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,11 +36,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} custom-cursor`}>
-        <ShopProvider>
-          <Nav />
-          {children}
-        </ShopProvider>
-        {/* <Footer /> */}
+        <VideoProvider>
+          <ShopProvider>
+            <Nav />
+            {/* <Newsletter /> */}
+            {children}
+          </ShopProvider>
+          {/* <Footer /> */}
+        </VideoProvider>
       </body>
     </html>
   );

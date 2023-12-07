@@ -6,6 +6,9 @@ import { CartContext } from "../context/shopContext";
 import axios from "axios";
 import useSWR from "swr";
 
+import { Disclosure } from "@headlessui/react";
+import { ChevronUpIcon } from "@heroicons/react/20/solid";
+
 // setup inventory fetcher
 const fetchInventory = (url, id) =>
   axios
@@ -17,6 +20,7 @@ const fetchInventory = (url, id) =>
     .then((res) => res.data);
 
 export default function ProductForm({ product }) {
+  console.log(product);
   const { data: productInventory } = useSWR(
     `/api/available/${product.handle}`,
     (url, id) => fetchInventory(url, id),
@@ -92,11 +96,11 @@ export default function ProductForm({ product }) {
 
   useEffect(() => {
     if (productInventory) {
-      const checkAvailable = productInventory?.variants.edges.filter(
+      const checkAvailable = productInventory?.variants?.edges?.filter(
         (item) => item.node.id === selectedVariant.id
       );
 
-      if (checkAvailable[0]?.node.availableForSale) {
+      if (checkAvailable && checkAvailable[0]?.node.availableForSale) {
         setAvailable(true);
       } else {
         setAvailable(false);
@@ -116,46 +120,91 @@ export default function ProductForm({ product }) {
               {product.title.split("-")[0]}
             </h2>
           </div>
-          <div className="bg-white flex justify-center items-center border-l border-gray-800 border-b text-sm lg:text-base">
+          <div className="bg-white/90 flex justify-center items-center border-l border-gray-800 border-b text-sm lg:text-base">
             <span className="tracking-tight px-4 py-1 md:py-2">
               {formatter.format(product.variants.edges[0].node.priceV2.amount)}
             </span>
           </div>
         </div>
         <div className="pt-3 pb-4 md:pb-8 px-4 lg:h-auto text-xs md:text-base">
-          <p className="text-xs md:text-sm font-extralight lg:text-md tracking-tighter mb-6 leading-snug md:leading-normal">
+          <div className="hidden md:block">
+            {/* <Disclosure defaultOpen>
+              {({ open }) => (
+                <>
+                  <Disclosure.Button className="flex w-full justify-between rounded-lg py-2 text-left text-sm font-normal tracking-tighter text-black focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+                    <span className="uppercase">Info</span>
+                    <ChevronUpIcon
+                      className={`${
+                        open ? "rotate-180 transform" : ""
+                      } h-5 w-5 text-black`}
+                    />
+                  </Disclosure.Button> */}
+            <p className="text-xs md:text-sm font-extralight lg:text-md tracking-tighter mb-6 leading-snug md:leading-normal">
+              {product.description}
+            </p>
+            {/* </>
+              )}
+            </Disclosure> */}
+          </div>
+          <div className="md:hidden">
+            <Disclosure>
+              {({ open }) => (
+                <>
+                  <Disclosure.Button className="flex w-full justify-between rounded-lg py-2 text-left text-sm font-normal tracking-tighter text-black focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+                    <span className="uppercase">Details</span>
+                    <ChevronUpIcon
+                      className={`${
+                        open ? "rotate-180 transform" : ""
+                      } h-5 w-5 text-black`}
+                    />
+                  </Disclosure.Button>
+                  <Disclosure.Panel className="text-xs md:text-sm font-extralight lg:text-md tracking-tighter mb-6 leading-snug md:leading-normal">
+                    {product.description}
+                  </Disclosure.Panel>
+                </>
+              )}
+            </Disclosure>
+          </div>
+
+          {/* <p className="text-xs md:text-sm font-extralight lg:text-md tracking-tighter mb-6 leading-snug md:leading-normal">
             {product.description}
-          </p>
+          </p> */}
           <div className="flex items-center border border-gray-800">
             <button
-              className="px-2 py-1 md:px-4 md:py-2 bg-white"
+              className="px-2 py-1 md:px-4 md:py-2 bg-white/90"
               onClick={handleDecrementQuantity}
             >
               -
             </button>
-            <span className="px-2 py-1 md:px-4 md:py-2 border-gray-800 border-l border-r">
+            <span className="px-2 py-1 md:px-4 md:py-2 border-gray-800 border-l border-r bg-white/90">
               {quantity}
             </span>
             <button
-              className="px-2 py-1  md:px-4 md:py-2 bg-white"
+              className="px-2 py-1  md:px-4 md:py-2 bg-white/90"
               onClick={handleIncrementQuantity}
             >
               +
             </button>
             <button
               onClick={handleAddToCart}
-              className="flex-grow px-2 py-1 md:py-2 text-black uppercase font-light tracking-tight bg-white border-l border-gray-800 text-xs md:text-base"
+              disabled={!available}
+              className="flex-grow px-2 py-1 md:py-2 text-black uppercase font-light tracking-tight bg-white/90 border-l border-gray-800 text-xs md:text-base"
             >
-              <span className="hidden md:inline-block">Add To Cart</span>
-
-              <span className="md:hidden">Add</span>
+              {available ? (
+                <>
+                  <span className="hidden md:inline-block">Add To Cart</span>
+                  <span className="md:hidden">Add to cart</span>
+                </>
+              ) : (
+                <span className="cursor-not-allowed">Sold out</span>
+              )}
             </button>
           </div>
-          {!available && (
+          {/* {!available && (
             <button className="px-2 py-1 md:py-3 mt-3 text-white bg-gray-800 rounded-lg cursor-not-allowed mb-4">
               Sold out!
             </button>
-          )}
+          )} */}
         </div>
       </div>
     </div>

@@ -1,0 +1,52 @@
+import { NextResponse } from "next/server";
+
+export async function POST(request) {
+  const body = await request.json();
+  const email = body.email;
+
+  const domain = process.env.SHOPIFY_STORE_DOMAIN;
+  const adminAccessToken = process.env.SHOPIFY_ADMIN_ACCESSTOKEN;
+
+  const URL = `https://${domain}/admin/api/2023-10/customers.json`;
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Shopify-Access-Token": adminAccessToken,
+    },
+    body: JSON.stringify({
+      customer: {
+        email: email,
+        // Optional fields like first_name, last_name, etc.
+      },
+    }),
+  };
+
+  try {
+    const response = await fetch(URL, options);
+    const data = await response.json();
+
+    console.log("Response status:", response.status); // Log response status
+    console.log("Response body:", data); // Log response body
+
+    if (response.ok) {
+      return new NextResponse(
+        JSON.stringify({ message: "Subscription successful", data: data }),
+        { status: 200 }
+      );
+    } else {
+      console.error("Error from Shopify:", data); // Log error details
+      return new NextResponse(
+        JSON.stringify({ message: "Error subscribing", details: data }),
+        { status: response.status }
+      );
+    }
+  } catch (error) {
+    console.error("Server Error:", error); // Log server-side error
+    return new NextResponse(
+      JSON.stringify({ message: "Error subscribing", error: error.toString() }),
+      { status: 500 }
+    );
+  }
+}

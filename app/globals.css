@@ -213,3 +213,25 @@ body {
 .animate-rotate {
   animation: rotate 20s linear infinite; /* Adjust the duration as needed */
 }
+
+.projects-submenu::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 105px); /* Adjust this value */
+  height: 1px;
+  background-color: black;
+}
+
+.about-submenu::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 81px); /* Adjust this value */
+  height: 1px;
+  background-color: black;
+}
