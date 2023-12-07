@@ -174,7 +174,7 @@ export default function Nav() {
           <div className="lg:hidden absolute top-2 right-4 z-10">
             <button
               onClick={toggleMenu}
-              className="flex flex-col justify-center items-center w-8 h-8 border border-black bg-[#fff]"
+              className="flex flex-col justify-center items-center w-8 h-8 border border-black bg-[#F1C1AF]"
               aria-label="Open menu"
             >
               <span className="block w-6 h-[1px] bg-black mb-1"></span>
