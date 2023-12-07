@@ -140,7 +140,8 @@ const ProductCard = ({ product }) => {
                 }}
               ></div>
               <span className="z-[7] tracking-tighter text-left font-bold w-full leading-none">
-                {title.split("-")[0]}
+                {/* {title.split("-")[0]} */}
+                {title}
                 {/* {title.split(" ")[0]} */}
                 {/* <br />
               <span className="font-normal inline-block text-black/70 capitalize italic py-0">
@@ -167,7 +168,8 @@ const ProductCard = ({ product }) => {
             />
 
             <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
-              <span>{title.split("-")[0]}</span>
+              {/* <span>{title.split("-")[0]}</span> */}
+              <span>{title}</span>
               <span className="font-light -mt-1">
                 {formatter.format(price)}
               </span>

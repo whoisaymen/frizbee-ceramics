@@ -4,28 +4,28 @@ import Image from "next/image";
 
 export default function ContactPage() {
   return (
-    <div className="bg-white font-extralight tracking-tight h-screen">
+    <div className="bg-white font-extralight tracking-tight h-screen w-full">
       <ScrollToTop />
 
-      <div className="mx-auto">
-        <div className="flex justify-start items-center">
-          <div className="relative w-[200px] h-[200px]">
+      <div className="h-[50vh] flex items-center justify-center">
+        <div className="w-full">
+          {/* <div className="self-stretch h-auto">
             <Image
               src={"/images/contact/frizbeeceramics.jpg"}
               alt={"Image"}
-              layout="fill"
-              className={``}
-              objectFit="cover"
+              width={500}
+              height={500}
+              className={`h-auto`}
             />
-          </div>
-          <div className="p-8 mt-32">
+          </div> */}
+          <div className="mt-32 flex justify-evenly w-full">
             {/* Contact Information */}
             <div className="space-y-2">
-              <span className="px-2 border-[#E42220] border text-[#E42220]">
+              <span className="px-2 border-[#E42220] border text-[#E42220] mb-6 inline-block">
                 TO SAY HI
               </span>
               <p>
-                CUSTOMER SUPPORT:
+                <span className="uppercase">Customer support: </span>
                 <Link
                   href="mailto:hey@frizbeeceramics.com"
                   className="uppercase border-b border-gray-700 tracking-tighter mr-6"
@@ -34,7 +34,7 @@ export default function ContactPage() {
                 </Link>
               </p>
               <p>
-                WHOLESALE:
+                <span className="uppercase">Wholesale: </span>
                 <Link
                   href="mailto:go@frizbeeceramics.com"
                   className="uppercase border-b border-gray-700 tracking-tighter mr-6"
@@ -43,7 +43,7 @@ export default function ContactPage() {
                 </Link>
               </p>
               <p>
-                PRESS INQUIRY:
+                <span className="uppercase">Press inquiry: </span>
                 <Link
                   href="mailto:pizza@frizbeeceramics.com"
                   className="uppercase border-b border-gray-700 tracking-tighter mr-6"
@@ -52,7 +52,7 @@ export default function ContactPage() {
                 </Link>
               </p>
               <p>
-                COLLABORATION:
+                <span className="uppercase">Collaboration: </span>
                 <Link
                   href="mailto:pizza@frizbeeceramics.com"
                   className="uppercase border-b border-gray-700 tracking-tighter mr-6"
@@ -63,22 +63,24 @@ export default function ContactPage() {
             </div>
 
             {/* Social Links */}
-            <div className="flex justify-center gap-4 mt-8">
-              <span className="px-2 border-[#E42220] border text-[#E42220]">
+            <div className="flex flex-col space-y-2">
+              <span className="px-2 border-[#E42220] border text-[#E42220] self-start mb-6 inline-block">
                 TO FOLLOW US
               </span>
-              <Link
-                href="https://www.instagram.com"
-                className="uppercase border-b border-gray-700 tracking-tighter mr-6"
-              >
-                Instagram
-              </Link>
-              <Link
-                href="https://www.facebook.com"
-                className="uppercase border-b border-gray-700 tracking-tighter mr-6"
-              >
-                Facebook
-              </Link>
+              <div>
+                <Link
+                  href="https://www.instagram.com"
+                  className="uppercase border-b border-gray-700 tracking-tighter mr-6"
+                >
+                  Instagram
+                </Link>
+                <Link
+                  href="https://www.facebook.com"
+                  className="uppercase border-b border-gray-700 tracking-tighter"
+                >
+                  Facebook
+                </Link>
+              </div>
             </div>
           </div>
         </div>

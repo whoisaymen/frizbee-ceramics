@@ -117,7 +117,8 @@ export default function ProductForm({ product }) {
           <div className="text-black flex-grow flex justify-start items-center">
             {/* <div className='bg-gradient-to-b from-[#AAEFB1] text-black flex-grow flex justify-center items-center'> */}
             <h2 className="p-1 md:p-2 px-4 leading-tight text-md md:text-lg lg:text-2xl tracking-tighter font-bold">
-              {product.title.split("-")[0]}
+              {/* {product.title.split("-")[0]} */}
+              {product.title}
             </h2>
           </div>
           <div className="bg-white/90 flex justify-center items-center border-l border-gray-800 border-b text-sm lg:text-base">
