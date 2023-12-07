@@ -16,15 +16,7 @@ export default function AboutPage() {
       <div className="mx-auto">
         <div className="flex flex-col md:flex-row justify-center items-center">
           <div className="order-2 lg:order-1 w-full">
-            <div className="text-sm lg:text-lg columns-2 gap-x-[20px] p-10 mt-40 mb-10">
-              {/* <h2 className='uppercase mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>About</h2> */}
-              {/* <Image src='/images/sun.png' height={1000} width={1000} className='w-auto mx-auto z-50' alt='Frizbee Ceramics logo'></Image> */}
-              {/* <p className="text-gray-900 tracking-tighter mb-10">
-                <strong className="text-xl tracking-tighter">
-                  <span className="font-black">FRIZBEE CERAMICS</span> offers a
-                  high-end handcrafted porcelain tableware collection.
-                </strong>
-              </p> */}
+            <div className="text-sm lg:text-lg columns-1 md:columns-2 gap-x-[20px] p-10 mt-32 mb-10">
               <p className="text-gray-900 tracking-tighter font-normal mb-2">
                 FRIZBEE CERAMICS offers a high-end handcrafted porcelain
                 tableware collection.
