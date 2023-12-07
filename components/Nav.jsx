@@ -204,7 +204,7 @@ export default function Nav() {
             <div
               className={`lg:hidden fixed flex items-center justify-center top-[0.5rem] ${
                 isFilterOpen ? "left-[8rem]" : "left-0"
-              } z-30 h-[2rem] w-[2rem] bg-white border-black border border-l-0 cursor-pointer  transition-[left] duration-300 ease-in-out`}
+              } z-30 h-[2rem] w-[1.5rem] bg-[#6072D3] border-black border border-l-0 cursor-pointer  rounded-r-lg transition-[left] duration-300 ease-in-out`}
               onClick={toggleFilter}
             >
               <ChevronUpIcon
@@ -221,7 +221,7 @@ export default function Nav() {
               {categories.map(({ name, hoverColor, activeColor }) => (
                 <button
                   key={name}
-                  className={`cursor-pointer uppercase tracking-[-1.2px] custom-cursor border-black border-t border-r`}
+                  className={`cursor-pointer uppercase tracking-[-1.2px] custom-cursor bg-[#B8D0F3] border-black border-t border-r`}
                   onClick={() => handleCategoryClick(name)}
                 >
                   {name.charAt(0).toUpperCase() + name.slice(1)}
