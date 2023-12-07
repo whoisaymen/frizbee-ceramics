@@ -108,13 +108,13 @@ const ProductCard = ({ product }) => {
       exit={{ opacity: 0 }}
       className="group border border-gray-800 -m-[0.5px] relative overflow-hidden"
     >
-      <div
-        key={id}
-        className="group"
-        onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
-        onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
-      >
-        <Link href={`/products/${handle}`} className="custom-cursor relative">
+      <Link href={`/products/${handle}`} className="custom-cursor relative">
+        <div
+          key={id}
+          className="group"
+          onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
+          onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
+        >
           {/* Mobile Product Card */}
           <div className="md:hidden overflow-hidden text-[12px] h-[18rem] text-center flex flex-col justify-end relative">
             <Swiper
@@ -176,8 +176,8 @@ const ProductCard = ({ product }) => {
               </span>
             </div>
           </div>
-        </Link>
-      </div>
+        </div>
+      </Link>
 
       {/* Mobile Quick Buy  */}
       <div className="relative">
