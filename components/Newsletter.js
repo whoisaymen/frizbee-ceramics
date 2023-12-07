@@ -130,8 +130,8 @@ export default function Newsletter() {
                 leaveFrom="translate-x-0 translate-y-0"
                 leaveTo={isMobile ? "translate-y-full" : "translate-x-full"}
               >
-                <div className="w-full border-black lg:border-l border-t border-b rounded-l-lg h-full">
-                  <div className="flex flex-col overflow-y-scroll bg-white rounded-l-lg shadow-xl relative h-auto">
+                <div className="w-full border-black lg:border-l border-t border-b rounded-t-lg lg:rounded-l-lg h-full overflow-hidden lg:rounded-r-none">
+                  <div className="flex flex-col overflow-y-scroll bg-white rounded-t-lg  lg:rounded-l-lg lg:rounded-t-none lg:rounded-r-none shadow-xl relative h-auto">
                     <button
                       type="button"
                       className="p-1 -m-2 text-black hover:text-white outline-none absolute right-2 top-3 z-[10000]"

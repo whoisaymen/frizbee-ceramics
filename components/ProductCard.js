@@ -26,14 +26,14 @@ const ProductCard = ({ product }) => {
   };
 
   // Function to fetch detailed product information
-  const fetchProductDetails = async () => {
-    const detailedInfo = await getProduct(product.node.handle);
-    setDetailedProduct(detailedInfo);
-  };
+  // const fetchProductDetails = async () => {
+  //   const detailedInfo = await getProduct(product.node.handle);
+  //   setDetailedProduct(detailedInfo);
+  // };
 
-  useEffect(() => {
-    fetchProductDetails();
-  });
+  // useEffect(() => {
+  //   fetchProductDetails();
+  // });
 
   // Function to handle adding product to cart
   const handleAddToCart = () => {
@@ -68,6 +68,7 @@ const ProductCard = ({ product }) => {
   };
 
   const { handle, title, id } = product.node;
+  console.log(handle);
   const { altText, url } = product.node.images.edges[0].node;
   const price = product.node.priceRange.minVariantPrice.amount;
   const color =

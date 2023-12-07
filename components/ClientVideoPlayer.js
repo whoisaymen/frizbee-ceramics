@@ -18,11 +18,11 @@ const ClientVideoPlayer = ({ products }) => {
     );
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 1); // delay of 100ms, adjust as needed
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     window.scrollTo(0, 0);
+  //   }, 1); // delay of 100ms, adjust as needed
+  // }, []);
 
   return (
     <>
