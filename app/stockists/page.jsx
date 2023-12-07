@@ -255,7 +255,7 @@ export default function StockistsPage() {
     <div className="bg-white font-extralight tracking-tight text-gray-900 h-full p-10">
       <ScrollToTop />
 
-      <div className="mx-auto max-w-7xl p-1 my-32 z-10 relative">
+      <div className="mx-auto max-w-7xl p-1 my-32 relative">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-20 text-sm lg:text-base">
           {stockistsData.map((stockist, index) => (
             <StockistEntry
