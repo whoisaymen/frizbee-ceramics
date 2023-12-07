@@ -250,24 +250,6 @@ export default function Nav() {
                   </div>
                 </div>
               </Link>
-              {/* <Link
-                href="/"
-                onClick={() => setSortOption("")}
-                className="custom-cursor"
-              >
-                <span className="sr-only">Frizbee Ceramics</span>
-                <div className="inline-block lg:absolute lg:top-6 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 -rotate-6 custom-cursor bg-red-500 mx-auto ">
-                  <Image
-                    src="/images/logo.png"
-                    height={1000}
-                    width={1000}
-                    alt="Frizbee Ceramics logo"
-                    priority
-                    className="object-contain"
-                    style={{ width: "auto", height: "4rem" }}
-                  />
-                </div>
-              </Link> */}
 
               {/* Categories */}
               {!isSpecialPage && (
@@ -421,13 +403,13 @@ export default function Nav() {
                       <Link href="/stockists" className="">
                         Stockists
                       </Link>
-                      <button
+                      {/* <button
                         onClick={toggleProjectsSubmenuMobile}
                         className="text-left uppercase"
                       >
                         Projects
                       </button>
-                      {/* Mobile Menu Projects Submenu */}
+
                       {isProjectsSubmenuOpen && (
                         <ul className="pl-4 list-nonemy-0 py-0">
                           {projects.map((project) => (
@@ -443,7 +425,7 @@ export default function Nav() {
                             </li>
                           ))}
                         </ul>
-                      )}
+                      )} */}
                       <Link href="/about" className="">
                         About
                       </Link>
