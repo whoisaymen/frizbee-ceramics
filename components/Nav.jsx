@@ -26,9 +26,9 @@ export default function Nav() {
   // CSS styles for filter container
   const filterContainerStyle = {
     position: "fixed",
-    top: "5rem",
+    top: "0.5rem",
     left: isFilterOpen ? "0" : "-100vw",
-    width: "7rem",
+    width: "8rem",
     // height: "100%",
     transition: "left 0.3s ease",
     backgroundColor: "white",
@@ -196,8 +196,8 @@ export default function Nav() {
           ) : (
             <>
               <div
-                className={`lg:hidden fixed flex items-center justify-center top-[5rem] ${
-                  isFilterOpen ? "left-[7rem]" : "left-0"
+                className={`lg:hidden fixed flex items-center justify-center top-[0.5rem] ${
+                  isFilterOpen ? "left-[8rem]" : "left-0"
                 } z-30 h-[2rem] w-[1.5rem] bg-[#6072D3] border-black border border-l-0 cursor-pointer  rounded-r-lg transition-[left] duration-300 ease-in-out`}
                 onClick={toggleFilter}
               >
