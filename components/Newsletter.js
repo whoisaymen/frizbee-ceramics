@@ -119,7 +119,7 @@ export default function Newsletter() {
 
             <div
               className={`fixed right-0 bottom-[24px] lg:bottom-[10%]
-               flex w-full lg:max-w-[calc(40%+1px)] h-[75vh] md:h-auto `}
+               flex w-full lg:max-w-[calc(40%+1px)] h-[50vh] md:h-auto`}
             >
               <Transition.Child
                 as={Fragment}
@@ -130,7 +130,7 @@ export default function Newsletter() {
                 leaveFrom="translate-x-0 translate-y-0"
                 leaveTo={isMobile ? "translate-y-full" : "translate-x-full"}
               >
-                <div className="w-full border-black lg:border-l border-t border-b rounded-l-lg">
+                <div className="w-full border-black lg:border-l border-t border-b rounded-l-lg h-full">
                   <div className="flex flex-col overflow-y-scroll bg-white rounded-l-lg shadow-xl relative h-auto">
                     <button
                       type="button"
@@ -148,7 +148,7 @@ export default function Newsletter() {
                     </div> */}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 mt-0 -m-[1px]">
-                      <div className="relative lg:border-r border-black md:w-full">
+                      <div className="relative lg:border-r border-black md:w-full h-[200px] md:h-auto">
                         <Image
                           src={"/images/newsletter2.jpeg"}
                           alt={""}
