@@ -21,7 +21,7 @@ export default function ContactPage() {
           <div className="mt-20 flex flex-col lg:flex-row justify-center lg:items-center w-full mx-10 lg:mx-48 text-xs">
             {/* Contact Information */}
             <div className="space-y-4 w-1/2">
-              <span className="bg-[#E42220] text-[#fff] mb-6 inline-block font-normal tracking-tight px-1 py-[2px] text-sm">
+              <span className="bg-[#E42220] text-[#fff] mb-0 inline-block font-normal tracking-tight px-1 py-[2px] text-sm">
                 TO SAY HI
               </span>
               <p>
@@ -63,11 +63,11 @@ export default function ContactPage() {
             </div>
 
             {/* Social Links */}
-            <div className="flex flex-col space-y-2 self-start w-1/2">
-              <span className="bg-[#E42220] text-[#fff] self-start mb-6 inline-block font-normal tracking-tight px-1 py-[2px] lg:mt-0 mt-1 text-sm">
+            <div className="flex flex-col space-y-4 self-start w-1/2">
+              <span className="bg-[#E42220] text-[#fff] self-start mb-0 inline-block font-normal tracking-tight px-1 py-[2px] lg:mt-0 text-sm mt-8">
                 TO FOLLOW US
               </span>
-              <div className="flex flex-col items-start space-y-4">
+              <div className="flex flex-col items-start space-y-2">
                 <Link
                   href="https://www.instagram.com"
                   className="uppercase border-b border-gray-700 tracking-tighter mr-6"
