@@ -429,9 +429,6 @@ export default function Nav() {
 
                   <div className="flex pb-40 px-4 sm:px-6 h-full">
                     <nav className="flex flex-col tracking-tighter uppercase text-sm justify-center space-y-2 mt-[60px]">
-                      <Link href="/about" className="">
-                        About
-                      </Link>
                       <Link href="/stockists" className="">
                         Stockists
                       </Link>
@@ -458,13 +455,13 @@ export default function Nav() {
                           ))}
                         </ul>
                       )}
-                      <Link href="/newsletter" className="">
-                        Newsletter
+                      <Link href="/about" className="">
+                        About
                       </Link>
                       <Link href="/terms-and-conditions" className="">
                         Terms & Conditions
                       </Link>
-                      <Link href="/about" className="">
+                      <Link href="/contact" className="">
                         Contact
                       </Link>
                       {/* Add more links as needed */}
