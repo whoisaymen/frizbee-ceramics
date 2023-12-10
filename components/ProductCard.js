@@ -197,10 +197,10 @@ const ProductCard = ({ product }) => {
         </button>
       </div>
 
-      {/* Desktop Quick Buy */}
+      {/* Desktop Quick Buy REWORK */}
       <button
         style={buttonStyle}
-        className="hidden md:block md:absolute right-8 -bottom-1   translate-y-full text-sm tracking-tighter font-light group-hover:translate-y-0 bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase"
+        className="hidden md:block md:absolute right-8 -bottom-1 translate-y-full text-sm tracking-tighter font-light group-hover:translate-y-0 bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase"
         onClick={handleAddToCart}
       >
         Add to Cart
