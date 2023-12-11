@@ -40,15 +40,16 @@ export default function ProductForm({ product }) {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
 
+  const { addToCart } = useContext(CartContext);
+
   const handleAddToCart = () => {
     const itemToAdd = {
       ...selectedVariant,
       variantQuantity: quantity, // Use the local quantity state
     };
+    console.log(itemToAdd, "ITEM TO SEND");
     addToCart(itemToAdd);
   };
-
-  const { addToCart } = useContext(CartContext);
 
   const allVariantOptions = product.variants.edges?.map((variant) => {
     const allOptions = {};

@@ -10,7 +10,8 @@ import { getProduct } from "@/lib/shopify";
 
 import { formatter } from "../utils/helpers";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, index }) => {
+  console.log(product, index);
   const [detailedProduct, setDetailedProduct] = useState(null);
   const { addToCart } = useContext(CartContext);
 
@@ -26,33 +27,55 @@ const ProductCard = ({ product }) => {
   };
 
   // Function to fetch detailed product information
-  const fetchProductDetails = async () => {
-    const detailedInfo = await getProduct(product.node.handle);
-    setDetailedProduct(detailedInfo);
-  };
+  // const fetchProductDetails = async () => {
+  //   const detailedInfo = await getProduct(product.node.handle);
+  //   setDetailedProduct(detailedInfo);
+  // };
 
-  useEffect(() => {
-    fetchProductDetails();
-  });
+  // useEffect(() => {
+  //   fetchProductDetails();
+  // });
 
   // Function to handle adding product to cart
   const handleAddToCart = () => {
-    if (!detailedProduct) return; // Ensure detailed product data is available
+    // console.log(product.node.variants.edges[0]?.node);
+    const defaultVariant = product.node.variants.edges[0]?.node;
+    console.log(defaultVariant);
 
-    const defaultVariant = detailedProduct.variants.edges[0].node;
+    const allOptions = {};
+    defaultVariant.selectedOptions.map((item) => {
+      allOptions[item.name] = item.value;
+    });
+
     const itemToAdd = {
       id: defaultVariant.id,
-      title: detailedProduct.title,
-      handle: detailedProduct.handle,
-      image: detailedProduct.images.edges[0]?.node.url,
+      title: product.node.title,
+      handle: product.node.handle,
+      image: product.node.images.edges[0]?.node.url,
       variantTitle: defaultVariant.title,
       variantPrice: defaultVariant.priceV2.amount,
       variantQuantity: 1,
-      options: defaultVariant.selectedOptions.reduce((options, option) => {
-        options[option.name] = option.value;
-        return options;
-      }, {}),
+      options: allOptions,
     };
+
+    console.log(itemToAdd, "ITEM TO SEND");
+    if (!itemToAdd) return; // Ensure detailed product data is available
+
+    // console.log(product);
+    // const defaultVariant = detailedProduct.variants.edges[0].node;
+    // const itemToAdd = {
+    //   id: defaultVariant.id,
+    //   title: detailedProduct.title,
+    //   handle: detailedProduct.handle,
+    //   image: detailedProduct.images.edges[0]?.node.url,
+    //   variantTitle: defaultVariant.title,
+    //   variantPrice: defaultVariant.priceV2.amount,
+    //   variantQuantity: 1,
+    //   options: defaultVariant.selectedOptions.reduce((options, option) => {
+    //     options[option.name] = option.value;
+    //     return options;
+    //   }, {}),
+    // };
 
     addToCart(itemToAdd);
   };
@@ -64,11 +87,9 @@ const ProductCard = ({ product }) => {
 
   const buttonStyle = {
     transition: "transform 0.5s ease-in-out",
-    // backgroundColor: colorValue,
   };
 
   const { handle, title, id } = product.node;
-  // console.log(handle);
   const { altText, url } = product.node.images.edges[0].node;
   const price = product.node.priceRange.minVariantPrice.amount;
   const color =
@@ -93,7 +114,6 @@ const ProductCard = ({ product }) => {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            // mixBlendMode: "multiply",
           }}
         />
       </SwiperSlide>
@@ -106,14 +126,21 @@ const ProductCard = ({ product }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="group border border-gray-800 -m-[0.5px] relative overflow-hidden"
+      // className="group border border-gray-800 -m-[0.5px] relative overflow-hidden"
+      className={`group border-gray-800 border-b relative overflow-hidden ${
+        index % 2 === 0 ? "border-r" : ""
+      } ${(index + 1) % 3 !== 0 ? "md:border-r" : "md:border-r-0"} ${
+        (index + 1) % 4 !== 0 ? "lg:border-r" : "lg:border-r-0"
+      } ${(index + 1) % 5 !== 0 ? "xl:border-r" : "xl:border-r-0"} ${
+        (index + 1) % 6 !== 0 ? "2xl:border-r" : "2xl:border-r-0"
+      }`}
     >
       <Link href={`/products/${handle}`} className="custom-cursor relative">
         <div
           key={id}
           className="group"
-          onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
-          onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
+          // onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
+          // onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
         >
           {/* Mobile Product Card */}
           <div className="md:hidden overflow-hidden text-[12px] h-[18rem] text-center flex flex-col justify-end relative">
@@ -184,7 +211,7 @@ const ProductCard = ({ product }) => {
         {/* <span className="bg-[#eee]/30 blur-xl absolute right-0 bottom-0 h-8 w-8 z-[8] md:hidden"></span> */}
         <button
           style={buttonStyle}
-          className=" md:hidden absolute right-0 bottom-0 text-sm tracking-tighter font-light   h-10 w-10 border-black uppercase flex items-center justify-center z-[8] "
+          className=" md:hidden absolute right-0 bottom-0 text-sm tracking-tighter font-light h-10 w-10 border-black uppercase flex items-center justify-center z-[8] "
           onClick={handleAddToCart}
         >
           <Image

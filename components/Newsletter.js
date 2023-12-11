@@ -119,7 +119,7 @@ export default function Newsletter() {
 
             <div
               className={`fixed right-0 bottom-[24px] lg:bottom-[10%]
-               flex w-full lg:max-w-[calc(40%+1px)] h-[50vh] md:h-auto`}
+               flex w-full lg:max-w-[calc(40%+1px)] h-auto`}
             >
               <Transition.Child
                 as={Fragment}
@@ -148,7 +148,7 @@ export default function Newsletter() {
                     </div> */}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 mt-0 -m-[1px]">
-                      <div className="relative lg:border-r border-black md:w-full h-[200px] md:h-auto">
+                      <div className="relative lg:border-r border-black md:w-full h-[300px] md:h-auto">
                         <Image
                           src={"/images/newsletter2.jpeg"}
                           alt={""}
@@ -180,9 +180,8 @@ export default function Newsletter() {
                               <h3 className="tracking-tighter font-extralight uppercase m-2 text-lg">
                                 Newsletter
                               </h3>
-                              <p className="text-sm font-extralight tracking-tighter leading-snug p-2 pt-0 -mt-1 ">
-                                Sign up for our newsletter and take 10% off your
-                                first Ceramics purchase.
+                              <p className="text-sm font-extralight tracking-tighter leading-snug p-2 pt-0 -mt-1 mb-6 md:mb-0">
+                                Sign up for our newsletter here.
                               </p>
                             </div>
 

@@ -17,7 +17,11 @@ const ProductList = ({ products }) => {
         <AnimatePresence>
           <motion.div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 -mt-3">
             {sortedProducts.map((product, index) => (
-              <ProductCard key={product.node.id} product={product} />
+              <ProductCard
+                key={product.node.id}
+                product={product}
+                index={index}
+              />
             ))}
           </motion.div>
         </AnimatePresence>
