@@ -195,6 +195,7 @@ export default function MiniCart({ cart }) {
                                         >
                                           <Image
                                             src="/images/removeIcon.svg"
+                                            priority
                                             alt="Remove"
                                             className="h-4 w-4"
                                             width={10}
