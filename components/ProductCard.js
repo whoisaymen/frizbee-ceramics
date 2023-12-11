@@ -26,22 +26,8 @@ const ProductCard = ({ product, index }) => {
     roses: "#942B50",
   };
 
-  // Function to fetch detailed product information
-  // const fetchProductDetails = async () => {
-  //   const detailedInfo = await getProduct(product.node.handle);
-  //   setDetailedProduct(detailedInfo);
-  // };
-
-  // useEffect(() => {
-  //   fetchProductDetails();
-  // });
-
-  // Function to handle adding product to cart
   const handleAddToCart = () => {
-    // console.log(product.node.variants.edges[0]?.node);
     const defaultVariant = product.node.variants.edges[0]?.node;
-    console.log(defaultVariant);
-
     const allOptions = {};
     defaultVariant.selectedOptions.map((item) => {
       allOptions[item.name] = item.value;
@@ -109,7 +95,6 @@ const ProductCard = ({ product, index }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      // className="group border border-gray-800 -m-[0.5px] relative overflow-hidden"
       className={`group border-gray-800 border-b relative overflow-hidden ${
         index % 2 === 0 ? "border-r" : ""
       } ${(index + 1) % 3 !== 0 ? "md:border-r" : "md:border-r-0"} ${
@@ -153,7 +138,7 @@ const ProductCard = ({ product, index }) => {
               <span className="z-[7] tracking-tighter text-left font-bold w-full leading-none">
                 {/* {title.split("-")[0]} */}
                 {title}
-                {/* {title.split(" ")[0]} */}
+                {/* {title.split(" ")[0]}  */}
                 {/* <br />
               <span className="font-normal inline-block text-black/70 capitalize italic py-0">
                 {title.split(" ")[0]}
