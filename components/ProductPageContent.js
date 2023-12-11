@@ -3,11 +3,19 @@ import Image from "next/image";
 import ProductForm from "./ProductForm";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { useRef } from "react";
+import { useState, useEffect } from "react";
 
 export default function ProductPageContent({ product }) {
   const images = [];
   const imagesSwiper = [];
+
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    setHeight(window.innerHeight);
+  }, []);
+
+  console.log(height);
 
   product.images.edges.map((image, i) => {
     imagesSwiper.push(
@@ -52,7 +60,10 @@ export default function ProductPageContent({ product }) {
   return (
     <div className="mx-auto">
       <div className="flex flex-row items-stretch w-full">
-        <div className="w-full h-[calc(100vh-30px)]">
+        <div
+          className={`w-full`}
+          style={{ height: `calc(${height}px - 24px)` }}
+        >
           <Swiper
             // ref={swiperRef}
             style={{
