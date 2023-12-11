@@ -11,7 +11,7 @@ import { getProduct } from "@/lib/shopify";
 import { formatter } from "../utils/helpers";
 
 const ProductCard = ({ product, index }) => {
-  console.log(product, index);
+  // console.log(product, index);
   const [detailedProduct, setDetailedProduct] = useState(null);
   const { addToCart } = useContext(CartContext);
 
@@ -58,27 +58,10 @@ const ProductCard = ({ product, index }) => {
       options: allOptions,
     };
 
-    console.log(itemToAdd, "ITEM TO SEND");
-    if (!itemToAdd) return; // Ensure detailed product data is available
-
-    // console.log(product);
-    // const defaultVariant = detailedProduct.variants.edges[0].node;
-    // const itemToAdd = {
-    //   id: defaultVariant.id,
-    //   title: detailedProduct.title,
-    //   handle: detailedProduct.handle,
-    //   image: detailedProduct.images.edges[0]?.node.url,
-    //   variantTitle: defaultVariant.title,
-    //   variantPrice: defaultVariant.priceV2.amount,
-    //   variantQuantity: 1,
-    //   options: defaultVariant.selectedOptions.reduce((options, option) => {
-    //     options[option.name] = option.value;
-    //     return options;
-    //   }, {}),
-    // };
-
+    if (!itemToAdd) return;
     addToCart(itemToAdd);
   };
+
   const imageStyle = {
     maxWidth: "100%",
     height: "100%",
@@ -139,8 +122,8 @@ const ProductCard = ({ product, index }) => {
         <div
           key={id}
           className="group"
-          // onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
-          // onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
+          onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
+          onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
         >
           {/* Mobile Product Card */}
           <div className="md:hidden overflow-hidden text-[12px] h-[18rem] text-center flex flex-col justify-end relative">
