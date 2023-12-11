@@ -15,8 +15,6 @@ export default function ProductPageContent({ product }) {
     setHeight(window.innerHeight);
   }, []);
 
-  console.log(height);
-
   product.images.edges.map((image, i) => {
     imagesSwiper.push(
       <SwiperSlide key={`slide-${i}`} style={{ width: "100%", height: "100%" }}>

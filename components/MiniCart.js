@@ -177,7 +177,7 @@ export default function MiniCart({ cart }) {
                                           {product.variantQuantity}
                                         </span>
                                         <button
-                                          className="px-3 text-xl font-extralight h-full"
+                                          className="px-3 text-xl font-extralight h-full border-black border-r"
                                           onClick={() =>
                                             incrementCartItem(product)
                                           }
@@ -190,13 +190,13 @@ export default function MiniCart({ cart }) {
                                             removeCartItem(product.id)
                                           }
                                           type="button"
-                                          className="border-black border-l tracking-tighter px-2 py-1 flex items-center h-full"
+                                          className="tracking-tighter px-2 py-1 flex items-center"
                                           disabled={cartLoading}
                                         >
                                           <Image
                                             src="/images/removeIcon.svg"
                                             alt="Remove"
-                                            className="object-cover"
+                                            className="h-4 w-4"
                                             width={10}
                                             height={10}
                                           />

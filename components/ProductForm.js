@@ -20,7 +20,6 @@ const fetchInventory = (url, id) =>
     .then((res) => res.data);
 
 export default function ProductForm({ product }) {
-  console.log(product);
   const { data: productInventory } = useSWR(
     `/api/available/${product.handle}`,
     (url, id) => fetchInventory(url, id),
@@ -47,7 +46,7 @@ export default function ProductForm({ product }) {
       ...selectedVariant,
       variantQuantity: quantity, // Use the local quantity state
     };
-    console.log(itemToAdd, "ITEM TO SEND");
+
     addToCart(itemToAdd);
   };
 
@@ -129,8 +128,8 @@ export default function ProductForm({ product }) {
           </div>
         </div>
         <div className="pt-3 pb-4 md:pb-8 px-4 lg:h-auto text-xs md:text-base">
-          <div className="hidden md:block">
-            {/* <Disclosure defaultOpen>
+          {/* <div className="hidden md:block"> */}
+          {/* <Disclosure defaultOpen>
               {({ open }) => (
                 <>
                   <Disclosure.Button className="flex w-full justify-between rounded-lg py-2 text-left text-sm font-normal tracking-tighter text-black focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
@@ -141,14 +140,18 @@ export default function ProductForm({ product }) {
                       } h-5 w-5 text-black`}
                     />
                   </Disclosure.Button> */}
-            <p className="text-xs md:text-sm font-extralight lg:text-md tracking-tighter mb-6 leading-snug md:leading-normal">
-              {product.description}
-            </p>
-            {/* </>
+          {/* {product.descriptionHtml ? (
+              <div
+                className="text-xs md:text-sm font-extralight lg:text-md tracking-tighter mb-6 leading-snug md:leading-normal"
+                dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+              ></div>
+            ) : null} */}
+
+          {/* </>
               )}
             </Disclosure> */}
-          </div>
-          <div className="md:hidden">
+          {/* </div> */}
+          <div className="">
             <Disclosure>
               {({ open }) => (
                 <>
@@ -160,9 +163,15 @@ export default function ProductForm({ product }) {
                       } h-5 w-5 text-black`}
                     />
                   </Disclosure.Button>
-                  <Disclosure.Panel className="text-xs md:text-sm font-extralight lg:text-md tracking-tighter mb-6 leading-snug md:leading-normal">
-                    {product.description}
-                  </Disclosure.Panel>
+
+                  {product.descriptionHtml ? (
+                    <Disclosure.Panel
+                      className="text-xs md:text-sm font-extralight lg:text-md tracking-tighter mb-4 leading-snug md:leading-normal border-t-[0.5px] border-gray-300 pt-2"
+                      dangerouslySetInnerHTML={{
+                        __html: product.descriptionHtml,
+                      }}
+                    ></Disclosure.Panel>
+                  ) : null}
                 </>
               )}
             </Disclosure>
@@ -194,8 +203,7 @@ export default function ProductForm({ product }) {
             >
               {available ? (
                 <>
-                  <span className="hidden md:inline-block">Add To Cart</span>
-                  <span className="md:hidden">Add to cart</span>
+                  <span>Add To Cart</span>
                 </>
               ) : (
                 <span className="cursor-not-allowed">Sold out</span>
