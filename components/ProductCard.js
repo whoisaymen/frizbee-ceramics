@@ -11,8 +11,7 @@ import { getProduct } from "@/lib/shopify";
 import { formatter } from "../utils/helpers";
 
 const ProductCard = ({ product, index }) => {
-  // console.log(product, index);
-  const [detailedProduct, setDetailedProduct] = useState(null);
+  console.log(product);
   const { addToCart } = useContext(CartContext);
 
   const colorTag = product.node.tags.find((tag) => tag.startsWith("color:"));
@@ -177,28 +176,36 @@ const ProductCard = ({ product, index }) => {
       {/* Mobile Quick Buy  */}
       <div className="relative">
         {/* <span className="bg-[#eee]/30 blur-xl absolute right-0 bottom-0 h-8 w-8 z-[8] md:hidden"></span> */}
-        <button
-          style={buttonStyle}
-          className=" md:hidden absolute right-0 bottom-0 text-sm tracking-tighter font-light h-10 w-10 border-black uppercase flex items-center justify-center z-[8] "
-          onClick={handleAddToCart}
-        >
-          <Image
-            src="/images/cartIcon.svg"
-            alt="Filter"
-            className="object-cover"
-            width={16}
-            height={16}
-          />
-        </button>
+        {product.node.availableForSale ? (
+          <button
+            style={buttonStyle}
+            className=" md:hidden absolute right-0 bottom-0 text-sm tracking-tighter font-light h-10 w-10 border-black uppercase flex items-center justify-center z-[8]"
+            onClick={handleAddToCart}
+            disabled={!product.node.availableForSale}
+          >
+            <Image
+              src="/images/cartIcon.svg"
+              alt="Filter"
+              className="object-cover"
+              width={16}
+              height={16}
+            />
+          </button>
+        ) : (
+          ""
+        )}
       </div>
 
       {/* Desktop Quick Buy REWORK */}
       <button
         style={buttonStyle}
-        className="hidden md:block md:absolute right-8 -bottom-1 translate-y-full text-sm tracking-tighter font-light group-hover:translate-y-0 bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase"
+        className={`hidden md:block md:absolute right-8 -bottom-1 translate-y-full text-sm tracking-tighter font-light group-hover:translate-y-0 bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase ${
+          !product.node.availableForSale ? "bg-red-400" : ""
+        }`}
         onClick={handleAddToCart}
+        disabled={!product.node.availableForSale}
       >
-        Add to Cart
+        {product.node.availableForSale ? "Add to Cart" : "Sold Out"}
       </button>
     </motion.div>
   );

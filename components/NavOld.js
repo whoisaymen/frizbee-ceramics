@@ -244,7 +244,8 @@ export default function Nav() {
 
               {/* Mobile Menu */}
               <div
-                className="text-sm lg:hidden w-full m-0 p-0 text-center bg-white-500 fixed top-4 flex justify-between"
+                className="text-
+                sm lg:hidden w-full m-0 p-0 text-center bg-white-500 fixed top-4 flex justify-between"
                 // style={{ backgroundImage: "url(/images/clouds.jpeg)" }}
               >
                 <div className="-rotate-3 self-center">
