@@ -70,8 +70,8 @@ export default function Newsletter() {
   return (
     <>
       <button
-        className={`flex lg:hidden text-sm font-light tracking-wide fixed left-[10px] z-[9] px-3 py-1 text-black transition-[bottom] duration-500 ease-in-out rounded-t-lg rounded-b-none border-black border bg-[#FFA500] ${
-          newsletterOpen ? "bottom-[calc(60vh+23px)]" : "bottom-[24px]"
+        className={`flex lg:hidden text-sm font-light tracking-wide fixed left-[10px] z-[9] px-3 py-1 text-black transition-[bottom] duration-500 ease-in-out rounded-t-lg rounded-b-none border-black border bg-[#FFA500] bottom-[24px] md:bottom-[28px] ${
+          newsletterOpen ? "bottom-[calc(60vh-700px)]" : ""
         }`}
         onClick={() => setNewsletterOpen(!newsletterOpen)}
       >
@@ -130,8 +130,8 @@ export default function Newsletter() {
                 leaveFrom="translate-x-0 translate-y-0"
                 leaveTo={isMobile ? "translate-y-full" : "translate-x-full"}
               >
-                <div className="w-full border-black lg:border-l border-t border-b rounded-t-none lg:rounded-l-lg lg:overflow-hidden lg:rounded-r-none h-[60vh]">
-                  <div className="flex flex-col justify-end overflow-y-scroll bg-white lg:rounded-t-lg lg:rounded-l-lg lg:rounded-r-none shadow-xl relative h-full">
+                <div className="w-full border-black lg:border-l border-t border-b rounded-t-none lg:rounded-l-lg lg:overflow-hidden lg:rounded-r-none h-auto">
+                  <div className="flex flex-col justify-stretch overflow-y-scroll bg-white lg:rounded-t-lg lg:rounded-l-lg lg:rounded-r-none shadow-xl relative h-full">
                     <button
                       type="button"
                       className="p-1 -m-2 text-black hover:text-white outline-none absolute right-2 top-3 z-[10000]"
@@ -141,14 +141,13 @@ export default function Newsletter() {
                       <XMarkIcon className="w-6 h-6" aria-hidden="true" />
                     </button>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 mt-0 -m-[1px]">
-                      <div className="relative lg:border-r border-black md:w-full h-[300px] md:h-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 mt-0 -m-[1px] relative">
+                      <div className="relative lg:border-r border-black w-full min-h-[300px] max-h-[800px]">
                         <Image
                           src={"/images/newsletter2.jpeg"}
-                          alt={""}
-                          className="object-cover h-full"
-                          width={1000}
-                          height={1000}
+                          alt={"Newsletter image"}
+                          layout="fill"
+                          className="relative h-full w-full object-cover"
                         />
                       </div>
                       <div className="flex flex-col justify-between lg:mb-0">
