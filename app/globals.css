@@ -26,6 +26,18 @@ body {
   /* cursor: none; */
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.animate-carousel {
+  animation: marquee 60s linear infinite;
+}
+
 .letstry::after {
   content: "";
   position: absolute;

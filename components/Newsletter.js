@@ -70,9 +70,9 @@ export default function Newsletter() {
   return (
     <>
       <button
-        className={`flex lg:hidden text-sm font-light tracking-wide fixed left-[10px] bottom-[24px] z-[9] px-3 py-1 text-black transition-[bottom] duration-500 ease-in-out rounded-t-lg rounded-b-none border-black border bg-[#FFA500] ${
-          newsletterOpen ? "bottom-[75vh]" : "bottom-[24px]"
-        }}`}
+        className={`flex lg:hidden text-sm font-light tracking-wide fixed left-[10px] z-[9] px-3 py-1 text-black transition-[bottom] duration-500 ease-in-out rounded-t-lg rounded-b-none border-black border bg-[#FFA500] ${
+          newsletterOpen ? "bottom-[calc(60vh+23px)]" : "bottom-[24px]"
+        }`}
         onClick={() => setNewsletterOpen(!newsletterOpen)}
       >
         NEWS
@@ -119,7 +119,7 @@ export default function Newsletter() {
 
             <div
               className={`fixed right-0 bottom-[24px] lg:bottom-[10%]
-               flex w-full lg:max-w-[calc(40%+1px)] h-auto`}
+   w-full lg:max-w-[calc(40%+1px)] lg:h-auto`}
             >
               <Transition.Child
                 as={Fragment}
@@ -130,8 +130,8 @@ export default function Newsletter() {
                 leaveFrom="translate-x-0 translate-y-0"
                 leaveTo={isMobile ? "translate-y-full" : "translate-x-full"}
               >
-                <div className="w-full border-black lg:border-l border-t border-b rounded-t-lg lg:rounded-l-lg h-full overflow-hidden lg:rounded-r-none">
-                  <div className="flex flex-col overflow-y-scroll bg-white rounded-t-lg  lg:rounded-l-lg lg:rounded-t-none lg:rounded-r-none shadow-xl relative h-auto">
+                <div className="w-full border-black lg:border-l border-t border-b rounded-t-none lg:rounded-l-lg lg:overflow-hidden lg:rounded-r-none h-[60vh]">
+                  <div className="flex flex-col justify-end overflow-y-scroll bg-white lg:rounded-t-lg lg:rounded-l-lg lg:rounded-r-none shadow-xl relative h-full">
                     <button
                       type="button"
                       className="p-1 -m-2 text-black hover:text-white outline-none absolute right-2 top-3 z-[10000]"
@@ -140,12 +140,6 @@ export default function Newsletter() {
                       <span className="sr-only">Close panel</span>
                       <XMarkIcon className="w-6 h-6" aria-hidden="true" />
                     </button>
-
-                    {/* <div className="flex-1 overflow-y-auto sm:px-0">
-                      <div className="border-black">
-                        <div className="flow-root"></div>
-                      </div>
-                    </div> */}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 mt-0 -m-[1px]">
                       <div className="relative lg:border-r border-black md:w-full h-[300px] md:h-auto">

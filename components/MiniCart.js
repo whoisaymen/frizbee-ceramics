@@ -244,7 +244,9 @@ export default function MiniCart({ cart }) {
                           cartLoading ? "cursor-not-allowed" : ""
                         }`}
                       >
-                        Proceed to payment
+                        {cartQuantity > 0
+                          ? "Proceed to Payment"
+                          : "Continue Shopping"}
                       </a>
                     </div>
                   </div>

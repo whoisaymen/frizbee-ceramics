@@ -11,6 +11,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import MarketingBanner from "./MarketingBanner";
 import MiniCart from "./MiniCart";
 import Newsletter from "./Newsletter";
+
 import { useVideo } from "@/context/VideoContext";
 
 export default function Nav() {
@@ -287,8 +288,8 @@ export default function Nav() {
                   // onClick={() => setIsProjectsVisible(!isProjectsVisible)}
                   className={`cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 ${
                     isStockistsPage
-                      ? "bg-[#FD5381]/90"
-                      : "bg-white/90 hover:bg-[#FD5381]/90" // Different background color if on Projects page
+                      ? "bg-[#efaacd]/90"
+                      : "bg-white/90 hover:bg-[#efaacd]/90" // Different background color if on Projects page
                   }`}
                 >
                   Stockists

@@ -11,7 +11,6 @@ import { getProduct } from "@/lib/shopify";
 import { formatter } from "../utils/helpers";
 
 const ProductCard = ({ product, index }) => {
-  console.log(product);
   const { addToCart } = useContext(CartContext);
 
   const colorTag = product.node.tags.find((tag) => tag.startsWith("color:"));
@@ -199,8 +198,8 @@ const ProductCard = ({ product, index }) => {
       {/* Desktop Quick Buy REWORK */}
       <button
         style={buttonStyle}
-        className={`hidden md:block md:absolute right-8 -bottom-1 translate-y-full text-sm tracking-tighter font-light group-hover:translate-y-0 bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase ${
-          !product.node.availableForSale ? "bg-red-400" : ""
+        className={`hidden md:block md:absolute right-8 -bottom-1 translate-y-full text-sm tracking-tighter font-light group-hover:translate-y-0 bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase cursor- ${
+          !product.node.availableForSale ? "bg-red-400 cursor-not-allowed" : ""
         }`}
         onClick={handleAddToCart}
         disabled={!product.node.availableForSale}

@@ -18,7 +18,6 @@ export async function GET(request, { params }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ query }),
-      cache: "no-store",
     };
 
     try {

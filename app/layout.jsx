@@ -13,6 +13,28 @@ import Nav from "@/components/Nav";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
+  metadataBase: new URL("https://frizbeeceramics.com"),
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-US": "/en-US",
+      "de-DE": "/de-DE",
+    },
+  },
+  keywords: [
+    "Frizbee Ceramics",
+    "handmade pottery",
+    "ceramic art",
+    "artisan ceramics",
+    "Brussels ceramics studio",
+    "custom ceramics",
+    "ceramic mugs",
+    "ceramic plates",
+    "home decor",
+  ].join(", "),
+  openGraph: {
+    images: "/images/og-image.png",
+  },
   title: "Frizbee Ceramics",
   description: "Frizbee Ceramics is an artist-run brand based in Brussels.",
   openGraph: {
@@ -22,7 +44,7 @@ export const metadata = {
     siteName: "Frizbee Ceramics",
     images: [
       {
-        url: "/imaeges/logoSpirale.png",
+        url: "/images/logoSpirale.png",
         width: 800,
         height: 800,
       },
