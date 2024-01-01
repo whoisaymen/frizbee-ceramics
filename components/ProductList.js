@@ -1,12 +1,14 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { Suspense, useContext, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "./ProductCard";
 import { CartContext } from "@/context/shopContext";
+import Loading from "@/app/loading";
 
 const ProductList = ({ products }) => {
   const { sortOption, sortProducts } = useContext(CartContext);
   const sortedProducts = sortProducts(products, sortOption);
+  console.log(sortedProducts, "sortedProducts:");
 
   return (
     <motion.div

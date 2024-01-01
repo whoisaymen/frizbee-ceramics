@@ -1,11 +1,17 @@
-/** @type {import('next').NextConfig} */
+// @ts-check
+import withPlaiceholder from "@plaiceholder/next";
+
+/**
+ * @type {import('next').NextConfig}
+ */
+
 const nextConfig = {
   env: {
     SHOPIFY_STORE_DOMAIN: process.env.SHOPIFY_STORE_DOMAIN,
     SHOPIFY_STOREFRONT_ACCESSTOKEN: process.env.SHOPIFY_STOREFRONT_ACCESSTOKEN,
   },
   images: {
-    domains: ["cdn.shopify.com"],
+    domains: ["cdn.shopify.com", "images.unsplash.com"],
   },
   async headers() {
     return [
@@ -37,4 +43,7 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+// module.exports = nextConfig;
+// export default withPlaiceholder(nextConfig);
+// module.exports = withPlaiceholder(nextConfig);
+export default withPlaiceholder(nextConfig);
