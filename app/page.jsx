@@ -7,5 +7,11 @@ import { getPlaiceholder } from "plaiceholder";
 import { Suspense } from "react";
 
 export default async function Home() {
-  return <div>Hi</div>;
+  return (
+    <>
+      <Suspense fallback={<CardsSkeleton />}>
+        <ProductList />
+      </Suspense>
+    </>
+  );
 }

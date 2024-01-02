@@ -62,14 +62,12 @@ export default function RootLayout({ children }) {
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         ) : null}
-        <VideoProvider>
-          <ShopProvider>
-            <Nav />
-            {/* <Newsletter /> */}
-            {children}
-          </ShopProvider>
-          {/* <Footer /> */}
-        </VideoProvider>
+        <ShopProvider>
+          <Nav />
+          {/* <Newsletter /> */}
+          {children}
+        </ShopProvider>
+        {/* <Footer /> */}
       </body>
     </html>
   );

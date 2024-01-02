@@ -102,117 +102,113 @@ const ProductCard = ({ product, index }) => {
         (index + 1) % 6 !== 0 ? "2xl:border-r" : "2xl:border-r-0"
       }`}
     >
-      <Suspense fallback={<Loading />}>
-        <Link href={`/products/${handle}`} className="custom-cursor relative">
-          <div
-            key={id}
-            className="group"
-            onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
-            onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
-          >
-            {/* Mobile Product Card */}
-            <div className="md:hidden overflow-hidden text-[12px] h-[18rem] text-center flex flex-col justify-end relative">
-              <Swiper
-                className="w-full h-full object-cover object-center"
-                modules={[Pagination]}
-                pagination={{ clickable: true, el: ".swiper-pagination" }}
-                style={{
-                  "--swiper-pagination-color": "#000",
-                  "--swiper-pagination-bullet-inactive-color": "#C8C8C8",
-                  "--swiper-pagination-bullet-inactive-opacity": "1",
-                  "--swiper-pagination-bullet-size": "4px",
-                  "--swiper-pagination-bullet-horizontal-gap": "3px",
-                }}
-              >
-                {prepareSwiperSlides()}
-                <div className="swiper-pagination -mt-4"></div>
-              </Swiper>
+      <Link href={`/products/${handle}`} className="custom-cursor relative">
+        <div
+          key={id}
+          className="group"
+          onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
+          onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
+        >
+          {/* Mobile Product Card */}
+          <div className="md:hidden overflow-hidden text-[12px] h-[18rem] text-center flex flex-col justify-end relative">
+            <Swiper
+              className="w-full h-full object-cover object-center"
+              modules={[Pagination]}
+              pagination={{ clickable: true, el: ".swiper-pagination" }}
+              style={{
+                "--swiper-pagination-color": "#000",
+                "--swiper-pagination-bullet-inactive-color": "#C8C8C8",
+                "--swiper-pagination-bullet-inactive-opacity": "1",
+                "--swiper-pagination-bullet-size": "4px",
+                "--swiper-pagination-bullet-horizontal-gap": "3px",
+              }}
+            >
+              {prepareSwiperSlides()}
+              <div className="swiper-pagination -mt-4"></div>
+            </Swiper>
 
-              <div className="flex justify-between mt-4 absolute left-3 bottom-[3px]">
-                <div
-                  className="w-1/2 blur-2xl absolute left-0 bottom-0 h-6 z-[8]"
-                  style={{
-                    backgroundColor: colorMappings[colorValue] || "#343dfb",
-                  }}
-                ></div>
-                <span className="z-[7] tracking-tighter text-left font-bold w-full leading-none">
-                  {/* {title.split("-")[0]} */}
-                  {title}
-                  {/* {title.split(" ")[0]}  */}
-                  {/* <br />
+            <div className="flex justify-between mt-4 absolute left-3 bottom-[3px]">
+              <div
+                className="w-1/2 blur-2xl absolute left-0 bottom-0 h-6 z-[8]"
+                style={{
+                  backgroundColor: colorMappings[colorValue] || "#343dfb",
+                }}
+              ></div>
+              <span className="z-[7] tracking-tighter text-left font-bold w-full leading-none">
+                {/* {title.split("-")[0]} */}
+                {title}
+                {/* {title.split(" ")[0]}  */}
+                {/* <br />
               <span className="font-normal inline-block text-black/70 capitalize italic py-0">
                 {title.split(" ")[0]}
               </span> */}
-                  <br />
-                  <span className="font-normal mt-[4px] mb-[8px] inline-block">
-                    {formatter.format(price)}
-                  </span>
-                </span>
-              </div>
-            </div>
-
-            {/* Desktop Product Card */}
-            <div className="hidden md:block w-full overflow-hidden md:h-[24rem] bg-gray-100 relative text-sm">
-              <Image
-                src={displayImageUrl}
-                alt={"Test"}
-                width={500}
-                height={500}
-                loading="lazy"
-                className="w-full h-full object-cover object-center"
-                style={imageStyle}
-                // placeholder="blur"
-                // blurDataURL={product.blurDataURL}
-              />
-
-              <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
-                {/* <span>{title.split("-")[0]}</span> */}
-                <span>{title}</span>
-                <span className="font-light -mt-1">
+                <br />
+                <span className="font-normal mt-[4px] mb-[8px] inline-block">
                   {formatter.format(price)}
                 </span>
-              </div>
+              </span>
             </div>
           </div>
-        </Link>
 
-        {/* Mobile Quick Buy  */}
-        <div className="relative">
-          {/* <span className="bg-[#eee]/30 blur-xl absolute right-0 bottom-0 h-8 w-8 z-[8] md:hidden"></span> */}
-          {product.node.availableForSale ? (
-            <button
-              style={buttonStyle}
-              className=" md:hidden absolute right-0 bottom-0 text-sm tracking-tighter font-light h-10 w-10 border-black uppercase flex items-center justify-center z-[8]"
-              onClick={handleAddToCart}
-              disabled={!product.node.availableForSale}
-            >
-              <Image
-                src="/images/cartIcon.svg"
-                alt="Filter"
-                className="object-cover"
-                width={16}
-                height={16}
-              />
-            </button>
-          ) : (
-            ""
-          )}
+          {/* Desktop Product Card */}
+          <div className="hidden md:block w-full overflow-hidden md:h-[24rem] bg-gray-100 relative text-sm">
+            <Image
+              src={displayImageUrl}
+              alt={"Test"}
+              width={500}
+              height={500}
+              loading="lazy"
+              className="w-full h-full object-cover object-center"
+              style={imageStyle}
+              // placeholder="blur"
+              // blurDataURL={product.blurDataURL}
+            />
+
+            <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
+              {/* <span>{title.split("-")[0]}</span> */}
+              <span>{title}</span>
+              <span className="font-light -mt-1">
+                {formatter.format(price)}
+              </span>
+            </div>
+          </div>
         </div>
+      </Link>
 
-        {/* Desktop Quick Buy REWORK */}
-        <button
-          style={buttonStyle}
-          className={`hidden md:block md:absolute right-8 -bottom-1 translate-y-full text-sm tracking-tighter font-light group-hover:translate-y-0 bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase cursor- ${
-            !product.node.availableForSale
-              ? "bg-red-400 cursor-not-allowed"
-              : ""
-          }`}
-          onClick={handleAddToCart}
-          disabled={!product.node.availableForSale}
-        >
-          {product.node.availableForSale ? "Add to Cart" : "Sold Out"}
-        </button>
-      </Suspense>
+      {/* Mobile Quick Buy  */}
+      <div className="relative">
+        {/* <span className="bg-[#eee]/30 blur-xl absolute right-0 bottom-0 h-8 w-8 z-[8] md:hidden"></span> */}
+        {product.node.availableForSale ? (
+          <button
+            style={buttonStyle}
+            className=" md:hidden absolute right-0 bottom-0 text-sm tracking-tighter font-light h-10 w-10 border-black uppercase flex items-center justify-center z-[8]"
+            onClick={handleAddToCart}
+            disabled={!product.node.availableForSale}
+          >
+            <Image
+              src="/images/cartIcon.svg"
+              alt="Filter"
+              className="object-cover"
+              width={16}
+              height={16}
+            />
+          </button>
+        ) : (
+          ""
+        )}
+      </div>
+
+      {/* Desktop Quick Buy REWORK */}
+      <button
+        style={buttonStyle}
+        className={`hidden md:block md:absolute right-8 -bottom-1 translate-y-full text-sm tracking-tighter font-light group-hover:translate-y-0 bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase cursor- ${
+          !product.node.availableForSale ? "bg-red-400 cursor-not-allowed" : ""
+        }`}
+        onClick={handleAddToCart}
+        disabled={!product.node.availableForSale}
+      >
+        {product.node.availableForSale ? "Add to Cart" : "Sold Out"}
+      </button>
     </motion.div>
   );
 };

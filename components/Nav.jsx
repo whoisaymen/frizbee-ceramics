@@ -3,7 +3,7 @@ import { Fragment, useContext, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
-
+import logo from "@/public/images/logo-min.png";
 import { CartContext } from "../context/shopContext";
 import { useRouter, usePathname } from "next/navigation";
 import { Dialog, Transition } from "@headlessui/react";
@@ -238,17 +238,11 @@ export default function Nav() {
                 <span className="sr-only">Frizbee Ceramics</span>
                 <div className="h-16 lg:h-[5.4rem] w-auto">
                   <Image
-                    src="/images/logo.png"
-                    height={1000}
-                    width={1000}
+                    src={logo}
                     alt="Frizbee Ceramics logo"
                     priority
-                    className="object-contain relative z-[2000]"
-                    style={{ width: "100%", height: "100%" }}
+                    className="object-contain relative z-[2000] w-full h-full"
                   />
-                  <div className="absolute top-0 left-1/4 h-16 w-1/2 blur-lg">
-                    test
-                  </div>
                 </div>
               </Link>
 

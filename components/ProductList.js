@@ -1,34 +1,26 @@
-"use client";
-import { Suspense, useContext, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "./ProductCard";
-import { CartContext } from "@/context/shopContext";
-import Loading from "@/app/loading";
+import { getProductsInCollection, getTotalProducts } from "../lib/shopify";
 
-const ProductList = ({ products }) => {
-  const { sortOption, sortProducts } = useContext(CartContext);
-  const sortedProducts = sortProducts(products, sortOption);
-  console.log(sortedProducts, "sortedProducts:");
+const ProductList = async () => {
+  const products = await getProductsInCollection();
 
   return (
-    <motion.div
+    <div
       className="mb-[24px] md:mb-[29px] md:mx-0 -mt-[2px]"
       style={{ backgroundImage: "url(/images/bgHomeGradient.svg)" }}
     >
       <div className="mx-auto">
-        <AnimatePresence>
-          <motion.div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 -mt-3">
-            {sortedProducts.map((product, index) => (
-              <ProductCard
-                key={product.node.id}
-                product={product}
-                index={index}
-              />
-            ))}
-          </motion.div>
-        </AnimatePresence>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 -mt-3">
+          {products.map((product, index) => (
+            <ProductCard
+              key={product.node.id}
+              product={product}
+              index={index}
+            />
+          ))}
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
