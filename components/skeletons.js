@@ -1,9 +1,29 @@
 import Skeleton from "@mui/material/Skeleton";
 
-Skeleton;
 // Loading animation
 const shimmer =
   "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent";
+
+const colors = [
+  "#D6FD53",
+  "#AAAAEF",
+  "#76BC91",
+  "#EFAACD",
+  "#F7D949",
+  "#6072D3",
+  "#B8D0F3",
+  "#F0ED9F",
+  "#C4576C",
+  "#4656C3",
+  "#DDEEC0",
+  "#9AB8E5",
+  "#F0ED9F",
+  "#F1CA78",
+  "#E9EDF4",
+  "#9FC2C9",
+  "#D1EDF1",
+  "#76BC91",
+];
 
 export function CardsSkeleton() {
   const cardCount = 50; // Number of card components to render
@@ -21,15 +41,14 @@ export function CardSkeleton() {
   return <div>Loading...</div>;
 }
 
-function ProductCardSkeleton(index) {
-  const randomColor = getRandomColor();
+function ProductCardSkeleton({ index }) {
+  // const randomColor = getRandomColor();
+  const colorIndex = index % colors.length; // Calculate the color index
+  const bgColor = colors[colorIndex];
   return (
     <>
-      <div className="md:hidden overflow-hidden text-[12px] h-[18rem] text-center">
-        <Skeleton variant="rectangular" width={"50%"} height={200} />
-      </div>
       <div
-        className={`hidden md:block w-full overflow-hidden md:h-[24rem] bg-gray-100 relative text-sm border-b border-gray-800 ${
+        className={`w-full overflow-hidden h-[18rem] md:h-[24rem] bg-gray-100 relative text-sm border-b border-gray-800 ${
           index % 2 === 0 ? "border-r" : ""
         } ${(index + 1) % 3 !== 0 ? "md:border-r" : "md:border-r-0"} ${
           (index + 1) % 4 !== 0 ? "lg:border-r" : "lg:border-r-0"
@@ -41,7 +60,7 @@ function ProductCardSkeleton(index) {
           variant="rectangular"
           width={"100%"}
           height={"100%"}
-          sx={{ bgcolor: randomColor }}
+          sx={{ bgcolor: bgColor }}
         />
       </div>
     </>
