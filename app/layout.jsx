@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Nav from "@/components/Nav";
-// import Newsletter from "@/components/Newsletter";
+import GoogleAnalytics from "@/GoogleAnalytics";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -58,14 +58,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} custom-cursor`}>
-        <VideoProvider>
-          <ShopProvider>
-            <Nav />
-            {/* <Newsletter /> */}
-            {children}
-          </ShopProvider>
-          {/* <Footer /> */}
-        </VideoProvider>
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+          <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+        ) : null}
+        <ShopProvider>
+          <Nav />
+          {children}
+        </ShopProvider>
       </body>
     </html>
   );
