@@ -1,9 +1,11 @@
 import ProductPageContent from "@/components/ProductPageContent";
 import ScrollToTop from "@/components/ScrollToTop";
+import { ProductCardSkeleton } from "@/components/skeletons";
 
 import { getProduct } from "@/lib/shopify";
 import Image from "next/image";
 import { getPlaiceholder } from "plaiceholder";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params, searchParams }, parent) {
   // fetch data
@@ -23,19 +25,15 @@ export default async function ProductPage({ params }) {
   });
 
   const { base64 } = await getPlaiceholder(buffer);
+  const { css } = await getPlaiceholder(buffer);
+  const { color } = await getPlaiceholder(buffer);
+  console.log(base64, css, color);
 
   return (
     <>
-      <ScrollToTop />
-      <div className="relative"></div>
-      {/* <Image
-        src={src}
-        fill
-        alt="image"
-        placeholder="blur"
-        blurDataURL={base64}
-      /> */}
-      <ProductPageContent product={product} blurDataURL={base64} />
+      {/* <Suspense fallback={<ProductCardSkeleton />}> */}
+      <ProductPageContent product={product} blurDataURL={base64} css={css} />
+      {/* </Suspense> */}
     </>
   );
 }

@@ -11,7 +11,7 @@ const nextConfig = {
     SHOPIFY_STOREFRONT_ACCESSTOKEN: process.env.SHOPIFY_STOREFRONT_ACCESSTOKEN,
   },
   images: {
-    domains: ["cdn.shopify.com", "images.unsplash.com"],
+    domains: ["cdn.shopify.com"],
   },
   async headers() {
     return [
@@ -20,6 +20,8 @@ const nextConfig = {
         source: "/api/(.*)",
         // Headers
         headers: [
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+
           // Allow for specific domains to have access or * for all
           {
             key: "Access-Control-Allow-Origin",

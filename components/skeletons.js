@@ -37,11 +37,7 @@ export function CardsSkeleton() {
   );
 }
 
-export function CardSkeleton() {
-  return <div>Loading...</div>;
-}
-
-function ProductCardSkeleton({ index }) {
+export function ProductCardSkeleton({ index }) {
   // const randomColor = getRandomColor();
   const colorIndex = index % colors.length; // Calculate the color index
   const bgColor = colors[colorIndex];

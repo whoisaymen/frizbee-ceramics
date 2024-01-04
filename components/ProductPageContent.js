@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 export default function ProductPageContent({ product, blurDataURL }) {
   const imagesSwiper = [];
   const base64 = blurDataURL;
+  console.log(base64);
   const src = product.images.edges[0].node.url;
 
   const [height, setHeight] = useState(0);

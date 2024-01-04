@@ -9,7 +9,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Nav from "@/components/Nav";
 import GoogleAnalytics from "@/GoogleAnalytics";
-// import Newsletter from "@/components/Newsletter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -64,10 +63,8 @@ export default function RootLayout({ children }) {
         ) : null}
         <ShopProvider>
           <Nav />
-          {/* <Newsletter /> */}
           {children}
         </ShopProvider>
-        {/* <Footer /> */}
       </body>
     </html>
   );

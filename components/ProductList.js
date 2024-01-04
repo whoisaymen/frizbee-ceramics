@@ -1,5 +1,7 @@
 import ProductCard from "./ProductCard";
 import { getProductsInCollection, getTotalProducts } from "../lib/shopify";
+import { getPlaiceholder } from "plaiceholder";
+import { Suspense } from "react";
 
 const ProductList = async () => {
   const products = await getProductsInCollection();

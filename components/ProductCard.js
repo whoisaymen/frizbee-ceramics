@@ -7,23 +7,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import { CartContext } from "../context/shopContext";
 import { getProduct } from "@/lib/shopify";
-// import { getPlaiceholder } from "plaiceholder/next";
-import { formatter } from "../utils/helpers";
-import Loading from "@/app/loading";
+import { formatter, getColorFromTag, colorMappings } from "../utils/helpers";
 
 const ProductCard = ({ product, index }) => {
   const { addToCart } = useContext(CartContext);
-
-  const colorTag = product.node.tags.find((tag) => tag.startsWith("color:"));
-  const colorValue = colorTag ? colorTag.split(":")[1] : null;
-
-  // Color mappings
-  const colorMappings = {
-    acid: "#AECCD7",
-    blue: "#3549A6",
-    green: "#7BB97A",
-    roses: "#942B50",
-  };
+  const colorValue = getColorFromTag(product);
 
   const handleAddToCart = () => {
     const defaultVariant = product.node.variants.edges[0]?.node;
@@ -60,40 +48,41 @@ const ProductCard = ({ product, index }) => {
   const { handle, title, id } = product.node;
   const { altText, url } = product.node.images.edges[0].node;
   const price = product.node.priceRange.minVariantPrice.amount;
-  const color =
-    product.node.tags.find((tag) => tag.startsWith("color:"))?.split(":")[1] ||
-    "";
 
   const imageUrl1 = product.node.images.edges[0].node.url;
   const imageUrl2 = product.node.images.edges[1]?.node.url;
   const [displayImageUrl, setDisplayImageUrl] = useState(imageUrl1);
 
-  const prepareSwiperSlides = () => {
-    return product.node.images.edges.map((image, i) => (
-      <SwiperSlide key={`mobile-slide-${i}`}>
-        <Image
-          src={image.node.url}
-          alt="Product image"
-          width={500}
-          height={500}
-          loading="lazy"
-          className="w-full h-full object-cover object-center"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-      </SwiperSlide>
-    ));
-  };
+  // const prepareSwiperSlides = () => {
+  //   const images = product.node.images.edges;
+
+  //   return images.map((image, i) => (
+  //     <SwiperSlide key={`mobile-slide-${i}`}>
+  //       <Image
+  //         src={image.node.url}
+  //         alt="Product image"
+  //         width={500}
+  //         height={500}
+  //         loading="lazy"
+  //         className="w-full h-full object-cover object-center"
+  //         style={{
+  //           width: "100%",
+  //           height: "100%",
+  //           objectFit: "cover",
+  //         }}
+  //       />
+  //     </SwiperSlide>
+  //   ));
+  // };
+
+  console.log(product.node);
 
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+    <div
+      // layout
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 0 }}
       className={`group border-gray-800 border-b relative overflow-hidden ${
         index % 2 === 0 ? "border-r" : ""
       } ${(index + 1) % 3 !== 0 ? "md:border-r" : "md:border-r-0"} ${
@@ -102,82 +91,43 @@ const ProductCard = ({ product, index }) => {
         (index + 1) % 6 !== 0 ? "2xl:border-r" : "2xl:border-r-0"
       }`}
     >
-      <Link href={`/products/${handle}`} className="custom-cursor relative">
-        <div
-          key={id}
-          className="group"
-          onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
-          onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
-        >
-          {/* Mobile Product Card */}
-          <div className="md:hidden overflow-hidden text-[12px] h-[18rem] text-center flex flex-col justify-end relative">
-            <Swiper
-              className="w-full h-full object-cover object-center"
-              modules={[Pagination]}
-              pagination={{ clickable: true, el: ".swiper-pagination" }}
+      <div className="w-full overflow-hidden text-[0.70rem] md:text-sm h-[18rem] md:h-[24rem] bg-gray-100 relative text-sm text-gray-500">
+        <Link href={`/products/${handle}`} className="custom-cursor">
+          <Image
+            src={displayImageUrl}
+            alt={"Product image"}
+            width={500}
+            height={500}
+            loading="lazy"
+            // priority
+            className="w-full h-full object-cover object-center max-w-full"
+            onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
+            onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
+          />
+
+          <div className="absolute left-3 font-semibold bottom-2 flex flex-col z-[7]">
+            <div
+              className="md:hidden w-1/2 blur-2xl absolute left-0 bottom-0 h-6 z-[8]"
               style={{
-                "--swiper-pagination-color": "#000",
-                "--swiper-pagination-bullet-inactive-color": "#C8C8C8",
-                "--swiper-pagination-bullet-inactive-opacity": "1",
-                "--swiper-pagination-bullet-size": "4px",
-                "--swiper-pagination-bullet-horizontal-gap": "3px",
+                backgroundColor: colorMappings[colorValue] || "#343dfb",
               }}
-            >
-              {prepareSwiperSlides()}
-              <div className="swiper-pagination -mt-4"></div>
-            </Swiper>
-
-            <div className="flex justify-between mt-4 absolute left-3 bottom-[3px]">
-              <div
-                className="w-1/2 blur-2xl absolute left-0 bottom-0 h-6 z-[8]"
-                style={{
-                  backgroundColor: colorMappings[colorValue] || "#343dfb",
-                }}
-              ></div>
-              <span className="z-[7] tracking-tighter text-left font-bold w-full leading-none">
-                {/* {title.split("-")[0]} */}
-                {title}
-                {/* {title.split(" ")[0]}  */}
-                {/* <br />
-              <span className="font-normal inline-block text-black/70 capitalize italic py-0">
-                {title.split(" ")[0]}
-              </span> */}
-                <br />
-                <span className="font-normal mt-[4px] mb-[8px] inline-block">
-                  {formatter.format(price)}
-                </span>
-              </span>
-            </div>
+            ></div>
+            <spa className="tracking-tighter leading-none mb-0 font-light text-[0.80rem] md:text-sm text-gray-800">
+              {title.split("-")[0]}
+            </spa>
+            <spa className="tracking-tighter leading-none mb-1 text-xs font-extralight">
+              {title.split("-")[1]}
+            </spa>
+            <span className="font-light -mt-1">{formatter.format(price)}</span>
           </div>
-
-          {/* Desktop Product Card */}
-          <div className="hidden md:block w-full overflow-hidden md:h-[24rem] bg-gray-100 relative text-sm">
-            <Image
-              src={displayImageUrl}
-              alt={"Test"}
-              width={500}
-              height={500}
-              loading="lazy"
-              className="w-full h-full object-cover object-center"
-              style={imageStyle}
-              // placeholder="blur"
-              // blurDataURL={product.blurDataURL}
-            />
-
-            <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
-              {/* <span>{title.split("-")[0]}</span> */}
-              <span>{title}</span>
-              <span className="font-light -mt-1">
-                {formatter.format(price)}
-              </span>
-            </div>
-          </div>
-        </div>
-      </Link>
+        </Link>
+        {!product.node.availableForSale && (
+          <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-black"></div>
+        )}
+      </div>
 
       {/* Mobile Quick Buy  */}
       <div className="relative">
-        {/* <span className="bg-[#eee]/30 blur-xl absolute right-0 bottom-0 h-8 w-8 z-[8] md:hidden"></span> */}
         {product.node.availableForSale ? (
           <button
             style={buttonStyle}
@@ -189,6 +139,7 @@ const ProductCard = ({ product, index }) => {
               src="/images/cartIcon.svg"
               alt="Filter"
               className="object-cover"
+              priority
               width={16}
               height={16}
             />
@@ -209,7 +160,7 @@ const ProductCard = ({ product, index }) => {
       >
         {product.node.availableForSale ? "Add to Cart" : "Sold Out"}
       </button>
-    </motion.div>
+    </div>
   );
 };
 
