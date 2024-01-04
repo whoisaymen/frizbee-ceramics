@@ -21,7 +21,6 @@ export default function Nav() {
     useContext(CartContext);
 
   const [isProjectsSubmenuOpen, setIsProjectsSubmenuOpen] = useState(false);
-
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // CSS styles for filter container
@@ -168,6 +167,8 @@ export default function Nav() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  console.log("nav");
 
   return (
     <>

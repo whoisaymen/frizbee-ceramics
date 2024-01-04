@@ -8,7 +8,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Nav from "@/components/Nav";
+SideNav;
 import GoogleAnalytics from "@/GoogleAnalytics";
+import SideNav from "@/components/nav/SideNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -62,7 +64,8 @@ export default function RootLayout({ children }) {
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         ) : null}
         <ShopProvider>
-          <Nav />
+          {/* <Nav /> */}
+          <SideNav />
           {children}
         </ShopProvider>
       </body>

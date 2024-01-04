@@ -75,7 +75,7 @@ const ProductCard = ({ product, index }) => {
   //   ));
   // };
 
-  console.log(product.node);
+  // console.log(product.node, "product.node");
 
   return (
     <div
@@ -83,7 +83,7 @@ const ProductCard = ({ product, index }) => {
       // initial={{ opacity: 0 }}
       // animate={{ opacity: 1 }}
       // exit={{ opacity: 0 }}
-      className={`group border-gray-800 border-b relative overflow-hidden ${
+      className={`group border-gray-600 border-b relative overflow-hidden ${
         index % 2 === 0 ? "border-r" : ""
       } ${(index + 1) % 3 !== 0 ? "md:border-r" : "md:border-r-0"} ${
         (index + 1) % 4 !== 0 ? "lg:border-r" : "lg:border-r-0"
@@ -91,7 +91,7 @@ const ProductCard = ({ product, index }) => {
         (index + 1) % 6 !== 0 ? "2xl:border-r" : "2xl:border-r-0"
       }`}
     >
-      <div className="w-full overflow-hidden text-[0.70rem] md:text-sm h-[18rem] md:h-[24rem] bg-gray-100 relative text-sm text-gray-500">
+      <div className="w-full overflow-hidden text-[0.70rem] md:text-sm h-[18rem] md:h-[49vh] bg-gray-100 relative text-sm text-gray-500">
         <Link href={`/products/${handle}`} className="custom-cursor">
           <Image
             src={displayImageUrl}
@@ -105,20 +105,22 @@ const ProductCard = ({ product, index }) => {
             onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
           />
 
-          <div className="absolute left-3 font-semibold bottom-2 flex flex-col z-[7]">
+          <div className="absolute left-4 font-semibold bottom-2 flex flex-col z-[7]">
             <div
               className="md:hidden w-1/2 blur-2xl absolute left-0 bottom-0 h-6 z-[8]"
               style={{
                 backgroundColor: colorMappings[colorValue] || "#343dfb",
               }}
             ></div>
-            <spa className="tracking-tighter leading-none mb-0 font-light text-[0.80rem] md:text-sm text-gray-800">
+            <span className="tracking-tighter leading-none mb-2 font-light text-[0.80rem] md:text-[1rem] text-gray-800">
               {title.split("-")[0]}
-            </spa>
-            <spa className="tracking-tighter leading-none mb-1 text-xs font-extralight">
+            </span>
+            <span className="tracking-tighter leading-none mb-1 text-xs font-extralight">
               {title.split("-")[1]}
-            </spa>
-            <span className="font-light -mt-1">{formatter.format(price)}</span>
+            </span>
+          </div>
+          <div className="absolute right-3 font-semibold bottom-2 flex flex-col z-[7]">
+            <span className="font-light">{formatter.format(price)}</span>
           </div>
         </Link>
         {!product.node.availableForSale && (
@@ -152,7 +154,7 @@ const ProductCard = ({ product, index }) => {
       {/* Desktop Quick Buy REWORK */}
       <button
         style={buttonStyle}
-        className={`hidden md:block md:absolute right-8 -bottom-1 translate-y-full text-sm tracking-tighter font-light group-hover:translate-y-0 bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase cursor- ${
+        className={`hidden md:block md:absolute right-8 -bottom-1 translate-y-full text-sm tracking-tighter font-light group-hover:translate-y-0 bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase z-[8] cursor- ${
           !product.node.availableForSale ? "bg-red-400 cursor-not-allowed" : ""
         }`}
         onClick={handleAddToCart}
