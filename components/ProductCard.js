@@ -8,21 +8,11 @@ import { Pagination } from "swiper/modules";
 import { CartContext } from "../context/shopContext";
 import { getProduct } from "@/lib/shopify";
 
-import { formatter } from "../utils/helpers";
+import { formatter, getColorFromTag, colorMappings } from "../utils/helpers";
 
 const ProductCard = ({ product, index }) => {
   const { addToCart } = useContext(CartContext);
-
-  const colorTag = product.node.tags.find((tag) => tag.startsWith("color:"));
-  const colorValue = colorTag ? colorTag.split(":")[1] : null;
-
-  // Color mappings
-  const colorMappings = {
-    acid: "#AECCD7",
-    blue: "#3549A6",
-    green: "#7BB97A",
-    roses: "#942B50",
-  };
+  const colorValue = getColorFromTag(product);
 
   const handleAddToCart = () => {
     const defaultVariant = product.node.variants.edges[0]?.node;
@@ -153,7 +143,7 @@ const ProductCard = ({ product, index }) => {
           <div className="hidden md:block w-full overflow-hidden md:h-[24rem] bg-gray-100 relative text-sm">
             <Image
               src={displayImageUrl}
-              alt={"Test"}
+              alt={"Product Image"}
               width={500}
               height={500}
               loading="lazy"
@@ -186,6 +176,7 @@ const ProductCard = ({ product, index }) => {
               src="/images/cartIcon.svg"
               alt="Filter"
               className="object-cover"
+              priority
               width={16}
               height={16}
             />
