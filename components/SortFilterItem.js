@@ -1,3 +1,4 @@
+"use client";
 // components/SortFilterItem.js
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";

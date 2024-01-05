@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Nav from "@/components/Nav";
 import GoogleAnalytics from "@/GoogleAnalytics";
+import SortFilterMenu from "@/components/SortFilterItem";
 
 const inter = Inter({ subsets: ["latin"] });
 
