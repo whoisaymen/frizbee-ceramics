@@ -43,9 +43,6 @@ const ProductCard = ({ product, index }) => {
   const { handle, title, id } = product.node;
   const { altText, url } = product.node.images.edges[0].node;
   const price = product.node.priceRange.minVariantPrice.amount;
-  const color =
-    product.node.tags.find((tag) => tag.startsWith("color:"))?.split(":")[1] ||
-    "";
 
   const imageUrl1 = product.node.images.edges[0].node.url;
   const imageUrl2 = product.node.images.edges[1]?.node.url;

@@ -1,10 +1,10 @@
 import ProductCard from "./ProductCard";
 import { getProductsInCollection } from "@/lib/shopify";
 
-const ProductList = async () => {
+const ProductList = async ({ sortOption }) => {
   const products = await getProductsInCollection();
 
-  // const sortedProducts = sortProducts(products, "new");
+  const sortedProducts = sortProducts(products, sortOption);
 
   return (
     <div
@@ -13,7 +13,7 @@ const ProductList = async () => {
     >
       <div className="mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 -mt-3">
-          {products.map((product, index) => (
+          {sortedProducts.map((product, index) => (
             <ProductCard
               key={product.node.id}
               product={product}
@@ -27,6 +27,8 @@ const ProductList = async () => {
 };
 
 function sortProducts(products, option) {
+  if (!option || !products) return products;
+
   if (option === "color") {
     return [...products].sort((a, b) => {
       const colorA =

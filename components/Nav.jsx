@@ -3,7 +3,7 @@ import { Fragment, useContext, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
-
+import logo from "@/public/images/logo-min.png";
 import { CartContext } from "../context/shopContext";
 import { useRouter, usePathname } from "next/navigation";
 import { Dialog, Transition } from "@headlessui/react";
@@ -11,8 +11,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import MarketingBanner from "./MarketingBanner";
 import MiniCart from "./MiniCart";
 import Newsletter from "./Newsletter";
-
-import { useVideo } from "@/context/VideoContext";
+import SortFilterMenu from "./SortFilterItem";
 
 export default function Nav() {
   const router = useRouter();
@@ -21,7 +20,6 @@ export default function Nav() {
     useContext(CartContext);
 
   const [isProjectsSubmenuOpen, setIsProjectsSubmenuOpen] = useState(false);
-
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // CSS styles for filter container
@@ -169,6 +167,8 @@ export default function Nav() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  console.log("nav");
+
   return (
     <>
       <div className="fixed top-0 left-0 right-0 z-10 font-light tracking-tight uppercase mx-auto lg:mt-4">
@@ -238,24 +238,18 @@ export default function Nav() {
                 <span className="sr-only">Frizbee Ceramics</span>
                 <div className="h-16 lg:h-[5.4rem] w-auto">
                   <Image
-                    src="/images/logo.png"
-                    height={1000}
-                    width={1000}
+                    src={logo}
                     alt="Frizbee Ceramics logo"
                     priority
-                    className="object-contain relative z-[2000]"
-                    style={{ width: "100%", height: "100%" }}
+                    className="object-contain relative z-[2000] w-full h-full"
                   />
-                  <div className="absolute top-0 left-1/4 h-16 w-1/2 blur-lg">
-                    test
-                  </div>
                 </div>
               </Link>
-
+              <SortFilterMenu />
               {/* Categories */}
               {!isSpecialPage && (
                 <div className="hidden lg:flex py-[2px] relative">
-                  {categories.map(({ name, hoverColor, activeColor }) => (
+                  {/* {categories.map(({ name, hoverColor, activeColor }) => (
                     <button
                       key={name}
                       className={`cursor-pointer uppercase px-4 tracking-[-1.2px] ml-4 custom-cursor border-black border-[1px] hover:-rotate-3 ${
@@ -267,7 +261,7 @@ export default function Nav() {
                     >
                       {name.charAt(0).toUpperCase() + name.slice(1)}
                     </button>
-                  ))}
+                  ))} */}
                 </div>
               )}
 
