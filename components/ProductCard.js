@@ -36,12 +36,6 @@ const ProductCard = ({ product, index }) => {
     addToCart(itemToAdd);
   };
 
-  const imageStyle = {
-    maxWidth: "100%",
-    height: "100%",
-    objectFit: "cover",
-  };
-
   const buttonStyle = {
     transition: "transform 0.5s ease-in-out",
   };
@@ -90,16 +84,16 @@ const ProductCard = ({ product, index }) => {
       } ${(index + 1) % 5 !== 0 ? "xl:border-r" : "xl:border-r-0"} ${
         (index + 1) % 6 !== 0 ? "2xl:border-r" : "2xl:border-r-0"
       }`}
+      key={id}
     >
       <Link href={`/products/${handle}`} className="custom-cursor relative">
         <div
-          key={id}
           className="group"
           onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
           onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
         >
           {/* Mobile Product Card */}
-          <div className="md:hidden overflow-hidden text-[12px] h-[18rem] text-center flex flex-col justify-end relative">
+          <div className="md:hidden overflow-hidden text-[12px] h-[33vh] text-center flex flex-col justify-end relative">
             <Swiper
               className="w-full h-full object-cover object-center"
               modules={[Pagination]}
@@ -147,8 +141,7 @@ const ProductCard = ({ product, index }) => {
               width={500}
               height={500}
               loading="lazy"
-              className="w-full h-full object-cover object-center"
-              style={imageStyle}
+              className="w-full h-full object-cover object-center max-w-full"
             />
 
             <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
