@@ -64,6 +64,7 @@ export default function RootLayout({ children }) {
         ) : null}
         <ShopProvider>
           <Nav />
+          {/* <SortFilterMenu /> */}
           {children}
         </ShopProvider>
       </body>

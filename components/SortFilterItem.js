@@ -7,9 +7,10 @@ import { SORTING_OPTIONS } from "@/lib/constants";
 
 function SortFilterItem({ item }) {
   const pathname = usePathname();
-  const [searchParams] = useSearchParams();
-  const active = searchParams[1] === item.slug;
+  const searchParams = useSearchParams();
+  const active = searchParams.get("sort") === item.slug;
 
+  console.log(searchParams.get("sort"));
   const href = `${pathname}?sort=${item.slug}`;
   const DynamicTag = active ? "p" : Link;
 
