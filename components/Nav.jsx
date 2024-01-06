@@ -11,7 +11,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import MarketingBanner from "./MarketingBanner";
 import MiniCart from "./MiniCart";
 import Newsletter from "./Newsletter";
-import SortFilterMenu from "./SortFilterItem";
+import SortFilterMenu from "./nav/SortFilterMenu";
 
 export default function Nav() {
   const router = useRouter();

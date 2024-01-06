@@ -1,17 +1,12 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
-import ShopProvider from "@/context/shopContext";
-import { VideoProvider } from "@/context/VideoContext";
-import Footer from "@/components/Footer";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import Nav from "@/components/Nav";
+import { inter } from "@/components/ui/fonts";
 import GoogleAnalytics from "@/GoogleAnalytics";
-import SortFilterMenu from "@/components/SortFilterItem";
+import ShopProvider from "@/context/shopContext";
 
-const inter = Inter({ subsets: ["latin"] });
+import Footer from "@/components/Footer";
 
 export const metadata = {
   metadataBase: new URL("https://frizbeeceramics.com"),
@@ -63,9 +58,8 @@ export default function RootLayout({ children }) {
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         ) : null}
         <ShopProvider>
-          <Nav />
-          {/* <SortFilterMenu /> */}
           {children}
+          <Footer />
         </ShopProvider>
       </body>
     </html>

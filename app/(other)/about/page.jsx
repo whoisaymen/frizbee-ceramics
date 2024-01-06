@@ -54,7 +54,7 @@ export default function AboutPage() {
         <ul className="flex animate-carousel gap-0">
           {images.map((image, index) => (
             <li
-              key={image}
+              key={`${image}-${index + 1}`}
               className="relative h-[40vh] max-h-[555px] w-2/3 max-w-[475px] flex-none md:w-1/3"
             >
               <div className="relative h-full w-full">

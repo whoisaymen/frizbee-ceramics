@@ -90,7 +90,7 @@ const ProductCard = ({ product, index }) => {
           onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
         >
           {/* Mobile Product Card */}
-          <div className="md:hidden overflow-hidden text-[12px] h-[33vh] text-center flex flex-col justify-end relative">
+          <div className="md:hidden overflow-hidden text-[12px] h-[40vh] text-center flex flex-col justify-end relative">
             <Swiper
               className="w-full h-full object-cover object-center"
               modules={[Pagination]}

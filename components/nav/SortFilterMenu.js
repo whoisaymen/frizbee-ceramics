@@ -1,5 +1,5 @@
 "use client";
-// components/SortFilterItem.js
+
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import clsx from "clsx";
@@ -11,18 +11,19 @@ function SortFilterItem({ item }) {
   const active = searchParams.get("sort") === item.slug;
 
   console.log(searchParams.get("sort"));
+  console.log(pathname);
   const href = `${pathname}?sort=${item.slug}`;
   const DynamicTag = active ? "p" : Link;
 
   return (
     <li
-      className="mt-2 tracking-[-1.2px] ml-4 custom-cursor text-black dark:text-white border-black border hover:-rotate-3 transition duration-200 ease-out bg-white/90"
+      className="tracking-[-1.2px] ml-4 custom-cursor text-black dark:text-white border-black border hover:-rotate-3 transition duration-200 ease-out bg-white/90 font-light"
       key={item.slug}
     >
       <DynamicTag
         href={href}
         className={clsx("w-full px-4", {
-          "bg-red-200": active,
+          "bg-[#b6ffb9] italic": active,
         })}
       >
         {item.title}
@@ -33,10 +34,12 @@ function SortFilterItem({ item }) {
 
 export default function SortFilterMenu() {
   return (
-    <ul className="flex">
-      {SORTING_OPTIONS.map((option) => (
-        <SortFilterItem key={option.slug} item={option} />
-      ))}
-    </ul>
+    <div className="flex justify-start items-center w-full md:bg-transparent">
+      <ul className="flex">
+        {SORTING_OPTIONS.map((option) => (
+          <SortFilterItem key={option.slug} item={option} />
+        ))}
+      </ul>
+    </div>
   );
 }
