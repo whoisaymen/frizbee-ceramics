@@ -12,6 +12,7 @@ const images = [
   "/images/about/img3.jpg",
   "/images/about/img4.jpg",
 ];
+
 export default function AboutPage() {
   return (
     <div className="bg-white font-extralight tracking-tight min-h-[100vh] flex flex-col justify-between items-center pt-10">
@@ -58,13 +59,13 @@ export default function AboutPage() {
               className="relative h-[40vh] max-h-[555px] w-2/3 max-w-[475px] flex-none md:w-1/3"
             >
               <div className="relative h-full w-full">
-                <div className="group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black">
+                <div className="group flex h-full w-full items-center justify-center overflow-hidden relative border-t border-black border-r">
                   <Image
                     src={image}
                     alt={"Image " + (index + 1)}
-                    layout="fill"
+                    fill
                     sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-                    className="relative h-full w-full object-cover transition duration-300 ease-in-out group-hover:scale-105 border-t border-black border-r"
+                    className="relative h-full w-full object-cover transition duration-300 ease-in-out group-hover:scale-105"
                   />
                 </div>
               </div>

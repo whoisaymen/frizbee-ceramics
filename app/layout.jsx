@@ -2,11 +2,18 @@ import "./globals.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { inter } from "@/components/ui/fonts";
+
 import GoogleAnalytics from "@/GoogleAnalytics";
 import ShopProvider from "@/context/shopContext";
 
 import Footer from "@/components/Footer";
+import { inter } from "@/components/ui/Fonts";
+import Nav from "@/components/nav/Nav";
+import NavLinks from "@/components/nav/NavLinks";
+import Logo from "@/components/nav/Logo";
+import SortFilterMenu from "@/components/nav/SortFilterMenu";
+import NewsletterSimplified from "@/components/NewsletterSimplified";
+import Cart from "@/components/Cart";
 
 export const metadata = {
   metadataBase: new URL("https://frizbeeceramics.com"),
@@ -58,6 +65,13 @@ export default function RootLayout({ children }) {
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         ) : null}
         <ShopProvider>
+          <Nav>
+            <SortFilterMenu />
+            <Logo />
+            <NavLinks />
+          </Nav>
+          <Cart />
+          <NewsletterSimplified />
           {children}
           <Footer />
         </ShopProvider>

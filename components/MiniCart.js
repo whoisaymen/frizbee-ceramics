@@ -6,12 +6,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatter } from "../utils/helpers";
 import { CartContext } from "@/context/shopContext";
-import useHeaderHeight from "@/hooks/useHeaderHeight";
 import { useMediaQuery } from "react-responsive";
 
-export default function MiniCart({ cart }) {
+export default function MiniCart() {
   const cancelButtonRef = useRef();
   const {
+    cart,
     cartOpen,
     setCartOpen,
     checkoutUrl,
@@ -37,7 +37,7 @@ export default function MiniCart({ cart }) {
   return (
     <>
       <button
-        className={`flex lg:hidden text-sm font-light tracking-wide fixed right-[10px] z-[9] px-3 py-1 text-black transition-[bottom] duration-500 ease-in-out rounded-t-lg rounded-b-none border-black border bottom-[24px] md:bottom-[28px] ${
+        className={`flex lg:hidden text-sm font-light tracking-wide fixed right-[10px] z-[10] px-3 py-1 text-black transition-[bottom] duration-500 ease-in-out rounded-t-lg rounded-b-none border-black border bottom-[24px] md:bottom-[28px] ${
           cartOpen ? "bottom-[calc(75vh)]" : ""
         } ${cartQuantity > 0 ? "bg-[#fbf234]" : "bg-white"}`}
         onClick={() => setCartOpen(!cartOpen)}
