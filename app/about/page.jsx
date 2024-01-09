@@ -19,7 +19,7 @@ export default function AboutPage() {
       <ScrollToTop />
 
       <div className="w-full h-auto">
-        <div className="text-sm lg:text-lg columns-1 md:columns-2 gap-x-[20px] p-10 mt-20 sm:mt-32 mb-4">
+        <div className="text-sm lg:text-base columns-1 md:columns-2 gap-x-[20px] p-10 mt-20 sm:mt-32 mb-4">
           <p className="text-gray-900 tracking-tighter font-normal mb-2">
             FRIZBEE CERAMICS offers a high-end handcrafted porcelain tableware
             collection.

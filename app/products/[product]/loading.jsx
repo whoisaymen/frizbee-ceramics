@@ -1,29 +1,77 @@
-import ScrollToTop from "@/components/ScrollToTop";
+import Skeleton from "@mui/material/Skeleton";
 
 export default function Loading() {
+  const color = colors[Math.floor(Math.random() * colors.length)];
   return (
     <div className="flex items-center justify-center h-screen">
-      <ScrollToTop />
+      <Skeleton
+        variant="rectangular"
+        width={"100%"}
+        height={"100%"}
+        sx={{ bgcolor: color }}
+      />
+      <div className="z-[7]">
+        <div className="from-[#B0AAEF]/30 bg-[#fff]/80 w-[69vw] left-14 lg:left-auto bottom-[70px] lg:min-w-[450px]  lg:w-1/4  fixed md:bottom-[29px] md:right-1/4 border border-gray-800">
+          <div className="relative">
+            <button className="swiper-button-prev"></button>
+            <button className="swiper-button-next"></button>
+            <div className="lg:border-none flex justify-between items-stretch">
+              <div className="text-black flex-grow flex justify-start items-center">
+                <h2 className="p-1 md:p-2 px-4 leading-tight text-md md:text-lg lg:text-2xl tracking-tighter font-bold w-full">
+                  <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
+                </h2>
+              </div>
+              <div className="bg-white/90 flex justify-center items-center border-l border-gray-800 border-b text-sm lg:text-base">
+                <span className="tracking-tight px-4 py-1 md:py-2">
+                  <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
+                </span>
+              </div>
+            </div>
+            <div className="pt-3 pb-4 md:pb-8 px-4 lg:h-auto text-xs md:text-base">
+              <div className="mb-2">
+                {" "}
+                <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
+              </div>
 
-      <div role="status">
-        <svg
-          aria-hidden="true"
-          className="inline w-8 h-8 mr-2 text-gray-200 animate-spin fill-[#fbf234]"
-          viewBox="0 0 100 101"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-            fill="currentColor"
-          />
-          <path
-            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-            fill="currentFill"
-          />
-        </svg>
-        <span className="sr-only">Loading...</span>
+              <div className="flex items-center border border-gray-800">
+                <button className="px-2 py-1 md:px-4 md:py-2 bg-white/90">
+                  <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
+                </button>
+                <span className="px-2 py-1 md:px-4 md:py-2 border-gray-800 border-l border-r bg-white/90">
+                  <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
+                </span>
+                <button className="px-2 py-1  md:px-4 md:py-2 bg-white/90">
+                  <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
+                </button>
+                <button className="flex-grow px-2 py-1 md:py-2 text-black uppercase font-light tracking-tight bg-white/90 border-l border-gray-800 text-xs md:text-base">
+                  <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
+
+const colors = [
+  "#D6FD53",
+  "#AAAAEF",
+  "#76BC91",
+  "#EFAACD",
+  "#F7D949",
+  "#6072D3",
+  "#B8D0F3",
+  "#F0ED9F",
+  "#C4576C",
+  "#4656C3",
+  "#DDEEC0",
+  "#9AB8E5",
+  "#F0ED9F",
+  "#F1CA78",
+  "#E9EDF4",
+  "#9FC2C9",
+  "#D1EDF1",
+  "#76BC91",
+];

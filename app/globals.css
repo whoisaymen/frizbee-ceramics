@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --tw-bg-opacity: 1;
+  /* --tw-bg-opacity: 1; */
   /* background-color: rgb(243 244 246 / var(--tw-bg-opacity)); */
-  background-color: #e8ecf4;
+  /* background-color: #e8ecf4; */
   /* --foreground-rgb: 0, 0, 0;
   
 	--background-start-rgb: 214, 219, 220;

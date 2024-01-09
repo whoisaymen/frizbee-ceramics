@@ -73,20 +73,18 @@ function sortProducts(products, option) {
     return filteredProducts;
   }
   if (option === "new") {
-    // Filter products with the 'new' tag
     return products.filter((product) => product.node.tags.includes("new"));
   }
 
   if (option === "date") {
-    // Sort products by date added, from newest to oldest
     return [...products].sort((a, b) => {
       const dateA = new Date(a.node.createdAt);
       const dateB = new Date(b.node.createdAt);
-      return dateB - dateA; // Sorting in descending order
+      return dateB - dateA;
     });
   }
 
-  return products; // return products as-is if there's no sorting
+  return products;
 }
 
 export default ProductList;
