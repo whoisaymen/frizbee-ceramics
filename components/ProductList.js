@@ -9,7 +9,7 @@ const ProductList = async ({ sortOption }) => {
 
   return (
     <div
-      className="mb-[24px] md:mb-[29px] md:mx-0 -mt-[2px]"
+      className="mb-[24px] md:mb-[29px] md:mx-0 -mt-[2px] min-h-screen"
       style={{ backgroundImage: "url(/images/bgHomeGradient.svg)" }}
     >
       <div className="mx-auto">

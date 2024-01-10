@@ -24,7 +24,7 @@ function SortFilterItem({ item }) {
       <DynamicTag
         href={href}
         className={clsx("w-full px-4", {
-          "bg-[#b6ffb9] italic": active,
+          "bg-[#b6ffb9]": active,
         })}
       >
         {item.title}
@@ -41,12 +41,14 @@ export default function SortFilterMenu() {
     return (
       <div className="flex justify-start items-center w-full md:bg-transparent">
         <ul className="flex">
-          <li className="tracking-[-1.2px] ml-4 custom-cursor text-black dark:text-white border-black border md:hover:-rotate-3 transition duration-200 ease-out font-light bg-white/90">
+          <li className="tracking-[-1.2px] ml-4 custom-cursor text-black border-black border md:hover:-rotate-3 transition duration-200 ease-out font-light bg-white/90">
             {pathname.includes("products") ? (
               <button
                 type="button"
                 onClick={() => router.back()}
-                className={"px-1 py-1 flex items-center justify-center"}
+                className={
+                  "px-1 py-1 flex items-center justify-center hover:bg-red-300"
+                }
               >
                 <div className="relative h-5 w-5">
                   <Image
