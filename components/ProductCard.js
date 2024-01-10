@@ -6,7 +6,6 @@ import { useState, useContext, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import { CartContext } from "../context/shopContext";
-import { getProduct } from "@/lib/shopify";
 
 import { formatter, getColorFromTag, colorMappings } from "../utils/helpers";
 
@@ -56,7 +55,7 @@ const ProductCard = ({ product, index }) => {
           alt="Product image"
           width={500}
           height={500}
-          loading="lazy"
+          priority={index === 0 ? "true" : "false"}
           className="w-full h-full object-cover object-center"
           style={{
             width: "100%",
@@ -117,11 +116,6 @@ const ProductCard = ({ product, index }) => {
               <span className="z-[7] tracking-tighter text-left font-bold w-full leading-none">
                 {/* {title.split("-")[0]} */}
                 {title}
-                {/* {title.split(" ")[0]}  */}
-                {/* <br />
-              <span className="font-normal inline-block text-black/70 capitalize italic py-0">
-                {title.split(" ")[0]}
-              </span> */}
                 <br />
                 <span className="font-normal mt-[4px] mb-[8px] inline-block">
                   {formatter.format(price)}
@@ -137,7 +131,8 @@ const ProductCard = ({ product, index }) => {
               alt={"Product Image"}
               width={500}
               height={500}
-              loading="lazy"
+              // loading="lazy"
+              priority
               className="w-full h-full object-cover object-center max-w-full"
             />
 

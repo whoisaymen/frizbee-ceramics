@@ -3,9 +3,12 @@ import Image from "next/image";
 import ProductForm from "./ProductForm";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
+import { ProductPageImageSkeleton } from "./Skeleton";
 
 export default function ProductPageContent({ product, base64 }) {
+  const [loaded, setLoaded] = useState(false);
+
   const imagesSwiper = [];
 
   product.images.edges.map((image, i) => {
@@ -17,7 +20,9 @@ export default function ProductPageContent({ product, base64 }) {
           fill
           sizes="100vw"
           className="object-cover w-full h-full object-center"
+          onLoad={() => setLoaded(true)}
         />
+        {!loaded && <ProductPageImageSkeleton />}
       </SwiperSlide>
     );
   });
@@ -33,8 +38,8 @@ export default function ProductPageContent({ product, base64 }) {
                 "--swiper-pagination-color": "#000",
               }}
               navigation={{
-                nextEl: ".swiper-button-prev",
-                prevEl: ".swiper-button-next",
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
               }}
               className="h-full"
               loop="true"

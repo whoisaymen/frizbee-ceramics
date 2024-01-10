@@ -12,16 +12,16 @@ export default function ShopProvider({ children }) {
   const [cartLoading, setCartLoading] = useState(false);
   const [itemUpdated, setItemUpdated] = useState(false);
 
-  useEffect(() => {
-    let timer;
-    if (itemUpdated) {
-      timer = setTimeout(() => {
-        setCartOpen(false);
-        setItemUpdated(false);
-      }, 1000);
-    }
-    return () => clearTimeout(timer);
-  }, [itemUpdated]);
+  // useEffect(() => {
+  //   let timer;
+  //   if (itemUpdated) {
+  //     timer = setTimeout(() => {
+  //       setCartOpen(false);
+  //       setItemUpdated(false);
+  //     }, 1000);
+  //   }
+  //   return () => clearTimeout(timer);
+  // }, [itemUpdated]);
 
   useEffect(() => {
     if (localStorage.checkout_id) {
@@ -81,7 +81,7 @@ export default function ShopProvider({ children }) {
         JSON.stringify([newCart, newCheckout])
       );
     }
-    setItemUpdated(true);
+    // setItemUpdated(true);
   }
 
   async function removeCartItem(itemToRemove) {

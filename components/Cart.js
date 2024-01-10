@@ -32,7 +32,7 @@ export default function Cart() {
 
   return (
     <div
-      className={`z-10 fixed bottom-0 right-0 lg:bottom-auto lg:top-[1rem]  w-full transform transition-transform duration-500 ease-in-out lg:max-w-[calc(35%+1px)] lg:flex ${
+      className={`z-10 fixed bottom-0 right-0 lg:bottom-auto lg:top-[1rem]  w-full transform transition-transform duration-500 ease-in-out min-w-[400px] lg:max-w-[calc(30%+1px)] lg:flex ${
         cartOpen
           ? "translate-y-0"
           : "translate-y-[calc(100%-54px)] md:translate-y-[calc(100%-58px)] lg:translate-y-0 lg:translate-x-[calc(100%-27px)]"
@@ -64,9 +64,9 @@ export default function Cart() {
         <XMarkIcon className="w-6 h-6" aria-hidden="true" />
       </button>
 
-      <div className=" h-[75vh] lg:h-[calc(100vh-46px)]">
+      <div className=" h-[75vh] lg:h-[calc(100vh-46px)] w-full">
         <div
-          className={`h-full transform transition ease-in-out duration-500 translate-y-0 bg-white  border-t border-black lg:border-l w-screen -mt-[24px] md:-mt-[28px] mb-[24px] lg:m-0 lg:flex overflow-y-scroll flex flex-col lg:items-start lg:w-full`}
+          className={`h-full transform transition ease-in-out duration-500 translate-y-0 bg-white  border-t border-black lg:border-l w-full -mt-[24px] md:-mt-[28px] mb-[24px] lg:m-0 lg:flex overflow-y-scroll flex flex-col lg:items-start`}
         >
           <div className="flex-1 overflow-y-auto sm:px-0">
             <div className="border-black">
@@ -159,11 +159,11 @@ export default function Cart() {
                     ))}
                   </ul>
                 ) : (
-                  <div className="h-full">
+                  <div className="h-full w-screen">
                     <p className="p-4 text-sm md:text-lg tracking-tighter font-light">
                       There&apos;s nothing in your cart.
                     </p>
-                    <div className="h-screen bg-[#4019A9]/10 blur-xl mt-32 -mb-10"></div>
+                    <div className="h-screen bg-[#4019A9]/10 blur-xl mt-32 -mb-10 w-full"></div>
                   </div>
                 )}
               </div>

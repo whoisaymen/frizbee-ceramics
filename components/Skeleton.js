@@ -77,7 +77,7 @@ export function ProductCardSkeleto2({ index }) {
   );
 }
 
-export function ProductPageSkeleton({ index }) {
+export function ProductPageSkeleton() {
   return (
     <>
       <div className="mx-auto">
@@ -136,6 +136,27 @@ export function ProductPageSkeleton({ index }) {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export function ProductPageImageSkeleton() {
+  const color = colors[Math.floor(Math.random() * colors.length)];
+
+  return (
+    <>
+      <div className="mx-auto">
+        <div className="flex flex-row items-stretch w-full">
+          <div className={`w-full h-[calc(100svh-24px)]`}>
+            <Skeleton
+              variant="rectangular"
+              width={"100%"}
+              height={"100%"}
+              sx={{ bgcolor: color }}
+            />
           </div>
         </div>
       </div>
