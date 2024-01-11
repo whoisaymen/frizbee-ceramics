@@ -45,14 +45,92 @@ function NavLink({ item }) {
 }
 
 export default function NavLinks() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
   return (
-    <div className="hidden lg:flex justify-end items-center w-full md:bg-transparent">
-      <ul className="flex">
-        {MENU_ITEMS.map((option) => (
-          <NavLink key={option.slug} item={option} />
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="hidden lg:flex justify-end items-center w-full h-full md:bg-transparent">
+        <ul className="flex">
+          {MENU_ITEMS.map((option) => (
+            <NavLink key={option.slug} item={option} />
+          ))}
+        </ul>
+      </div>
+      <div className="lg:hidden flex justify-end items-center w-full h-full mr-4">
+        <div>
+          <button
+            onClick={toggleMenu}
+            className="flex flex-col justify-center items-center w-8 h-8 border border-black bg-[#fff]/90 z-[9] relative"
+            aria-label="Open menu"
+          >
+            <span
+              className={`transition-all duration-300 ease-out w-6 h-[1px] bg-black mb-1 ${
+                menuOpen ? "rotate-45 translate-y-[4.5px]" : "-translate-y-0.5"
+              }`}
+            ></span>
+            <span
+              className={`transition-all duration-300 ease-out w-6 h-[1px] bg-black mb-1 ${
+                menuOpen ? "opacity-0" : "opacity-100"
+              }`}
+            ></span>
+            <span
+              className={`transition-all duration-300 ease-out w-6 h-[1px] bg-black ${
+                menuOpen ? "-rotate-45 -translate-y-[4.5px]" : "translate-y-0.5"
+              }`}
+            ></span>
+          </button>
+        </div>
+        {/* {menuOpen && (
+          
+        )} */}
+      </div>
+      {/* <div
+        className={`fixed left-0 bottom-0 w-[50vw] transform transition-transform duration-500 ease-in-out  ${
+          menuOpen ? "translate-x-0" : "translate-x-[calc(100%+3px)]"
+        }`}
+      > */}
+      <div
+        className={`lg:hidden fixed top-0 bottom-0 right-0 flex flex-col justify-center h-full transform transition ease-in-out duration-500 bg-[#e8ecf4] border-gray-800 border-l ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        } `}
+      >
+        <div className="h-screen bg-[#4019A9]/10 blur-xl -mb-20 z-0 relative"></div>
+
+        <div className="pb-40 px-4 sm:px-6 h-full overflow-y-scroll w-[50vw] z-1 relative">
+          <nav className="flex flex-col tracking-tighter font-light uppercase text-sm justify-center space-y-2 mt-[60px]">
+            <Link
+              href="/stockists"
+              className=""
+              onClick={() => setMenuOpen(false)}
+            >
+              Stockists
+            </Link>
+            <Link href="/about" className="" onClick={() => setMenuOpen(false)}>
+              About
+            </Link>
+            <Link
+              href="/terms-and-conditions"
+              className=""
+              onClick={() => setMenuOpen(false)}
+            >
+              Terms & Conditions
+            </Link>
+            <Link
+              href="/contact"
+              className=""
+              onClick={() => setMenuOpen(false)}
+            >
+              Contact
+            </Link>
+            {/* Add more links as needed */}
+          </nav>
+        </div>
+      </div>
+      {/* </div> */}
+    </>
   );
 }
 

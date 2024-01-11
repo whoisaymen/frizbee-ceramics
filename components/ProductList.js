@@ -1,7 +1,5 @@
 import ProductCard from "./ProductCard";
 import { getProductsInCollection } from "@/lib/shopify";
-import { CardsSkeleton } from "./Skeleton";
-import { Suspense } from "react";
 
 const ProductList = async ({ sortOption }) => {
   const products = await getProductsInCollection();
@@ -14,15 +12,13 @@ const ProductList = async ({ sortOption }) => {
     >
       <div className="mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 -mt-3">
-          <Suspense fallback={<CardsSkeleton />}>
-            {sortedProducts.map((product, index) => (
-              <ProductCard
-                key={product.node.id}
-                product={product}
-                index={index}
-              />
-            ))}
-          </Suspense>
+          {sortedProducts.map((product, index) => (
+            <ProductCard
+              key={product.node.id}
+              product={product}
+              index={index}
+            />
+          ))}
         </div>
       </div>
     </div>

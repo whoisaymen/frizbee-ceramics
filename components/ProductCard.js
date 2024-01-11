@@ -1,7 +1,9 @@
 "use client";
+import { cubicBezier } from "framer-motion";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useState, useContext, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -9,9 +11,21 @@ import { CartContext } from "../context/shopContext";
 
 import { formatter, getColorFromTag, colorMappings } from "../utils/helpers";
 
+import MobileQuickBuy from "./ui/MobileQuickBuy";
+import DesktopQuickBuy from "./ui/DesktopQuickBuy";
+
+// const MobileQuickBuy = dynamic(() => import("./ui/MobileQuickBuy"));
+// const DesktopQuickBuy = dynamic(() => import("./ui/DesktopQuickBuy"));
+
 const ProductCard = ({ product, index }) => {
   const { addToCart } = useContext(CartContext);
+  const { handle, title, id } = product.node;
+  const price = product.node.priceRange.minVariantPrice.amount;
+  const isAvailableForSale = product.node.availableForSale;
   const colorValue = getColorFromTag(product);
+  const imageUrl1 = product.node.images.edges[0].node.url;
+  const imageUrl2 = product.node.images.edges[1]?.node.url;
+  const [displayImageUrl, setDisplayImageUrl] = useState(imageUrl1);
 
   const handleAddToCart = () => {
     const defaultVariant = product.node.variants.edges[0]?.node;
@@ -35,19 +49,7 @@ const ProductCard = ({ product, index }) => {
     addToCart(itemToAdd);
   };
 
-  const buttonStyle = {
-    transition: "transform 0.5s ease-in-out",
-  };
-
-  const { handle, title, id } = product.node;
-  const { altText, url } = product.node.images.edges[0].node;
-  const price = product.node.priceRange.minVariantPrice.amount;
-
-  const imageUrl1 = product.node.images.edges[0].node.url;
-  const imageUrl2 = product.node.images.edges[1]?.node.url;
-  const [displayImageUrl, setDisplayImageUrl] = useState(imageUrl1);
-
-  const prepareSwiperSlides = () => {
+  const SwiperSlides = () => {
     return product.node.images.edges.map((image, i) => (
       <SwiperSlide key={`mobile-slide-${i}`}>
         <Image
@@ -55,13 +57,8 @@ const ProductCard = ({ product, index }) => {
           alt="Product image"
           width={500}
           height={500}
-          priority={index === 0 ? "true" : "false"}
+          priority={i === 0 ? "true" : "false"}
           className="w-full h-full object-cover object-center"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
         />
       </SwiperSlide>
     ));
@@ -70,9 +67,9 @@ const ProductCard = ({ product, index }) => {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      transition={{
+        layout: { ease: cubicBezier(0.76, 0, 0.24, 1), duration: 1.1 },
+      }}
       className={`group border-gray-800 border-b relative overflow-hidden ${
         index % 2 === 0 ? "border-r" : ""
       } ${(index + 1) % 3 !== 0 ? "md:border-r" : "md:border-r-0"} ${
@@ -102,7 +99,7 @@ const ProductCard = ({ product, index }) => {
                 "--swiper-pagination-bullet-horizontal-gap": "3px",
               }}
             >
-              {prepareSwiperSlides()}
+              {SwiperSlides()}
               <div className="swiper-pagination -mt-4"></div>
             </Swiper>
 
@@ -147,41 +144,15 @@ const ProductCard = ({ product, index }) => {
         </div>
       </Link>
 
-      {/* Mobile Quick Buy  */}
-      <div className="relative">
-        {/* <span className="bg-[#eee]/30 blur-xl absolute right-0 bottom-0 h-8 w-8 z-[8] md:hidden"></span> */}
-        {product.node.availableForSale ? (
-          <button
-            style={buttonStyle}
-            className=" md:hidden absolute right-0 bottom-0 text-sm tracking-tighter font-light h-10 w-10 border-black uppercase flex items-center justify-center z-[8]"
-            onClick={handleAddToCart}
-            disabled={!product.node.availableForSale}
-          >
-            <Image
-              src="/images/cartIcon.svg"
-              alt="Filter"
-              className="object-cover"
-              priority
-              width={16}
-              height={16}
-            />
-          </button>
-        ) : (
-          ""
-        )}
-      </div>
+      <MobileQuickBuy
+        handleAddToCart={handleAddToCart}
+        isAvailableForSale={isAvailableForSale}
+      />
 
-      {/* Desktop Quick Buy REWORK */}
-      <button
-        style={buttonStyle}
-        className={`hidden md:block md:absolute right-8 -bottom-1 translate-y-full text-sm tracking-tighter font-light group-hover:translate-y-0 bg-white p-2 pt-1 border-black rounded-t-md border-[1px] uppercase cursor- ${
-          !product.node.availableForSale ? "bg-red-400 cursor-not-allowed" : ""
-        }`}
-        onClick={handleAddToCart}
-        disabled={!product.node.availableForSale}
-      >
-        {product.node.availableForSale ? "Add to Cart" : "Sold Out"}
-      </button>
+      <DesktopQuickBuy
+        handleAddToCart={handleAddToCart}
+        isAvailableForSale={isAvailableForSale}
+      />
     </motion.div>
   );
 };

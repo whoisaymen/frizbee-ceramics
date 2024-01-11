@@ -39,7 +39,7 @@ export default function SortFilterMenu() {
 
   if (pathname !== "/") {
     return (
-      <div className="flex justify-start items-center w-full md:bg-transparent">
+      <div className="flex justify-start items-center h-full  w-full md:bg-transparent">
         <ul className="flex">
           <li className="tracking-[-1.2px] ml-4 custom-cursor text-black border-black border md:hover:-rotate-3 transition duration-200 ease-out font-light bg-white/90">
             {pathname.includes("products") ? (
@@ -72,7 +72,7 @@ export default function SortFilterMenu() {
   }
 
   return (
-    <div className="justify-start items-center w-full md:bg-transparent hidden lg:flex">
+    <div className="justify-start items-center w-full h-full  md:bg-transparent hidden lg:flex">
       <ul className="flex">
         {SORTING_OPTIONS.map((option) => (
           <SortFilterItem key={option.slug} item={option} />
