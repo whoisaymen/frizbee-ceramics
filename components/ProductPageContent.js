@@ -9,7 +9,6 @@ import { ProductPageImageSkeleton } from "./Skeleton";
 export default function ProductPageContent({ product, blurDataURL }) {
   const [loaded, setLoaded] = useState(false);
   const imagesSwiper = [];
-  console.log(blurDataURL);
 
   product.images.edges.map((image, i) => {
     imagesSwiper.push(
@@ -18,8 +17,8 @@ export default function ProductPageContent({ product, blurDataURL }) {
           src={image.node.url}
           alt="Product image"
           fill
-          placeholder="blur"
-          blurDataURL={blurDataURL}
+          // placeholder="blur"
+          // blurDataURL={blurDataURL}
           sizes="100vw"
           className="object-cover w-full h-full object-center"
           // onLoad={() => setLoaded(true)}

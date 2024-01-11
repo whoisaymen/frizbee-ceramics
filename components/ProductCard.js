@@ -111,7 +111,6 @@ const ProductCard = ({ product, index }) => {
                 }}
               ></div>
               <span className="z-[7] tracking-tighter text-left font-bold w-full leading-none">
-                {/* {title.split("-")[0]} */}
                 {title}
                 <br />
                 <span className="font-normal mt-[4px] mb-[8px] inline-block">
@@ -128,13 +127,11 @@ const ProductCard = ({ product, index }) => {
               alt={"Product Image"}
               width={500}
               height={500}
-              // loading="lazy"
               priority
               className="w-full h-full object-cover object-center max-w-full"
             />
 
             <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
-              {/* <span>{title.split("-")[0]}</span> */}
               <span>{title}</span>
               <span className="font-light -mt-1">
                 {formatter.format(price)}

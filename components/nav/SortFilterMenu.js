@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useState } from "react";
 import clsx from "clsx";
 import { SORTING_OPTIONS } from "@/lib/constants";
-import { ArrowLongLeftIcon, ArrowLeftIcon } from "@heroicons/react/20/solid";
 import arrowLeft from "@/public/images/arrow-icon-left.svg";
 import Image from "next/image";
 
@@ -18,7 +18,7 @@ function SortFilterItem({ item }) {
 
   return (
     <li
-      className="tracking-[-1.2px] ml-4 custom-cursor text-black dark:text-white border-black border hover:-rotate-3 transition duration-200 ease-out bg-white/90 font-light"
+      className="tracking-[-1.2px] ml-4 custom-cursor text-black border-black border lg:hover:-rotate-3 transition duration-200 ease-out bg-white/90 font-light"
       key={item.slug}
     >
       <DynamicTag
@@ -34,14 +34,22 @@ function SortFilterItem({ item }) {
 }
 
 export default function SortFilterMenu() {
+  const [currentSortIndex, setCurrentSortIndex] = useState(0);
   const pathname = usePathname();
   const router = useRouter();
+
+  const handleSortClick = () => {
+    const newSortIndex = (currentSortIndex + 1) % SORTING_OPTIONS.length;
+    setCurrentSortIndex(newSortIndex);
+    const newSortOption = SORTING_OPTIONS[newSortIndex].slug;
+    router.push(`${pathname}?sort=${newSortOption}`);
+  };
 
   if (pathname !== "/") {
     return (
       <div className="flex justify-start items-center h-full  w-full md:bg-transparent">
         <ul className="flex">
-          <li className="tracking-[-1.2px] ml-4 custom-cursor text-black border-black border md:hover:-rotate-3 transition duration-200 ease-out font-light bg-white/90">
+          <li className="tracking-[-1.2px] ml-4 custom-cursor text-black border-black border lg:hover:-rotate-3 transition duration-200 ease-out font-light bg-white/90">
             {pathname.includes("products") ? (
               <button
                 type="button"
@@ -72,12 +80,19 @@ export default function SortFilterMenu() {
   }
 
   return (
-    <div className="justify-start items-center w-full h-full  md:bg-transparent hidden lg:flex">
-      <ul className="flex">
-        {SORTING_OPTIONS.map((option) => (
-          <SortFilterItem key={option.slug} item={option} />
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="md:hidden">
+        <ul onClick={handleSortClick}>
+          <SortFilterItem item={SORTING_OPTIONS[currentSortIndex]} />
+        </ul>
+      </div>
+      <div className="hidden lg:flex justify-start items-center w-full h-full  md:bg-transparent">
+        <ul className="flex">
+          {SORTING_OPTIONS.map((option) => (
+            <SortFilterItem key={option.slug} item={option} />
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
