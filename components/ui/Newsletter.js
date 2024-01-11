@@ -1,11 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import newsletterImage from "@/public/images/newsletter2.jpeg";
 import Image from "next/image";
 
 export default function Newsletter() {
   const [newsletterOpen, setNewsletterOpen] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setNewsletterOpen(true);
+    }, 10000);
+  }, []);
   const [subscriptionStatus, setSubscriptionStatus] = useState("idle");
 
   const toggleNewsletter = () => {
