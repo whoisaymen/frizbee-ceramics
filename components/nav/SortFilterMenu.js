@@ -23,7 +23,7 @@ function SortFilterItem({ item }) {
     >
       <DynamicTag
         href={href}
-        className={clsx("w-full px-4", {
+        className={clsx("w-full px-3 lg:px-4", {
           "bg-[#b6ffb9]": active,
         })}
       >
