@@ -12,9 +12,8 @@ import Nav from "@/components/nav/Nav";
 import NavLinks from "@/components/nav/NavLinks";
 import Logo from "@/components/nav/Logo";
 import SortFilterMenu from "@/components/nav/SortFilterMenu";
-import NewsletterSimplified from "@/components/NewsletterSimplified";
 import Cart from "@/components/Cart";
-import MobileMenu from "@/components/nav/MobileMenu";
+import Newsletter from "@/components/ui/Newsletter";
 
 export const metadata = {
   metadataBase: new URL("https://frizbeeceramics.com"),
@@ -75,9 +74,9 @@ export default function RootLayout({ children }) {
             <Logo />
             <NavLinks />
           </Nav>
-          {/* <MobileMenu /> */}
           <Cart />
-          <NewsletterSimplified />
+          <Newsletter />
+
           {children}
           <Footer />
         </ShopProvider>

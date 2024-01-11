@@ -4,7 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import newsletterImage from "@/public/images/newsletter2.jpeg";
 import Image from "next/image";
 
-export default function NewsletterSimplified() {
+export default function Newsletter() {
   const [newsletterOpen, setNewsletterOpen] = useState(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState("idle");
 

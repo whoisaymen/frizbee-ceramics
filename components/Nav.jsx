@@ -10,14 +10,13 @@ import { Dialog, Transition } from "@headlessui/react";
 
 import MarketingBanner from "./MarketingBanner";
 import MiniCart from "./MiniCart";
-import Newsletter from "./Newsletter";
+import Newsletter from "./ui/Newsletter";
 import SortFilterMenu from "./nav/SortFilterMenu";
 
 export default function Nav() {
   const router = useRouter();
 
-  const { cart, setCartOpen, sortOption, setSortOption } =
-    useContext(CartContext);
+  const { cart, setCartOpen } = useContext(CartContext);
 
   const [isProjectsSubmenuOpen, setIsProjectsSubmenuOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
