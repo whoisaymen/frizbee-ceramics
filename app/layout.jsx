@@ -18,7 +18,7 @@ import Newsletter from "@/components/ui/Newsletter";
 export const metadata = {
   metadataBase: new URL("https://frizbeeceramics.com"),
   verfication: {
-    facebook: "lbjdtr5qo1x4378gdzqmqynds55its",
+    other: { "facebook-data-verification": "lbjdtr5qo1x4378gdzqmqynds55its" },
   },
   alternates: {
     canonical: "/",
