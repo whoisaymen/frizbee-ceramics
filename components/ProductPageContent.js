@@ -17,13 +17,13 @@ export default function ProductPageContent({ product, blurDataURL }) {
           src={image.node.url}
           alt="Product image"
           fill
+          priority={i === 0 ? "true" : "false"}
           // placeholder="blur"
           // blurDataURL={blurDataURL}
           sizes="100vw"
           className="object-cover w-full h-full object-center"
           // onLoad={() => setLoaded(true)}
         />
-        {/* {!loaded && <ProductPageImageSkeleton />} */}
       </SwiperSlide>
     );
   });

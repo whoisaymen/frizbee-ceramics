@@ -82,7 +82,7 @@ export default function SortFilterMenu() {
 
   return (
     <>
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <ul onClick={handleSortClick}>
           <SortFilterItem item={SORTING_OPTIONS[currentSortIndex]} />
         </ul>

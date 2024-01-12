@@ -18,7 +18,6 @@ import DesktopQuickBuy from "./ui/DesktopQuickBuy";
 // const DesktopQuickBuy = dynamic(() => import("./ui/DesktopQuickBuy"));
 
 const ProductCard = ({ product, index }) => {
-  console.log(product);
   const { addToCart } = useContext(CartContext);
   const { handle, title, id } = product.node;
   const price = product.node.priceRange.minVariantPrice.amount;
