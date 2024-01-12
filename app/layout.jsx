@@ -14,12 +14,10 @@ import Logo from "@/components/nav/Logo";
 import SortFilterMenu from "@/components/nav/SortFilterMenu";
 import Cart from "@/components/Cart";
 import Newsletter from "@/components/ui/Newsletter";
+import FacebookPixel from "@/components/FacebookPixel";
 
 export const metadata = {
   metadataBase: new URL("https://frizbeeceramics.com"),
-  verfication: {
-    other: { "facebook-data-verification": "lbjdtr5qo1x4378gdzqmqynds55its" },
-  },
   alternates: {
     canonical: "/",
     languages: {
@@ -83,6 +81,7 @@ export default function RootLayout({ children }) {
           {children}
           <Footer />
         </ShopProvider>
+        <FacebookPixel />
       </body>
     </html>
   );
