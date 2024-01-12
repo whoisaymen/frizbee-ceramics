@@ -66,6 +66,7 @@ export default function ProductForm({ product }) {
       variantTitle: variant.node.title,
       variantPrice: variant.node.priceV2.amount,
       variantQuantity: 1,
+      compareAtPrice: variant.node.compareAtPriceV2?.amount,
     };
   });
 
@@ -108,6 +109,10 @@ export default function ProductForm({ product }) {
     }
   }, [productInventory, selectedVariant]);
 
+  const price = product.variants.edges[0].node.priceV2?.amount;
+  const compareAtPrice =
+    product.variants.edges[0].node.compareAtPriceV2?.amount;
+
   return (
     <div className="from-[#B0AAEF]/30 bg-[#fff]/80 w-[69vw] left-14 lg:left-auto bottom-[70px] lg:min-w-[450px]  lg:w-1/4  fixed md:bottom-[29px] md:right-1/4 border border-gray-800">
       <div className="relative">
@@ -115,42 +120,27 @@ export default function ProductForm({ product }) {
         <button className="swiper-button-next"></button>
         <div className="lg:border-none flex justify-between items-stretch">
           <div className="text-black flex-grow flex justify-start items-center">
-            {/* <div className='bg-gradient-to-b from-[#AAEFB1] text-black flex-grow flex justify-center items-center'> */}
             <h2 className="p-1 md:p-2 px-4 leading-tight text-md md:text-lg lg:text-2xl tracking-tighter font-bold">
-              {/* {product.title.split("-")[0]} */}
               {product.title}
             </h2>
           </div>
           <div className="bg-white/90 flex justify-center items-center border-l border-gray-800 border-b text-sm lg:text-base">
-            <span className="tracking-tight px-4 py-1 md:py-2">
-              {formatter.format(product.variants.edges[0].node.priceV2.amount)}
+            <span className="tracking-tight px-4 py-1 md:py-2 flex flex-col">
+              {/* {formatter.format(product.variants.edges[0].node.priceV2.amount)} */}
+              {compareAtPrice && price < compareAtPrice ? (
+                <>
+                  <span className="text-gray-500 line-through pr-2 inline-block">
+                    {formatter.format(compareAtPrice)}
+                  </span>
+                  {formatter.format(price)}
+                </>
+              ) : (
+                formatter.format(price)
+              )}
             </span>
           </div>
         </div>
         <div className="pt-3 pb-4 md:pb-8 px-4 lg:h-auto text-xs md:text-base">
-          {/* <div className="hidden md:block"> */}
-          {/* <Disclosure defaultOpen>
-              {({ open }) => (
-                <>
-                  <Disclosure.Button className="flex w-full justify-between rounded-lg py-2 text-left text-sm font-normal tracking-tighter text-black focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
-                    <span className="uppercase">Info</span>
-                    <ChevronUpIcon
-                      className={`${
-                        open ? "rotate-180 transform" : ""
-                      } h-5 w-5 text-black`}
-                    />
-                  </Disclosure.Button> */}
-          {/* {product.descriptionHtml ? (
-              <div
-                className="text-xs md:text-sm font-extralight lg:text-md tracking-tighter mb-6 leading-snug md:leading-normal"
-                dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-              ></div>
-            ) : null} */}
-
-          {/* </>
-              )}
-            </Disclosure> */}
-          {/* </div> */}
           <div className="">
             <Disclosure>
               {({ open }) => (
@@ -177,9 +167,6 @@ export default function ProductForm({ product }) {
             </Disclosure>
           </div>
 
-          {/* <p className="text-xs md:text-sm font-extralight lg:text-md tracking-tighter mb-6 leading-snug md:leading-normal">
-            {product.description}
-          </p> */}
           <div className="flex items-center border border-gray-800">
             <button
               className="px-2 py-1 md:px-4 md:py-2 bg-white/90"
@@ -210,11 +197,6 @@ export default function ProductForm({ product }) {
               )}
             </button>
           </div>
-          {/* {!available && (
-            <button className="px-2 py-1 md:py-3 mt-3 text-white bg-gray-800 rounded-lg cursor-not-allowed mb-4">
-              Sold out!
-            </button>
-          )} */}
         </div>
       </div>
     </div>
