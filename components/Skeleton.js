@@ -22,7 +22,7 @@ const colors = [
 ];
 
 export function CardsSkeleton() {
-  const cardCount = 50; // Number of card components to render
+  const cardCount = 24; // Number of card components to render
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 -mt-3">
@@ -34,9 +34,8 @@ export function CardsSkeleton() {
 }
 
 export function ProductCardSkeleton({ index }) {
-  // const randomColor = getRandomColor();
-  const colorIndex = index % colors.length; // Calculate the color index
-  const bgColor = colors[colorIndex];
+  // const colorIndex = index % colors.length;
+  // const bgColor = colors[colorIndex];
   return (
     <>
       <div
@@ -52,26 +51,18 @@ export function ProductCardSkeleton({ index }) {
           variant="rectangular"
           width={"100%"}
           height={"100%"}
-          sx={{ bgcolor: bgColor }}
+          sx={{ bgcolor: "#e8ecf4" }}
         />
-      </div>
-    </>
-  );
-}
-
-export function ProductCardSkeleto2({ index }) {
-  return (
-    <>
-      <div
-        className={`w-full overflow-hidden h-[18rem] md:h-[24rem] bg-gray-100 relative text-sm border-b border-gray-800 ${
-          index % 2 === 0 ? "border-r" : ""
-        } ${(index + 1) % 3 !== 0 ? "md:border-r" : "md:border-r-0"} ${
-          (index + 1) % 4 !== 0 ? "lg:border-r" : "lg:border-r-0"
-        } ${(index + 1) % 5 !== 0 ? "xl:border-r" : "xl:border-r-0"} ${
-          (index + 1) % 6 !== 0 ? "2xl:border-r" : "2xl:border-r-0"
-        }`}
-      >
-        <Skeleton variant="rectangular" width={"100%"} height={"100%"} />
+        <Skeleton
+          variant="text"
+          sx={{ fontSize: "12px" }}
+          className="w-1/2 absolute left-3 bottom-6"
+        />
+        <Skeleton
+          variant="text"
+          sx={{ fontSize: "12px" }}
+          className="w-1/4 absolute left-3 bottom-2"
+        />
       </div>
     </>
   );
@@ -162,13 +153,4 @@ export function ProductPageImageSkeleton() {
       </div>
     </>
   );
-}
-
-function getRandomColor() {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
 }

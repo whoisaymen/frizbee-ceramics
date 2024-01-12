@@ -110,7 +110,7 @@ const ProductCard = ({ product, index }) => {
                   backgroundColor: colorMappings[colorValue] || "#343dfb",
                 }}
               ></div>
-              <span className="z-[7] tracking-tighter text-left font-bold w-full leading-none">
+              <span className="z-[7] tracking-tighter text-left font-bold w-full leading-none truncate">
                 {title}
                 <br />
                 <span className="font-normal mt-[4px] mb-[8px] inline-block">
