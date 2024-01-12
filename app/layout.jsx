@@ -14,11 +14,12 @@ import Logo from "@/components/nav/Logo";
 import SortFilterMenu from "@/components/nav/SortFilterMenu";
 import Cart from "@/components/Cart";
 import Newsletter from "@/components/ui/Newsletter";
-import { Suspense } from "react";
-import { FacebookPixelEvents } from "@/components/PixelEvents";
 
 export const metadata = {
   metadataBase: new URL("https://frizbeeceramics.com"),
+  verfication: {
+    facebook: "lbjdtr5qo1x4378gdzqmqynds55its",
+  },
   alternates: {
     canonical: "/",
     languages: {
@@ -70,10 +71,6 @@ export default function RootLayout({ children }) {
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         ) : null}
-
-        <Suspense fallback={null}>
-          <FacebookPixelEvents />
-        </Suspense>
         <ShopProvider>
           <Nav>
             <SortFilterMenu />
