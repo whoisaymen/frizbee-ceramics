@@ -35,6 +35,7 @@ function SortFilterItem({ item }) {
 
 export default function SortFilterMenu() {
   const [currentSortIndex, setCurrentSortIndex] = useState(0);
+
   const pathname = usePathname();
   const router = useRouter();
 

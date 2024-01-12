@@ -80,6 +80,16 @@ function sortProducts(products, option) {
     });
   }
 
+  if (option === "sale") {
+    const onSaleProducts = products.filter((product) => {
+      return (
+        product.node.compareAtPriceRange?.minVariantPrice.amount >
+        product.node.priceRange.minVariantPrice.amount
+      );
+    });
+    return onSaleProducts;
+  }
+
   return products;
 }
 

@@ -18,9 +18,12 @@ import DesktopQuickBuy from "./ui/DesktopQuickBuy";
 // const DesktopQuickBuy = dynamic(() => import("./ui/DesktopQuickBuy"));
 
 const ProductCard = ({ product, index }) => {
+  console.log(product);
   const { addToCart } = useContext(CartContext);
   const { handle, title, id } = product.node;
   const price = product.node.priceRange.minVariantPrice.amount;
+  const compareAtPrice =
+    product.node.compareAtPriceRange?.minVariantPrice.amount;
   const isAvailableForSale = product.node.availableForSale;
   const colorValue = getColorFromTag(product);
   const imageUrl1 = product.node.images.edges[0].node.url;
@@ -114,7 +117,16 @@ const ProductCard = ({ product, index }) => {
                 {title}
                 <br />
                 <span className="font-normal mt-[4px] mb-[8px] inline-block">
-                  {formatter.format(price)}
+                  {compareAtPrice && price < compareAtPrice ? (
+                    <>
+                      <span className="text-gray-500 line-through pr-2">
+                        {formatter.format(compareAtPrice)}
+                      </span>
+                      {formatter.format(price)}
+                    </>
+                  ) : (
+                    formatter.format(price)
+                  )}
                 </span>
               </span>
             </div>
@@ -134,7 +146,16 @@ const ProductCard = ({ product, index }) => {
             <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
               <span>{title}</span>
               <span className="font-light -mt-1">
-                {formatter.format(price)}
+                {compareAtPrice && price < compareAtPrice ? (
+                  <>
+                    <span className="text-gray-500 line-through pr-2">
+                      {formatter.format(compareAtPrice)}
+                    </span>{" "}
+                    {formatter.format(price)}
+                  </>
+                ) : (
+                  formatter.format(price)
+                )}
               </span>
             </div>
           </div>
