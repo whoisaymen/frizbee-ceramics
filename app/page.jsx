@@ -6,7 +6,6 @@ export default async function Home({ searchParams }) {
   const sortOption = searchParams.sort || null;
 
   return (
-    // <CardsSkeleton />
     <Suspense fallback={<CardsSkeleton />}>
       <ProductList sortOption={sortOption} />
     </Suspense>

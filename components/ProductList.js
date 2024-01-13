@@ -4,6 +4,9 @@ import { getProductsInCollection } from "@/lib/shopify";
 const ProductList = async ({ sortOption }) => {
   const products = await getProductsInCollection();
   const sortedProducts = sortProducts(products, sortOption);
+  sortedProducts.map((product) =>
+    console.log("sorted produts", product.node.tags)
+  );
 
   return (
     <div
@@ -36,6 +39,13 @@ function sortProducts(products, option) {
       const colorB =
         b.node.tags.find((tag) => tag.startsWith("color:"))?.split(":")[1] ||
         "";
+
+      const isSetA = a.node.tags.includes("set");
+      const isSetB = b.node.tags.includes("set");
+
+      if (isSetA && !isSetB) return 1;
+      if (!isSetA && isSetB) return -1;
+
       return colorA.localeCompare(colorB);
     });
   }
@@ -47,6 +57,12 @@ function sortProducts(products, option) {
       const shapeB =
         b.node.tags.find((tag) => tag.startsWith("shape:"))?.split(":")[1] ||
         "";
+      const isSetA = a.node.tags.includes("set");
+      const isSetB = b.node.tags.includes("set");
+
+      if (isSetA && !isSetB) return 1;
+      if (!isSetA && isSetB) return -1;
+
       return shapeA.localeCompare(shapeB);
     });
   }
@@ -58,6 +74,12 @@ function sortProducts(products, option) {
       const patternB =
         b.node.tags.find((tag) => tag.startsWith("pattern:"))?.split(":")[1] ||
         "";
+      const isSetA = a.node.tags.includes("set");
+      const isSetB = b.node.tags.includes("set");
+
+      if (isSetA && !isSetB) return 1;
+      if (!isSetA && isSetB) return -1;
+
       return patternA.localeCompare(patternB);
     });
   }
