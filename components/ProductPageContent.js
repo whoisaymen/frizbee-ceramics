@@ -25,8 +25,6 @@ export default function ProductPageContent({ product, blurDataURL }) {
     );
   });
 
-  console.log(imagesSwiper.length);
-
   return (
     <div className="mx-auto">
       <div className="flex flex-row items-stretch w-full">

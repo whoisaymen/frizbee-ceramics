@@ -8,7 +8,7 @@ export default function Loading() {
         variant="rectangular"
         width={"100%"}
         height={"100%"}
-        sx={{ bgcolor: color }}
+        sx={{ bgcolor: "#e8ecf4" }}
       />
       <div className="z-[7]">
         <div className="from-[#B0AAEF]/30 bg-[#fff]/80 w-[69vw] left-14 lg:left-auto bottom-[70px] lg:min-w-[450px]  lg:w-1/4  fixed md:bottom-[29px] md:right-1/4 border border-gray-800">
