@@ -46,7 +46,7 @@ export default function SortFilterMenu() {
     router.push(`${pathname}?sort=${newSortOption}`);
   };
 
-  if (pathname !== "/") {
+  if (pathname !== "/products") {
     return (
       <div className="flex justify-start items-center h-full  w-full md:bg-transparent">
         <ul className="flex">
@@ -70,7 +70,7 @@ export default function SortFilterMenu() {
                 </div>
               </button>
             ) : (
-              <Link href="/" className={"w-full px-4"}>
+              <Link href="/products" className={"w-full px-4"}>
                 Shop
               </Link>
             )}

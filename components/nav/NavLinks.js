@@ -83,15 +83,7 @@ export default function NavLinks() {
             ></span>
           </button>
         </div>
-        {/* {menuOpen && (
-          
-        )} */}
       </div>
-      {/* <div
-        className={`fixed left-0 bottom-0 w-[50vw] transform transition-transform duration-500 ease-in-out  ${
-          menuOpen ? "translate-x-0" : "translate-x-[calc(100%+3px)]"
-        }`}
-      > */}
       <div
         className={`lg:hidden fixed top-0 bottom-0 right-0 flex flex-col justify-center h-full transform transition ease-in-out duration-500 bg-[#e8ecf4] border-gray-800 border-l ${
           menuOpen ? "translate-x-0" : "translate-x-full"
@@ -125,11 +117,9 @@ export default function NavLinks() {
             >
               Contact
             </Link>
-            {/* Add more links as needed */}
           </nav>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 }
