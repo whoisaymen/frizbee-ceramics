@@ -113,6 +113,7 @@ export default function Newsletter() {
             <Image
               src={newsletterImage}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority
               placeholder="blur"
               alt={"Newsletter image"}

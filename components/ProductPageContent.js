@@ -3,34 +3,34 @@ import Image from "next/image";
 import ProductForm from "./ProductForm";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { Suspense, useState } from "react";
-import { ProductPageImageSkeleton } from "./Skeleton";
 
 export default function ProductPageContent({ product, blurDataURL }) {
-  const [loaded, setLoaded] = useState(false);
   const imagesSwiper = [];
+  const productImages = product.images.edges;
 
-  product.images.edges.map((image, i) => {
+  productImages.map((image, i) => {
     imagesSwiper.push(
-      <SwiperSlide key={`slide-${i}`} className="w-full h-full relative">
+      <SwiperSlide key={`slide-${i}`} className="relative">
         <Image
           src={image.node.url}
           alt="Product image"
           fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
           priority={i === 0 ? "true" : "false"}
-          // placeholder="blur"
-          // blurDataURL={blurDataURL}
-          sizes="100vw"
-          className="object-cover w-full h-full object-center"
-          // onLoad={() => setLoaded(true)}
+          placeholder="blur"
+          blurDataURL={blurDataURL}
+          className="object-cover object-center"
         />
       </SwiperSlide>
     );
   });
 
+  console.log(imagesSwiper.length);
+
   return (
     <div className="mx-auto">
       <div className="flex flex-row items-stretch w-full">
+        {/* Product Swiper */}
         <div className={`w-full h-[calc(100svh-24px)]`}>
           <Swiper
             style={{
@@ -41,9 +41,15 @@ export default function ProductPageContent({ product, blurDataURL }) {
               nextEl: ".swiper-button-next",
               prevEl: ".swiper-button-prev",
             }}
-            className="h-full"
-            loop="true"
+            className="h-full w-full"
+            loop={imagesSwiper.length > 2 ? true : false}
             modules={[Navigation, Pagination]}
+            slidesPerView={"auto"}
+            breakpoints={{
+              1024: {
+                slidesPerView: imagesSwiper.length > 1 ? 2 : 1,
+              },
+            }}
           >
             {imagesSwiper}
           </Swiper>
