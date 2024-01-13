@@ -4,6 +4,7 @@ import { getPlaiceholder } from "plaiceholder";
 
 export async function generateMetadata({ params, searchParams }, parent) {
   const product = await getProduct(params.product);
+  console.log(product.description);
 
   return {
     title: "Frizbee Ceramics | " + product.title,
