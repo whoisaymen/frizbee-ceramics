@@ -23,7 +23,7 @@ function NavLink({ item }) {
       <li
         className={`tracking-[-1.2px] ${
           item.slug === "about" ? "mr-12" : "mr-4"
-        } custom-cursor text-black dark:text-white border-black border hover:-rotate-3 transition duration-200 ease-out font-light bg-white/90 relative`}
+        } custom-cursor text-black border-black border hover:-rotate-3 transition duration-200 ease-out font-light bg-white/90 relative`}
         key={item.slug}
         style={{
           background: active
