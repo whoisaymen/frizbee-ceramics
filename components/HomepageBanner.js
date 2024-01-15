@@ -1,5 +1,5 @@
 import Image from "next/image";
-import homepageBanner from "@/public/images/homepage-banner2.jpeg";
+import homepageBanner from "@/public/images/homepage-banner.jpg";
 import homepageBannerMobile from "@/public/images/homepage-banner-mobile.jpeg";
 import Link from "next/link";
 export default function HomepageBanner() {
