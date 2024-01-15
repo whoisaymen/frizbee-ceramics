@@ -100,13 +100,19 @@ function sortProducts(products, option) {
   }
 
   if (option === "sale") {
-    const onSaleProducts = products.filter((product) => {
-      return (
-        product.node.compareAtPriceRange?.minVariantPrice.amount >
-        product.node.priceRange.minVariantPrice.amount
-      );
+    return [...products].sort((a, b) => {
+      const isOnSaleA =
+        a.node.compareAtPriceRange?.minVariantPrice.amount >
+        a.node.priceRange.minVariantPrice.amount;
+      const isOnSaleB =
+        b.node.compareAtPriceRange?.minVariantPrice.amount >
+        b.node.priceRange.minVariantPrice.amount;
+
+      if (isOnSaleA && !isOnSaleB) return -1;
+      if (!isOnSaleA && isOnSaleB) return 1;
+
+      return 0;
     });
-    return onSaleProducts;
   }
 
   return products;
