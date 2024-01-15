@@ -23,7 +23,7 @@ function NavLink({ item }) {
       <li
         className={`tracking-[-1.2px] ${
           item.slug === "about" ? "mr-12" : "mr-4"
-        } custom-cursor text-black dark:text-white border-black border hover:-rotate-3 transition duration-200 ease-out font-light bg-white/90 relative`}
+        } custom-cursor text-black border-black border hover:-rotate-3 transition duration-200 ease-out font-light bg-white/90 relative`}
         key={item.slug}
         style={{
           background: active
@@ -83,7 +83,15 @@ export default function NavLinks() {
             ></span>
           </button>
         </div>
+        {/* {menuOpen && (
+          
+        )} */}
       </div>
+      {/* <div
+        className={`fixed left-0 bottom-0 w-[50vw] transform transition-transform duration-500 ease-in-out  ${
+          menuOpen ? "translate-x-0" : "translate-x-[calc(100%+3px)]"
+        }`}
+      > */}
       <div
         className={`lg:hidden fixed top-0 bottom-0 right-0 flex flex-col justify-center h-full transform transition ease-in-out duration-500 bg-[#e8ecf4] border-gray-800 border-l ${
           menuOpen ? "translate-x-0" : "translate-x-full"
@@ -117,9 +125,11 @@ export default function NavLinks() {
             >
               Contact
             </Link>
+            {/* Add more links as needed */}
           </nav>
         </div>
       </div>
+      {/* </div> */}
     </>
   );
 }
