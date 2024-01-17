@@ -102,7 +102,7 @@ const ProductCard = ({ product, index }) => {
               }}
             >
               {SwiperSlides()}
-              <div className="swiper-pagination -mt-4"></div>
+              <div className="swiper-pagination -mt- ml-6"></div>
             </Swiper>
 
             <div className="flex justify-between mt-4 absolute left-3 bottom-[3px]">
