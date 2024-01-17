@@ -1,6 +1,6 @@
 import Image from "next/image";
-import homepageBanner from "@/public/images/homepage-banner.jpg";
-import homepageBannerMobile from "@/public/images/homepage-banner-mobile.jpeg";
+import homepageBanner from "@/public/images/homepage-banner-air.png";
+import homepageBannerMobile from "@/public/images/homepage-banner-air.jpg";
 import Link from "next/link";
 export default function HomepageBanner() {
   return (
