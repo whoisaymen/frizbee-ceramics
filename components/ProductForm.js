@@ -20,6 +20,7 @@ const fetchInventory = (url, id) =>
     .then((res) => res.data);
 
 export default function ProductForm({ product }) {
+  console.log(product);
   const { data: productInventory } = useSWR(
     `/api/available/${product.handle}`,
     (url, id) => fetchInventory(url, id),
@@ -52,6 +53,7 @@ export default function ProductForm({ product }) {
 
   const allVariantOptions = product.variants.edges?.map((variant) => {
     const allOptions = {};
+    console.log(variant);
 
     variant.node.selectedOptions.map((item) => {
       allOptions[item.name] = item.value;
@@ -67,6 +69,7 @@ export default function ProductForm({ product }) {
       variantPrice: variant.node.priceV2.amount,
       variantQuantity: 1,
       compareAtPrice: variant.node.compareAtPriceV2?.amount,
+      isAvailableForSale: variant.node.availableForSale,
     };
   });
 
@@ -112,6 +115,7 @@ export default function ProductForm({ product }) {
   const price = product.variants.edges[0].node.priceV2?.amount;
   const compareAtPrice =
     product.variants.edges[0].node.compareAtPriceV2?.amount;
+  const isAvailableForSale = product.variants.edges[0].node.availableForSale;
 
   return (
     <div className="from-[#B0AAEF]/30 bg-[#fff]/80 w-[69vw] left-14 lg:left-auto bottom-[70px] lg:min-w-[450px]  lg:w-1/4  fixed md:bottom-[29px] md:right-1/4 border border-gray-800">
@@ -188,7 +192,7 @@ export default function ProductForm({ product }) {
               disabled={!available}
               className="flex-grow px-2 py-1 md:py-2 text-black uppercase font-light tracking-tight bg-white/90 border-l border-gray-800 text-xs md:text-base"
             >
-              {available ? (
+              {isAvailableForSale ? (
                 <>
                   <span>Add To Cart</span>
                 </>
