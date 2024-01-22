@@ -20,7 +20,6 @@ const fetchInventory = (url, id) =>
     .then((res) => res.data);
 
 export default function ProductForm({ product }) {
-  console.log(product);
   const { data: productInventory } = useSWR(
     `/api/available/${product.handle}`,
     (url, id) => fetchInventory(url, id),
@@ -53,7 +52,6 @@ export default function ProductForm({ product }) {
 
   const allVariantOptions = product.variants.edges?.map((variant) => {
     const allOptions = {};
-    console.log(variant);
 
     variant.node.selectedOptions.map((item) => {
       allOptions[item.name] = item.value;
