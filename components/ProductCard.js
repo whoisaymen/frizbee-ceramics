@@ -149,7 +149,7 @@ const ProductCard = ({ product, index }) => {
                   <>
                     <span className="text-gray-500 line-through pr-2">
                       {formatter.format(compareAtPrice)}
-                    </span>{" "}
+                    </span>
                     {formatter.format(price)}
                   </>
                 ) : (

@@ -19,7 +19,15 @@ const MobileQuickBuy = ({ handleAddToCart, isAvailableForSale }) => {
           />
         </button>
       ) : (
-        ""
+        <button
+          className={`absolute right-4 -bottom-1 md:hidden text-xs tracking-tighter font-light bg-white p-2 py-1 pb-[6px] border-black rounded-t-md border-[1px] uppercase cursor- z-10 ${
+            !isAvailableForSale ? "bg-red-400 cursor-not-allowed" : ""
+          }`}
+          onClick={handleAddToCart}
+          disabled={!isAvailableForSale}
+        >
+          Sold Out
+        </button>
       )}
     </div>
   );
