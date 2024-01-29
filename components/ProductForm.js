@@ -187,7 +187,7 @@ export default function ProductForm({ product }) {
             </button>
             <button
               onClick={handleAddToCart}
-              disabled={!available}
+              disabled={!isAvailableForSale}
               className="flex-grow px-2 py-1 md:py-2 text-black uppercase font-light tracking-tight bg-white/90 border-l border-gray-800 text-xs md:text-base"
             >
               {isAvailableForSale ? (
