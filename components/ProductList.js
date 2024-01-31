@@ -4,6 +4,7 @@ import { getProductsInCollection } from "@/lib/shopify";
 const ProductList = async ({ sortOption }) => {
   const products = await getProductsInCollection();
   const sortedProducts = sortProducts(products, sortOption);
+  console.log(products);
 
   return (
     <div

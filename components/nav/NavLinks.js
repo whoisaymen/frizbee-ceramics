@@ -8,15 +8,26 @@ import { useState } from "react";
 
 function NavLink({ item }) {
   const pathname = usePathname();
-  const active = pathname === `/${item.slug}`;
-
+  const active = pathname.includes(`/${item.slug}`);
   const href = `/${item.slug}`;
 
   const [isAboutHovered, setIsAboutHovered] = useState(false);
-  const handleMouseEnter = () =>
-    item.slug === "about" && setIsAboutHovered(true);
-  const handleMouseLeave = () =>
-    item.slug === "about" && setIsAboutHovered(false);
+  const [isProjectsHovered, setIsProjectsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    if (item.slug === "about") {
+      setIsAboutHovered(true);
+    } else if (item.slug === "projects") {
+      setIsProjectsHovered(true);
+    }
+  };
+  const handleMouseLeave = () => {
+    if (item.slug === "about") {
+      setIsAboutHovered(false);
+    } else if (item.slug === "projects") {
+      setIsProjectsHovered(false);
+    }
+  };
 
   return (
     <>
@@ -30,15 +41,22 @@ function NavLink({ item }) {
             ? item.color
             : isAboutHovered
             ? "#AAAAEF"
+            : isProjectsHovered
+            ? "#eee"
             : "white",
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <Link href={href} className={"w-full px-4"}>
-          {item.title}
-        </Link>
+        {item.slug === "projects" ? (
+          <div className="w-full px-4">{item.title}</div>
+        ) : (
+          <Link href={href} className="w-full px-4">
+            {item.title}
+          </Link>
+        )}
         {isAboutHovered && aboutSubmenu}
+        {isProjectsHovered && projectsSubmenu}
       </li>
     </>
   );
@@ -46,6 +64,11 @@ function NavLink({ item }) {
 
 export default function NavLinks() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isProjectsSubmenuOpen, setIsProjectsSubmenuOpen] = useState(false);
+
+  const toggleProjectsSubmenuMobile = () => {
+    setIsProjectsSubmenuOpen(!isProjectsSubmenuOpen);
+  };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -108,6 +131,29 @@ export default function NavLinks() {
             >
               Stockists
             </Link>
+            <button
+              onClick={toggleProjectsSubmenuMobile}
+              className="text-left uppercase"
+            >
+              Projects
+            </button>
+
+            {isProjectsSubmenuOpen && (
+              <ul className="pl-4 list-nonemy-0 py-0">
+                {projectsItem.projects.map((project) => (
+                  <li key={project.title} className="py-1 text-gray-400 ">
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      <span className="block no-underline">
+                        {project.title}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
             <Link href="/about" className="" onClick={() => setMenuOpen(false)}>
               About
             </Link>
@@ -125,7 +171,7 @@ export default function NavLinks() {
             >
               Contact
             </Link>
-            {/* Add more links as needed */}
+            {/* Add more links as neeeed */}
           </nav>
         </div>
       </div>
@@ -137,11 +183,28 @@ export default function NavLinks() {
 const aboutSubmenu = (
   <div className="about-submenu absolute top-full right-0 z-0 bg-[#AAAAEF] border border-t-0 border-black w-[180px] -mt-0 -mr-[1px]">
     <ul className="list-none p-0 m-0 text-right">
-      {MENU_ITEMS[1].subsections.map((subsection) => (
+      {MENU_ITEMS[2].subsections.map((subsection) => (
         <li key={subsection.title} className="p-[0.1rem] px-1 py-0">
           <Link href={`/${subsection.slug}`}>
             <span className="block text-black no-underline">
               {subsection.title}
+            </span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+const projectsItem = MENU_ITEMS.find((item) => item.slug === "projects");
+
+const projectsSubmenu = (
+  <div className="projects-submenu absolute top-full right-0 z-0 bg-[#eee] border border-t-0 border-black w-[180px] -mt-0 -mr-[1px]">
+    <ul className="list-none p-0 m-0 text-right">
+      {projectsItem.projects.map((project) => (
+        <li key={project.slug} className="p-[0.1rem] px-1 py-0">
+          <Link href={`/projects/${project.slug}`}>
+            <span className="block text-black no-underline">
+              {project.title}
             </span>
           </Link>
         </li>
