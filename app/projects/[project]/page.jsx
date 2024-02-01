@@ -30,7 +30,7 @@ export default async function ProjectPage({ params }) {
   return (
     <div className="bg-[#fff] font-extralight tracking-tight">
       <div className="grid grid-cols-1 md:grid-cols-2 -m-[1px] h-screen">
-        <div className="border-l border-black border-b relative h-full w-full">
+        <div className="hidden md:block  border-l border-black border-b relative h-full w-full">
           <Image
             src={img1}
             alt="A Box is a Box"
@@ -39,7 +39,7 @@ export default async function ProjectPage({ params }) {
             className={`relative h-full w-full object-cover`}
           />
         </div>
-        <div className="hidden md:block border-l border-black border-b relative h-full w-full">
+        <div className="border-l border-black border-b relative h-full w-full">
           <Image
             src={img2}
             alt="A Box is a Box"
