@@ -3,8 +3,8 @@ import { getProductsInCollection } from "@/lib/shopify";
 
 const ProductList = async ({ sortOption }) => {
   const products = await getProductsInCollection();
+  console.log(sortOption);
   const sortedProducts = sortProducts(products, sortOption);
-  console.log(products);
 
   return (
     <div
@@ -27,7 +27,21 @@ const ProductList = async ({ sortOption }) => {
 };
 
 function sortProducts(products, option) {
-  if (!option || !products || option === "default") return products;
+  if (!option || !products) return products;
+
+  if (option === "default") {
+    console.log(products.map((product) => product.node.tags)); // Add this line
+
+    return [...products].sort((a, b) => {
+      const isProjectA = a.node.tags.includes("project:a-box-is-a-box");
+      const isProjectB = b.node.tags.includes("project:a-box-is-a-box");
+
+      if (isProjectA && !isProjectB) return -1;
+      if (!isProjectA && isProjectB) return 1;
+
+      return 0;
+    });
+  }
 
   if (option === "color") {
     return [...products].sort((a, b) => {
