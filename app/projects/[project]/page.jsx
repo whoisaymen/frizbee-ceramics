@@ -29,22 +29,7 @@ export default async function ProjectPage({ params }) {
 
   return (
     <div className="bg-[#fff] font-extralight tracking-tight">
-      <ScrollToTop />
-
       <div className="grid grid-cols-1 md:grid-cols-2 -m-[1px] h-screen">
-        {/* {projectDetails.images.slice(0, 2).map((img, index) => (
-          <div
-            key={img.id}
-            className="border-l border-black border-b relative h-full w-full"
-          >
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              className={`relative h-full w-full object-cover`}
-            />
-          </div>
-        ))} */}
         <div className="border-l border-black border-b relative h-full w-full">
           <Image
             src={img1}
@@ -88,8 +73,8 @@ export default async function ProjectPage({ params }) {
         </div>
       </div>
 
-      <div className="h-screen border-t border-black flex items-center justify-center p-4 pr-30 max-w-6xl">
-        <p className="text-xl lg:text-3xl font-extralight tracking-tighter mb-4 uppercase">
+      <div className="h-screen border-t border-black flex items-center justify-center p-4 pr-30 w-full">
+        <p className="text-xl lg:text-3xl font-extralight tracking-tighter mb-4 uppercase  max-w-6xl">
           {projectDetails.description[0]}
         </p>
       </div>
@@ -99,65 +84,30 @@ export default async function ProjectPage({ params }) {
         ))}
       </div>
 
-      <div className="h-screen">
-        <div className="relative h-full w-full">
-          <Image
-            src={screenshot1}
-            alt="A Box is a Box"
-            fill
-            placeholder="blur"
-            className={`h-full w-full object-cover`}
-          />
-        </div>
-
-        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
-          {projectDetails.productImages.slice(0, 4).map((image, index) => (
-            <div key={image.id} className="relative w-full h-[50vh]">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                // layout="fill"
-                height={1000}
-                width={1000}
-                className={`border-t border-black border-l ${
-                  index !== 1 ? "border-l" : ""
-                }`}
-                // objectFit="cover"
-              />
-            </div>
-          ))}
-        </div> */}
-      </div>
-
       <div className="h-screen flex items-center justify-center p-4 pr-30 w-full">
         <p className="text-xl lg:text-3xl font-extralight tracking-tighter mb-4 uppercase  max-w-6xl">
           {projectDetails.description[1]}
         </p>
       </div>
 
-      <div className="h-screen">
-        {/* {projectDetails.images.slice(3, 5).map((img, index) => (
-          <div
-            key={img.id}
-            className="border-l border-black border-b relative h-full w-full"
-          >
-            <Image
-              src={img.src}
-              alt="A Box is a Box"
-              fill
-              className={`relative h-full w-full object-cover`}
-            />
-          </div>
-        ))} */}
-        <div className="relative h-full w-full border-t border-black">
-          <Image
-            src={screenshot2}
-            alt="A Box is a Box"
-            fill
-            placeholder="blur"
-            className={`h-full w-full object-cover`}
-          />
-        </div>
+      <div className="h-auto md:flex w-full">
+        <Image
+          src={screenshot1}
+          alt="A Box is a Box"
+          height={1000}
+          width={1000}
+          placeholder="blur"
+          className={`h-full w-full lg:w-1/2 object-contain`}
+        />
+
+        <Image
+          src={screenshot2}
+          alt="A Box is a Box"
+          height={1000}
+          width={1000}
+          placeholder="blur"
+          className={`h-full w-full lg:w-1/2 object-contain`}
+        />
       </div>
     </div>
   );

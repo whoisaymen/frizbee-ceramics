@@ -3,7 +3,6 @@ import { getProductsInCollection } from "@/lib/shopify";
 
 const ProductList = async ({ sortOption }) => {
   const products = await getProductsInCollection();
-  console.log(sortOption);
   const sortedProducts = sortProducts(products, sortOption);
 
   return (
@@ -30,8 +29,6 @@ function sortProducts(products, option) {
   if (!option || !products) return products;
 
   if (option === "default") {
-    console.log(products.map((product) => product.node.tags)); // Add this line
-
     return [...products].sort((a, b) => {
       const isProjectA = a.node.tags.includes("project:a-box-is-a-box");
       const isProjectB = b.node.tags.includes("project:a-box-is-a-box");
