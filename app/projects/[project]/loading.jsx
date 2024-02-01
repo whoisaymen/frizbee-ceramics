@@ -2,8 +2,8 @@ import ScrollToTop from "@/components/ScrollToTop";
 
 export default function Loading() {
   return (
-    <div className="text-center my-20">
-      <div role="status">
+    <div className="text-center h-screen">
+      <div role="status" className="flex items-center justify-center h-full">
         <svg
           aria-hidden="true"
           className="inline w-8 h-8 mr-2 text-gray-200 animate-spin fill-[#B0AAEF]"
