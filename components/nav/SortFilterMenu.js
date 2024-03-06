@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import clsx from "clsx";
 import { SORTING_OPTIONS } from "@/lib/constants";
 import arrowLeft from "@/public/images/arrow-icon-left.svg";
@@ -21,14 +21,16 @@ function SortFilterItem({ item }) {
       className="tracking-[-1.2px] ml-4 custom-cursor text-black border-black border lg:hover:-rotate-3 transition duration-200 ease-out bg-white/90 font-light"
       key={item.slug}
     >
-      <DynamicTag
-        href={href}
-        className={clsx("w-full px-3 lg:px-4", {
-          "bg-[#e8ecf4]": active,
-        })}
-      >
-        {item.title}
-      </DynamicTag>
+      <Suspense>
+        <DynamicTag
+          href={href}
+          className={clsx("w-full px-3 lg:px-4", {
+            "bg-[#e8ecf4]": active,
+          })}
+        >
+          {item.title}
+        </DynamicTag>
+      </Suspense>
     </li>
   );
 }
