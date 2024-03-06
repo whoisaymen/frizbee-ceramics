@@ -111,20 +111,32 @@ function sortProducts(products, option) {
     });
   }
 
+  // Show sale products at the top
+  // if (option === "sale") {
+  //   return [...products].sort((a, b) => {
+  //     const isOnSaleA =
+  //       a.node.compareAtPriceRange?.minVariantPrice.amount >
+  //       a.node.priceRange.minVariantPrice.amount;
+  //     const isOnSaleB =
+  //       b.node.compareAtPriceRange?.minVariantPrice.amount >
+  //       b.node.priceRange.minVariantPrice.amount;
+
+  //     if (isOnSaleA && !isOnSaleB) return -1;
+  //     if (!isOnSaleA && isOnSaleB) return 1;
+
+  //     return 0;
+  //   });
+  // }
+
+  // Only show sale products
   if (option === "sale") {
-    return [...products].sort((a, b) => {
-      const isOnSaleA =
-        a.node.compareAtPriceRange?.minVariantPrice.amount >
-        a.node.priceRange.minVariantPrice.amount;
-      const isOnSaleB =
-        b.node.compareAtPriceRange?.minVariantPrice.amount >
-        b.node.priceRange.minVariantPrice.amount;
-
-      if (isOnSaleA && !isOnSaleB) return -1;
-      if (!isOnSaleA && isOnSaleB) return 1;
-
-      return 0;
+    const saleProducts = products.filter((product) => {
+      const isOnSale =
+        product.node.compareAtPriceRange?.minVariantPrice.amount >
+        product.node.priceRange.minVariantPrice.amount;
+      return isOnSale;
     });
+    return saleProducts;
   }
 
   return products;
