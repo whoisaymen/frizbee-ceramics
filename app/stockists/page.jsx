@@ -1,4 +1,5 @@
 import ScrollToTop from "@/components/ScrollToTop";
+import Link from "next/link";
 
 // Stockist entry subcomponent
 const StockistEntry = ({ country, stockists }) => (
@@ -14,9 +15,16 @@ const StockistEntry = ({ country, stockists }) => (
             <p>{place.name}</p>
             <p>{place.address}</p>
             {place.phone && <p>{place.phone}</p>}
-            <p className="border-b border-black inline-block cursor-pointer text-sm mb-4">
-              SEE MAPS
-            </p>
+            <Link
+              href={`https://www.google.com/maps?q=${encodeURIComponent(
+                place.address
+              )}`}
+              target="_blank"
+            >
+              <p className="border-b border-black inline-block cursor-pointer text-sm mb-4">
+                SEE MAPS
+              </p>
+            </Link>
           </div>
         ))}
       </div>
