@@ -1,5 +1,5 @@
 // "use client";
-import ScrollToTop from "@/components/ScrollToTop";
+
 import projectsData from "/lib/projectsData";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +9,7 @@ import img1 from "/public/images/projects/a-box-is-a-box/img1.jpg";
 import img2 from "/public/images/projects/a-box-is-a-box/img2.png";
 import screenshot1 from "/public/images/projects/a-box-is-a-box/screenshot1.png";
 import screenshot2 from "/public/images/projects/a-box-is-a-box/screenshot2.png";
+import ProjectPageSwiper from "@/components/ui/ProjectPageSwiper";
 
 export async function generateMetadata({ params }) {
   const projectDetails = projectsData.find((p) => p.id === params.project);
@@ -29,85 +30,32 @@ export default async function ProjectPage({ params }) {
 
   return (
     <div className="bg-[#fff] font-extralight tracking-tight">
-      <div className="grid grid-cols-1 md:grid-cols-2 -m-[1px] h-screen">
-        <div className="hidden md:block  border-l border-black border-b relative h-full w-full">
-          <Image
-            src={img1}
-            alt="A Box is a Box"
-            fill
-            placeholder="blur"
-            className={`relative h-full w-full object-cover`}
-          />
+      <div className="grid grid-cols-1 xl:grid-cols-3 min-h-screen mt-0 -m-[1px]">
+        <div className="col-span-2 xl:order-2 border-l border-black border-b relative h-[65vh] xl:h-full w-full">
+          <ProjectPageSwiper images={projectDetails.images} />
         </div>
-        <div className="border-l border-black border-b relative h-full w-full">
-          <Image
-            src={img2}
-            alt="A Box is a Box"
-            fill
-            placeholder="blur"
-            className={`relative h-full w-full object-cover`}
-          />
-        </div>
-      </div>
-
-      <div className="h-screen hidden md:block">
-        <div className="grid grid-cols-1 md:grid-cols-2 h-full mt-0 -m-[1px]">
-          <div className="flex flex-col justify-start p-28 pl-10 pr-32">
+        <div className="flex flex-col justify-between pt-28 pb-10 px-10">
+          <div>
             <h2 className="text-2xl lg:text-5xl font-extralight tracking-tighter mb-10 leading-snug">
               {projectDetails.title}
             </h2>
+            <p className="text-md lg:text-lg font-extralight tracking-tighter mb-8 max-w-6xl">
+              {projectDetails.description[0]}
+            </p>
+            <p className="text-md lg:text-lg font-extralight tracking-tighter mb-8 max-w-6xl">
+              {projectDetails.description[1]}
+            </p>
           </div>
-          <div className="border-l border-t border-black relative">
-            <Image
-              src={projectDetails.images[2].src}
-              alt="A Box is a Box"
-              // height={1000}
-              // width={1000}
-              fill
-              className={`object-cover h-full`}
-
-              // layout="fill"
-              // objectFit="cover"
-            />
-          </div>
+          <h2 className="uppercase text-xl lg:text-xl">
+            Capsule collection below
+          </h2>
         </div>
       </div>
 
-      <div className="h-screen border-t border-black flex items-center justify-center p-4 pr-30 w-full">
-        <p className="text-xl lg:text-3xl font-extralight tracking-tighter mb-4 uppercase  max-w-6xl">
-          {projectDetails.description[0]}
-        </p>
-      </div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 -mt-3 border-t border-black">
+      <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-black mb-[24px] md:mb-[28px]">
         {products.slice(0, 4).map((product, index) => (
           <ProductCard key={product.node.id} product={product} index={index} />
         ))}
-      </div>
-
-      <div className="h-screen flex items-center justify-center p-4 pr-30 w-full">
-        <p className="text-xl lg:text-3xl font-extralight tracking-tighter mb-4 uppercase  max-w-6xl">
-          {projectDetails.description[1]}
-        </p>
-      </div>
-
-      <div className="h-auto md:flex w-full">
-        <Image
-          src={screenshot1}
-          alt="A Box is a Box"
-          height={1000}
-          width={1000}
-          placeholder="blur"
-          className={`h-full w-full lg:w-1/2 object-contain`}
-        />
-
-        <Image
-          src={screenshot2}
-          alt="A Box is a Box"
-          height={1000}
-          width={1000}
-          placeholder="blur"
-          className={`h-full w-full lg:w-1/2 object-contain`}
-        />
       </div>
     </div>
   );
