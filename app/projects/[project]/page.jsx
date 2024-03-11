@@ -5,6 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import { getProductsForProject } from "@/lib/shopify";
+import img1 from "/public/images/projects/a-box-is-a-box/img1.jpg";
+import img2 from "/public/images/projects/a-box-is-a-box/img2.png";
+import screenshot1 from "/public/images/projects/a-box-is-a-box/screenshot1.png";
+import screenshot2 from "/public/images/projects/a-box-is-a-box/screenshot2.png";
 import ProjectPageSwiper from "@/components/ui/ProjectPageSwiper";
 
 export async function generateMetadata({ params }) {
@@ -32,7 +36,7 @@ export default async function ProjectPage({ params }) {
         </div>
         <div className="flex flex-col justify-between pt-14 xl:pt-28 pb-10 px-10">
           <div>
-            <h2 className="text-2xl xl:text-5xl font-extralight tracking-tighter mb-10 leading-snug">
+            <h2 className="text-2xl xl:text-5xl font-extralight tracking-tighter mb-8 xl:mb-10 leading-snug">
               {projectDetails.title}
             </h2>
             <p className="text-md lg:text-lg font-extralight tracking-tighter mb-8 max-w-6xl">
