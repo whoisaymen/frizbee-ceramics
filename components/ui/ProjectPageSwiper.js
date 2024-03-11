@@ -37,7 +37,7 @@ const ProjectPageSwiper = ({ images }) => {
             src={image.src}
             alt={`Image ${index + 1}`}
             fill
-            // placeholder="blur"
+            sizes="(min-width: 808px) 50vw, 100vw"
             className={`object-cover h-full w-full`}
           />
         </SwiperSlide>

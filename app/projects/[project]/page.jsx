@@ -5,10 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import { getProductsForProject } from "@/lib/shopify";
-import img1 from "/public/images/projects/a-box-is-a-box/img1.jpg";
-import img2 from "/public/images/projects/a-box-is-a-box/img2.png";
-import screenshot1 from "/public/images/projects/a-box-is-a-box/screenshot1.png";
-import screenshot2 from "/public/images/projects/a-box-is-a-box/screenshot2.png";
 import ProjectPageSwiper from "@/components/ui/ProjectPageSwiper";
 
 export async function generateMetadata({ params }) {
