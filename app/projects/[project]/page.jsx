@@ -31,12 +31,12 @@ export default async function ProjectPage({ params }) {
   return (
     <div className="bg-[#fff] font-extralight tracking-tight">
       <div className="grid grid-cols-1 xl:grid-cols-3 min-h-screen mt-0 -m-[1px]">
-        <div className="col-span-2 xl:order-2 border-l border-black border-b relative h-[65vh] xl:h-full w-full">
+        <div className="col-span-2 xl:order-2 border-l border-black border-b relative h-[60vh] xl:h-full w-full">
           <ProjectPageSwiper images={projectDetails.images} />
         </div>
-        <div className="flex flex-col justify-between pt-28 pb-10 px-10">
+        <div className="flex flex-col justify-between pt-14 xl:pt-28 pb-10 px-10">
           <div>
-            <h2 className="text-2xl lg:text-5xl font-extralight tracking-tighter mb-10 leading-snug">
+            <h2 className="text-2xl xl:text-5xl font-extralight tracking-tighter mb-10 leading-snug">
               {projectDetails.title}
             </h2>
             <p className="text-md lg:text-lg font-extralight tracking-tighter mb-8 max-w-6xl">
@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }) {
               {projectDetails.description[1]}
             </p>
           </div>
-          <h2 className="uppercase text-xl lg:text-xl">
+          <h2 className="uppercase text-md lg:text-lg tracking-tighter">
             Capsule collection below
           </h2>
         </div>
