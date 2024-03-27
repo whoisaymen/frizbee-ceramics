@@ -4,6 +4,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import GoogleAnalytics from "@/GoogleAnalytics";
+import { GoogleTagManager } from "@next/third-parties/google";
 import ShopProvider from "@/context/shopContext";
 
 import Footer from "@/components/Footer";
@@ -65,6 +66,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <GoogleTagManager gtmId="GTM-KZ296SD6" />
       <body className={`${inter.className} custom-cursor`}>
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
