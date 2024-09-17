@@ -28,16 +28,31 @@ const ProductList = async ({ sortOption }) => {
 function sortProducts(products, option) {
   if (!option || !products) return products;
 
-  if (option === "default") {
-    return [...products].sort((a, b) => {
-      const isProjectA = a.node.tags.includes("project:a-box-is-a-box");
-      const isProjectB = b.node.tags.includes("project:a-box-is-a-box");
+  // old default sort option
+  // if (option === "default") {
+  //   return [...products].sort((a, b) => {
+  //     const isProjectA = a.node.tags.includes("project:a-box-is-a-box");
+  //     const isProjectB = b.node.tags.includes("project:a-box-is-a-box");
 
-      if (isProjectA && !isProjectB) return -1;
-      if (!isProjectA && isProjectB) return 1;
+  //     if (isProjectA && !isProjectB) return -1;
+  //     if (!isProjectA && isProjectB) return 1;
 
-      return 0;
+  //     return 0;
+  //   });
+  // }
+
+  // new default and shop option [with new products at the top]
+  if (option === "default" || option === "shop") {
+    const newProducts = products.filter((product) => product.node.tags.includes("new"));
+    const otherProducts = products.filter((product) => !product.node.tags.includes("new"));
+
+    const sortedOtherProducts = otherProducts.sort((a, b) => {
+      const dateA = new Date(a.node.createdAt);
+      const dateB = new Date(b.node.createdAt);
+      return dateB - dateA;
     });
+
+    return [...newProducts, ...sortedOtherProducts];
   }
 
   if (option === "color") {
@@ -137,20 +152,6 @@ function sortProducts(products, option) {
       return isOnSale;
     });
     return saleProducts;
-  }
-
-  // new shop option [with new products at the top]
-  if (option === "shop") {
-    const newProducts = products.filter((product) => product.node.tags.includes("new"));
-    const otherProducts = products.filter((product) => !product.node.tags.includes("new"));
-
-    const sortedOtherProducts = otherProducts.sort((a, b) => {
-      const dateA = new Date(a.node.createdAt);
-      const dateB = new Date(b.node.createdAt);
-      return dateB - dateA;
-    });
-
-    return [...newProducts, ...sortedOtherProducts];
   }
 
   return products;

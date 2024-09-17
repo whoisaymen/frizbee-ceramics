@@ -144,7 +144,7 @@ export default function Newsletter() {
                   <h3 className="tracking-tighter font-extralight uppercase m-2 text-lg">
                     Newsletter
                   </h3>
-                  <p className="text-sm font-extralight tracking-tighter leading-snug p-2 pt-0 -mt-1 mb-6 md:mb-0">
+                  <p className="text-sm font-extralight tracking-tighter leading-snug p-2 pt-0 -mt-1 md:mb-0">
                     Sign up for our newsletter here.
                   </p>
 

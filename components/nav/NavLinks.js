@@ -177,7 +177,7 @@ export default function NavLinks() {
               </ul>
             )}
             <Link href="/about" className="" onClick={() => setMenuOpen(false)}>
-              About
+              Info
             </Link>
             <Link
               href="/terms-and-conditions"
