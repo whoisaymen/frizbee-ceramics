@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import { MENU_ITEMS } from "@/lib/constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { checkForSaleProducts } from "./SortFilterMenu";
 
 function NavLink({ item }) {
   const pathname = usePathname();
@@ -65,6 +66,15 @@ function NavLink({ item }) {
 export default function NavLinks() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isProjectsSubmenuOpen, setIsProjectsSubmenuOpen] = useState(false);
+  const [hasSaleProducts, setHasSaleProducts] = useState(0);
+
+  useEffect(() => {
+    const fetchSaleProducts = async () => {
+      const res = await checkForSaleProducts();
+      setHasSaleProducts(res);
+    };
+    fetchSaleProducts();
+  }, []);
 
   const toggleProjectsSubmenuMobile = () => {
     setIsProjectsSubmenuOpen(!isProjectsSubmenuOpen);
@@ -124,13 +134,25 @@ export default function NavLinks() {
 
         <div className="pb-40 px-4 sm:px-6 h-full overflow-y-scroll w-[50vw] z-1 relative">
           <nav className="flex flex-col tracking-tighter font-light uppercase text-sm justify-center space-y-2 mt-[60px]">
-            <Link
+            {/* <Link
               href="/stockists"
               className=""
               onClick={() => setMenuOpen(false)}
             >
               Stockists
-            </Link>
+            </Link> */}
+
+            {/* if sale products exist, show sale button */}
+            {hasSaleProducts && (
+              <Link
+                href="/?sort=sale"
+                className=""
+                onClick={() => setMenuOpen(false)}
+              >
+                Sale
+              </Link>
+            )}
+
             <button
               onClick={toggleProjectsSubmenuMobile}
               className="text-left uppercase"
@@ -183,7 +205,7 @@ export default function NavLinks() {
 const aboutSubmenu = (
   <div className="about-submenu absolute top-full right-0 z-0 bg-[#AAAAEF] border border-t-0 border-black w-[180px] -mt-0 -mr-[1px]">
     <ul className="list-none p-0 m-0 text-right">
-      {MENU_ITEMS[2].subsections.map((subsection) => (
+      {MENU_ITEMS[1].subsections.map((subsection) => (
         <li key={subsection.title} className="p-[0.1rem] px-1 py-0">
           <Link href={`/${subsection.slug}`}>
             <span className="block text-black no-underline">

@@ -4,14 +4,14 @@ import Image from "next/image";
 
 export default function ContactPage() {
   return (
-    <div className="bg-white font-extralight tracking-tight min-h-[100vh] flex flex-col justify-between items-center">
+    <div className="bg-white font-extralight tracking-tight min-h-[100vh] flex flex-col gap-6 items-center">
       <ScrollToTop />
 
       <div className="w-full h-full mt-20 lg:mt-20">
         <div className="mt-20 flex flex-col lg:flex-row justify-center lg:items-center mx-10 lg:mx-48 space-y-8 lg:space-y-0">
           <div className="space-y-4 w-1/2">
             <span className="text-[#000] bg-[#aaefcc] mb-0 inline-block font-light py-[0px] px-3 tracking-[-1.2px] border border-black text-sm md:text-base">
-              TO SAY HI
+              EMAIL US
             </span>
             <p className="text-sm">
               <span className="font-bold mb-1 inline-block">
@@ -47,7 +47,7 @@ export default function ContactPage() {
                 pizza@frizbeeceramics.com
               </Link>
             </p>
-            <p className="text-sm">
+            {/* <p className="text-sm">
               <span className="font-bold mb-1 inline-block">
                 Collaboration:
               </span>
@@ -58,13 +58,13 @@ export default function ContactPage() {
               >
                 pizza@frizbeeceramics.com
               </Link>
-            </p>
+            </p> */}
           </div>
 
           {/* Social Links */}
           <div className="flex flex-col space-y-4 self-start w-1/2">
             <span className="text-[#000] bg-[#aaefcc] mb-0 inline-block md:text-base font-light py-[0px] px-3 tracking-[-1.2px] border border-black self-start text-sm">
-              TO FOLLOW US
+              FOLLOW US
             </span>
             <div className="flex flex-col items-start space-y-2">
               <Link

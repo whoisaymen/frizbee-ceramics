@@ -139,6 +139,20 @@ function sortProducts(products, option) {
     return saleProducts;
   }
 
+  // new shop option [with new products at the top]
+  if (option === "shop") {
+    const newProducts = products.filter((product) => product.node.tags.includes("new"));
+    const otherProducts = products.filter((product) => !product.node.tags.includes("new"));
+
+    const sortedOtherProducts = otherProducts.sort((a, b) => {
+      const dateA = new Date(a.node.createdAt);
+      const dateB = new Date(b.node.createdAt);
+      return dateB - dateA;
+    });
+
+    return [...newProducts, ...sortedOtherProducts];
+  }
+
   return products;
 }
 

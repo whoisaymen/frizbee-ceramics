@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import newsletterImage from "@/public/images/newsletter2.jpeg";
+// import newsletterImage from "@/public/images/newsletter2.jpeg";
+import newsletterImage from "@/public/images/newsletter-latest.jpg";
 import Image from "next/image";
 
 export default function Newsletter() {
@@ -128,8 +129,7 @@ export default function Newsletter() {
               </h3>
               <ul className="text-sm font-extralight tracking-tighter p-2 pt-0 -mt-1 list-none">
                 <li>
-                  The studio is now located in Portugal, Barrosinha. Feel free
-                  to visit to see what we&apos;re up to.
+                Come see us / Barcelona Coffee Awards / October the 18th, 19th and 20th.
                 </li>
               </ul>
             </div>

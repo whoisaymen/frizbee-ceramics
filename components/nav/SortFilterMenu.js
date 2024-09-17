@@ -2,24 +2,26 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import clsx from "clsx";
 import { SORTING_OPTIONS } from "@/lib/constants";
 import arrowLeft from "@/public/images/arrow-icon-left.svg";
 import Image from "next/image";
+import { getProductsInCollection } from "@/lib/shopify";
 
 function SortFilterItem({ item }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const active = searchParams.get("sort") === item.slug;
+  const active = searchParams.get("sort") === item?.slug;
 
-  const href = `${pathname}?sort=${item.slug}`;
+  const href = `${pathname}?sort=${item?.slug}`;
   const DynamicTag = active ? "p" : Link;
+
 
   return (
     <li
       className="tracking-[-1.2px] ml-4 custom-cursor text-black border-black border lg:hover:-rotate-3 transition duration-200 ease-out bg-white/90 font-light"
-      key={item.slug}
+      key={item?.slug}
     >
       <Suspense>
         <DynamicTag
@@ -28,7 +30,7 @@ function SortFilterItem({ item }) {
             "bg-[#e8ecf4]": active,
           })}
         >
-          {item.title}
+          {item?.title}
         </DynamicTag>
       </Suspense>
     </li>
@@ -37,14 +39,28 @@ function SortFilterItem({ item }) {
 
 export default function SortFilterMenu() {
   const [currentSortIndex, setCurrentSortIndex] = useState(0);
+  const [availableSortingOptions, setAvailableSortingOptions] = useState([]);
 
   const pathname = usePathname();
   const router = useRouter();
 
+  useEffect(() => {
+    async function fetchSaleProducts() {
+      // Replace this with your actual Shopify API call to check for sale products
+      const hasSaleProducts = await checkForSaleProducts();
+      if (hasSaleProducts) {  
+        setAvailableSortingOptions(SORTING_OPTIONS);
+      } else {
+        setAvailableSortingOptions(SORTING_OPTIONS.filter(option => option.slug !== 'sale'));
+      }
+    }
+    fetchSaleProducts();
+  }, []);
+
   const handleSortClick = () => {
-    const newSortIndex = (currentSortIndex + 1) % SORTING_OPTIONS.length;
+    const newSortIndex = (currentSortIndex + 1) % availableSortingOptions.length;
     setCurrentSortIndex(newSortIndex);
-    const newSortOption = SORTING_OPTIONS[newSortIndex].slug;
+    const newSortOption = availableSortingOptions[newSortIndex].slug;
     router.push(`${pathname}?sort=${newSortOption}`);
   };
 
@@ -72,7 +88,7 @@ export default function SortFilterMenu() {
                 </div>
               </button>
             ) : (
-              <Link href="/" className={"w-full px-4"}>
+              <Link href="/?sort=shop" className={"w-full px-4"}>
                 Shop
               </Link>
             )}
@@ -86,16 +102,33 @@ export default function SortFilterMenu() {
     <>
       <div className="lg:hidden">
         <ul onClick={handleSortClick}>
-          <SortFilterItem item={SORTING_OPTIONS[currentSortIndex]} />
+          <SortFilterItem item={availableSortingOptions[currentSortIndex]} />
         </ul>
       </div>
-      <div className="hidden lg:flex justify-start items-center w-full h-full  md:bg-transparent">
+      <div className="hidden lg:flex justify-start items-center w-full h-full md:bg-transparent">
         <ul className="flex">
-          {SORTING_OPTIONS.map((option) => (
+          {availableSortingOptions.map((option) => (
             <SortFilterItem key={option.slug} item={option} />
           ))}
         </ul>
       </div>
     </>
   );
+}
+
+export async function checkForSaleProducts() {
+  try {
+    const products = await getProductsInCollection();
+
+    const saleProducts = products.filter((product) => {
+      const isOnSale =
+        product.node.compareAtPriceRange?.minVariantPrice.amount >
+        product.node.priceRange?.minVariantPrice.amount;
+      return isOnSale;
+    });
+    return saleProducts.length > 0;
+  } catch (error) {
+    console.error('Error checking for sale products:', error);
+    return false;
+  }
 }
