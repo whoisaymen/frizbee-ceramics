@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 // import newsletterImage from "@/public/images/newsletter2.jpeg";
-import newsletterImage from "@/public/images/newsletter-latest.jpg";
+import newsletterImage from "@/public/images/newsletter1.jpg";
 import Image from "next/image";
 
 export default function Newsletter() {
@@ -129,7 +129,8 @@ export default function Newsletter() {
               </h3>
               <ul className="text-sm font-extralight tracking-tighter p-2 pt-0 -mt-1 list-none">
                 <li>
-                Come see us / Barcelona Coffee Awards / October the 18th, 19th and 20th.
+                  Come see us / Barcelona Coffee Awards / October the 18th, 19th
+                  and 20th.
                 </li>
               </ul>
             </div>
