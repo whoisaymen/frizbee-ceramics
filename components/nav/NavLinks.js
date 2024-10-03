@@ -5,7 +5,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import { MENU_ITEMS } from "@/lib/constants";
 import { useEffect, useState } from "react";
-import { checkForSaleProducts } from "./SortFilterMenu";
+import { checkForSaleProducts, checkForFlawedProducts } from "./SortFilterMenu";
 
 function NavLink({ item }) {
   const pathname = usePathname();
@@ -67,13 +67,19 @@ export default function NavLinks() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isProjectsSubmenuOpen, setIsProjectsSubmenuOpen] = useState(false);
   const [hasSaleProducts, setHasSaleProducts] = useState(0);
+  const [hasFlawedProducts, setHasFlawedProducts] = useState(0);
 
   useEffect(() => {
-    const fetchSaleProducts = async () => {
+    const fetchFlawedAndSaleProducts = async () => {
+      // Check for Sale Products
       const res = await checkForSaleProducts();
       setHasSaleProducts(res);
+
+      // Check for Flawed Products
+      const res2 = await checkForFlawedProducts();
+      setHasFlawedProducts(res2);
     };
-    fetchSaleProducts();
+    fetchFlawedAndSaleProducts();
   }, []);
 
   const toggleProjectsSubmenuMobile = () => {
@@ -150,6 +156,16 @@ export default function NavLinks() {
                 onClick={() => setMenuOpen(false)}
               >
                 Sale
+              </Link>
+            )}
+
+            {hasFlawedProducts && (
+              <Link
+                href="/?sort=flawfab"
+                className=""
+                onClick={() => setMenuOpen(false)}
+              >
+                Flawed & Faboulous
               </Link>
             )}
 

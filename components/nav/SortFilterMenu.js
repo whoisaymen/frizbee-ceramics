@@ -20,7 +20,7 @@ function SortFilterItem({ item }) {
 
   return (
     <li
-      className="tracking-[-1.2px] ml-4 custom-cursor text-black border-black border lg:hover:-rotate-3 transition duration-200 ease-out bg-white/90 font-light"
+      className={`tracking-[-1.2px] ml-4 custom-cursor text-black border-black border lg:hover:-rotate-3 transition duration-200 ease-out font-light ${item?.slug === "flawfab" ? "bg-[#aaaaef]" : "bg-white/90"}`}
       key={item?.slug}
     >
       <Suspense>
@@ -46,13 +46,15 @@ export default function SortFilterMenu() {
 
   useEffect(() => {
     async function fetchSaleProducts() {
-      // Replace this with your actual Shopify API call to check for sale products
       const hasSaleProducts = await checkForSaleProducts();
-      if (hasSaleProducts) {  
-        setAvailableSortingOptions(SORTING_OPTIONS);
-      } else {
-        setAvailableSortingOptions(SORTING_OPTIONS.filter(option => option.slug !== 'sale'));
-      }
+      const hasFlawedProducts = await checkForFlawedProducts();
+
+      setAvailableSortingOptions(
+        SORTING_OPTIONS.filter((option) =>
+          (option.slug !== "sale" || hasSaleProducts) &&
+          (option.slug !== "flawfab" || hasFlawedProducts)
+        )
+      );
     }
     fetchSaleProducts();
   }, []);
@@ -129,6 +131,17 @@ export async function checkForSaleProducts() {
     return saleProducts.length > 0;
   } catch (error) {
     console.error('Error checking for sale products:', error);
+    return false;
+  }
+}
+
+export async function checkForFlawedProducts() {
+  try {
+    const products = await getProductsInCollection();
+
+    return products.some((product) => product.node.tags.includes('flawfab'));
+  } catch (error) {
+    console.error('Error checking for flawfab products:', error);
     return false;
   }
 }

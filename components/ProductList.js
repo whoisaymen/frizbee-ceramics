@@ -43,8 +43,17 @@ function sortProducts(products, option) {
 
   // new default and shop option [with new products at the top]
   if (option === "default" || option === "shop") {
-    const newProducts = products.filter((product) => product.node.tags.includes("new"));
-    const otherProducts = products.filter((product) => !product.node.tags.includes("new"));
+    //only new products
+    const newProducts = products.filter((product) =>
+      product.node.tags.includes("new")
+    );
+
+    //other products except new and flawed
+    const otherProducts = products.filter(
+      (product) =>
+        !product.node.tags.includes("new") &&
+        !product.node.tags.includes("flawfab")
+    );
 
     const sortedOtherProducts = otherProducts.sort((a, b) => {
       const dateA = new Date(a.node.createdAt);
@@ -53,6 +62,9 @@ function sortProducts(products, option) {
     });
 
     return [...newProducts, ...sortedOtherProducts];
+  }
+  if (option === "flawfab") {
+    return products.filter((product) => product.node.tags.includes("flawfab"));
   }
 
   if (option === "color") {
