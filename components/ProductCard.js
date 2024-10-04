@@ -18,16 +18,19 @@ import DesktopQuickBuy from './ui/DesktopQuickBuy'
 // const DesktopQuickBuy = dynamic(() => import("./ui/DesktopQuickBuy"));
 
 const ProductCard = ({ product, index }) => {
-  const { addToCart } = useContext(CartContext)
-  const { handle, title, id } = product.node
-  const price = product.node.priceRange.minVariantPrice.amount
-  const compareAtPrice =
-    product.node.compareAtPriceRange?.minVariantPrice.amount
-  const isAvailableForSale = product.node.availableForSale
-  const colorValue = getColorFromTag(product)
-  const imageUrl1 = product.node.images.edges[0].node.url
-  const imageUrl2 = product.node.images.edges[1]?.node.url
-  const [displayImageUrl, setDisplayImageUrl] = useState(imageUrl1)
+  const { addToCart } = useContext(CartContext);
+  const { handle, title, id } = product.node;
+  const price = product.node.priceRange.minVariantPrice.amount;
+  const compareAtPrice = product.node.compareAtPriceRange?.minVariantPrice.amount;
+  const isAvailableForSale = product.node.availableForSale;
+  const colorValue = getColorFromTag(product);
+  
+  // Get images and video
+  const mediaItems = product.node.media.edges;
+  const imageUrl1 = mediaItems[0]?.node.image?.url;
+  const imageUrl2 = mediaItems[1]?.node.image?.url;
+  const video = mediaItems.find(edge => edge.node.sources)?.node;
+  
 
   const handleAddToCart = () => {
     const defaultVariant = product.node.variants.edges[0]?.node
@@ -52,20 +55,75 @@ const ProductCard = ({ product, index }) => {
   }
 
   const SwiperSlides = () => {
-    return product.node.images.edges.map((image, i) => (
-      <SwiperSlide key={`mobile-slide-${i}`}>
-        <Image
-          src={image.node.url}
-          alt='Product image'
-          width={300}
-          height={300}
-          // priority={i === 0 ? 'true' : 'false'}
-          loading='lazy'
-          className='w-full h-full object-cover object-center'
-        />
-      </SwiperSlide>
-    ))
+    return mediaItems.map((mediaItem, i) => {
+      if (mediaItem.node.sources) {
+        // This is a video
+        const videoSource = mediaItem.node.sources.find(source => 
+          source.mimeType === "video/mp4" && source.url.includes("HD")
+        ) || mediaItem.node.sources[0];
+          return <SwiperSlide key={`slide-${i}`} className="relative">
+            <div className="w-full h-full flex items-center justify-center bg-black">
+              <video
+                autoPlay
+                loop
+                muted
+                className="h-full w-full object-cover object-center"
+                poster={mediaItem.node.previewImage?.url}
+              >
+                <source src={videoSource.url} type={videoSource.mimeType} />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </SwiperSlide>
+      } else if (mediaItem.node.image) {
+  
+        // This is an image
+        return <SwiperSlide key={`slide-${i}`} className="relative">
+            <Image
+              src={mediaItem.node.image.url}
+              alt={mediaItem.node.image.altText || "Product image"}
+              width={300}
+              height={300}
+              // priority={i === 0 ? 'true' : 'false'}
+              loading='lazy'
+              className='w-full h-full object-cover object-center'
+            />
+          </SwiperSlide>
+      }
+    });
   }
+  
+  const [displayMedia, setDisplayMedia] = useState({
+    type: 'IMAGE',
+    content: imageUrl1
+  });
+
+  const handleMouseEnter = () => {
+    if (video) {
+      // Find the MP4 video source with the highest quality
+      const videoSource = video.sources.find(source => 
+        source.mimeType === "video/mp4" && source.url.includes("HD")
+      ) || video.sources[0];
+      
+      setDisplayMedia({
+        type: 'VIDEO',
+        content: videoSource.url
+      });
+    } else if (imageUrl2) {
+      setDisplayMedia({
+        type: 'IMAGE',
+        content: imageUrl2
+      });
+    }
+  };
+
+
+  const handleMouseLeave = () => {
+    setDisplayMedia({
+      type: 'IMAGE',
+      content: imageUrl1
+    });
+  };
 
   return (
     <motion.div
@@ -82,11 +140,11 @@ const ProductCard = ({ product, index }) => {
       }`}
       key={id}
     >
-      <Link href={`/products/${handle}`} className='custom-cursor relative'>
+      <Link href={`/products/${handle}`} className="custom-cursor relative">
         <div
-          className='group'
-          onMouseEnter={() => setDisplayImageUrl(imageUrl2 || imageUrl1)}
-          onMouseLeave={() => setDisplayImageUrl(imageUrl1)}
+          className="group"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           {/* Mobile Product Card */}
           <div className='md:hidden overflow-hidden text-[12px] h-[40vh] text-center flex flex-col justify-end relative'>
@@ -133,17 +191,27 @@ const ProductCard = ({ product, index }) => {
           </div>
 
           {/* Desktop Product Card */}
-          <div className='hidden md:block w-full overflow-hidden md:h-[24rem] bg-gray-100 relative text-sm'>
-            <Image
-              src={displayImageUrl}
-              alt={'Product Image'}
-              width={500}
-              height={500}
-              priority
-              className='w-full h-full object-cover object-center max-w-full'
-            />
-
-            <div className='absolute left-3 font-semibold bottom-2 flex flex-col'>
+          <div className="hidden md:block w-full overflow-hidden md:h-[24rem] bg-gray-100 relative text-sm">
+            {displayMedia.type === 'VIDEO' ? (
+              <video
+                src={displayMedia.content}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover object-center"
+              />
+            ) : (
+              <Image
+                src={displayMedia.content}
+                alt={"Product Image"}
+                width={500}
+                height={500}
+                priority
+                className="w-full h-full object-cover object-center max-w-full"
+              />
+            )}
+            <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
               <span>{title}</span>
               <span className='font-light -mt-1'>
                 {compareAtPrice && price < compareAtPrice ? (
