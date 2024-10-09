@@ -212,6 +212,12 @@ const ProductCard = ({ product, index }) => {
               />
             )}
             <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
+              <div
+                className='w-1/2 blur-2xl absolute left-0 bottom-0 h-6 z-[8]'
+                style={{
+                  backgroundColor: colorMappings[colorValue] || '#343dfb',
+                }}
+              ></div>
               <span>{title}</span>
               <span className='font-light -mt-1'>
                 {compareAtPrice && price < compareAtPrice ? (
