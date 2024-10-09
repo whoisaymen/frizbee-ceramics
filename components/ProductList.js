@@ -43,25 +43,41 @@ function sortProducts(products, option) {
 
   // new default and shop option [with new products at the top]
   if (option === "default" || option === "shop") {
-    //only new products
-    const newProducts = products.filter((product) =>
-      product.node.tags.includes("new")
-    );
-
-    //other products except new and flawed
-    const otherProducts = products.filter(
+    //remove flawed products and rest will be manually sorted from backend
+    const filteredProducts = products.filter(
       (product) =>
-        !product.node.tags.includes("new") &&
         !product.node.tags.includes("flawfab")
     );
 
-    const sortedOtherProducts = otherProducts.sort((a, b) => {
-      const dateA = new Date(a.node.createdAt);
-      const dateB = new Date(b.node.createdAt);
-      return dateB - dateA;
-    });
+    return filteredProducts;
 
-    return [...newProducts, ...sortedOtherProducts];
+    //only new products
+    // const newProducts = products.filter((product) =>
+    //   product.node.tags.includes("new")
+    // );
+
+    // //other products except new and flawed
+    // const otherProducts = products.filter(
+    //   (product) =>
+    //     !product.node.tags.includes("new") &&
+    //     !product.node.tags.includes("flawfab")
+    // );
+
+    //sort other products by latest updated
+    // otherProducts.sort((a, b) => {
+    //   const updatedAtA = new Date(a.node.updatedAt);
+    //   const updatedAtB = new Date(b.node.updatedAt);
+    //   return updatedAtB - updatedAtA;
+    // });
+
+    //sort both new and other products
+    // newProducts.sort((a, b) => {
+    //   const updatedAtA = new Date(a.node.updatedAt);
+    //   const updatedAtB = new Date(b.node.updatedAt);
+    //   return updatedAtB - updatedAtA;
+    // });
+
+    // return [...newProducts, ...otherProducts];
   }
   if (option === "flawfab") {
     return products.filter((product) => product.node.tags.includes("flawfab"));
