@@ -110,9 +110,9 @@ export default function ProductForm({ product }) {
     }
   }, [productInventory, selectedVariant]);
 
-  const price = product.variants.edges[0].node.priceV2?.amount;
+  const price = parseFloat(product.variants.edges[0].node.priceV2?.amount);
   const compareAtPrice =
-    product.variants.edges[0].node.compareAtPriceV2?.amount;
+  parseFloat(product.variants.edges[0].node.compareAtPriceV2?.amount);
   const isAvailableForSale = product.variants.edges[0].node.availableForSale;
 
   return (

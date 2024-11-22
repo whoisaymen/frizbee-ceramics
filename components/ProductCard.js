@@ -20,8 +20,8 @@ import DesktopQuickBuy from './ui/DesktopQuickBuy'
 const ProductCard = ({ product, index }) => {
   const { addToCart } = useContext(CartContext);
   const { handle, title, id } = product.node;
-  const price = product.node.priceRange.minVariantPrice.amount;
-  const compareAtPrice = product.node.compareAtPriceRange?.minVariantPrice.amount;
+  const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
+  const compareAtPrice = parseFloat(product.node.compareAtPriceRange?.minVariantPrice.amount);
   const isAvailableForSale = product.node.availableForSale;
   const colorValue = getColorFromTag(product);
   

@@ -175,8 +175,8 @@ function sortProducts(products, option) {
   if (option === "sale") {
     const saleProducts = products.filter((product) => {
       const isOnSale =
-        product.node.compareAtPriceRange?.minVariantPrice.amount >
-        product.node.priceRange.minVariantPrice.amount;
+        parseFloat(product.node.compareAtPriceRange?.minVariantPrice.amount) >
+        parseFloat(product.node.priceRange.minVariantPrice.amount);
       return isOnSale;
     });
     return saleProducts;
