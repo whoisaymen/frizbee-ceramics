@@ -7,11 +7,11 @@ import Image from "next/image";
 
 export default function Newsletter() {
   const [newsletterOpen, setNewsletterOpen] = useState(false);
-  useEffect(() => {
-    setTimeout(() => {
-      setNewsletterOpen(true);
-    }, 10000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setNewsletterOpen(true);
+  //   }, 10000);
+  // }, []);
   const [subscriptionStatus, setSubscriptionStatus] = useState("idle");
 
   const toggleNewsletter = () => {
@@ -108,7 +108,7 @@ export default function Newsletter() {
         </button>
 
         <div
-          className={`transform transition ease-in-out duration-500 translate-y-0 bg-white h-auto w-screen md:-mt-[28px] mb-[24px] md:mb-[28px] lg:m-0 lg:flex lg:rounded-l-lg lg:min-h-[300px] lg:w-full`}
+          className={`transform transition ease-in-out duration-500 translate-y-0 bg-white h-auto w-screen md:-mt-[28px] mb-[24px] md:mb-[28px] lg:m-0 lg:flex lg:rounded-l-lg lg:min-h-[300px] lg:max-w-[470px]`}
         >
           <div className="relative h-[20vh] lg:h-auto lg:w-1/2">
             <Image
@@ -122,16 +122,18 @@ export default function Newsletter() {
             />
           </div>
 
-          <div className="h-auto lg:w-1/2 lg:flex lg:justify-between lg:flex-col lg:border-t border-black lg:border-b">
+          <div className="h-auto lg:w-1/2 lg:min-w-[250px] lg:flex lg:justify-between lg:flex-col lg:border-t border-black lg:border-b">
             <div>
               <h3 className="tracking-tighter font-extralight uppercase m-2 text-lg">
                 News
               </h3>
               <ul className="text-sm font-extralight tracking-tighter p-2 pt-0 -mt-1 list-none">
                 <li>
-                  Come see us / Barcelona Coffee Awards / October the 18th, 19th
-                  and 20th.
+                  Come see us 
                 </li>
+                <li>- Paris: 07/12 - 08/12 - Lafayette Anticipations </li>
+                <li>- Lisbon: 07/12 - Ele Ela Café</li>
+                <li>- Brussels: 14/12 - Bouche Café</li>
               </ul>
             </div>
             <div>
