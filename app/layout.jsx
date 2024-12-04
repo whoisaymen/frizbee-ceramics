@@ -79,7 +79,6 @@ export default function RootLayout({ children }) {
           </Nav>
           <Cart />
           <Newsletter />
-
           {children}
           <Footer />
         </ShopProvider>
