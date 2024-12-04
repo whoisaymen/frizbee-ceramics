@@ -67,16 +67,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <GoogleTagManager gtmId="GTM-KZ296SD6" />
-      <body className={`${inter.className} custom-cursor bg-black`}>
+      <body className={`${inter.className} custom-cursor`}>
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         ) : null}
-          {/* <Nav>
+        <ShopProvider>
+          <Nav>
             <SortFilterMenu />
             <Logo />
             <NavLinks />
-          </Nav> */}
+          </Nav>
+          <Cart />
+          <Newsletter />
+
           {children}
+          <Footer />
+        </ShopProvider>
+        <FacebookPixel />
       </body>
     </html>
   );
