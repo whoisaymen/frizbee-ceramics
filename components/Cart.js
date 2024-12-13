@@ -72,6 +72,7 @@ export default function Cart() {
             <div className="border-black">
               <div className="flow-root">
                 {cart.length > 0 ? (
+                  <div>
                   <ul role="list" className="divide-y-0 divide-gray-400">
                     {cart.map((product) => (
                       <li
@@ -158,6 +159,12 @@ export default function Cart() {
                       </li>
                     ))}
                   </ul>
+                    <div className="text-center lg:text-left">
+                      <p className="p-2 text-lg bg-[#ff7171ed] md:text-lg tracking-tighter">
+                        From now, all orders will be delivered in 2025!
+                      </p>
+                    </div>
+                </div>
                 ) : (
                   <div className="h-full w-screen">
                     <p className="p-4 text-sm md:text-lg tracking-tighter font-light">
