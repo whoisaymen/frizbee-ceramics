@@ -2,8 +2,8 @@ import React from "react";
 import Countdown from "react-countdown";
 
 const CountdownTimer = () => {
-    // Set end date to December 3rd, 2024 at 8 AM
-    const endDate = new Date("2024-12-04T12:30:00").getTime();
+    // Set end date to Tuesday 04/02 3PM GMT
+    const endDate = new Date("2025-02-04T20:30:00").getTime();
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {
