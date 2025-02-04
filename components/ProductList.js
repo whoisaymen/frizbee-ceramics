@@ -43,10 +43,14 @@ function sortProducts(products, option) {
 
   // new default and shop option [with new products at the top]
   if (option === "default" || option === "shop") {
-    //remove flawed products and rest will be manually sorted from backend
+    //remove flawed and on-sale products and rest will be manually sorted from backend
     const filteredProducts = products.filter(
-      (product) =>
-        !product.node.tags.includes("flawfab")
+      (product) =>{
+        const isOnSale =
+        parseFloat(product.node.compareAtPriceRange?.minVariantPrice.amount) >
+        parseFloat(product.node.priceRange.minVariantPrice.amount);
+        return !isOnSale && !product.node.tags.includes("flawfab")
+      }
     );
 
     return filteredProducts;

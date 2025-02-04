@@ -22,6 +22,9 @@ const ProductCard = ({ product, index }) => {
   const { handle, title, id } = product.node;
   const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
   const compareAtPrice = parseFloat(product.node.compareAtPriceRange?.minVariantPrice.amount);
+  //check if product is on sale (discounted)
+  const isOnSale = compareAtPrice > price;
+  //check if product is available for sale (not sold out)
   const isAvailableForSale = product.node.availableForSale;
   const colorValue = getColorFromTag(product);
   
@@ -171,13 +174,13 @@ const ProductCard = ({ product, index }) => {
                   backgroundColor: colorMappings[colorValue] || '#343dfb',
                 }}
               ></div>
-              <span className='z-[7] tracking-tighter text-left font-bold w-full leading-none'>
+              <span className='z-[7] tracking-tighter text-left font-bold w-full leading-none' style={{color: isOnSale && '#3aea81'}}>
                 {title}
                 <br />
                 <span className='font-normal mt-[4px] mb-[8px] inline-block'>
                   {compareAtPrice && price < compareAtPrice ? (
                     <>
-                      <span className='text-gray-500 line-through pr-2'>
+                      <span className='text-gray-500 line-through pr-2' style={{color: isOnSale && '#5fa37b'}}>
                         {formatter.format(compareAtPrice)}
                       </span>
                       {formatter.format(price)}
@@ -211,7 +214,7 @@ const ProductCard = ({ product, index }) => {
                 className="w-full h-full object-cover object-center max-w-full"
               />
             )}
-            <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
+            <div className="absolute left-3 font-semibold bottom-2 flex flex-col" style={{color: isOnSale && '#3aea81'}}>
               <div
                 className='w-1/2 blur-2xl absolute left-0 bottom-0 h-6 z-[8]'
                 style={{
@@ -222,7 +225,7 @@ const ProductCard = ({ product, index }) => {
               <span className='font-light -mt-1'>
                 {compareAtPrice && price < compareAtPrice ? (
                   <>
-                    <span className='text-gray-500 line-through pr-2'>
+                    <span className='text-gray-500 line-through pr-2' style={{color: isOnSale && '#5fa37b'}}>
                       {formatter.format(compareAtPrice)}
                     </span>
                     {formatter.format(price)}
