@@ -68,7 +68,7 @@ export default function ContactPage() {
             </span>
             <div className="flex flex-col items-start space-y-2">
               <Link
-                href="https://www.instagram.com"
+                href="https://www.instagram.com/frizbeeceramics/?hl=en"
                 className="uppercase border-b border-gray-700 tracking-tighter mr-6 text-sm"
               >
                 Instagram
