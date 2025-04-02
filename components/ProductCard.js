@@ -8,7 +8,6 @@ import { useState, useContext, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
 import { CartContext } from '../context/shopContext'
-
 import { formatter, getColorFromTag, colorMappings } from '../utils/helpers'
 
 import MobileQuickBuy from './ui/MobileQuickBuy'
@@ -17,7 +16,7 @@ import DesktopQuickBuy from './ui/DesktopQuickBuy'
 // const MobileQuickBuy = dynamic(() => import("./ui/MobileQuickBuy"));
 // const DesktopQuickBuy = dynamic(() => import("./ui/DesktopQuickBuy"));
 
-const ProductCard = ({ product, index }) => {
+const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
   const { addToCart } = useContext(CartContext);
   const { handle, title, id } = product.node;
   const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
@@ -134,13 +133,32 @@ const ProductCard = ({ product, index }) => {
       transition={{
         layout: { ease: cubicBezier(0.76, 0, 0.24, 1), duration: 1.1 },
       }}
-      className={`group border-gray-800 border-b relative overflow-hidden ${
-        index % 2 === 0 ? 'border-r' : ''
-      } ${(index + 1) % 3 !== 0 ? 'md:border-r' : 'md:border-r-0'} ${
-        (index + 1) % 4 !== 0 ? 'lg:border-r' : 'lg:border-r-0'
-      } ${(index + 1) % 5 !== 0 ? 'xl:border-r' : 'xl:border-r-0'} ${
-        (index + 1) % 6 !== 0 ? '2xl:border-r' : '2xl:border-r-0'
-      }`}
+      // className={`group border-gray-800 border-b relative overflow-hidden 
+      //   ${index < 2 ? 'border-t' : ''} 
+      //   ${index < 3 ? 'md:border-t' : ''} 
+      //   ${index < 4 ? 'lg:border-t' : ''} 
+      //   ${index < 5 ? 'xl:border-t' : ''} 
+      //   ${index < 5 ? '2xl:border-t' : ''} 
+      //   ${index % 2 === 0 ? 'border-r' : ''} 
+      //   ${(index + 1) % 3 !== 0 ? 'md:border-r' : 'md:border-r-0'} 
+      //   ${(index + 1) % 4 !== 0 ? 'lg:border-r' : 'lg:border-r-0'} 
+      //   ${(index + 1) % 5 !== 0 ? 'xl:border-r' : 'xl:border-r-0'} 
+      //   ${(index + 1) % 5 !== 0 ? '2xl:border-r' : '2xl:border-r-0'}
+      // `}
+      className={`group border-gray-800 border-b relative overflow-hidden 
+          ${index % 2 === 0 ? 'border-r' : ''} 
+          ${(index + 1) % 3 !== 0 ? 'md:border-r' : 'md:border-r-0'} 
+          ${(index + 1) % 4 !== 0 ? 'lg:border-r' : 'lg:border-r-0'} 
+          ${(index + 1) % 5 !== 0 ? 'xl:border-r' : 'xl:border-r-0'} 
+          ${(index + 1) % 5 !== 0 ? '2xl:border-r' : '2xl:border-r-0'}
+          ${isCapsule && index >= totalProducts - 2 ? 'md:border-b-0' : ''} /* Last 2 items (mobile) */
+          ${isCapsule && index >= totalProducts - 3 ? 'lg:border-b-0' : ''} /* Last 3 items (tablet) */
+          ${isCapsule && index >= totalProducts - 4 ? 'xl:border-b-0' : ''} /* Last 4 items (laptop) */
+          ${isCapsule && index >= totalProducts - 5 ? '2xl:border-b-0' : ''} /* Last 5 items (desktop) */
+      `}
+      style={{
+        borderBottomWidth: isCapsule ? '0px' : '1px',
+      }}
       key={id}
     >
       <Link href={`/products/${handle}`} className="custom-cursor relative">

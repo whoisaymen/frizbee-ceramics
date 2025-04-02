@@ -2,43 +2,45 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
     const body = await request.json();
-    const email = body.email;
+    const {email, firstName, lastName, companyName, category, country} = body;
 
-    // const domain = process.env.SHOPIFY_STORE_DOMAIN;
-    // const adminAccessToken = process.env.SHOPIFY_ADMIN_ACCESSTOKEN;
+    const hubspotUrl = process.env.HUBSPOT_DOMAIN;
+    const hubspotAccessToken = process.env.HUBSPOT_ACCESS_TOKEN;
 
-    const URL = `https://${domain}/admin/api/2023-10/customers.json`;
-
-    const options = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-Shopify-Access-Token": adminAccessToken,
-        },
-        body: JSON.stringify({
-            customer: {
-                email: email,
-                // Optional fields like first_name, last_name, etc.
-            },
-        }),
+    const contactData = {
+        properties: {
+            email: email,
+            lastname: lastName,
+            firstname: firstName,
+            company: companyName,
+            // segment_1: category,
+            country: country,
+            source: "Shopify professional tab",
+            segment_3: "Prospect",
+        }
     };
 
     try {
-        const response = await fetch(URL, options);
-        const data = await response.json();
+        const response = await fetch(hubspotUrl, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${hubspotAccessToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(contactData),
+        });
 
-        console.log("Response status:", response.status); // Log response status
-        console.log("Response body:", data); // Log response body
+        const data = await response.json();
 
         if (response.ok) {
             return new NextResponse(
-                JSON.stringify({ message: "Subscription successful", data: data }),
+                JSON.stringify({ message: "Contact saved in HubSpot", data }),
                 { status: 200 }
             );
         } else {
-            console.error("Error from Shopify:", data); // Log error details
+            console.error("HubSpot API Error:", data);
             return new NextResponse(
-                JSON.stringify({ message: "Error subscribing", details: data }),
+                JSON.stringify({ message: "Error saving to HubSpot", details: data }),
                 { status: response.status }
             );
         }

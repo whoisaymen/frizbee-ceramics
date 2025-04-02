@@ -32,8 +32,7 @@ export default function Newsletter() {
 
     if (response.ok) {
       setSubscriptionStatus("subscribed");
-    } else if (response.status === 409) {
-      // Assuming 409 status code for existing email
+    } else if (response.status === 409 || response.status === 422) {
       setSubscriptionStatus("alreadyExists");
     } else {
       console.error("Subscription failed:", response);

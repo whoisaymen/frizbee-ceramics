@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-import clsx from "clsx";
+import { usePathname } from "next/navigation";
 import { MENU_ITEMS } from "@/lib/constants";
 import { useEffect, useState } from "react";
 import { checkForSaleProducts, checkForFlawedProducts } from "./SortFilterMenu";
@@ -14,12 +13,15 @@ function NavLink({ item }) {
 
   const [isAboutHovered, setIsAboutHovered] = useState(false);
   const [isProjectsHovered, setIsProjectsHovered] = useState(false);
+  const [isProfessionalHovered, setIsProfessionalHovered] = useState(false);
 
   const handleMouseEnter = () => {
     if (item.slug === "about") {
       setIsAboutHovered(true);
     } else if (item.slug === "projects") {
       setIsProjectsHovered(true);
+    } else if (item.slug === "professionals") {
+      setIsProfessionalHovered(true);
     }
   };
   const handleMouseLeave = () => {
@@ -27,6 +29,8 @@ function NavLink({ item }) {
       setIsAboutHovered(false);
     } else if (item.slug === "projects") {
       setIsProjectsHovered(false);
+    } else if (item.slug === "professionals") {
+      setIsProfessionalHovered(false);
     }
   };
 
@@ -39,17 +43,19 @@ function NavLink({ item }) {
         key={item.slug}
         style={{
           background: active
-            ? item.color
-            : isAboutHovered
-            ? "#AAAAEF"
-            : isProjectsHovered
-            ? "#eee"
-            : "white",
+            ? item.color : isAboutHovered || isProjectsHovered || isProfessionalHovered ? "#AAAAEF" : "white",
+          // background: active
+          //   ? item.color
+          //   : isAboutHovered
+          //   ? "#AAAAEF"
+          //   : isProjectsHovered || isProfessionalHovered
+          //   ? "#eee"
+          //   : "white",
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {item.slug === "projects" ? (
+        {item.slug === "projects" || item.slug === "professionals" ? (
           <div className="w-full px-4">{item.title}</div>
         ) : (
           <Link href={href} className="w-full px-4">
@@ -57,6 +63,7 @@ function NavLink({ item }) {
           </Link>
         )}
         {isAboutHovered && aboutSubmenu}
+        {isProfessionalHovered && professionalsSubmenu }
         {isProjectsHovered && projectsSubmenu}
       </li>
     </>
@@ -85,6 +92,7 @@ export default function NavLinks() {
   const toggleProjectsSubmenuMobile = () => {
     setIsProjectsSubmenuOpen(!isProjectsSubmenuOpen);
   };
+ 
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -169,6 +177,7 @@ export default function NavLinks() {
               </Link>
             )}
 
+
             <button
               onClick={toggleProjectsSubmenuMobile}
               className="text-left uppercase"
@@ -177,7 +186,7 @@ export default function NavLinks() {
             </button>
 
             {isProjectsSubmenuOpen && (
-              <ul className="pl-4 list-nonemy-0 py-0">
+              <ul className="pl-4 list-none my-0 py-0">
                 {projectsItem.projects.map((project) => (
                   <li key={project.title} className="py-1 text-gray-400 ">
                     <Link
@@ -233,10 +242,29 @@ const aboutSubmenu = (
     </ul>
   </div>
 );
+
+// const professionalItem = MENU_ITEMS.find((item) => item.slug === "professionals");
+
+// const professionalsSubmenu = (
+//   <div className="professionals-submenu absolute top-full right-0 z-0 bg-[#AAAAEF] border border-t-0 border-black w-[180px] -mt-0 -mr-[1px]">
+//     <ul className="list-none p-0 m-0 text-right">
+//       {professionalItem.subsections.map((subsection) => (
+//         <li key={subsection.title} className="p-[0.1rem] px-1 py-0">
+//           <Link href={`/${subsection.slug}`}>
+//             <span className="block text-black no-underline">
+//               {subsection.title}
+//             </span>
+//           </Link>
+//         </li>
+//       ))}
+//     </ul>
+//   </div>
+// );
+
 const projectsItem = MENU_ITEMS.find((item) => item.slug === "projects");
 
 const projectsSubmenu = (
-  <div className="projects-submenu absolute top-full right-0 z-0 bg-[#eee] border border-t-0 border-black w-[180px] -mt-0 -mr-[1px]">
+  <div className="projects-submenu absolute top-full right-0 z-0 bg-[#AAAAEF] border border-t-0 border-black w-[150px] -mt-0 -mr-[1px]">
     <ul className="list-none p-0 m-0 text-right">
       {projectsItem.projects.map((project) => (
         <li key={project.slug} className="p-[0.1rem] px-1 py-0">

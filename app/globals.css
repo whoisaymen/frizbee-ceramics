@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root { */
   /* --tw-bg-opacity: 1; */
   /* background-color: rgb(243 244 246 / var(--tw-bg-opacity)); */
   /* background-color: #e8ecf4; */
@@ -10,7 +10,7 @@
   
 	--background-start-rgb: 214, 219, 220;
 	--background-end-rgb: 255, 255, 255; */
-}
+/* } */
 
 /* @media (prefers-color-scheme: dark) {
 	:root {
@@ -50,6 +50,17 @@ body {
   }
 }
 .animate-carousel {
+  animation: marquee 60s linear infinite;
+}
+@keyframes marquee-long {
+  0% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.animate-carousel-long {
   animation: marquee 60s linear infinite;
 }
 
@@ -136,8 +147,8 @@ body {
 }
 
 /* Enable animation */
-.enable-animation .marquee__content {
-}
+/* .enable-animation .marquee__content {
+} */
 
 /* Reverse animation */
 .marquee--reverse .marquee__content {
@@ -258,7 +269,23 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(100% - 81px); /* Adjust this value */
+  width: calc(100% - 66px); /* Adjust this value */
   height: 1px;
   background-color: black;
+}
+.professionals-submenu::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 146px); /* Adjust this value */
+  height: 1px;
+  background-color: black;
+}
+
+/* temp margin as imgs are not properl */ 
+/* remove it to make it proper */
+img.w-full.h-full.object-cover.object-center{
+  margin-top: -30px !important;
 }

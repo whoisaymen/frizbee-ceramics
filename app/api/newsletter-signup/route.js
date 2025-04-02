@@ -6,7 +6,6 @@ export async function POST(request) {
 
   const domain = process.env.SHOPIFY_STORE_DOMAIN;
   const adminAccessToken = process.env.SHOPIFY_ADMIN_ACCESSTOKEN;
-
   const URL = `https://${domain}/admin/api/2023-10/customers.json`;
 
   const options = {
@@ -18,13 +17,19 @@ export async function POST(request) {
     body: JSON.stringify({
       customer: {
         email: email,
-        // Optional fields like first_name, last_name, etc.
+        accepts_marketing: true,
+        email_marketing_consent: {
+          state : "subscribed",
+          marketing_opt_in_level: "confirmed", 
+        }
       },
     }),
   };
 
   try {
+    console.log("Sending request",options);
     const response = await fetch(URL, options);
+
     const data = await response.json();
 
     console.log("Response status:", response.status); // Log response status
@@ -50,3 +55,4 @@ export async function POST(request) {
     );
   }
 }
+

@@ -5,21 +5,67 @@ const ProductList = async ({ sortOption }) => {
   const products = await getProductsInCollection();
   const sortedProducts = sortProducts(products, sortOption);
 
+  //need 2 separate arrays for shop/default products and capsules products
+  const shopProducts = sortedProducts.filter(
+    (product) => !product.node.tags.includes("capsule")
+  );
+  const capsuleProducts = sortedProducts.filter((product) =>
+    product.node.tags.includes("capsule")
+  );
+
   return (
     <div
       className="mb-[24px] md:mb-[29px] md:mx-0 -mt-[2px] min-h-screen"
       style={{ backgroundImage: "url(/images/bgHomeGradient.svg)" }}
     >
-      <div className="mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 -mt-3">
-          {sortedProducts.map((product, index) => (
-            <ProductCard
-              key={product.node.id}
-              product={product}
-              index={index}
-            />
-          ))}
-        </div>
+      <div className="mx-auto" >
+
+        {/* capsules products section */}
+        {capsuleProducts.length > 0 && (
+          <>
+            {/* <div className="w-full border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover" style={{backgroundImage: "url(https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule-collection.jpg?v=1742990303)"}}>
+            </div> */}
+            {/* diff img for mobile */}
+            <div
+              className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/kota-collection-mobile.jpg?v=1743588887')] md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/kota-collection-web.jpg?v=1743588685')]"
+            ></div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+              {capsuleProducts.map((product, index) => (
+                <ProductCard
+                  key={product.node.id}
+                  product={product}
+                  index={index}
+                  totalProducts={capsuleProducts.length}
+                  isCapsule={false} //it is capsule but temporarily set to false for styling
+                />
+              ))}
+            </div>
+          </>
+        )}
+        
+        {/* shop or default products section */}
+        {shopProducts.length > 0 && (
+          <>
+            {/* <div className="w-full border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover" style={{backgroundImage: "url(https://cdn.shopify.com/s/files/1/0806/4381/7793/files/shop-collection.jpg?v=1742990302)"}}>
+            </div> */}
+            {/* diff img for mobile */}
+            <div
+              className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/everlasting-collection-web.jpg?v=1743588736')] bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/everlasting-collection-mobile.png?v=1743588826')]"
+            ></div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+              {shopProducts.map((product, index) => (
+                <ProductCard
+                  key={product.node.id}
+                  product={product}
+                  index={index}
+                  totalProducts={shopProducts.length}
+                  isCapsule={false}
+                />
+              ))}
+            </div>
+          </>
+        )}
+        
       </div>
     </div>
   );
@@ -44,14 +90,12 @@ function sortProducts(products, option) {
   // new default and shop option [with new products at the top]
   if (option === "default" || option === "shop") {
     //remove flawed and on-sale products and rest will be manually sorted from backend
-    const filteredProducts = products.filter(
-      (product) =>{
-        const isOnSale =
+    const filteredProducts = products.filter((product) => {
+      const isOnSale =
         parseFloat(product.node.compareAtPriceRange?.minVariantPrice.amount) >
         parseFloat(product.node.priceRange.minVariantPrice.amount);
-        return !isOnSale && !product.node.tags.includes("flawfab")
-      }
-    );
+      return !isOnSale && !product.node.tags.includes("flawfab");
+    });
 
     return filteredProducts;
 
