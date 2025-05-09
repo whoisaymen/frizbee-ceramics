@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 // import newsletterImage from "@/public/images/newsletter2.jpeg";
-import newsletterImage from "@/public/images/newsletter1.jpg";
+// import newsletterImage from "@/public/images/newsletter1.jpg";
 import Image from "next/image";
 
 export default function Newsletter() {
@@ -111,11 +111,12 @@ export default function Newsletter() {
         >
           <div className="relative h-[20vh] lg:h-auto lg:w-1/2">
             <Image
-              src={newsletterImage}
+              // src={newsletterImage}
+              src="https://cdn.shopify.com/s/files/1/0806/4381/7793/files/newsletter-image.jpg"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority
-              placeholder="blur"
+              // placeholder="blur"
               alt={"Newsletter image"}
               className="object-cover border-gray-800 border-t lg:border lg:rounded-l-lg"
             />
@@ -126,14 +127,17 @@ export default function Newsletter() {
               <h3 className="tracking-tighter font-extralight uppercase m-2 text-lg">
                 News
               </h3>
-              <ul className="text-sm font-extralight tracking-tighter p-2 pt-0 -mt-1 list-none">
+              {/* <ul className="text-sm font-extralight tracking-tighter p-2 pt-0 -mt-1 list-none">
                 <li>
                   Come see us 
                 </li>
                 <li>- Paris: 07/12 - 08/12 - Lafayette Anticipations </li>
                 <li>- Lisbon: 07/12 - Ele Ela Café</li>
                 <li>- Brussels: 14/12 - Bouche Café</li>
-              </ul>
+              </ul> */}
+              <p className="text-sm font-extralight tracking-tighter leading-snug p-2 pt-0 -mt-1 md:mb-0">
+                Sign up for email updates on the latest Frizbee restocks, collections, campaigns and events here.
+              </p>
             </div>
             <div>
               {subscriptionStatus !== "idle" ? (
@@ -142,12 +146,12 @@ export default function Newsletter() {
                 </div>
               ) : (
                 <>
-                  <h3 className="tracking-tighter font-extralight uppercase m-2 text-lg">
+                  {/* <h3 className="tracking-tighter font-extralight uppercase m-2 text-lg">
                     Newsletter
                   </h3>
                   <p className="text-sm font-extralight tracking-tighter leading-snug p-2 pt-0 -mt-1 md:mb-0">
                     Sign up for our newsletter here.
-                  </p>
+                  </p> */}
 
                   <form onSubmit={handleSubmit}>
                     <label htmlFor="email-address" className="sr-only">

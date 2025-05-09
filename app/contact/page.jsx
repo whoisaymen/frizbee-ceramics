@@ -86,7 +86,8 @@ export default function ContactPage() {
 
       <div className="relative w-full bg-[#E42220] pb-[20px]">
         <Image
-          src={"/images/contact/frizbee-redlogo.jpg"}
+          // src={"/images/contact/frizbee-redlogo.jpg"}
+          src={"https://cdn.shopify.com/s/files/1/0806/4381/7793/files/contact-image.jpg"}
           alt={"Image"}
           height={3000}
           width={3000}

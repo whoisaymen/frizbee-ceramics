@@ -188,9 +188,9 @@ const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
             <div className='flex justify-between mt-4 absolute left-3 bottom-[3px]'>
               <div
                 className='w-1/2 blur-2xl absolute left-0 bottom-0 h-6 z-[8]'
-                style={{
-                  backgroundColor: colorMappings[colorValue] || '#343dfb',
-                }}
+                // style={{
+                //   backgroundColor: colorMappings[colorValue] || '#343dfb',
+                // }}
               ></div>
               <span className='z-[7] tracking-tighter text-left font-bold w-full leading-none' style={{color: isOnSale && '#3aea81'}}>
                 {title}
@@ -235,9 +235,9 @@ const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
             <div className="absolute left-3 font-semibold bottom-2 flex flex-col" style={{color: isOnSale && '#3aea81'}}>
               <div
                 className='w-1/2 blur-2xl absolute left-0 bottom-0 h-6 z-[8]'
-                style={{
-                  backgroundColor: colorMappings[colorValue] || '#343dfb',
-                }}
+                // style={{
+                //   backgroundColor: colorMappings[colorValue] || '#343dfb',
+                // }}
               ></div>
               <span>{title}</span>
               <span className='font-light -mt-1'>
