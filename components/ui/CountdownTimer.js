@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Countdown from "react-countdown";
+import { useRouter } from "next/navigation";
 
-const CountdownTimer = () => {
-    // Set end date to December 3rd, 2024 at 8 AM
-    const endDate = new Date("2025-04-02T18:00:00").getTime();
+const CountdownTimer = ({ onComplete }) => {
+    const router = useRouter();
 
-    const renderer = ({ days, hours, minutes, seconds, completed }) => {
-        if (completed) {
-            return <span className="text-red-500 sm:font-bold">New products dropped!</span>;
-        }
+    const end = process.env.NEXT_PUBLIC_SCH_TIME || "2024-05-12T09:32:00";
+    const [endDate, setEndDate] = useState(null);
 
+    useEffect(() => {
+        const parsedDate = new Date(end).getTime();
+        setEndDate(parsedDate);
+        console.log("End date set to:", parsedDate);
+    }, [end]);
+
+    const handleComplete = () => {
+        console.log("Countdown completed in child");
+        onComplete?.(); // call parent handler
+        router.replace("/"); // client-side redirect
+    };
+
+    const renderer = ({ days, hours, minutes, seconds }) => {
         const timeUnits = [
             { label: "Days", value: days },
             { label: "Hours", value: hours },
@@ -32,7 +43,14 @@ const CountdownTimer = () => {
 
     return (
         <div className="flex flex-col items-center gap-4 p-6">
-            <Countdown date={endDate} renderer={renderer} suppressHydrationWarning />
+            {endDate && (
+                <Countdown
+                    date={endDate}
+                    renderer={renderer}
+                    onComplete={handleComplete}
+                    suppressHydrationWarning
+                />
+            )}
         </div>
     );
 };

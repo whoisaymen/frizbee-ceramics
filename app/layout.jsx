@@ -1,3 +1,6 @@
+// import { cookies } from "next/headers";
+import { headers } from "next/headers";
+
 import "./globals.css";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -64,25 +67,45 @@ export const viewport = {
 };
 
 export default function RootLayout({ children }) {
+
+  // const cookieStore = cookies();
+  // const pathname = cookieStore.get("x-pathname")?.value;
+
+  const pathnameHeader = headers().get("x-pathname");
+
+  // console.log("🔥 Pathname from headers:", pathnameHeader);
+  const isDealsPage = pathnameHeader === "/deals";
+
   return (
     <html lang="en">
       <GoogleTagManager gtmId="GTM-KZ296SD6" />
-      <body className={`${inter.className} custom-cursor`}>
+      <body className={`${inter.className} custom-cursor ${isDealsPage ? "bg-black" : ""}`}>
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         ) : null}
+
         <ShopProvider>
-          <Nav>
-            <SortFilterMenu />
-            <Logo />
-            <NavLinks />
-          </Nav>
-          <Cart />
-          <Newsletter />
+          {isDealsPage ? (
+            <Nav>
+              <Logo />
+            </Nav>
+          ) : (
+            <>
+              <Nav>
+                <SortFilterMenu />
+                <Logo />
+                <NavLinks />
+              </Nav>
+              <Cart />
+              <Newsletter />
+            </>
+          )}
 
           {children}
-          <Footer />
+
+          {!isDealsPage && <Footer />}
         </ShopProvider>
+
         <FacebookPixel />
       </body>
     </html>
