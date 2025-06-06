@@ -73,7 +73,7 @@ const SUBMENU = [
     {
         info: [
             { slug: "contact", title: "Contact" },
-            { slug: "events", title: "Upcoming Events" },
+            // { slug: "events", title: "Upcoming Events" }, //removed for now
         ],
     },
 ];
