@@ -18,13 +18,15 @@ export async function POST(request) {
     body: JSON.stringify({
       customer: {
         email: email,
-        accepts_marketing: true,
+        // accepts_marketing: true,
+        // email_marketing_consent: {
+        //   state : "subscribed",
+        //   marketing_opt_in_level: "confirmed",
+        //   consent_updated_at: new Date().toISOString(),
+        // }
         email_marketing_consent: {
-          state : "subscribed",
-          marketing_opt_in_level: "confirmed",
-          consent_updated_at: new Date().toISOString(),
-          // marketing_opt_in_level: "confirmed", //old deprecated field
-          // opt_in_level: "confirmed", //new field
+          state: "subscribed",
+          opt_in_level: "confirmed_opt_in" 
         }
       },
     }),
