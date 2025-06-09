@@ -20,7 +20,8 @@ export async function POST(request) {
         accepts_marketing: true,
         email_marketing_consent: {
           state : "subscribed",
-          marketing_opt_in_level: "confirmed", 
+          // marketing_opt_in_level: "confirmed", //old deprecated field
+          opt_in_level: "confirmed", //new field
         }
       },
     }),
