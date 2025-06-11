@@ -101,22 +101,23 @@ const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
   });
 
   const handleMouseEnter = () => {
-    if (video) {
-      // Find the MP4 video source with the highest quality
-      const videoSource = video.sources.find(source => 
-        source.mimeType === "video/mp4" && source.url.includes("HD")
-      ) || video.sources[0];
+    //on hover show video
+    // if (video) {
+    //   // Find the MP4 video source with the highest quality
+    //   const videoSource = video.sources.find(source => 
+    //     source.mimeType === "video/mp4" && source.url.includes("HD")
+    //   ) || video.sources[0];
       
-      setDisplayMedia({
-        type: 'VIDEO',
-        content: videoSource.url
-      });
-    } else if (imageUrl2) {
+    //   setDisplayMedia({
+    //     type: 'VIDEO',
+    //     content: videoSource.url
+    //   });
+    // } else if (imageUrl2) {
       setDisplayMedia({
         type: 'IMAGE',
         content: imageUrl2
       });
-    }
+    // }
   };
 
 

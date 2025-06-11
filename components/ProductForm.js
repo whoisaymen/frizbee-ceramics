@@ -6,8 +6,8 @@ import { CartContext } from "../context/shopContext";
 import axios from "axios";
 import useSWR from "swr";
 
-import { Disclosure } from "@headlessui/react";
-import { ChevronUpIcon } from "@heroicons/react/20/solid";
+// import { Disclosure } from "@headlessui/react";
+// import { ChevronUpIcon } from "@heroicons/react/20/solid";
 
 // setup inventory fetcher
 const fetchInventory = (url, id) =>
