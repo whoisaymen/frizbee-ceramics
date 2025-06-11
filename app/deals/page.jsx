@@ -33,7 +33,6 @@ const Deals = () => {
             },
             body: JSON.stringify({ email }),
         });
-        console.log("Response:", response); // Log response status
 
         if (response.ok) {
             setSubscriptionStatus("subscribed");

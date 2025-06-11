@@ -22,7 +22,6 @@ export async function POST(request) {
         // email_marketing_consent: {
         //   state : "subscribed",
         //   marketing_opt_in_level: "confirmed",
-        //   consent_updated_at: new Date().toISOString(),
         // }
         email_marketing_consent: {
           state: "subscribed",

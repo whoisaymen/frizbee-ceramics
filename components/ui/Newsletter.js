@@ -4,15 +4,51 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 // import newsletterImage from "@/public/images/newsletter2.jpeg";
 // import newsletterImage from "@/public/images/newsletter1.jpg";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Newsletter() {
   const [newsletterOpen, setNewsletterOpen] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [subscriptionStatus, setSubscriptionStatus] = useState("idle");
+  const pathname = usePathname();
+
   // useEffect(() => {
   //   setTimeout(() => {
   //     setNewsletterOpen(true);
   //   }, 10000);
   // }, []);
-  const [subscriptionStatus, setSubscriptionStatus] = useState("idle");
+  useEffect(() => {
+    if (pathname !== "/") {
+      return;
+    }
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < lastScrollY && newsletterOpen) {
+        setNewsletterOpen(false);
+      }
+
+      const isAtBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 10;
+      if (isAtBottom) {
+        setNewsletterOpen(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [pathname, lastScrollY, newsletterOpen]);
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setNewsletterOpen(false);
+    }
+  }, [pathname]);
 
   const toggleNewsletter = () => {
     setNewsletterOpen(!newsletterOpen);

@@ -27,6 +27,12 @@ body {
   cursor: url("/images/logo.svg") 12 12, auto;
 }
 
+body.screen-locked {
+  overflow: hidden;
+  height: 100vh;
+  /* touch-action: none; */
+}
+
 @keyframes rotate {
   from {
     transform: rotate(0deg);

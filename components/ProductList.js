@@ -5,9 +5,14 @@ const ProductList = async ({ sortOption }) => {
   const products = await getProductsInCollection();
   const sortedProducts = sortProducts(products, sortOption);
 
-  //need 2 separate arrays for shop/default products and capsules products
+  //need 3 separate arrays for shop/default products, capsules products and sunset products
+  const sunsetProducts = sortedProducts.filter(
+    (product) => product.node.tags.includes("sunset")
+  );
+
+  // Everlasting
   const shopProducts = sortedProducts.filter(
-    (product) => !product.node.tags.includes("capsule")
+    (product) => !product.node.tags.includes("capsule") && !product.node.tags.includes("sunset")
   );
   const capsuleProducts = sortedProducts.filter((product) =>
     product.node.tags.includes("capsule")
@@ -19,23 +24,20 @@ const ProductList = async ({ sortOption }) => {
       style={{ backgroundImage: "url(/images/bgHomeGradient.svg)" }}
     >
       <div className="mx-auto" >
-
-        {/* capsules products section */}
-        {capsuleProducts.length > 0 && (
+        
+        {/* sunsetProducts products section */}
+        {sunsetProducts.length > 0 && (
           <>
-            {/* <div className="w-full border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover" style={{backgroundImage: "url(https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule-collection.jpg?v=1742990303)"}}>
-            </div> */}
-            {/* diff img for mobile */}
             <div
-              className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/kota-collection-mobile.jpg?v=1743588887')] md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/kota-collection-web.jpg?v=1743588685')]"
+              className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/sunset-collection-banner.gif?v=1749632587')]"
             ></div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
-              {capsuleProducts.map((product, index) => (
+              {sunsetProducts.map((product, index) => (
                 <ProductCard
                   key={product.node.id}
                   product={product}
                   index={index}
-                  totalProducts={capsuleProducts.length}
+                  totalProducts={sunsetProducts.length}
                   isCapsule={false} //it is capsule but temporarily set to false for styling
                 />
               ))}
@@ -60,6 +62,29 @@ const ProductList = async ({ sortOption }) => {
                   index={index}
                   totalProducts={shopProducts.length}
                   isCapsule={false}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* capsules products section */}
+        {capsuleProducts.length > 0 && (
+          <>
+            {/* <div className="w-full border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover" style={{backgroundImage: "url(https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule-collection.jpg?v=1742990303)"}}>
+            </div> */}
+            {/* diff img for mobile */}
+            <div
+              className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/kota-collection-mobile.jpg?v=1743588887')] md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/kota-collection-web.jpg?v=1743588685')]"
+            ></div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+              {capsuleProducts.map((product, index) => (
+                <ProductCard
+                  key={product.node.id}
+                  product={product}
+                  index={index}
+                  totalProducts={capsuleProducts.length}
+                  isCapsule={false} //it is capsule but temporarily set to false for styling
                 />
               ))}
             </div>
