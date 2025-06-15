@@ -56,29 +56,49 @@ const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
     addToCart(itemToAdd)
   }
 
+  //old code with video and image
+  // const SwiperSlides = () => {
+  //   return mediaItems.map((mediaItem, i) => {
+  //     if (mediaItem.node.sources) {
+  //       // This is a video
+  //       const videoSource = mediaItem.node.sources.find(source => 
+  //         source.mimeType === "video/mp4" && source.url.includes("HD")
+  //       ) || mediaItem.node.sources[0];
+  //         return <SwiperSlide key={`slide-${i}`} className="relative">
+  //           <div className="w-full h-full flex items-center justify-center bg-black">
+  //             <video
+  //               autoPlay
+  //               loop
+  //               muted
+  //               className="h-full w-full object-cover object-center"
+  //               poster={mediaItem.node.previewImage?.url}
+  //             >
+  //               <source src={videoSource.url} type={videoSource.mimeType} />
+  //               Your browser does not support the video tag.
+  //             </video>
+  //           </div>
+  //         </SwiperSlide>
+  //     } else if (mediaItem.node.image) {
+  
+  //       // This is an image
+  //       return <SwiperSlide key={`slide-${i}`} className="relative">
+  //           <Image
+  //             src={mediaItem.node.image.url}
+  //             alt={mediaItem.node.image.altText || "Product image"}
+  //             width={300}
+  //             height={300}
+  //             // priority={i === 0 ? 'true' : 'false'}
+  //             loading='lazy'
+  //             className='w-full h-full object-cover object-center'
+  //           />
+  //         </SwiperSlide>
+  //     }
+  //   });
+  // }
+  
   const SwiperSlides = () => {
     return mediaItems.map((mediaItem, i) => {
-      if (mediaItem.node.sources) {
-        // This is a video
-        const videoSource = mediaItem.node.sources.find(source => 
-          source.mimeType === "video/mp4" && source.url.includes("HD")
-        ) || mediaItem.node.sources[0];
-          return <SwiperSlide key={`slide-${i}`} className="relative">
-            <div className="w-full h-full flex items-center justify-center bg-black">
-              <video
-                autoPlay
-                loop
-                muted
-                className="h-full w-full object-cover object-center"
-                poster={mediaItem.node.previewImage?.url}
-              >
-                <source src={videoSource.url} type={videoSource.mimeType} />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </SwiperSlide>
-      } else if (mediaItem.node.image) {
-  
+      if (mediaItem.node.image) {
         // This is an image
         return <SwiperSlide key={`slide-${i}`} className="relative">
             <Image
@@ -94,7 +114,7 @@ const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
       }
     });
   }
-  
+
   const [displayMedia, setDisplayMedia] = useState({
     type: 'IMAGE',
     content: imageUrl1

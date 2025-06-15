@@ -131,7 +131,17 @@ export default function ProductForm({ product }) {
             <h2>{product.title}</h2>
           </div>
           <div className="font-medium text-sm lg:text-base border-l border-black border-b py-4 px-2">
-            {formatter.format(price)}
+            {/* {formatter.format(price)} */}
+            {compareAtPrice && price < compareAtPrice ? (
+              <>
+                <span className="text-gray-500 line-through pr-2 inline-block">
+                  {formatter.format(compareAtPrice)}
+                </span>
+                {formatter.format(price)}
+              </>
+            ) : (
+              formatter.format(price)
+            )}
           </div>
         </div>
 
@@ -196,7 +206,14 @@ export default function ProductForm({ product }) {
                   : "bg-white text-gray-400 cursor-not-allowed"
               }`}
             >
-              {isAvailableForSale ? "Add to Cart" : "Sold Out"}
+              {/* {isAvailableForSale ? "Add to Cart" : "Sold Out"} */}
+              {isAvailableForSale ? (
+                <>
+                  <span>Add To Cart</span>
+                </>
+              ) : (
+                <span className="cursor-not-allowed">Sold out</span>
+              )}
             </button>
           </div>
         </div>

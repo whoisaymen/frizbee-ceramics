@@ -101,8 +101,8 @@ export default function ProductPageContent({ product, blurDataURL }) {
       <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between w-full min-h-screen px-4 ">
         {/* LEFT: Video Container (dynamic or fallback) */}
 
-        <div className="lg:static absolute flex top-[88px] right-[18px] z-10 lg:w-[200px] lg:flex-col lg:items-center">
-          {videos.length > 0 && (
+        <div className="lg:static absolute flex top-[88px] right-[18px] z-[1] lg:w-[200px] lg:flex-col lg:items-center">
+          {videos.length > 0 &&
             videos.map((videoItem, i) => {
               const source =
                 videoItem.node.sources.find(
@@ -128,8 +128,7 @@ export default function ProductPageContent({ product, blurDataURL }) {
                   Your browser does not support the video tag.
                 </video>
               );
-            })
-          )} 
+            })}
         </div>
 
         {/* CENTER */}
