@@ -3,19 +3,40 @@ import Image from "next/image";
 import ProductForm from "./ProductForm";
 import { SwiperSlide } from "swiper/react";
 import { useRef, useState } from "react";
+import { Swiper } from "swiper/react";
+import "swiper/css";
 
 export default function ProductPageContent({ product, blurDataURL }) {
   const [zoomedMedia, setZoomedMedia] = useState(null);
   const mediaRef = useRef(null);
+  const swiperRef = useRef(null);
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // const prevImage = () => {
+  //   setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  // };
+
   const prevImage = () => {
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    const isMobile = window.innerWidth < 1024;
+    if (isMobile) {
+      if (swiperRef.current) swiperRef.current.slidePrev();
+    } else {
+      setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    }
   };
 
+  // const nextImage = () => {
+  //   setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  // };
+
   const nextImage = () => {
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    const isMobile = window.innerWidth < 1024;
+    if (isMobile) {
+      if (swiperRef.current) swiperRef.current.slideNext();
+    } else {
+      setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    }
   };
 
   const handleMouseMove = (e) => {
@@ -101,7 +122,7 @@ export default function ProductPageContent({ product, blurDataURL }) {
       <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between w-full min-h-screen px-4 ">
         {/* LEFT: Video Container (dynamic or fallback) */}
 
-        <div className="lg:static absolute flex top-[88px] right-[18px] z-[1] lg:w-[200px] lg:flex-col lg:items-center">
+        <div className="lg:static absolute flex top-[88px] right-[18px] z-[2] lg:w-[200px] lg:flex-col lg:items-center">
           {videos.length > 0 &&
             videos.map((videoItem, i) => {
               const source =
@@ -176,26 +197,37 @@ export default function ProductPageContent({ product, blurDataURL }) {
         </div>
 
         {/* Mobile CENTER*/}
-        <div className="flex lg:hidden items-center justify-center">
-          {images.length > 0 && (
-            <div
-              className="relative w-full h-[85vh] "
-              onClick={() =>
-                handleZoom("image", images[currentIndex].node.image.url)
-              }
+        {images.length > 0 && (
+          <div className="flex lg:hidden items-center justify-center w-full h-[85vh]">
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={1}
+              loop={true}
+              onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
+              className="w-full h-full"
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
-              <Image
-                src={`${images[currentIndex].node.image.url}`}
-                alt={images[currentIndex].node.image.altText || "Product image"}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                placeholder="blur"
-                blurDataURL={blurDataURL}
-                className="object-contain cursor-zoom-in"
-              />
-            </div>
-          )}
-        </div>
+              {images.map((imgItem, i) => (
+                <SwiperSlide key={`mobile-img-${i}`}>
+                  <div
+                    className="relative w-full h-full"
+                    onClick={() => handleZoom("image", imgItem.node.image.url)}
+                  >
+                    <Image
+                      src={imgItem.node.image.url}
+                      alt={imgItem.node.image.altText || "Product image"}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      placeholder="blur"
+                      blurDataURL={blurDataURL}
+                      className="object-contain cursor-zoom-in"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        )}
 
         {/* RIGHT: Sticky Form */}
         <div className="hidden lg:flex w-full lg:w-[264px] shrink-0 border border-black lg:mb-0 mb-16 lg:min-h-[298px]">
@@ -203,7 +235,7 @@ export default function ProductPageContent({ product, blurDataURL }) {
         </div>
 
         {/* Mobile RIGHT */}
-        <div className="flex items-center lg:hidden absolute bottom-12 left-1/2 transform -translate-x-1/2 w-full">
+        <div className="flex items-center lg:hidden absolute bottom-12 left-1/2 transform -translate-x-1/2 w-full z-[1]">
           <button
             onClick={prevImage}
             aria-label="Previous Image"
