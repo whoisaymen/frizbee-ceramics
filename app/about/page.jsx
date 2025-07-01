@@ -47,7 +47,7 @@ export default function AboutPage() {
           <p className="text-gray-700">
             Please reach out for special requests, studio visits and custom
             orders at{" "}
-            <span className="font-medium">hey@frizbeeceramics.com</span>.
+            <span className="font-medium">box@frizbeeceramics.com</span>.
           </p>
         </div>
       </div>

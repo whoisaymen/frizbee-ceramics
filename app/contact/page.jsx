@@ -19,10 +19,10 @@ export default function ContactPage() {
               </span>
               <br />
               <Link
-                href="mailto:hey@frizbeeceramics.com"
+                href="mailto:box@frizbeeceramics.com"
                 className="uppercase border-b border-gray-700 tracking-tighter mr-6"
               >
-                hey@frizbeeceramics.com
+                box@frizbeeceramics.com
               </Link>
             </p>
             <p className="text-sm">

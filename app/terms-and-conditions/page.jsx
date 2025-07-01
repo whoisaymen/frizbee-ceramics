@@ -132,7 +132,7 @@ export default function TermsAndConditionsPage() {
                     <strong>Phone number:</strong> +32484570756
                   </p>
                   <p className="text-gray-700 mb-2">
-                    <strong>E-mail address:</strong> hey@frizbeeceramics.com
+                    <strong>E-mail address:</strong> box@frizbeeceramics.com
                   </p>
                   <p className="text-gray-700 mb-2">
                     <strong>VAT-number:</strong> PT517890186
@@ -431,7 +431,7 @@ export default function TermsAndConditionsPage() {
                     The Customer has the possibility during the ordering process to choose for the pick up at the studio if possible. The Customer can choose this option in the shipping options during checkout. The Customer will need to send an email to the Company so the Parties can set a date & hour for pickup.
                   </p>
                   <p className="text-gray-700 mb-4">
-                    The Customer can send this email to hey@frizbeeceramics.com .
+                    The Customer can send this email to box@frizbeeceramics.com .
                   </p>
                   <p className="text-gray-700">
                     The Customer must report any visible damage, quality defects, or other issues with the delivered item to the Company within forty-eight (48) hours of arrival.
@@ -587,10 +587,10 @@ export default function TermsAndConditionsPage() {
                   <p className="text-gray-700 mb-4">
                     The Customer must inform the Company at{" "}
                     <a
-                      href="mailto:hey@frizbeeceramics.com"
+                      href="mailto:box@frizbeeceramics.com"
                       className="text-blue-600 underline"
                     >
-                      hey@frizbeeceramics.com
+                      box@frizbeeceramics.com
                     </a>{" "}
                     of the defective Goods within a maximum period of one month
                     after the hidden defect becomes known or could have
