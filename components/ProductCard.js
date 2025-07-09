@@ -213,13 +213,15 @@ const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
                 //   backgroundColor: colorMappings[colorValue] || '#343dfb',
                 // }}
               ></div>
-              <span className='z-[7] tracking-tighter text-left font-bold w-full leading-none' style={{color: isOnSale && '#3aea81'}}>
+              {/* <span className='z-[7] tracking-tighter text-left font-bold w-full leading-none' style={{color: isOnSale && '#3aea81'}}> */}
+              <span className='z-[7] tracking-tighter text-left font-bold w-full leading-none'>
                 {title}
                 <br />
                 <span className='font-normal mt-[4px] mb-[8px] inline-block'>
                   {compareAtPrice && price < compareAtPrice ? (
                     <>
-                      <span className='text-gray-500 line-through pr-2' style={{color: isOnSale && '#5fa37b'}}>
+                      {/* <span className='text-gray-500 line-through pr-2' style={{color: isOnSale && '#5fa37b'}}> */}
+                      <span className='text-gray-500 line-through pr-2'>
                         {formatter.format(compareAtPrice)}
                       </span>
                       {formatter.format(price)}
