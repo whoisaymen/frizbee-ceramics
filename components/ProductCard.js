@@ -253,7 +253,8 @@ const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
                 className="w-full h-full object-cover object-center max-w-full"
               />
             )}
-            <div className="absolute left-3 font-semibold bottom-2 flex flex-col" style={{color: isOnSale && '#3aea81'}}>
+            {/* <div className="absolute left-3 font-semibold bottom-2 flex flex-col" style={{color: isOnSale && '#3aea81'}}> */}
+            <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
               <div
                 className='w-1/2 blur-2xl absolute left-0 bottom-0 h-6 z-[8]'
                 // style={{
@@ -264,7 +265,8 @@ const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
               <span className='font-light -mt-1'>
                 {compareAtPrice && price < compareAtPrice ? (
                   <>
-                    <span className='text-gray-500 line-through pr-2' style={{color: isOnSale && '#5fa37b'}}>
+                    {/* <span className='text-gray-500 line-through pr-2' style={{color: isOnSale && '#5fa37b'}}> */}
+                    <span className='text-gray-500 line-through pr-2'>
                       {formatter.format(compareAtPrice)}
                     </span>
                     {formatter.format(price)}
