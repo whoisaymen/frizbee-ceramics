@@ -116,10 +116,12 @@ function sortProducts(products, option) {
   if (option === "default" || option === "shop") {
     //remove flawed and on-sale products and rest will be manually sorted from backend
     const filteredProducts = products.filter((product) => {
-      const isOnSale =
-        parseFloat(product.node.compareAtPriceRange?.minVariantPrice.amount) >
-        parseFloat(product.node.priceRange.minVariantPrice.amount);
-      return !isOnSale && !product.node.tags.includes("flawfab");
+      //filter out on-sale products and flawed products
+      // const isOnSale =
+      //   parseFloat(product.node.compareAtPriceRange?.minVariantPrice.amount) >
+      //   parseFloat(product.node.priceRange.minVariantPrice.amount);
+      // return !isOnSale && !product.node.tags.includes("flawfab");
+      return !product.node.tags.includes("flawfab");
     });
 
     return filteredProducts;
