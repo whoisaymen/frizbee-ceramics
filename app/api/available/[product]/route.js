@@ -7,7 +7,9 @@ export async function GET(request, { params }) {
   const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESSTOKEN;
   
   async function ShopifyData(query) {
-    const URL = `https://${domain}/api/2023-07/graphql.json`;
+    // const URL = `https://${domain}/api/2023-07/graphql.json`;
+  const URL = `https://${domain}/api/2025-01/graphql.json`;
+
 
     const options = {
       endpoint: URL,
