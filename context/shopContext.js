@@ -78,19 +78,15 @@ export default function ShopProvider({ children }) {
     try {
       if (cart.length === 0) {
         console.log('📦 Creating new checkout (empty cart)')
-        setCart([newItem])
+        const newCart = [newItem]
+        setCart(newCart)
 
-        const checkout = await createCheckout(
-          newItem.id,
-          newItem.variantQuantity
-        )
-
+        const checkout = await createCheckout(newCart)
+        localStorage.setItem('checkout_id', JSON.stringify([newCart, checkout]))
         console.log('✅ Created checkout:', checkout)
 
         setCheckoutId(checkout.id)
         setCheckoutUrl(checkout.webUrl || checkout.checkoutUrl)
-
-        localStorage.setItem('checkout_id', JSON.stringify([newItem, checkout]))
       } else {
         console.log('🔄 Updating existing checkout')
         let newCart = [...cart]
@@ -164,12 +160,8 @@ export default function ShopProvider({ children }) {
             return acc
           }, [])
 
-          // Create fresh checkout with all items
-          const checkout = await createCheckout(
-            mergedCart[0].id,
-            mergedCart[0].variantQuantity,
-            mergedCart.slice(1)
-          )
+          // ✅ FIX: Create fresh checkout with ALL items as an array
+          const checkout = await createCheckout(mergedCart)
 
           setCart(mergedCart)
           setCheckoutId(checkout.id)
