@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatter } from "../utils/helpers";
 import { CartContext } from "@/context/shopContext";
+import { validateCheckoutUrl } from "@/lib/shopify";
 import { useMediaQuery } from "react-responsive";
 
 export default function MiniCart() {
@@ -21,6 +22,55 @@ export default function MiniCart() {
     incrementCartItem,
     decrementCartItem,
   } = useContext(CartContext);
+
+  const handleCheckout = async (e) => {
+    e.preventDefault();
+    
+    if (cartQuantity === 0) {
+      setCartOpen(false);
+      return;
+    }
+
+    console.log('Current checkout URL:', checkoutUrl);
+
+    // Extract checkout ID from URL - try different patterns
+    let checkoutId = null;
+    
+    // Pattern 1: /checkouts/id?key=...
+    let match = checkoutUrl.match(/checkouts\/([^?]+)/);
+    if (match) {
+      checkoutId = `gid://shopify/Checkout/${match[1]}`;
+    }
+    
+    console.log('Extracted checkout ID:', checkoutId);
+    
+    if (!checkoutId) {
+      console.error('Could not extract checkout ID from URL');
+      // Try direct redirect as fallback
+      window.location.href = checkoutUrl;
+      return;
+    }
+    
+    // Validate checkout before redirecting
+    try {
+      const validation = await validateCheckoutUrl(checkoutId);
+      
+      if (validation.valid) {
+        console.log('Checkout is valid, redirecting...');
+        window.location.href = checkoutUrl;
+      } else {
+        console.error('Checkout validation failed:', validation.reason);
+        alert('Your cart session has expired. Please add items to your cart again.');
+        // Clear the invalid cart data
+        clearCart();
+        setCartOpen(false);
+      }
+    } catch (error) {
+      console.error('Error during checkout validation:', error);
+      // Fallback to direct redirect
+      window.location.href = checkoutUrl;
+    }
+  };
 
   let cartTotal = 0;
   cart.map((item) => {
@@ -238,8 +288,9 @@ export default function MiniCart() {
                       </div>
                     ) : null}
                     <div className="mt-0 pb-6 lg:pb-0">
-                      <a
-                        href={checkoutUrl}
+                      <button
+                        onClick={handleCheckout}
+                        disabled={cartLoading}
                         className={`uppercase tracking-tight flex items-center justify-center px-6 py-2 text-sm font-medium text-white bg-[#000] border border-transparent shadow-sm hover:bg-[#fbf234] hover:text-black hover:border-t hover:border-l-0 hover:border-r-0 hover:border-black ${
                           cartLoading ? "cursor-not-allowed" : ""
                         }`}
@@ -247,7 +298,7 @@ export default function MiniCart() {
                         {cartQuantity > 0
                           ? "Proceed to Payment"
                           : "Continue Shopping"}
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
