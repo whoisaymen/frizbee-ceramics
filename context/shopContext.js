@@ -71,8 +71,13 @@ export default function ShopProvider({ children }) {
     const newItem = { ...addedItem }
     setCartOpen(true)
 
+    console.log('🛒 Adding item to cart:', newItem)
+    console.log('📋 Current cart:', cart)
+    console.log('🆔 Current checkoutId:', checkoutId)
+
     try {
       if (cart.length === 0) {
+        console.log('📦 Creating new checkout (empty cart)')
         setCart([newItem])
 
         const checkout = await createCheckout(
@@ -80,17 +85,21 @@ export default function ShopProvider({ children }) {
           newItem.variantQuantity
         )
 
+        console.log('✅ Created checkout:', checkout)
+
         setCheckoutId(checkout.id)
-        setCheckoutUrl(checkout.webUrl)
+        setCheckoutUrl(checkout.webUrl || checkout.checkoutUrl)
 
         localStorage.setItem('checkout_id', JSON.stringify([newItem, checkout]))
       } else {
+        console.log('🔄 Updating existing checkout')
         let newCart = [...cart]
         let itemExists = false
 
         newCart = newCart.map((item) => {
           if (item.id === newItem.id) {
             itemExists = true
+            console.log('📈 Incrementing existing item quantity')
             return {
               ...item,
               variantQuantity: item.variantQuantity + newItem.variantQuantity,
@@ -100,29 +109,91 @@ export default function ShopProvider({ children }) {
         })
 
         if (!itemExists) {
+          console.log('➕ Adding new item to cart')
           newCart.push(newItem)
         }
 
+        console.log('🛍️ New cart contents:', newCart)
+
         setCart(newCart)
+
+        console.log('🔄 Calling updateCheckout with:', { checkoutId, newCart })
+
         const newCheckout = await updateCheckout(checkoutId, newCart)
+
+        console.log('✅ Update checkout response:', newCheckout)
+
+        const newCheckoutUrl =
+          newCheckout.webUrl || newCheckout.checkoutUrl || checkoutUrl
+        setCheckoutUrl(newCheckoutUrl)
 
         localStorage.setItem(
           'checkout_id',
-          JSON.stringify([newCart, newCheckout])
+          JSON.stringify([
+            newCart,
+            {
+              id: checkoutId,
+              webUrl: newCheckoutUrl,
+              checkoutUrl: newCheckoutUrl,
+            },
+          ])
         )
       }
+      console.log('🎉 Successfully added item to cart')
     } catch (error) {
-      console.error('Error adding to cart:', error)
-      // Reset cart state on error
-      setCart([])
-      setCheckoutId('')
-      setCheckoutUrl('')
-      localStorage.removeItem('checkout_id')
-      alert(
-        'There was an error adding the item to your cart. Please try again.'
-      )
+      console.error('❌ Error adding to cart:', error)
+      console.error('❌ Error message:', error.message)
+      console.error('❌ Error stack:', error.stack)
+
+      // More user-friendly error handling
+      if (cart.length > 0) {
+        // Try to recreate the checkout instead of showing error
+        console.log('🔄 Attempting to recreate checkout...')
+        try {
+          // Clear the old checkout and create a new one
+          const newCartWithItem = [...cart, newItem]
+
+          // Check if item already exists and merge quantities
+          const mergedCart = newCartWithItem.reduce((acc, item) => {
+            const existingItem = acc.find((accItem) => accItem.id === item.id)
+            if (existingItem) {
+              existingItem.variantQuantity += item.variantQuantity
+            } else {
+              acc.push({ ...item })
+            }
+            return acc
+          }, [])
+
+          // Create fresh checkout with all items
+          const checkout = await createCheckout(
+            mergedCart[0].id,
+            mergedCart[0].variantQuantity,
+            mergedCart.slice(1)
+          )
+
+          setCart(mergedCart)
+          setCheckoutId(checkout.id)
+          setCheckoutUrl(checkout.webUrl || checkout.checkoutUrl)
+          localStorage.setItem(
+            'checkout_id',
+            JSON.stringify([mergedCart, checkout])
+          )
+
+          console.log('✅ Successfully recreated checkout')
+        } catch (recreateError) {
+          console.error('❌ Failed to recreate checkout:', recreateError)
+          // Only show error if recreation also fails
+          alert('Unable to add item to cart. Please try refreshing the page.')
+        }
+      } else {
+        // Reset cart state only if it was empty
+        setCart([])
+        setCheckoutId('')
+        setCheckoutUrl('')
+        localStorage.removeItem('checkout_id')
+        alert('Unable to add item to cart. Please try again.')
+      }
     }
-    // setItemUpdated(true);
   }
 
   async function removeCartItem(itemToRemove) {
