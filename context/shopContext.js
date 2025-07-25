@@ -38,16 +38,11 @@ export default function ShopProvider({ children }) {
             const isValidCheckout = await validateCheckoutUrl(cartObject[1].id)
 
             if (isValidCheckout.valid) {
-              if (cartObject[0].id) {
-                setCart([cartObject[0]])
-              } else if (cartObject[0].length > 0) {
-                setCart(...[cartObject[0]])
-              }
-
+              setCart(cartObject[0])
               setCheckoutId(cartObject[1].id)
-              setCheckoutUrl(cartObject[1].webUrl)
+              setCheckoutUrl(cartObject[1].checkoutUrl || cartObject[1].webUrl)
             } else {
-              // Clear invalid checkout from localStorage
+              // Clear invalid cart from localStorage
               localStorage.removeItem('checkout_id')
               setCart([])
               setCheckoutId('')
@@ -189,23 +184,51 @@ export default function ShopProvider({ children }) {
   }
 
   async function removeCartItem(itemToRemove) {
-    const updatedCart = cart.filter((item) => item.id !== itemToRemove)
     setCartLoading(true)
 
+    const updatedCart = cart.filter((item) => item.id !== itemToRemove)
     setCart(updatedCart)
 
-    const newCheckout = await updateCheckout(checkoutId, updatedCart)
+    try {
+      if (updatedCart.length === 0) {
+        // Cart is empty, clear everything
+        setCheckoutId('')
+        setCheckoutUrl('')
+        localStorage.removeItem('checkout_id')
+        setCartOpen(false)
+      } else {
+        // Update checkout with remaining items
+        const newCheckout = await updateCheckout(checkoutId, updatedCart)
 
-    localStorage.setItem(
-      'checkout_id',
-      JSON.stringify([updatedCart, newCheckout])
-    )
+        if (newCheckout === null) {
+          // This shouldn't happen since we checked length > 0, but just in case
+          setCheckoutId('')
+          setCheckoutUrl('')
+          localStorage.removeItem('checkout_id')
+          setCartOpen(false)
+        } else {
+          // Update with new checkout
+          setCheckoutId(newCheckout.id)
+          setCheckoutUrl(newCheckout.webUrl || newCheckout.checkoutUrl)
+          localStorage.setItem(
+            'checkout_id',
+            JSON.stringify([updatedCart, newCheckout])
+          )
+        }
+      }
+    } catch (error) {
+      console.error('❌ Error removing item from cart:', error)
+      // Revert cart state on error
+      setCart(cart)
+      alert('Unable to remove item from cart. Please try again.')
+    }
+
     setCartLoading(false)
 
-    if (cart.length === 1) {
+    // Close cart if it becomes empty
+    if (updatedCart.length === 0) {
       setCartOpen(false)
     }
-    // setItemUpdated(true);
   }
 
   async function incrementCartItem(item) {
