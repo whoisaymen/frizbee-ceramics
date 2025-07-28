@@ -2,6 +2,7 @@
 import { createContext, useState, useEffect } from 'react'
 import {
   createCheckout,
+  getProduct,
   updateCheckout,
   validateCheckoutUrl,
 } from '@/lib/shopify'
@@ -62,126 +63,74 @@ export default function ShopProvider({ children }) {
     initializeCart()
   }, [])
 
-  async function addToCart(addedItem) {
-    const newItem = { ...addedItem }
-    setCartOpen(true)
 
-    console.log('🛒 Adding item to cart:', newItem)
-    console.log('📋 Current cart:', cart)
-    console.log('🆔 Current checkoutId:', checkoutId)
+async function addToCart(addedItem) {
+  const newItem = { ...addedItem }
+  setCartOpen(true)
 
-    try {
-      if (cart.length === 0) {
-        console.log('📦 Creating new checkout (empty cart)')
-        const newCart = [newItem]
-        setCart(newCart)
+  const handle = newItem.handle
+  const variantId = newItem.id
 
-        const checkout = await createCheckout(newCart)
-        localStorage.setItem('checkout_id', JSON.stringify([newCart, checkout]))
-        console.log('✅ Created checkout:', checkout)
-
-        setCheckoutId(checkout.id)
-        setCheckoutUrl(checkout.webUrl || checkout.checkoutUrl)
-      } else {
-        console.log('🔄 Updating existing checkout')
-        let newCart = [...cart]
-        let itemExists = false
-
-        newCart = newCart.map((item) => {
-          if (item.id === newItem.id) {
-            itemExists = true
-            console.log('📈 Incrementing existing item quantity')
-            return {
-              ...item,
-              variantQuantity: item.variantQuantity + newItem.variantQuantity,
-            }
-          }
-          return item
-        })
-
-        if (!itemExists) {
-          console.log('➕ Adding new item to cart')
-          newCart.push(newItem)
-        }
-
-        console.log('🛍️ New cart contents:', newCart)
-
-        setCart(newCart)
-
-        console.log('🔄 Calling updateCheckout with:', { checkoutId, newCart })
-
-        const newCheckout = await updateCheckout(checkoutId, newCart)
-
-        console.log('✅ Update checkout response:', newCheckout)
-
-        const newCheckoutUrl =
-          newCheckout.webUrl || newCheckout.checkoutUrl || checkoutUrl
-        setCheckoutUrl(newCheckoutUrl)
-
-        localStorage.setItem(
-          'checkout_id',
-          JSON.stringify([
-            newCart,
-            {
-              id: checkoutId,
-              webUrl: newCheckoutUrl,
-              checkoutUrl: newCheckoutUrl,
-            },
-          ])
-        )
-      }
-      console.log('🎉 Successfully added item to cart')
-    } catch (error) {
-      console.error('❌ Error adding to cart:', error)
-      console.error('❌ Error message:', error.message)
-      console.error('❌ Error stack:', error.stack)
-
-      // More user-friendly error handling
-      if (cart.length > 0) {
-        // Try to recreate the checkout instead of showing error
-        console.log('🔄 Attempting to recreate checkout...')
-        try {
-          // Clear the old checkout and create a new one
-          const newCartWithItem = [...cart, newItem]
-
-          // Check if item already exists and merge quantities
-          const mergedCart = newCartWithItem.reduce((acc, item) => {
-            const existingItem = acc.find((accItem) => accItem.id === item.id)
-            if (existingItem) {
-              existingItem.variantQuantity += item.variantQuantity
-            } else {
-              acc.push({ ...item })
-            }
-            return acc
-          }, [])
-
-          // ✅ FIX: Create fresh checkout with ALL items as an array
-          const checkout = await createCheckout(mergedCart)
-
-          setCart(mergedCart)
-          setCheckoutId(checkout.id)
-          setCheckoutUrl(checkout.webUrl || checkout.checkoutUrl)
-          localStorage.setItem(
-            'checkout_id',
-            JSON.stringify([mergedCart, checkout])
-          )
-
-          console.log('✅ Successfully recreated checkout')
-        } catch (recreateError) {
-          console.error('❌ Failed to recreate checkout:', recreateError)
-          // Only show error if recreation also fails
-          alert('Unable to add item to cart. Please try refreshing the page.')
-        }
-      } else {
-        // Reset cart state only if it was empty
-        setCart([])
-        setCheckoutId('')
-        setCheckoutUrl('')
-        localStorage.removeItem('checkout_id')
-        alert('Unable to add item to cart. Please try again.')
-      }
-    }
+  let quantityAvailable = null
+  try {
+    const product = await getProduct(handle)
+    const variant = product.variants.edges.find(v => v.node.id === variantId)
+    quantityAvailable = variant?.node?.quantityAvailable ?? 0
+  } catch (err) {
+    console.error('⚠️ Failed to fetch product inventory:', err)
+    alert('Unable to validate stock. Please try again.')
+    return
   }
+
+  const existingItem = cart.find((item) => item.id === newItem.id)
+  const currentQty = existingItem?.variantQuantity || 0
+  const totalQty = currentQty + newItem.variantQuantity
+
+  if (totalQty > quantityAvailable) {
+    alert(`Only ${quantityAvailable} of this item available in stock.`)
+    return
+  }
+
+  try {
+    if (cart.length === 0) {
+      const newCart = [newItem]
+      setCart(newCart)
+      const checkout = await createCheckout(newCart)
+      setCheckoutId(checkout.id)
+      setCheckoutUrl(checkout.checkoutUrl)
+      localStorage.setItem('checkout_id', JSON.stringify([newCart, checkout]))
+    } else {
+      let newCart = [...cart]
+      let itemExists = false
+
+      newCart = newCart.map((item) => {
+        if (item.id === newItem.id) {
+          itemExists = true
+          return {
+            ...item,
+            variantQuantity: item.variantQuantity + newItem.variantQuantity,
+          }
+        }
+        return item
+      })
+
+      if (!itemExists) {
+        newCart.push(newItem)
+      }
+
+      setCart(newCart)
+
+      const newCheckout = await updateCheckout(checkoutId, newCart)
+      const newCheckoutUrl = newCheckout?.checkoutUrl || checkoutUrl
+      setCheckoutUrl(newCheckoutUrl)
+
+      localStorage.setItem('checkout_id', JSON.stringify([newCart, newCheckout]))
+    }
+  } catch (error) {
+    console.error('❌ Error in addToCart:', error)
+    alert('Failed to add to cart. Please try again.')
+  }
+}
 
   async function removeCartItem(itemToRemove) {
     setCartLoading(true)
@@ -231,24 +180,49 @@ export default function ShopProvider({ children }) {
     }
   }
 
-  async function incrementCartItem(item) {
-    setCartLoading(true)
+async function incrementCartItem(item) {
+  setCartLoading(true)
 
-    let newCart = []
-
-    cart.map((cartItem) => {
-      if (cartItem.id === item.id) {
-        cartItem.variantQuantity++
-        newCart = [...cart]
-      }
-    })
-    setCart(newCart)
-    const newCheckout = await updateCheckout(checkoutId, newCart)
-
-    localStorage.setItem('checkout_id', JSON.stringify([newCart, newCheckout]))
+  let quantityAvailable = 0
+  try {
+    const product = await getProduct(item.handle)
+    const variant = product.variants.edges.find(v => v.node.id === item.id)
+    quantityAvailable = variant?.node?.quantityAvailable ?? 0
+  } catch (err) {
+    console.error('Failed to fetch live inventory:', err)
+    alert('Could not verify stock. Please try again.')
     setCartLoading(false)
-    // setItemUpdated(true);
+    return
   }
+
+  if (item.variantQuantity >= quantityAvailable) {
+    alert(`Only ${quantityAvailable} in stock.`)
+    setCartLoading(false)
+    return
+  }
+
+  const newCart = cart.map((cartItem) => {
+    if (cartItem.id === item.id) {
+      return {
+        ...cartItem,
+        variantQuantity: cartItem.variantQuantity + 1,
+      }
+    }
+    return cartItem
+  })
+
+  setCart(newCart)
+
+  try {
+    const newCheckout = await updateCheckout(checkoutId, newCart)
+    localStorage.setItem('checkout_id', JSON.stringify([newCart, newCheckout]))
+  } catch (err) {
+    console.error('Error incrementing cart item:', err)
+    alert('Cart update failed.')
+  }
+
+  setCartLoading(false)
+}
 
   async function decrementCartItem(item) {
     setCartLoading(true)
