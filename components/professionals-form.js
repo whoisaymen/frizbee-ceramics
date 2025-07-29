@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import * as countries from "../countries.json";
+import countries from "../countries.json";
 
 export default function CatalogueForm({ category }) {
     const [formState, setFormState] = useState({
