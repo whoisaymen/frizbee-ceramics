@@ -121,7 +121,7 @@ const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
   });
 
   const handleMouseEnter = () => {
-    //on hover show video
+    //on hover show video or img
     // if (video) {
     //   // Find the MP4 video source with the highest quality
     //   const videoSource = video.sources.find(source => 
@@ -133,11 +133,19 @@ const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
     //     content: videoSource.url
     //   });
     // } else if (imageUrl2) {
+      // setDisplayMedia({
+      //   type: 'IMAGE',
+      //   content: imageUrl2
+      // });
+    // }
+
+    //on hover show img
+     if (imageUrl2) {
       setDisplayMedia({
         type: 'IMAGE',
         content: imageUrl2
       });
-    // }
+    }
   };
 
 
