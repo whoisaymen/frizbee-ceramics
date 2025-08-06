@@ -179,7 +179,7 @@ export default function Cart() {
           {cart.length > 0 ? (
             <div className="flex flex-col w-full">
               <div className="px-8 py-6 border-t border-black sm:px-10 lg:w-full">
-                <ul className="list-disc text-sm">
+                <ul className="list-disc text-xs">
                   <li>Complimentary 4-5 days shipping (EU & UK)</li>
                   <li>Customs fees apply outside EU</li>
                   <li>14 days free return and exchange</li>
