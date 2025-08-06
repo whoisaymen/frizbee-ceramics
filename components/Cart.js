@@ -170,14 +170,23 @@ export default function Cart() {
             </div>
           </div>
           {cart.length > 0 ? (
-            <div className="px-4 py-4 border-t border-black sm:px-6 lg:w-full">
-              <div className="flex justify-between uppercase font-medium text-black text-sm tracking-tighter">
-                <p>Subtotal</p>
-                <p>{formatter.format(cartTotal)}</p>
+            <div className="flex flex-col w-full">
+              <div className="px-8 py-6 border-t border-black sm:px-10 lg:w-full">
+                <ul className="list-disc text-sm">
+                  <li>Complimentary 4-5 days shipping (EU & UK)</li>
+                  <li>Customs fees apply outside EU</li>
+                  <li>14 days free return and exchange</li>
+                </ul>
               </div>
-              <p className="mt-0.5 text-xs font-light text-gray-500">
-                Shipping and taxes calculated at checkout.
-              </p>
+              <div className="px-4 py-4 border-t border-black sm:px-6 lg:w-full">
+                <div className="flex justify-between uppercase font-medium text-black text-sm tracking-tighter">
+                  <p>Subtotal</p>
+                  <p>{formatter.format(cartTotal)}</p>
+                </div>
+                <p className="mt-0.5 text-xs font-light text-gray-500">
+                  Shipping and taxes calculated at checkout.
+                </p>
+              </div>
             </div>
           ) : null}
           <div className="mt-0 pb-6 lg:pb-0 lg:w-full">
