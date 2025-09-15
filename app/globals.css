@@ -292,6 +292,6 @@ body.screen-locked {
 
 /* temp margin as imgs are not properl */ 
 /* remove it to make it proper */
-img.w-full.h-full.object-cover.object-center{
+/* img.w-full.h-full.object-cover.object-center{
   margin-top: -30px !important;
-}
+} */
