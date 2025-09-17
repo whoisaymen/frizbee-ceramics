@@ -9,7 +9,12 @@ const ProductList = async ({ sortOption }) => {
   const sunsetProducts = sortedProducts.filter(
     (product) => product.node.tags.includes("sunset")
   );
-
+  
+  // Clarks
+  const clarksProducts = sortedProducts.filter(
+    (product) => product.node.tags.includes("clarks")
+  );
+  
   // Everlasting
   const shopProducts = sortedProducts.filter(
     (product) => !product.node.tags.includes("capsule") && !product.node.tags.includes("sunset")
@@ -25,6 +30,28 @@ const ProductList = async ({ sortOption }) => {
     >
       <div className="mx-auto" >
         
+        {/* clarks Products products section */}
+        {/* requirement : if there are 2 clarks products, make the grid of 2 and else usual grid */}
+        {clarksProducts.length > 0 && (
+          <>
+            <div
+              className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/clark_cover_image.jpg?v=1758097124')]"
+            ></div>
+            <div className={`grid  ` + (clarksProducts.length === 2 ? 'grid-cols-2 md:h-[60vh] lg:h-[80vh] xl:h-[90vh]' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5')}>
+              {clarksProducts.map((product, index) => (
+                <ProductCard
+                  key={product.node.id}
+                  product={product}
+                  index={index}
+                  totalProducts={clarksProducts.length}
+                  isCapsule={false}
+                  isClarks={clarksProducts.length === 2 ? true : false}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
         {/* sunsetProducts products section */}
         {sunsetProducts.length > 0 && (
           <>

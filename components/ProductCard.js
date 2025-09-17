@@ -16,7 +16,7 @@ import DesktopQuickBuy from './ui/DesktopQuickBuy'
 // const MobileQuickBuy = dynamic(() => import("./ui/MobileQuickBuy"));
 // const DesktopQuickBuy = dynamic(() => import("./ui/DesktopQuickBuy"));
 
-const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
+const ProductCard = ({ product, index, totalProducts , isCapsule, isClarks = false }) => {
   const { addToCart } = useContext(CartContext);
   const { handle, title, id } = product.node;
   const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
@@ -243,7 +243,7 @@ const ProductCard = ({ product, index, totalProducts , isCapsule }) => {
           </div>
 
           {/* Desktop Product Card */}
-          <div className="hidden md:block w-full overflow-hidden md:h-[24rem] bg-gray-100 relative text-sm">
+          <div className={`hidden md:block w-full overflow-hidden md:h-[24rem] bg-gray-100 relative text-sm ` + (isClarks ? 'md:h-[60vh] lg:h-[80vh] xl:h-[90vh]' : '')}>
             {displayMedia.type === 'VIDEO' ? (
               <video
                 src={displayMedia.content}
