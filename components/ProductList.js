@@ -17,7 +17,7 @@ const ProductList = async ({ sortOption }) => {
   
   // Everlasting
   const shopProducts = sortedProducts.filter(
-    (product) => !product.node.tags.includes("capsule") && !product.node.tags.includes("sunset")
+    (product) => !product.node.tags.includes("capsule") && !product.node.tags.includes("sunset") && !product.node.tags.includes("clarks")
   );
   const capsuleProducts = sortedProducts.filter((product) =>
     product.node.tags.includes("capsule")
