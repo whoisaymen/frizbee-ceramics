@@ -80,6 +80,7 @@ const Deals = () => {
         <>
             <TempNav />
             <div className="flex flex-col items-center justify-end md:justify-center text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/3 w-full">
+                <h4 className="sm:text-md sm:font-regular uppercase">{`YES, WE NEED ONE EXTRA DAY ::)`}</h4>
                 <h2 className="sm:text-xl sm:font-semibold uppercase">MYSTERY BOX</h2>
                 {/* <div className="text-center">
                     <h2 className="sm:text-xl sm:font-semibold">Up to 40% off</h2>
