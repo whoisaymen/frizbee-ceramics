@@ -36,8 +36,8 @@ const ProductList = async ({ sortOption }) => {
   );
 
   //check if clarks cover image exists
-  const clarkImgUrl = 'https://cdn.shopify.com/s/files/1/0806/4381/7793/files/clark_cover_image.jpg?v=1758097124';
-  const sunsetImgUrl = 'https://cdn.shopify.com/s/files/1/0806/4381/7793/files/sunset-collection-banner.gif?v=1749632587';
+  const clarkImgUrl = 'https://cdn.shopify.com/s/files/1/0806/4381/7793/files/clark_cover_image.jpg';
+  const sunsetImgUrl = 'https://cdn.shopify.com/s/files/1/0806/4381/7793/files/sunset-collection-banner.gif';
   const isClarkImgExists = await checkImageExists(clarkImgUrl);
   const isSunsetImgExists = await checkImageExists(sunsetImgUrl);
 
