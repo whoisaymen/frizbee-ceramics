@@ -1,6 +1,18 @@
 import ProductCard from "./ProductCard";
 import { getProductsInCollection } from "@/lib/shopify";
 
+async function checkImageExists(url) {
+  try {
+    const response = await fetch(url, { 
+      method: 'HEAD',
+      cache: 'no-store' // or 'force-cache' depending on your needs
+    })
+    return response.ok
+  } catch (error) {
+    return false
+  }
+}
+
 const ProductList = async ({ sortOption }) => {
   const products = await getProductsInCollection();
   const sortedProducts = sortProducts(products, sortOption);
@@ -23,6 +35,12 @@ const ProductList = async ({ sortOption }) => {
     product.node.tags.includes("capsule")
   );
 
+  //check if clarks cover image exists
+  const clarkImgUrl = 'https://cdn.shopify.com/s/files/1/0806/4381/7793/files/clark_cover_image.jpg?v=1758097124';
+  const sunsetImgUrl = 'https://cdn.shopify.com/s/files/1/0806/4381/7793/files/sunset-collection-banner.gif?v=1749632587';
+  const isClarkImgExists = await checkImageExists(clarkImgUrl);
+  const isSunsetImgExists = await checkImageExists(sunsetImgUrl);
+
   return (
     <div
       className="mb-[24px] md:mb-[29px] md:mx-0 -mt-[2px] min-h-screen"
@@ -34,9 +52,9 @@ const ProductList = async ({ sortOption }) => {
         {/* requirement : if there are 2 clarks products, make the grid of 2 and else usual grid */}
         {clarksProducts.length > 0 && (
           <>
-            <div
+            {isClarkImgExists && <div
               className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/clark_cover_image.jpg?v=1758097124')]"
-            ></div>
+            ></div>}
             <div className={`grid  ` + (clarksProducts.length === 2 ? 'grid-cols-2 md:h-[60vh] lg:h-[80vh] xl:h-[90vh]' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5')}>
               {clarksProducts.map((product, index) => (
                 <ProductCard
@@ -55,9 +73,9 @@ const ProductList = async ({ sortOption }) => {
         {/* sunsetProducts products section */}
         {sunsetProducts.length > 0 && (
           <>
-            <div
+            {isSunsetImgExists && <div
               className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/sunset-collection-banner.gif?v=1749632587')]"
-            ></div>
+            ></div>}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
               {sunsetProducts.map((product, index) => (
                 <ProductCard
