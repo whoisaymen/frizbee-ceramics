@@ -67,12 +67,16 @@ export default function ShopProvider({ children }) {
     const variantId = newItem.id
 
     let quantityAvailable = null
+    let isAvailableForSale = false;
+
     try {
       const product = await getProduct(handle)
       const variant = product.variants.edges.find(
         (v) => v.node.id === variantId
       )
       quantityAvailable = variant?.node?.quantityAvailable ?? 0
+      isAvailableForSale = variant.node.availableForSale;
+
     } catch (err) {
       console.error('⚠️ Failed to fetch product inventory:', err)
       alert('Unable to validate stock. Please try again.')
@@ -83,9 +87,13 @@ export default function ShopProvider({ children }) {
     const currentQty = existingItem?.variantQuantity || 0
     const totalQty = currentQty + newItem.variantQuantity
 
-    if (totalQty > quantityAvailable) {
-      alert(`Only ${quantityAvailable} of this item available in stock.`)
-      return
+    if (!isAvailableForSale) {
+      alert("This item is currently unavailable.");
+      return;
+    }
+    if (quantityAvailable > 0 && totalQty > quantityAvailable) {
+      alert(`Only ${quantityAvailable} of this item available in stock.`);
+      return;
     }
 
     try {
@@ -196,11 +204,12 @@ export default function ShopProvider({ children }) {
       return
     }
 
-    if (item.variantQuantity >= quantityAvailable) {
-      setQuantityError(item.id, `Only ${quantityAvailable} in stock`)
-      setTimeout(() => setQuantityError(item.id, null), 3000)
-      setCartLoading(false)
-      return
+    // Only block if there's actual stock AND we've reached the limit
+    if (quantityAvailable > 0 && item.variantQuantity >= quantityAvailable) {
+      setQuantityError(item.id, `Only ${quantityAvailable} in stock`);
+      setTimeout(() => setQuantityError(item.id, null), 3000);
+      setCartLoading(false);
+      return;
     }
 
     const newCart = cart.map((cartItem) => {
