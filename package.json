@@ -25,6 +25,7 @@
     "eslint": "8.46.0",
     "eslint-config-next": "^14.0.4",
     "framer-motion": "^10.16.1",
+    "googleapis": "^166.0.0",
     "i": "^0.3.7",
     "next": "^14.2.4",
     "plaiceholder": "^3.0.0",
