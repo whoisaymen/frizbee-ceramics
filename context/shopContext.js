@@ -32,14 +32,15 @@ export default function ShopProvider({ children }) {
 
           // Validate checkout if it exists
           if (cartObject[1] && cartObject[1].id) {
-            const isValidCheckout = await validateCheckoutUrl(cartObject[1].id)
+            const validation = await validateCheckoutUrl(cartObject[1].id)
 
-            if (isValidCheckout.valid) {
+           if (validation.valid) {
               setCart(cartObject[0])
               setCheckoutId(cartObject[1].id)
-              setCheckoutUrl(cartObject[1].checkoutUrl || cartObject[1].webUrl)
-            } else {
-              // Clear invalid cart from localStorage
+              setCheckoutUrl(cartObject[1].checkoutUrl)
+            }else {
+              // Cart is invalid (likely ordered), clear local storage
+              // console.log("🛒 Cart expired or completed. Clearing local storage.")
               localStorage.removeItem('checkout_id')
               setCart([])
               setCheckoutId('')
@@ -86,19 +87,29 @@ export default function ShopProvider({ children }) {
     const existingItem = cart.find((item) => item.id === newItem.id)
     const currentQty = existingItem?.variantQuantity || 0
     const totalQty = currentQty + newItem.variantQuantity
+    // const isPreOrder = quantityAvailable === 0 || totalQty > quantityAvailable;
+    const isPreOrder = quantityAvailable <= 0 || totalQty > quantityAvailable;
+    const itemToSave = {
+      ...newItem,
+      isPreOrder,
+    };
 
-    if (!isAvailableForSale) {
-      alert("This item is currently unavailable.");
-      return;
-    }
+    // if (!isAvailableForSale) {
+    //   alert("This item is currently unavailable.");
+    //   return;
+    // }
+
     if (quantityAvailable > 0 && totalQty > quantityAvailable) {
       alert(`Only ${quantityAvailable} of this item available in stock.`);
+      // alert(`Only ${quantityAvailable} available now. Added as pre-order.`);
+      // if un-comment above line then remove return statement.
       return;
     }
 
     try {
       if (cart.length === 0) {
-        const newCart = [newItem]
+        // const newCart = [newItem]
+        const newCart = [itemToSave];
         setCart(newCart)
         const checkout = await createCheckout(newCart)
         setCheckoutId(checkout.id)
@@ -114,13 +125,15 @@ export default function ShopProvider({ children }) {
             return {
               ...item,
               variantQuantity: item.variantQuantity + newItem.variantQuantity,
+              isPreOrder: item.isPreOrder || isPreOrder,
             }
           }
           return item
         })
 
         if (!itemExists) {
-          newCart.push(newItem)
+          // newCart.push(newItem)
+          newCart.push(itemToSave);
         }
 
         setCart(newCart)

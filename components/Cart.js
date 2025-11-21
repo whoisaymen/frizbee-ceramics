@@ -31,6 +31,12 @@ export default function Cart() {
     0
   )
 
+  // Pre-order date: 20 days from now
+  const today = new Date();
+  const preOrderDate = new Date(today);
+  preOrderDate.setDate(preOrderDate.getDate() + 20);
+  const formattedPreorderDate = preOrderDate.toLocaleDateString("en-GB");
+
   return (
     <div
       className={`z-10 fixed bottom-0 right-0 lg:bottom-auto lg:top-[1rem]  w-full transform transition-transform duration-500 ease-in-out min-w-[400px] lg:max-w-[calc(30%+1px)] lg:flex ${
@@ -110,6 +116,13 @@ export default function Cart() {
                                   {product.title}
                                 </span>
                               </Link>
+                               {product.isPreOrder && (
+                                <div>
+                                  <p className="text-[13px] text-[#3418EB] pt-1 font-normal">
+                                    Pre-order
+                                  </p>
+                                </div>
+                              )}
                             </h3>
                           </div>
 
@@ -156,6 +169,13 @@ export default function Cart() {
                             </p>
                           </div>
 
+                          {product.isPreOrder && (
+                            <div>
+                              <p className="text-[13px] text-[#000000] pt-1 font-normal">
+                                Estimated shipping date: no longer than {formattedPreorderDate}
+                              </p>
+                            </div>
+                          )}
                           {quantityErrors[product.id] && (
                             <div className='mt-2 text-xs text-red-600 pb-1'>
                               {quantityErrors[product.id]}

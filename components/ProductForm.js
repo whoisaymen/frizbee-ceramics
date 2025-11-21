@@ -68,6 +68,7 @@ export default function ProductForm({ product }) {
       variantQuantity: 1,
       compareAtPrice: variant.node.compareAtPriceV2?.amount,
       isAvailableForSale: variant.node.availableForSale,
+      quantityAvailable: variant.node.quantityAvailable,
     };
   });
 
@@ -115,6 +116,8 @@ export default function ProductForm({ product }) {
     product.variants.edges[0].node.compareAtPriceV2?.amount
   );
   const isAvailableForSale = product.variants.edges[0].node.availableForSale;
+const quantityAvailable = selectedVariant?.quantityAvailable;
+const isPreOrder = quantityAvailable <= 0 && selectedVariant?.isAvailableForSale;
 
   // const [detailsOpen, setDetailsOpen] = useState(true);
 
@@ -199,20 +202,19 @@ export default function ProductForm({ product }) {
             </button>
             <button
               onClick={handleAddToCart}
-              disabled={!isAvailableForSale}
-              className={`flex-1 uppercase tracking-wide font-medium ${
-                isAvailableForSale
-                  ? "bg-white"
-                  : "bg-white text-gray-400 cursor-not-allowed"
-              }`}
+              // disabled={!isAvailableForSale}
+              // className={`flex-1 uppercase tracking-wide font-medium ${
+              //   isAvailableForSale
+              //     ? "bg-white"
+              //     : "bg-white text-gray-400 cursor-not-allowed"
+              // }`}
+              className="flex-1 uppercase tracking-wide font-medium bg-white"
             >
               {/* {isAvailableForSale ? "Add to Cart" : "Sold Out"} */}
-              {isAvailableForSale ? (
-                <>
-                  <span>Add To Cart</span>
-                </>
+              {isPreOrder ? (
+                <span className="cursor-pointer">PRE-ORDER</span>
               ) : (
-                <span className="cursor-not-allowed">Sold out</span>
+                <span className="cursor-pointer">Add To Cart</span>
               )}
             </button>
           </div>
@@ -237,16 +239,14 @@ export default function ProductForm({ product }) {
             </button>
             <button
               onClick={handleAddToCart}
-              disabled={!isAvailableForSale}
+              // disabled={!isAvailableForSale}
               className="flex-grow px-2 py-1 md:py-2 text-black uppercase font-light tracking-tight bg-white/90 border-l border-gray-800 text-xs md:text-base"
             >
-              {isAvailableForSale ? (
-                <>
-                  <span>Add To Cart</span>
-                </>
-              ) : (
-                <span className="cursor-not-allowed">Sold out</span>
-              )}
+                {isPreOrder ? (
+                  <span className="cursor-pointer">PRE-ORDER</span>
+                ) : (
+                  <span className="cursor-pointer">Add To Cart</span>
+                )}
             </button>
           </div>
         </div>

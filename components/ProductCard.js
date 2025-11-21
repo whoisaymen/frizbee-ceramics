@@ -26,6 +26,12 @@ const ProductCard = ({ product, index, totalProducts , isCapsule, isClarks = fal
   //check if product is available for sale (not sold out)
   const isAvailableForSale = product.node.availableForSale;
   const colorValue = getColorFromTag(product);
+
+  const defaultVariant = product.node.variants.edges[0]?.node;
+  const quantityAvailable = defaultVariant?.quantityAvailable;
+  // console.log("quantityAvailable =====", quantityAvailable);
+  const isPreOrder = quantityAvailable <= 0 && isAvailableForSale;
+  // console.log("isPreOrder =====", isPreOrder);
   
   // Get images and video
   const mediaItems = product.node.media.edges;
@@ -293,11 +299,13 @@ const ProductCard = ({ product, index, totalProducts , isCapsule, isClarks = fal
       <MobileQuickBuy
         handleAddToCart={handleAddToCart}
         isAvailableForSale={isAvailableForSale}
+        isPreOrder={isPreOrder}
       />
 
       <DesktopQuickBuy
         handleAddToCart={handleAddToCart}
         isAvailableForSale={isAvailableForSale}
+        isPreOrder={isPreOrder}
       />
     </motion.div>
   )
