@@ -1,15 +1,4 @@
 const DesktopQuickBuy = ({ handleAddToCart, isPreOrder }) => {
-  if (isPreOrder) {
-    return (
-      <button
-        className="hidden md:block md:absolute right-8 -bottom-1 text-sm tracking-tighter font-light bg-white p-2 pt-1 border-black rounded-t-md border-[1px] transition-transform duration-500 ease-in-out transform uppercase cursor-pointer"
-        onClick={handleAddToCart}
-      >
-        PRE-ORDER NOW
-      </button>
-    );
-  }
-
   return (
     <button
       className="hidden md:block md:absolute right-8 -bottom-1 
@@ -19,7 +8,7 @@ const DesktopQuickBuy = ({ handleAddToCart, isPreOrder }) => {
         ease-in-out transform uppercase cursor-pointer"
       onClick={handleAddToCart}
     >
-      Add to Cart
+      {isPreOrder ? "PRE-ORDER NOW" : "Add to Cart"}
     </button>
   );
 };

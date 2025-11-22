@@ -106,7 +106,7 @@ export default function Cart() {
                         </div>
 
                         <div className='flex flex-col flex-1 ml-4 justify-center w-1/2'>
-                          <div className='flex justify-between text-sm font-light text-gray-900 tracking-tighter leading-[18px] mb-4'>
+                          <div className={`flex justify-between text-sm font-light text-gray-900 tracking-tighter leading-[18px] ${product.isPreOrder ? 'mb-0' : 'mb-4'}`}>
                             <h3>
                               <Link
                                 href={`/products/${product.handle}`}
@@ -116,9 +116,9 @@ export default function Cart() {
                                   {product.title}
                                 </span>
                               </Link>
-                               {product.isPreOrder && (
+                              {product.isPreOrder && (
                                 <div>
-                                  <p className="text-[13px] text-[#3418EB] pt-1 font-normal">
+                                  <p className="text-[13px] text-[#3418EB] font-normal">
                                     Pre-order
                                   </p>
                                 </div>
