@@ -10,6 +10,8 @@ export async function GET() {
 }
 export async function POST(req) {
   try {
+    console.log("Webhook Hit:", req);
+
     const rawBody = await req.text();
 
     // Validate HMAC
