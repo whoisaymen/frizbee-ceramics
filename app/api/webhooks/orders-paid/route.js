@@ -5,6 +5,7 @@ import { appendOrderToSheet } from '@/lib/googleSheets';
 import { getPreOrderProductIds } from '@/lib/shopify';
 
 export async function GET() {
+  console.log("🔔 Webhook endpoint is live");
   return NextResponse.json({ message: "Webhook endpoint is live" }, { status: 200 });
 }
 export async function POST(req) {
