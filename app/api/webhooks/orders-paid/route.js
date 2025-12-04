@@ -4,6 +4,9 @@ import { writeLog } from '@/lib/logger';
 import { appendOrderToSheet } from '@/lib/googleSheets';
 import { getPreOrderProductIds } from '@/lib/shopify';
 
+export async function GET() {
+  return NextResponse.json({ message: "Webhook endpoint is live" }, { status: 200 });
+}
 export async function POST(req) {
   try {
     const rawBody = await req.text();
@@ -26,7 +29,7 @@ export async function POST(req) {
     const topic = req.headers.get('X-Shopify-Topic');
     const orderData = JSON.parse(rawBody);
 
-    // console.log(`📦 Received Webhook: ${topic} → Order ${orderData.id}`);
+    console.log(`📦 Received Webhook: ${topic} → Order ${orderData.id}`);
     writeLog(`📦 Received Webhook: ${topic}`, { orderId: orderData.id });
     // // Always save JSON file (for debugging only)
     // const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
@@ -54,14 +57,14 @@ export async function POST(req) {
       orderData.preOrderMatchedIds = matchedPreOrderIds;
 
       await appendOrderToSheet(orderData);
-      // console.log("✔ Saved to Google Sheet");
+      console.log("✔ Saved to Google Sheet");
       writeLog("✔ Saved to Google Sheet", { orderId: orderData.id });
     }
 
     return NextResponse.json({ message: "Webhook received" }, { status: 200 });
 
   } catch (error) {
-    // console.error("Webhook Error:", error);
+    console.error("Webhook Error:", error);
     writeLog("Webhook Error", error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
   }
