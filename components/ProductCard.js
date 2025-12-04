@@ -32,7 +32,9 @@ const ProductCard = ({ product, index, totalProducts , isCapsule, isClarks = fal
   // console.log("quantityAvailable =====", quantityAvailable);
   const isPreOrder = quantityAvailable <= 0 && isAvailableForSale;
   // console.log("isPreOrder =====", isPreOrder);
-  
+
+  const isSoldOut = quantityAvailable === 0 && isAvailableForSale === false;
+
   // Get images and video
   const mediaItems = product.node.media.edges;
   const imageUrl1 = mediaItems[0]?.node.image?.url;
@@ -300,12 +302,14 @@ const ProductCard = ({ product, index, totalProducts , isCapsule, isClarks = fal
         handleAddToCart={handleAddToCart}
         isAvailableForSale={isAvailableForSale}
         isPreOrder={isPreOrder}
+        isSoldOut={isSoldOut}
       />
 
       <DesktopQuickBuy
         handleAddToCart={handleAddToCart}
         isAvailableForSale={isAvailableForSale}
         isPreOrder={isPreOrder}
+        isSoldOut={isSoldOut}
       />
     </motion.div>
   )

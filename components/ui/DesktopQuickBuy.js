@@ -1,14 +1,61 @@
-const DesktopQuickBuy = ({ handleAddToCart, isPreOrder }) => {
+// const DesktopQuickBuy = ({ handleAddToCart, isPreOrder }) => {
+//   return (
+//     <button
+//       className="hidden md:block md:absolute right-8 -bottom-1 
+//         translate-y-full text-sm tracking-tighter font-light 
+//         group-hover:translate-y-0 bg-white p-2 pt-1 border-black 
+//         rounded-t-md border-[1px] transition-transform duration-500 
+//         ease-in-out transform uppercase cursor-pointer"
+//       onClick={handleAddToCart}
+//     >
+//       {isPreOrder ? "PRE-ORDER NOW" : "Add to Cart"}
+//     </button>
+//   );
+// };
+
+// export default DesktopQuickBuy;
+
+const DesktopQuickBuy = ({ handleAddToCart, isSoldOut, isPreOrder }) => {
+
+  // 1️⃣ SOLD OUT (Old style EXACT)
+  if (isSoldOut) {
+    return (
+      <button
+        className={`hidden md:block md:absolute right-8 -bottom-1 text-sm tracking-tighter font-light bg-white p-2 pt-1 border-black rounded-t-md border-[1px] transition-transform duration-500 ease-in-out transform uppercase cursor-not-allowed `}
+        disabled
+      >
+        Sold Out
+      </button>
+    );
+  }
+
+  // 2️⃣ PRE-ORDER (same style as Add to Cart, slides up)
+  if (isPreOrder) {
+    return (
+      <button
+        className={`hidden md:block md:absolute right-8 -bottom-1 
+          translate-y-full text-sm tracking-tighter font-light 
+          group-hover:translate-y-0 bg-white p-2 pt-1 border-black 
+          rounded-t-md border-[1px] transition-transform duration-500 
+          ease-in-out transform uppercase cursor-pointer`}
+        onClick={handleAddToCart}
+      >
+        Pre-Order Now
+      </button>
+    );
+  }
+
+  // 3️⃣ ADD TO CART (old working style)
   return (
     <button
-      className="hidden md:block md:absolute right-8 -bottom-1 
+      className={`hidden md:block md:absolute right-8 -bottom-1 
         translate-y-full text-sm tracking-tighter font-light 
         group-hover:translate-y-0 bg-white p-2 pt-1 border-black 
         rounded-t-md border-[1px] transition-transform duration-500 
-        ease-in-out transform uppercase cursor-pointer"
+        ease-in-out transform uppercase cursor-pointer`}
       onClick={handleAddToCart}
     >
-      {isPreOrder ? "PRE-ORDER NOW" : "Add to Cart"}
+      Add to Cart
     </button>
   );
 };

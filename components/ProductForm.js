@@ -118,6 +118,7 @@ export default function ProductForm({ product }) {
   const isAvailableForSale = product.variants.edges[0].node.availableForSale;
 const quantityAvailable = selectedVariant?.quantityAvailable;
 const isPreOrder = quantityAvailable <= 0 && selectedVariant?.isAvailableForSale;
+const isSoldOut = quantityAvailable === 0 && isAvailableForSale === false;
 
   // const [detailsOpen, setDetailsOpen] = useState(true);
 
@@ -202,17 +203,28 @@ const isPreOrder = quantityAvailable <= 0 && selectedVariant?.isAvailableForSale
             </button>
             <button
               onClick={handleAddToCart}
+              disabled={isSoldOut}
               // disabled={!isAvailableForSale}
               // className={`flex-1 uppercase tracking-wide font-medium ${
               //   isAvailableForSale
               //     ? "bg-white"
               //     : "bg-white text-gray-400 cursor-not-allowed"
               // }`}
-              className="flex-1 uppercase tracking-wide font-medium bg-white"
+              // className="flex-1 uppercase tracking-wide font-medium bg-white"
+               className={`flex-1 uppercase tracking-wide font-medium ${isSoldOut 
+                ? "bg-white text-gray-400 cursor-not-allowed"
+                : "bg-white"}`}
             >
               {/* {isAvailableForSale ? "Add to Cart" : "Sold Out"} */}
-              {isPreOrder ? (
+              {/* {isPreOrder ? (
                 <span className="cursor-pointer">PRE-ORDER</span>
+              ) : (
+                <span className="cursor-pointer">Add To Cart</span>
+              )} */}
+               {isSoldOut ? (
+              <span className="cursor-not-allowed">Sold Out</span>
+              ) : isPreOrder ? (
+                <span className="cursor-pointer">Pre-Order</span>
               ) : (
                 <span className="cursor-pointer">Add To Cart</span>
               )}
@@ -239,14 +251,24 @@ const isPreOrder = quantityAvailable <= 0 && selectedVariant?.isAvailableForSale
             </button>
             <button
               onClick={handleAddToCart}
+              disabled={isSoldOut}
               // disabled={!isAvailableForSale}
-              className="flex-grow px-2 py-1 md:py-2 text-black uppercase font-light tracking-tight bg-white/90 border-l border-gray-800 text-xs md:text-base"
+              // className="flex-grow px-2 py-1 md:py-2 text-black uppercase font-light tracking-tight bg-white/90 border-l border-gray-800 text-xs md:text-base"
+                className={`flex-grow px-2 py-1 md:py-2 text-black uppercase font-light tracking-tight bg-white/90 border-l border-gray-800 text-xs md:text-base ${ isSoldOut ? "text-gray-400 cursor-not-allowed" : "" }`}
             >
-                {isPreOrder ? (
+                {/* {isPreOrder ? (
                   <span className="cursor-pointer">PRE-ORDER</span>
                 ) : (
                   <span className="cursor-pointer">Add To Cart</span>
-                )}
+                )} */}
+                {isSoldOut ? (
+                <span className="cursor-not-allowed">Sold Out</span>
+                  ) : isPreOrder ? (
+                    <span className="cursor-pointer">Pre-Order</span>
+                  ) : (
+                    <span className="cursor-pointer">Add To Cart</span>
+                 )
+                }
             </button>
           </div>
         </div>
