@@ -84,7 +84,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className="relative w-full bg-[#E42220] pb-[20px]">
+      {/* <div className="relative w-full bg-[#E42220] pb-[20px]">
         <Image
           // src={"/images/contact/frizbee-redlogo.jpg"}
           src={"https://cdn.shopify.com/s/files/1/0806/4381/7793/files/contact-image.jpg"}
@@ -93,7 +93,7 @@ export default function ContactPage() {
           width={3000}
           className={`object-contain`}
         />
-      </div>
+      </div> */}
     </div>
   );
 }

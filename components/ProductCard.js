@@ -207,9 +207,11 @@ const ProductCard = ({ product, index, totalProducts , isCapsule, isClarks = fal
           {/* Mobile Product Card */}
           <div className='md:hidden overflow-hidden text-[12px] h-[40vh] text-center flex flex-col justify-end relative'>
             <Swiper
-              className='w-full h-full object-cover object-center'
+              // className='w-full h-full object-cover object-center'
+              className={`w-full h-full object-cover object-center productCardSwiper`}
               modules={[Pagination]}
-              pagination={{ clickable: true, el: '.swiper-pagination' }}
+              // pagination={{ clickable: true, el: '.swiper-pagination' }}
+                pagination={{ clickable: true }}
               style={{
                 '--swiper-pagination-color': '#000',
                 '--swiper-pagination-bullet-inactive-color': '#C8C8C8',
@@ -219,7 +221,7 @@ const ProductCard = ({ product, index, totalProducts , isCapsule, isClarks = fal
               }}
             >
               {SwiperSlides()}
-              <div className='swiper-pagination -mt- ml-6'></div>
+              {/* <div className='swiper-pagination -mt- ml-6'></div> */}
             </Swiper>
 
             <div className='flex justify-between mt-4 absolute left-3 bottom-[3px]'>

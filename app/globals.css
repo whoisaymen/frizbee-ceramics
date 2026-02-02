@@ -295,3 +295,19 @@ body.screen-locked {
 /* img.w-full.h-full.object-cover.object-center{
   margin-top: -30px !important;
 } */
+
+/* Center pagination dots for mobile product cards */
+@media (max-width: 767px) {
+  .productCardSwiper .swiper-pagination {
+    /* left: 0 !important; */
+    /* right: 0 !important; */
+    /* bottom: 8px !important; */
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  /* Hide dots when product is PRE-ORDER */
+  .productCardSwiper.hidePagination .swiper-pagination {
+    display: none !important;
+  }
+}

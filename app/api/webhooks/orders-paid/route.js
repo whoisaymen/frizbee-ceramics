@@ -4,12 +4,12 @@ import { appendOrderToSheet } from '@/lib/googleSheets';
 import { getPreOrderProductIds } from '@/lib/shopify';
 
 export async function GET() {
-  console.log("🔔 Webhook endpoint is live");
+  // console.log("🔔 Webhook endpoint is live");
   return NextResponse.json({ message: "Webhook endpoint is live" }, { status: 200 });
 }
 export async function POST(req) {
   try {
-    console.log("Webhook Hit:", req);
+    // console.log("Webhook Hit:", req);
 
     const rawBody = await req.text();
 
@@ -23,7 +23,7 @@ export async function POST(req) {
       .digest('base64');
 
     if (hash !== hmacHeader) {
-      console.error('❌ HMAC validation failed');
+      // console.error('❌ HMAC validation failed');
       // writeLog("❌ HMAC validation failed", { hmacHeader, hash });
       return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
     }
@@ -31,7 +31,7 @@ export async function POST(req) {
     const topic = req.headers.get('X-Shopify-Topic');
     const orderData = JSON.parse(rawBody);
 
-    console.log(`📦 Received Webhook: ${topic} → Order ${orderData.id}`);
+    // console.log(`📦 Received Webhook: ${topic} → Order ${orderData.id}`);
     // // Always save JSON file (for debugging only)
     // const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
     // saveJsonToFile(`order-${orderData.id}-${timestamp}.json`, orderData);
@@ -47,15 +47,15 @@ export async function POST(req) {
       );
 
       if (matchedPreOrderIds.length === 0) {
-        console.log("🟢 No pre-order products inside this order → NOT saved.");
+        // console.log("🟢 No pre-order products inside this order → NOT saved.");
         return NextResponse.json({ ok: true });
       }
 
-      console.log("🟦 Pre-order products detected:", matchedPreOrderIds);
+      // console.log("🟦 Pre-order products detected:", matchedPreOrderIds);
       orderData.preOrderMatchedIds = matchedPreOrderIds;
 
       await appendOrderToSheet(orderData);
-      console.log("✔ Saved to Google Sheet");
+      // console.log("✔ Saved to Google Sheet");
     }
 
     return NextResponse.json({ message: "Webhook received" }, { status: 200 });

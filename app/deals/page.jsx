@@ -11,7 +11,7 @@ const Deals = () => {
     const router = useRouter();
 
     const handleCountdownComplete = () => {
-        console.log("Countdown completed in parent");
+        // console.log("Countdown completed in parent");
         router.replace("/");
         // router.refresh();
         // Reload the page after a short delay to allow the URL change to happen

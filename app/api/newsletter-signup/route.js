@@ -32,13 +32,9 @@ export async function POST(request) {
   };
 
   try {
-    console.log("Sending request",options);
     const response = await fetch(URL, options);
 
     const data = await response.json();
-
-    console.log("Response status:", response.status); // Log response status
-    console.log("Response body:", data); // Log response body
 
     if (response.ok) {
       return new NextResponse(

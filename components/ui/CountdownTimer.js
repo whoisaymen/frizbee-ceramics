@@ -11,11 +11,11 @@ const CountdownTimer = ({ onComplete }) => {
     useEffect(() => {
         const parsedDate = new Date(end).getTime();
         setEndDate(parsedDate);
-        console.log("End date set to:", parsedDate);
+        // console.log("End date set to:", parsedDate);
     }, [end]);
 
     const handleComplete = () => {
-        console.log("Countdown completed in child");
+        // console.log("Countdown completed in child");
         onComplete?.(); // call parent handler
         router.replace("/"); // client-side redirect
     };

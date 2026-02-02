@@ -100,11 +100,16 @@ export default function NavLinks() {
   return (
     <>
       <div className="hidden lg:flex justify-end items-center w-full h-full md:bg-transparent">
-        <ul className="flex">
+        {/* <ul className="flex">
           {MENU_ITEMS.map((option) => (
             <NavLink key={option.slug} item={option} />
           ))}
-        </ul>
+        </ul> */}
+        <ul className="flex">
+        {MENU_ITEMS.filter((item) => item.slug !== "projects").map((option) => (
+          <NavLink key={option.slug} item={option} />
+        ))}
+      </ul>
       </div>
       <div className="lg:hidden flex justify-end items-center w-full h-full mr-4">
         <div>
@@ -177,13 +182,13 @@ export default function NavLinks() {
               </Link>
             )}
 
-
+            {/* 
             <button
               onClick={toggleProjectsSubmenuMobile}
               className="text-left uppercase"
             >
               Projects
-            </button>
+            </button> */}
 
             {isProjectsSubmenuOpen && (
               <ul className="pl-4 list-none my-0 py-0">
@@ -203,6 +208,9 @@ export default function NavLinks() {
             )}
             <Link href="/about" className="" onClick={() => setMenuOpen(false)}>
               Info
+            </Link>
+            <Link href="/professionals" className="" onClick={() => setMenuOpen(false)} >
+              Professionals
             </Link>
             <Link
               href="/terms-and-conditions"

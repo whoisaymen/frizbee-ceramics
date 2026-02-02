@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import countries from "../countries.json";
+import { inter } from "@/components/ui/Fonts";
 
 export default function CatalogueForm({ category }) {
     const [formState, setFormState] = useState({
@@ -92,7 +93,7 @@ export default function CatalogueForm({ category }) {
 
                     <select
                         name="country"
-                        className="w-full px-4 py-2 border border-gray-300  text-center text-sm placeholder:text-gray-400"
+                        className={`${inter.className} w-full px-4 py-2 border border-gray-300 text-center text-sm placeholder:text-gray-400`}
                     >
                         <option value="">SELECT COUNTRY</option>
                         {countries.map((country) => (

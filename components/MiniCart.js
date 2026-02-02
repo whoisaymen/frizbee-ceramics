@@ -31,7 +31,7 @@ export default function MiniCart() {
       return
     }
 
-    console.log('Current checkout URL:', checkoutUrl)
+    // console.log('Current checkout URL:', checkoutUrl)
 
     // Extract checkout ID from URL - try different patterns
     let checkoutId = null
@@ -42,7 +42,7 @@ export default function MiniCart() {
       checkoutId = `gid://shopify/Checkout/${match[1]}`
     }
 
-    console.log('Extracted checkout ID:', checkoutId)
+    // console.log('Extracted checkout ID:', checkoutId)
 
     if (!checkoutId) {
       console.error('Could not extract checkout ID from URL')
@@ -56,7 +56,7 @@ export default function MiniCart() {
       const validation = await validateCheckoutUrl(checkoutId)
 
       if (validation.valid) {
-        console.log('Checkout is valid, redirecting...')
+        // console.log('Checkout is valid, redirecting...')
         window.location.href = checkoutUrl
       } else {
         console.error('Checkout validation failed:', validation.reason)

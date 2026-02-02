@@ -166,8 +166,6 @@ export default function Nav() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  console.log("nav");
-
   return (
     <>
       <div className="fixed top-0 left-0 right-0 z-10 font-light tracking-tight uppercase mx-auto lg:mt-4">
