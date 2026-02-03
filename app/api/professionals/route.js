@@ -1,54 +1,56 @@
 import { NextResponse } from "next/server";
+import { google } from "googleapis";
+import { JWT } from "google-auth-library";
 
 export async function POST(request) {
+  try {
     const body = await request.json();
-    const {email, firstName, lastName, companyName, category, country} = body;
 
-    const hubspotUrl = process.env.HUBSPOT_DOMAIN;
-    const hubspotAccessToken = process.env.HUBSPOT_ACCESS_TOKEN;
+    const { email, firstName, lastName, companyName, country } = body;
 
-    const contactData = {
-        properties: {
-            email: email,
-            lastname: lastName,
-            firstname: firstName,
-            company: companyName,
-            // segment_1: category,
-            country: country,
-            source: "Shopify professional tab",
-            segment_3: "Prospect",
-        }
-    };
-
-    try {
-        const response = await fetch(hubspotUrl, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${hubspotAccessToken}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(contactData),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            return new NextResponse(
-                JSON.stringify({ message: "Contact saved in HubSpot", data }),
-                { status: 200 }
-            );
-        } else {
-            console.error("HubSpot API Error:", data);
-            return new NextResponse(
-                JSON.stringify({ message: "Error saving to HubSpot", details: data }),
-                { status: response.status }
-            );
-        }
-    } catch (error) {
-        console.error("Server Error:", error); // Log server-side error
-        return new NextResponse(
-            JSON.stringify({ message: "Error subscribing", error: error.toString() }),
-            { status: 500 }
-        );
+    if (!email) {
+      return NextResponse.json(
+        { message: "Email is required" },
+        { status: 400 },
+      );
     }
+
+    const jwtClient = new JWT({
+      email: process.env.GOOGLE_CLIENT_EMAIL,
+      key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
+
+    await jwtClient.authorize();
+
+    const sheets = google.sheets({ version: "v4", auth: jwtClient });
+
+    const dateOfSubmission = new Date().toLocaleDateString("en-US", {
+      timeZone: "Asia/Kolkata",
+    });
+
+    const row = [
+      firstName || "", 
+      lastName || "",
+      companyName || "", 
+      email || "", 
+      country || "", 
+      dateOfSubmission, 
+    ];
+
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: process.env.PROFESSIONALS_GOOGLE_SHEETS_ID,
+      range: "Sheet1!B:G",
+      valueInputOption: "USER_ENTERED",
+      requestBody: { values: [row] },
+    });
+
+    return NextResponse.json({ message: "Saved in Google Sheet." });
+  } catch (error) {
+    console.error("Google Sheets API Error:", error);
+    return NextResponse.json(
+      { message: "Google Sheets Error", error: error.message },
+      { status: 500 },
+    );
+  }
 }

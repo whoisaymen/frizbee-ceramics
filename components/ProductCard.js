@@ -274,7 +274,7 @@ const ProductCard = ({ product, index, totalProducts , isCapsule, isClarks = fal
               />
             )}
             {/* <div className="absolute left-3 font-semibold bottom-2 flex flex-col" style={{color: isOnSale && '#3aea81'}}> */}
-            <div className="absolute left-3 font-semibold bottom-2 flex flex-col">
+            <div className="absolute left-[1rem] font-semibold bottom-2 flex flex-col">
               <div
                 className='w-1/2 blur-2xl absolute left-0 bottom-0 h-6 z-[8]'
                 // style={{

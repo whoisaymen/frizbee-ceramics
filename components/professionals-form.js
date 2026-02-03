@@ -11,6 +11,7 @@ export default function CatalogueForm({ category }) {
         companyName: "",
         email: "",
         category: category,
+        country: "",
     });
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -91,8 +92,14 @@ export default function CatalogueForm({ category }) {
                         className="w-full px-4 py-2 border border-gray-300  text-center text-sm placeholder:text-gray-400"
                     />
 
+                    {/* <select
+                        name="country"
+                        className={`${inter.className} w-full px-4 py-2 border border-gray-300 text-center text-sm placeholder:text-gray-400`}
+                    > */}
                     <select
                         name="country"
+                        value={formState.country}
+                        onChange={handleChange}
                         className={`${inter.className} w-full px-4 py-2 border border-gray-300 text-center text-sm placeholder:text-gray-400`}
                     >
                         <option value="">SELECT COUNTRY</option>

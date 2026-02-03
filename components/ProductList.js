@@ -3,13 +3,13 @@ import { getProductsInCollection } from "@/lib/shopify";
 
 async function checkImageExists(url) {
   try {
-    const response = await fetch(url, { 
-      method: 'HEAD',
-      cache: 'no-store' // or 'force-cache' depending on your needs
-    })
-    return response.ok
+    const response = await fetch(url, {
+      method: "HEAD",
+      cache: "no-store", // or 'force-cache' depending on your needs
+    });
+    return response.ok;
   } catch (error) {
-    return false
+    return false;
   }
 }
 
@@ -18,26 +18,31 @@ const ProductList = async ({ sortOption }) => {
   const sortedProducts = sortProducts(products, sortOption);
 
   //need 3 separate arrays for shop/default products, capsules products and sunset products
-  const sunsetProducts = sortedProducts.filter(
-    (product) => product.node.tags.includes("sunset")
+  const sunsetProducts = sortedProducts.filter((product) =>
+    product.node.tags.includes("sunset"),
   );
-  
+
   // Clarks
-  const clarksProducts = sortedProducts.filter(
-    (product) => product.node.tags.includes("clarks")
+  const clarksProducts = sortedProducts.filter((product) =>
+    product.node.tags.includes("capsule 1"),
   );
-  
+
   // Everlasting
   const shopProducts = sortedProducts.filter(
-    (product) => !product.node.tags.includes("capsule") && !product.node.tags.includes("sunset") && !product.node.tags.includes("clarks")
+    (product) =>
+      !product.node.tags.includes("capsule 2") &&
+      !product.node.tags.includes("sunset") &&
+      !product.node.tags.includes("capsule 1"),
   );
   const capsuleProducts = sortedProducts.filter((product) =>
-    product.node.tags.includes("capsule")
+    product.node.tags.includes("capsule 2"),
   );
 
   //check if clarks cover image exists
-  const clarkImgUrl = 'https://cdn.shopify.com/s/files/1/0806/4381/7793/files/clark_cover_image.jpg';
-  const sunsetImgUrl = 'https://cdn.shopify.com/s/files/1/0806/4381/7793/files/sunset-collection-banner.gif';
+  const clarkImgUrl =
+    "https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule1-banner-web.jpg?v=1770121682";
+  const sunsetImgUrl =
+    "https://cdn.shopify.com/s/files/1/0806/4381/7793/files/sunset-collection-banner.gif";
   const isClarkImgExists = await checkImageExists(clarkImgUrl);
   const isSunsetImgExists = await checkImageExists(sunsetImgUrl);
 
@@ -46,16 +51,44 @@ const ProductList = async ({ sortOption }) => {
       className="mb-[24px] md:mb-[29px] md:mx-0 -mt-[2px] min-h-screen"
       style={{ backgroundImage: "url(/images/bgHomeGradient.svg)" }}
     >
-      <div className="mx-auto" >
+      <div className="mx-auto">
+
         
+        {/* sunsetProducts products section */}
+        {sunsetProducts.length > 0 && (
+          <>
+            {isSunsetImgExists && (
+              <div className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/sunset-collection-banner.gif?v=1749632587')]"></div>
+            )}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+              {sunsetProducts.map((product, index) => (
+                <ProductCard
+                  key={product.node.id}
+                  product={product}
+                  index={index}
+                  totalProducts={sunsetProducts.length}
+                  isCapsule={false} //it is capsule but temporarily set to false for styling
+                />
+              ))}
+            </div>
+          </>
+        )}
+
         {/* clarks Products products section */}
         {/* requirement : if there are 2 clarks products, make the grid of 2 and else usual grid */}
         {clarksProducts.length > 0 && (
           <>
-            {isClarkImgExists && <div
-              className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/clark_cover_image.jpg?v=1758097124')]"
-            ></div>}
-            <div className={`grid  ` + (clarksProducts.length === 2 ? 'grid-cols-2 md:h-[60vh] lg:h-[80vh] xl:h-[90vh]' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5')}>
+            {isClarkImgExists && (
+              <div className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule1-banner-mobile.png?v=1758097124')] md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule1-banner-web.jpg?v=1770121682')]"></div>
+            )}
+            <div
+              className={
+                `grid  ` +
+                (clarksProducts.length === 2
+                  ? "grid-cols-2 md:h-[60vh] lg:h-[80vh] xl:h-[90vh]"
+                  : "grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5")
+              }
+            >
               {clarksProducts.map((product, index) => (
                 <ProductCard
                   key={product.node.id}
@@ -70,35 +103,34 @@ const ProductList = async ({ sortOption }) => {
           </>
         )}
 
-        {/* sunsetProducts products section */}
-        {sunsetProducts.length > 0 && (
+        {/* capsules products section */}
+        {capsuleProducts.length > 0 && (
           <>
-            {isSunsetImgExists && <div
-              className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/sunset-collection-banner.gif?v=1749632587')]"
-            ></div>}
+            {/* <div className="w-full border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover" style={{backgroundImage: "url(https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule-collection.jpg?v=1742990303)"}}>
+            </div> */}
+            {/* diff img for mobile */}
+            <div className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule2-banner-mobile.jpg?v=1743588887')] md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule2-banner-web.jpg?v=1743588685')]"></div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
-              {sunsetProducts.map((product, index) => (
+              {capsuleProducts.map((product, index) => (
                 <ProductCard
                   key={product.node.id}
                   product={product}
                   index={index}
-                  totalProducts={sunsetProducts.length}
+                  totalProducts={capsuleProducts.length}
                   isCapsule={false} //it is capsule but temporarily set to false for styling
                 />
               ))}
             </div>
           </>
         )}
-        
+
         {/* shop or default products section */}
         {shopProducts.length > 0 && (
           <>
             {/* <div className="w-full border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover" style={{backgroundImage: "url(https://cdn.shopify.com/s/files/1/0806/4381/7793/files/shop-collection.jpg?v=1742990302)"}}>
             </div> */}
             {/* diff img for mobile */}
-            <div
-              className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/everlasting-collection-web.jpg?v=1743588736')] bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/everlasting-collection-mobile.png?v=1743588826')]"
-            ></div>
+            <div className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/everlasting-collection-web.jpg?v=1743588736')] bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/everlasting-collection-mobile.png?v=1743588826')]"></div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
               {shopProducts.map((product, index) => (
                 <ProductCard
@@ -113,29 +145,6 @@ const ProductList = async ({ sortOption }) => {
           </>
         )}
 
-        {/* capsules products section */}
-        {capsuleProducts.length > 0 && (
-          <>
-            {/* <div className="w-full border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover" style={{backgroundImage: "url(https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule-collection.jpg?v=1742990303)"}}>
-            </div> */}
-            {/* diff img for mobile */}
-            <div
-              className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/kota-collection-mobile.jpg?v=1743588887')] md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/kota-collection-web.jpg?v=1743588685')]"
-            ></div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
-              {capsuleProducts.map((product, index) => (
-                <ProductCard
-                  key={product.node.id}
-                  product={product}
-                  index={index}
-                  totalProducts={capsuleProducts.length}
-                  isCapsule={false} //it is capsule but temporarily set to false for styling
-                />
-              ))}
-            </div>
-          </>
-        )}
-        
       </div>
     </div>
   );

@@ -220,7 +220,8 @@ export default function ProductPageContent({ product, blurDataURL }) {
       <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between w-full min-h-screen px-4 ">
         {/* LEFT: Video Container (dynamic or fallback) */}
 
-        <div className="lg:static absolute flex top-[88px] right-[18px] z-[2] lg:w-[200px] lg:flex-col lg:items-center lg:min-w-[300px]">
+        {/* <div className="lg:static absolute flex top-[88px] right-[18px] z-[2] lg:w-[264px] lg:flex-col lg:items-baseline lg:min-w-[300px]"> */}
+        <div className="lg:static absolute flex top-[88px] right-[18px] z-[2] lg:w-[264px] lg:flex-col lg:items-baseline lg:mr-[30px]">
           {videos.length > 0 &&
             videos.map((videoItem, i) => {
               const source =
@@ -241,7 +242,7 @@ export default function ProductPageContent({ product, blurDataURL }) {
                   onClick={() => handleZoom("video", source.url)}
                   // className="h-[140px] object-cover cursor-zoom-in lg:mt-0 mt-16 lg:w-[200px] lg:h-auto lg:object-contain lg:shadow-md "
                   className="h-[200px] mt-[2rem] object-cover cursor-zoom-in lg:mt-0 
-                lg:w-[200px] lg:h-[298px] lg:object-contain"
+                lg:w-[264px] lg:h-[325px] lg:object-cover"
                 >
                   <source src={source.url} type={source.mimeType} />
                   Your browser does not support the video tag.
