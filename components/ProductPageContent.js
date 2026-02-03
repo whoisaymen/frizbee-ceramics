@@ -241,8 +241,7 @@ export default function ProductPageContent({ product, blurDataURL }) {
                   poster={videoItem.node.previewImage?.url}
                   onClick={() => handleZoom("video", source.url)}
                   // className="h-[140px] object-cover cursor-zoom-in lg:mt-0 mt-16 lg:w-[200px] lg:h-auto lg:object-contain lg:shadow-md "
-                  className="h-[200px] mt-[2rem] object-cover cursor-zoom-in lg:mt-0 
-                lg:w-[264px] lg:h-[325px] lg:object-cover"
+                  className="h-[200px] mt-[2rem] object-cover cursor-zoom-in lg:mt-0 lg:w-[258px] lg:h-auto lg:object-contain lg:aspect-video"
                 >
                   <source src={source.url} type={source.mimeType} />
                   Your browser does not support the video tag.
