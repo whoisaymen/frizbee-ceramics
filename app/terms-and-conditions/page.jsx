@@ -521,40 +521,15 @@ export default function TermsAndConditionsPage() {
                     Refund Policy
                   </h4>
                   <p className="text-gray-700 mb-4">
-                    Once the returned Good(s) are received, the Company will process a refund for the amounts previously paid for the Good(s) by the Customer. The refund won’t include the transportation costs incurred.
+                    The Customer has the right to withdraw within 14 days without giving any reason. Return shipping costs are borne by the Customer.
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    The refund shall be processed within a reasonable time after the Company receives the returned Good(s).
+                    The Company will refund all payments received, including standard delivery costs, within 14 days of withdrawal notification, and may withhold reimbursement until the goods are returned or proof of return is provided.
                   </p>
                   <p className="text-gray-700 mb-4">
-                    Refunds will be issued to the same credit or debit card used for the original payment.
+                    The Customer is only liable for any diminished value resulting from handling beyond what is necessary.
                   </p>
-
-                  <p className="text-gray-700">
-                    No refund will be granted if;
-                  </p>
-                  <ul className="list-disc pl-5 text-gray-700 mb-4">
-                    <li>
-                      The legal withdrawal period has expired;
-                    </li>
-                    <li>The Good(s) are not returned in their entirety, in their original condition, and in the original packaging.</li>
-                    <li>
-                      The Good(s) were purchased with a discount or promotional offer.
-                    </li>
-                  </ul>
-                  <p className="text-gray-700">
-                    The Customer may not exercise the right of withdrawal for:
-                  </p>
-                  <ul className="list-disc pl-5 text-gray-700 mb-4">
-                    <li>
-                      The delivery of Good(s) manufactured to the Customer’s specifications or clearly intended for a specific individual;
-                    </li>
-                    <li>  Items that were on sale at the time of purchase;</li>
-                    <li>
-                      Any other exceptions provided under the Portuguese Civil Code and applicable consumer protection laws.
-                    </li>
-                  </ul>
                 </Disclosure.Panel>
               </>
             )}
