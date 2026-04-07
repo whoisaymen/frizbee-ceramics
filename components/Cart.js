@@ -202,7 +202,7 @@ export default function Cart() {
                 <ul className="list-disc text-xs">
                   <li>Complimentary 4-5 days shipping (EU & UK)</li>
                   <li>Customs fees apply outside EU</li>
-                  <li>14 days free return and exchange</li>
+                  <li>14-day returns / exchange • Shipping costs for returns apply</li>
                 </ul>
               </div>
               <div className="px-4 py-4 border-t border-black sm:px-6 lg:w-full">
