@@ -462,74 +462,104 @@ export default function TermsAndConditionsPage() {
                 </Disclosure.Button>
                 <Disclosure.Panel className="text-sm font-extralight lg:text-lg tracking-tighter leading-snug md:leading-normal py-1 text-justify">
                   <p className="text-gray-700 mb-4">
-                    The right of withdrawal does not apply to Good(s) manufactured according to the Customer’s specifications or those clearly intended for a specific individual.
+                    The Customer has the right to withdraw from the Agreement
+                    within fourteen (14) calendar days without giving any reason.
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    The right of withdrawal does not apply to Good(s) that were on sale or purchased with a discount at the time of purchase;
-                  </p>
-
-                  <p className="text-gray-700 mb-4">
-                    In accordance with the Portuguese Civil Code, the Customer has the right to withdraw from the Agreement within fourteen (14) calendar days without providing a reason.
-                  </p>
-
-                  <p className="text-gray-700 mb-4">
-                    The withdrawal period expires fourteen (14) calendar days from the date the Customer or a third party (excluding the carrier) physically receives the Good(s).
+                    The withdrawal period expires fourteen (14) calendar days from
+                    the day on which the Customer, or a third party other than
+                    the carrier designated by the Customer, physically receives
+                    the Good(s).
                   </p>
                   <p className="text-gray-700 mb-4">
-                    To exercise the right of withdrawal, the Customer must notify the Company of their decision by means of a clear statement (e.g., via a registered letter or email).
-                  </p>
-                  <p className="text-gray-700 mb-4">
-                    The Customer may use the sample withdrawal form provided below, but its use is not mandatory.
+                    To exercise the right of withdrawal, the Customer must inform
+                    the Company of their decision by means of a clear statement
+                    (e.g. email).
                   </p>
                   <p className="text-gray-700 italic mb-4">
-                    To: [Company&apos;s Contact Details]
+                    To: [Company&apos;s contact details]
                   </p>
                   <ul className="list-disc pl-5 text-gray-700 mb-4 italic">
                     <li>
-                      I/we (*) hereby notify you (*) of my/our (*) withdrawal
-                      from the contract concluded by me/us (*) for the purchase
-                      of the following goods (*)
+                      I/we () hereby notify you () of my/our () withdrawal from the
+                      contract concluded by me/us () for the purchase of the
+                      following Good(s):
                     </li>
-                    <li>Ordered on (*) / received on (*)</li>
-                    <li>Name of the consumer(s): (*)</li>
-                    <li>Address of the consumer(s): (*)</li>
-                    <li>Order number: (*)</li>
+                    <li>Ordered on (*):</li>
+                    <li>Received on (*):</li>
+                    <li>Name of the consumer(s):</li>
+                    <li>Address of the consumer(s):</li>
+                    <li>Order number:</li>
                     <li>
-                      Signature of consumer(s): (*)(only if notified on paper)
+                      Signature of consumer(s) (only if notified on paper):
                     </li>
-                    <li>Date: (*)</li>
+                    <li>Date:</li>
                     <li>(*) Delete as appropriate.</li>
                   </ul>
 
-                  <h4 className="font-bold text-lg mb-2">
-                    Return of Goods
-                  </h4>
+                  <h4 className="font-bold text-lg mb-2">Return of Goods</h4>
                   <p className="text-gray-700 mb-4">
-                    The Customer must return the Good(s) to the Company at Frizbee Ceramics, Herdade da Barrosinha, 7580-514 Alcácer do Sal, Portugal no later than fourteen (14) calendar days from the date they notified the Company of their withdrawal.
+                    The Customer must return the Good(s) to Frizbee Ceramics,
+                    Herdade da Barrosinha, 7580-514 Alcácer do Sal, Portugal
+                    without undue delay and in any event no later than fourteen
+                    (14) calendar days from the day on which they communicated
+                    their withdrawal.
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    The Customer is deemed to have met this deadline if the Good(s) are sent back before the fourteen (14) calendar days expire.
+                    The deadline is met if the Customer sends back the Good(s)
+                    before the 14-day period has expired.
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    The direct costs of returning the Good(s) shall be borne by the Customer.
+                    Return shipping costs are borne by the Customer.
+                  </p>
+                  <p className="text-gray-700 mb-4">
+                    The Customer is only liable for any diminished value of the
+                    Good(s) resulting from handling other than what is necessary
+                    to establish the nature, characteristics, and functioning of
+                    the Good(s).
                   </p>
 
-                  <h4 className="font-bold text-lg mb-2">
-                    Refund Policy
-                  </h4>
+                  <h4 className="font-bold text-lg mb-2">Refunds</h4>
                   <p className="text-gray-700 mb-4">
-                    The Customer has the right to withdraw within 14 days without giving any reason. Return shipping costs are borne by the Customer.
+                    The Company will reimburse all payments received from the
+                    Customer, including standard delivery costs (excluding any
+                    additional costs resulting from the Customer choosing a
+                    delivery method other than the least expensive standard
+                    delivery offered).
                   </p>
 
                   <p className="text-gray-700 mb-4">
-                    The Company will refund all payments received, including standard delivery costs, within 14 days of withdrawal notification, and may withhold reimbursement until the goods are returned or proof of return is provided.
+                    Refunds will be processed within fourteen (14) days from the
+                    day the Company is informed of the Customer&apos;s decision to
+                    withdraw.
                   </p>
                   <p className="text-gray-700 mb-4">
-                    The Customer is only liable for any diminished value resulting from handling beyond what is necessary.
+                    The Company may withhold reimbursement until the Good(s) have
+                    been received back or the Customer has provided proof of
+                    return, whichever occurs first.
                   </p>
+                  <p className="text-gray-700 mb-4">
+                    Refunds will be made using the same payment method as the
+                    original transaction, unless expressly agreed otherwise.
+                  </p>
+
+                  <h4 className="font-bold text-lg mb-2">Exceptions</h4>
+                  <p className="text-gray-700 mb-4">
+                    The right of withdrawal does not apply to:
+                  </p>
+                  <ul className="list-disc pl-5 text-gray-700 mb-4">
+                    <li>
+                      Good(s) made to the Customer&apos;s specifications or clearly
+                      personalized;
+                    </li>
+                    <li>
+                      Any other exceptions provided under applicable EU consumer
+                      protection laws.
+                    </li>
+                  </ul>
                 </Disclosure.Panel>
               </>
             )}
