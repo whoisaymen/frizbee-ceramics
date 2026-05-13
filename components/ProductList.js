@@ -53,6 +53,26 @@ const ProductList = async ({ sortOption }) => {
     >
       <div className="mx-auto">
 
+        {/* capsules products section */}
+        {capsuleProducts.length > 0 && (
+          <>
+            {/* <div className="w-full border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover" style={{backgroundImage: "url(https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule-collection.jpg?v=1742990303)"}}>
+            </div> */}
+            {/* diff img for mobile */}
+            <div className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule2-banner-mobile.jpg?v=1743588887')] md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule2-banner-web.jpg?v=1743588685')]"></div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+              {capsuleProducts.map((product, index) => (
+                <ProductCard
+                  key={product.node.id}
+                  product={product}
+                  index={index}
+                  totalProducts={capsuleProducts.length}
+                  isCapsule={false} //it is capsule but temporarily set to false for styling
+                />
+              ))}
+            </div>
+          </>
+        )}
         
         {/* sunsetProducts products section */}
         {sunsetProducts.length > 0 && (
@@ -103,26 +123,6 @@ const ProductList = async ({ sortOption }) => {
           </>
         )}
 
-        {/* capsules products section */}
-        {capsuleProducts.length > 0 && (
-          <>
-            {/* <div className="w-full border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover" style={{backgroundImage: "url(https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule-collection.jpg?v=1742990303)"}}>
-            </div> */}
-            {/* diff img for mobile */}
-            <div className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule2-banner-mobile.jpg?v=1743588887')] md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule2-banner-web.jpg?v=1743588685')]"></div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
-              {capsuleProducts.map((product, index) => (
-                <ProductCard
-                  key={product.node.id}
-                  product={product}
-                  index={index}
-                  totalProducts={capsuleProducts.length}
-                  isCapsule={false} //it is capsule but temporarily set to false for styling
-                />
-              ))}
-            </div>
-          </>
-        )}
 
         {/* shop or default products section */}
         {shopProducts.length > 0 && (
