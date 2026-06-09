@@ -1,78 +1,126 @@
-import ScrollToTop from "@/components/ScrollToTop";
-import Link from "next/link";
-import Image from "next/image";
+'use client'
+import { useEffect, useRef, useState } from 'react'
 
-const images = [
-  "/images/about/img1.jpg",
-  "/images/about/img2.jpg",
-  "/images/about/img3.jpg",
-  "/images/about/img4.jpg",
-  "/images/about/img1.jpg",
-  "/images/about/img2.jpg",
-  "/images/about/img3.jpg",
-  "/images/about/img4.jpg",
-];
+export default function InfoPage() {
+    const [textVisible, setTextVisible] = useState(false)
+    const videoRef = useRef(null)
+    const sectionRef = useRef(null)
 
-export default function AboutPage() {
-  return (
-    <div className="bg-white font-extralight tracking-tight min-h-[100vh] flex flex-col justify-between items-center pt-10">
-      <ScrollToTop />
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!sectionRef.current) return
+            const { top } = sectionRef.current.getBoundingClientRect()
+            if (top <= -80) {
+                setTextVisible(true)
+                videoRef.current?.pause()
+            } else {
+                setTextVisible(false)
+                videoRef.current?.play().catch(() => { })
+            }
+        }
+        window.addEventListener('scroll', handleScroll, { passive: true })
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
 
-      <div className="w-full h-auto">
-        <div className="text-sm lg:text-base columns-1 md:columns-2 gap-x-[20px] p-10 mt-20 sm:mt-32 mb-4">
-          <p className="text-gray-900 tracking-tighter font-normal mb-2">
-            FRIZBEE CERAMICS offers a high-end handcrafted porcelain tableware
-            collection.
-          </p>
-          <p className="text-gray-700 mb-2">
-            The brand’s cups, bowls, plates, planters and homeware often include
-            nostalgic visuals like aliens and distorted smileys. Each item is
-            casted using premium-quality porcelain and glazed by hand. While
-            unique in design the collection remains true to FRIZBEE CERAMICS’
-            core philosophy of durability and functionality. FRIZBEE CERAMICS
-            adds a youthful charm and zest to modern kitchen and homeware with
-            its evocative and offbeat designs.
-          </p>
-          <p className="text-gray-700 mb-2">
-            Currently the brand is presented at over 40 stores/cafés, and in
-            more than 15 countries. Since the launch, FRIZBEE CERAMICS has
-            worked in a variety of contexts. Through collaborations, exhibitions
-            and performances with fashion brands, museums, art galleries and
-            artists.
-          </p>
-          <p className="text-gray-700 mb-2">
-            Frizbee Ceramics’ line ranges from tiny shot glasses to large
-            serving dishes and is 100% dishwasher safe!
-          </p>
-          <p className="text-gray-700">
-            Please reach out for special requests, studio visits and custom
-            orders at{" "}
-            <span className="font-medium">go@frizbeeceramics.com</span>.
-          </p>
-        </div>
-      </div>
-      <div className="w-full overflow-x-auto h-1/2">
-        <ul className="flex animate-carousel gap-0">
-          {images.map((image, index) => (
-            <li
-              key={`${image}-${index + 1}`}
-              className="relative h-[40vh] max-h-[555px] w-2/3 max-w-[475px] flex-none md:w-1/3"
-            >
-              <div className="relative h-full w-full">
-                <div className="group flex h-full w-full items-center justify-center overflow-hidden relative border-t border-black border-r">
-                  <Image
-                    src={image}
-                    alt={"Image " + (index + 1)}
-                    fill
-                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-                    className="relative h-full w-full object-cover transition duration-300 ease-in-out group-hover:scale-105"
-                  />
+    return (
+        <section
+            ref={sectionRef}
+            className="bg-[url('/images/about/frizbee_factory.jpg')] bg-cover bg-center min-h-[100vh]"
+        >
+            {/* ── DESKTOP (unchanged) ── */}
+            <div className="group hidden lg:block absolute top-0 left-[50%] translate-x-[-50%] h-full z-0">
+                <video autoPlay loop muted className="max-h-[100vh] group-hover:blur-md transition duration-300 ease-in-out">
+                    <source src="/videos/FRIZ_final.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+                <div className="text-wrapper group-hover:opacity-100 text-black opacity-0 absolute top-0 text-sm px-12 mt-8 sm:mt-40 transition duration-300 ease-in-out font-bold">
+                    <p className="mb-2">
+                        FRIZBEE CERAMICS offers a high-end handcrafted porcelain tableware
+                        collection.
+                    </p>
+                    <p className="mb-2">
+                        The brand&apos;s cups, bowls, plates, planters and homeware often include
+                        nostalgic visuals like aliens and distorted smileys. Each item is
+                        casted using premium-quality porcelain and glazed by hand. While
+                        unique in design the collection remains true to FRIZBEE CERAMICS&apos;
+                        core philosophy of durability and functionality. FRIZBEE CERAMICS
+                        adds a youthful charm and zest to modern kitchen and homeware with
+                        its evocative and offbeat designs.
+                    </p>
+                    <p className="mb-2">
+                        Currently the brand is presented at over 40 stores/cafés, and in
+                        more than 15 countries. Since the launch, FRIZBEE CERAMICS has
+                        worked in a variety of contexts. Through collaborations, exhibitions
+                        and performances with fashion brands, museums, art galleries and
+                        artists.
+                    </p>
+                    <p className="mb-2">
+                        Frizbee Ceramics&apos; line ranges from tiny shot glasses to large
+                        serving dishes and is 100% dishwasher safe!
+                    </p>
+                    <p>
+                        Please reach out for special requests, studio visits and custom
+                        orders at <span>go@frizbeeceramics.com</span>.
+                    </p>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
+            </div>
+
+            {/* ── MOBILE ── */}
+            <div className="lg:hidden h-[200vh]">
+                <div className="sticky top-0 h-screen overflow-hidden">
+
+                    {/* Fullscreen video */}
+                    <video
+                        ref={videoRef}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out ${textVisible ? 'blur-md scale-105' : 'blur-none scale-100'
+                            }`}
+                    >
+                        <source src="/videos/FRIZ_final.mp4" type="video/mp4" />
+                    </video>
+
+                    {/* Text panel — slides up from bottom in one go */}
+                    <div
+                        className={`absolute inset-0 bg-transparent flex flex-col justify-center px-8 py-20 overflow-y-auto transition-transform duration-500 ease-out ${textVisible ? 'translate-y-0' : 'translate-y-full'
+                            }`}
+                    >
+                        <div className="text-black text-[11px] font-bold mt-8">
+                            <p className="mb-2">
+                                FRIZBEE CERAMICS offers a high-end handcrafted porcelain tableware
+                                collection.
+                            </p>
+                            <p className="mb-2">
+                                The brand&apos;s cups, bowls, plates, planters and homeware often include
+                                nostalgic visuals like aliens and distorted smileys. Each item is
+                                casted using premium-quality porcelain and glazed by hand. While
+                                unique in design the collection remains true to FRIZBEE CERAMICS&apos;
+                                core philosophy of durability and functionality. FRIZBEE CERAMICS
+                                adds a youthful charm and zest to modern kitchen and homeware with
+                                its evocative and offbeat designs.
+                            </p>
+                            <p className="mb-2">
+                                Currently the brand is presented at over 40 stores/cafés, and in
+                                more than 15 countries. Since the launch, FRIZBEE CERAMICS has
+                                worked in a variety of contexts. Through collaborations, exhibitions
+                                and performances with fashion brands, museums, art galleries and
+                                artists.
+                            </p>
+                            <p className="mb-2">
+                                Frizbee Ceramics&apos; line ranges from tiny shot glasses to large
+                                serving dishes and is 100% dishwasher safe!
+                            </p>
+                            <p className="mb-2">
+                                Please reach out for special requests, studio visits and custom
+                                orders at <span>go@frizbeeceramics.com</span>.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    )
 }

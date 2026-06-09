@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 /* :root { */
-  /* --tw-bg-opacity: 1; */
-  /* background-color: rgb(243 244 246 / var(--tw-bg-opacity)); */
-  /* background-color: #e8ecf4; */
-  /* --foreground-rgb: 0, 0, 0;
+/* --tw-bg-opacity: 1; */
+/* background-color: rgb(243 244 246 / var(--tw-bg-opacity)); */
+/* background-color: #e8ecf4; */
+/* --foreground-rgb: 0, 0, 0;
   
 	--background-start-rgb: 214, 219, 220;
 	--background-end-rgb: 255, 255, 255; */
@@ -37,6 +37,7 @@ body.screen-locked {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -51,21 +52,26 @@ body.screen-locked {
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(0%);
   }
 }
+
 .animate-carousel {
   animation: marquee 60s linear infinite;
 }
+
 @keyframes marquee-long {
   0% {
     transform: translateX(-200%);
   }
+
   100% {
     transform: translateX(0%);
   }
 }
+
 .animate-carousel-long {
   animation: marquee 60s linear infinite;
 }
@@ -140,6 +146,7 @@ body.screen-locked {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(calc(-100% - var(--gap)));
   }
@@ -187,6 +194,7 @@ body.screen-locked {
   from {
     transform: translateX(calc(100% + var(--gap)));
   }
+
   to {
     transform: translateX(0);
   }
@@ -202,29 +210,38 @@ body.screen-locked {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
 
 @keyframes colorChange {
+
   0%,
   100% {
-    background-color: #6535d2; /* Purple */
+    background-color: #6535d2;
+    /* Purple */
   }
+
   33% {
-    background-color: #dbff00; /* Neon Green */
+    background-color: #dbff00;
+    /* Neon Green */
   }
+
   66% {
-    background-color: #ffa572; /* Coral */
+    background-color: #ffa572;
+    /* Coral */
   }
 }
 
 .header-enlarged {
-  padding-bottom: 2rem; /* Increase the bottom padding */
+  padding-bottom: 2rem;
+  /* Increase the bottom padding */
   /* Add any other styles you want for the enlarged header */
 }
 
@@ -234,12 +251,12 @@ body.screen-locked {
   }
 }
 
-.swiper-pagination > .swiper-pagination-bullet {
+.swiper-pagination>.swiper-pagination-bullet {
   opacity: 1;
   background-color: #c8c8c8;
 }
 
-.swiper-pagination > .swiper-pagination-bullet-active {
+.swiper-pagination>.swiper-pagination-bullet-active {
   background-color: black;
   /* border: black solid 0.5px; */
 }
@@ -249,13 +266,15 @@ body.screen-locked {
   color: red !important;
   top: 50% !important;
 }
+
 .swiper-button-next {
   right: -50px !important;
   top: 50% !important;
 }
 
 .animate-rotate {
-  animation: rotate 20s linear infinite; /* Adjust the duration as needed */
+  animation: rotate 20s linear infinite;
+  /* Adjust the duration as needed */
 }
 
 .projects-submenu::before {
@@ -264,7 +283,8 @@ body.screen-locked {
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(100% - 105px); /* Adjust this value */
+  width: calc(100% - 105px);
+  /* Adjust this value */
   height: 1px;
   background-color: black;
 }
@@ -275,22 +295,25 @@ body.screen-locked {
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(100% - 66px); /* Adjust this value */
+  width: calc(100% - 66px);
+  /* Adjust this value */
   height: 1px;
   background-color: black;
 }
+
 .professionals-submenu::before {
   content: "";
   display: block;
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(100% - 146px); /* Adjust this value */
+  width: calc(100% - 146px);
+  /* Adjust this value */
   height: 1px;
   background-color: black;
 }
 
-/* temp margin as imgs are not properl */ 
+/* temp margin as imgs are not properl */
 /* remove it to make it proper */
 /* img.w-full.h-full.object-cover.object-center{
   margin-top: -30px !important;
@@ -309,5 +332,58 @@ body.screen-locked {
   /* Hide dots when product is PRE-ORDER */
   .productCardSwiper.hidePagination .swiper-pagination {
     display: none !important;
+  }
+}
+
+/* info/about page */
+.text-wrapper>p {
+  text-shadow: -2px -2px white;
+  /* Adjust the shadow as needed */
+  font-size: 0.605rem;
+  /* Adjust the font size as needed */
+  line-height: 1rem;
+  /* Adjust the line height as needed */
+}
+
+@media (min-width: 1024px) {
+  .text-wrapper {
+    padding-inline: 1.5rem;
+    /* Adjust the horizontal padding as needed */
+  }
+
+  .text-wrapper>p {
+    font-size: 0.745rem;
+    /* Adjust the font size as needed */
+    line-height: 1.15rem;
+    /* Adjust the line height as needed */
+  }
+}
+
+@media (min-width: 1540px) {
+  .text-wrapper {
+    padding-inline: 1.5rem;
+    /* Adjust the horizontal padding as needed */
+  }
+
+  .text-wrapper>p {
+    font-size: 1.05rem;
+    /* Adjust the font size as needed */
+    line-height: 1.35rem;
+    /* Adjust the line height as needed */
+  }
+}
+
+
+@media (min-width: 1780px) {
+  .text-wrapper {
+    padding-inline: 2rem;
+    /* Adjust the horizontal padding as needed */
+  }
+
+  .text-wrapper>p {
+    font-size: 1.35rem;
+    /* Adjust the font size as needed */
+    line-height: 1.45rem;
+    /* Adjust the line height as needed */
   }
 }
