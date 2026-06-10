@@ -3,6 +3,48 @@ import crypto from 'crypto';
 import { appendOrderToSheet } from '@/lib/googleSheets';
 import { getPreOrderProductIds } from '@/lib/shopify';
 
+async function sendGA4Purchase(order) {
+  const measurementId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
+  const apiSecret = process.env.GA4_MEASUREMENT_PROTOCOL_SECRET
+
+  if (!measurementId || !apiSecret) return
+
+  const items = (order.line_items || []).map((li) => ({
+    item_id: String(li.variant_id),
+    item_name: li.title,
+    item_variant: li.variant_title,
+    price: parseFloat(li.price),
+    quantity: li.quantity,
+  }))
+
+  // DEBUG — remove before go-live
+  console.log('[GA4] purchase', { transaction_id: String(order.order_number), value: parseFloat(order.total_price), currency: order.currency, items })
+  try {
+    await fetch(
+      `https://www.google-analytics.com/mp/collect?measurement_id=${measurementId}&api_secret=${apiSecret}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          client_id: String(order.customer?.id || order.id),
+          events: [{
+            name: 'purchase',
+            params: {
+              transaction_id: String(order.order_number),
+              value: parseFloat(order.total_price),
+              tax: parseFloat(order.total_tax || 0),
+              currency: order.currency || 'EUR',
+              items,
+            },
+          }],
+        }),
+      }
+    )
+  } catch (err) {
+    console.error('GA4 purchase event failed:', err)
+  }
+}
+
 export async function GET() {
   // console.log("🔔 Webhook endpoint is live");
   return NextResponse.json({ message: "Webhook endpoint is live" }, { status: 200 });
@@ -37,6 +79,9 @@ export async function POST(req) {
     // saveJsonToFile(`order-${orderData.id}-${timestamp}.json`, orderData);
 
     if (topic === "orders/paid") {
+      // Fire GA4 purchase event for every paid order
+      await sendGA4Purchase(orderData)
+
       const preOrderIds = await getPreOrderProductIds();
 
       const orderProductIds = (orderData.line_items || [])

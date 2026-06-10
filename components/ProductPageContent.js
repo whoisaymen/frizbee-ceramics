@@ -5,6 +5,7 @@ import { SwiperSlide } from "swiper/react";
 import { useEffect, useRef, useState } from "react";
 import { Swiper } from "swiper/react";
 import "swiper/css";
+import { gtagEvent } from "@/lib/gtag";
 
 export default function ProductPageContent({ product, blurDataURL }) {
   const [zoomedMedia, setZoomedMedia] = useState(null);
@@ -168,6 +169,22 @@ export default function ProductPageContent({ product, blurDataURL }) {
   useEffect(() => {
     setCurrentIndex(0);
   }, [product?.handle]);
+
+  useEffect(() => {
+    const firstVariant = product.variants?.edges[0]?.node
+    if (!firstVariant) return
+    gtagEvent('view_item', {
+      currency: 'EUR',
+      value: parseFloat(firstVariant.priceV2?.amount || 0),
+      items: [{
+        item_id: firstVariant.id,
+        item_name: product.title,
+        item_variant: firstVariant.title,
+        price: parseFloat(firstVariant.priceV2?.amount || 0),
+        currency: 'EUR',
+      }],
+    })
+  }, [product?.handle])
 
   const mediaSwiper = [];
 
