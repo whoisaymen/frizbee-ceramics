@@ -1,5 +1,6 @@
 import ProductCard from "./ProductCard";
 import { getProductsInCollection } from "@/lib/shopify";
+import ViewItemListTracker from "./ViewItemListTracker";
 
 async function checkImageExists(url) {
   try {
@@ -56,8 +57,10 @@ const ProductList = async ({ sortOption }) => {
         {/* capsules products section */}
         {capsuleProducts.length > 0 && (
           <>
-            {/* <div className="w-full border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover" style={{backgroundImage: "url(https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule-collection.jpg?v=1742990303)"}}>
-            </div> */}
+            <ViewItemListTracker
+              listName="Capsule Collection"
+              items={capsuleProducts.map((p) => ({ id: p.node.id, title: p.node.title, price: parseFloat(p.node.priceRange?.minVariantPrice?.amount || 0) }))}
+            />
             {/* diff img for mobile */}
             <div className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule2-banner-mobile.jpg')] md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule2-banner-web.jpg')]"></div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
@@ -77,6 +80,10 @@ const ProductList = async ({ sortOption }) => {
         {/* sunsetProducts products section */}
         {sunsetProducts.length > 0 && (
           <>
+            <ViewItemListTracker
+              listName="Sunset Collection"
+              items={sunsetProducts.map((p) => ({ id: p.node.id, title: p.node.title, price: parseFloat(p.node.priceRange?.minVariantPrice?.amount || 0) }))}
+            />
             {isSunsetImgExists && (
               <div className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/sunset-collection-banner.gif')]"></div>
             )}
@@ -98,6 +105,10 @@ const ProductList = async ({ sortOption }) => {
         {/* requirement : if there are 2 clarks products, make the grid of 2 and else usual grid */}
         {clarksProducts.length > 0 && (
           <>
+            <ViewItemListTracker
+              listName="Capsule 1 Collection"
+              items={clarksProducts.map((p) => ({ id: p.node.id, title: p.node.title, price: parseFloat(p.node.priceRange?.minVariantPrice?.amount || 0) }))}
+            />
             {isClarkImgExists && (
               <div className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule1-banner-mobile.png')] md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/capsule1-banner-web.jpg')]"></div>
             )}
@@ -127,8 +138,10 @@ const ProductList = async ({ sortOption }) => {
         {/* shop or default products section */}
         {shopProducts.length > 0 && (
           <>
-            {/* <div className="w-full border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover" style={{backgroundImage: "url(https://cdn.shopify.com/s/files/1/0806/4381/7793/files/shop-collection.jpg?v=1742990302)"}}>
-            </div> */}
+            <ViewItemListTracker
+              listName="Shop"
+              items={shopProducts.map((p) => ({ id: p.node.id, title: p.node.title, price: parseFloat(p.node.priceRange?.minVariantPrice?.amount || 0) }))}
+            />
             {/* diff img for mobile */}
             <div className="w-full bg-center border-y border-black uppercase h-[100vh] flex items-center justify-center text-2xl md:text-3xl bg-cover md:bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/everlasting-collection-web.jpg')] bg-[url('https://cdn.shopify.com/s/files/1/0806/4381/7793/files/everlasting-collection-mobile.png')]"></div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">

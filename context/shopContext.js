@@ -6,6 +6,7 @@ import {
   updateCheckout,
   validateCheckoutUrl,
 } from '@/lib/shopify'
+import { gtagEvent, formatItem } from '@/lib/gtag'
 
 const CartContext = createContext()
 
@@ -111,6 +112,11 @@ export default function ShopProvider({ children }) {
         // const newCart = [newItem]
         const newCart = [itemToSave];
         setCart(newCart)
+        gtagEvent('add_to_cart', {
+          currency: 'EUR',
+          value: parseFloat(itemToSave.variantPrice) * newItem.variantQuantity,
+          items: [{ ...formatItem(itemToSave), quantity: newItem.variantQuantity }],
+        })
         const checkout = await createCheckout(newCart)
         setCheckoutId(checkout.id)
         setCheckoutUrl(checkout.checkoutUrl)
@@ -137,6 +143,11 @@ export default function ShopProvider({ children }) {
         }
 
         setCart(newCart)
+        gtagEvent('add_to_cart', {
+          currency: 'EUR',
+          value: parseFloat(newItem.variantPrice) * newItem.variantQuantity,
+          items: [{ ...formatItem(newItem), quantity: newItem.variantQuantity }],
+        })
 
         const newCheckout = await updateCheckout(checkoutId, newCart)
         const newCheckoutUrl = newCheckout?.checkoutUrl || checkoutUrl
@@ -156,7 +167,16 @@ export default function ShopProvider({ children }) {
   async function removeCartItem(itemToRemove) {
     setCartLoading(true)
 
+    const removedItem = cart.find((item) => item.id === itemToRemove)
     const updatedCart = cart.filter((item) => item.id !== itemToRemove)
+
+    if (removedItem) {
+      gtagEvent('remove_from_cart', {
+        currency: 'EUR',
+        value: parseFloat(removedItem.variantPrice) * removedItem.variantQuantity,
+        items: [{ ...formatItem(removedItem), quantity: removedItem.variantQuantity }],
+      })
+    }
     setCart(updatedCart)
 
     try {

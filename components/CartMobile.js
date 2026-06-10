@@ -6,6 +6,7 @@ import Image from "next/image";
 import { CartContext } from "@/context/shopContext";
 import Link from "next/link";
 import { formatter } from "@/utils/helpers";
+import { gtagEvent, formatItem } from "@/lib/gtag";
 
 export default function Cart() {
   const {
@@ -193,6 +194,15 @@ export default function Cart() {
           <div className="mt-0 pb-6 lg:pb-0">
             <a
               href={checkoutUrl}
+              onClick={() => {
+                if (cartQuantity > 0) {
+                  gtagEvent('begin_checkout', {
+                    currency: 'EUR',
+                    value: cartTotal,
+                    items: cart.map((item) => ({ ...formatItem(item), quantity: item.variantQuantity })),
+                  })
+                }
+              }}
               className={`uppercase tracking-tight flex items-center justify-center px-6 py-2 text-sm font-medium text-white bg-[#000] border border-transparent shadow-sm hover:bg-[#fbf234] hover:text-black hover:border-t hover:border-l-0 hover:border-r-0 hover:border-black ${
                 cartLoading ? "cursor-not-allowed" : ""
               }`}
